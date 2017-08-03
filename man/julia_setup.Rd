@@ -14,6 +14,9 @@ The julia interface, which is an environment with the necessary methods
 \code{julia_setup} does the initial setup for the JuliaCall package.
 }
 \examples{
-julia_setup()
+julia <- julia_setup()
+julia$cmd("println(sqrt(2))")
+julia$eval_string("sqrt(2)")
+julia$call("sqrt", 2)
 
 }

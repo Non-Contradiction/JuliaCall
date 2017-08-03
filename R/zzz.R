@@ -8,7 +8,10 @@
 #'   like cmd, source and things like that to communicate with julia.
 #'
 #' @examples
-#' julia_setup()
+#' julia <- julia_setup()
+#' julia$cmd("println(sqrt(2))")
+#' julia$eval_string("sqrt(2)")
+#' julia$call("sqrt", 2)
 #'
 #' @export
 julia_setup <- function() {
