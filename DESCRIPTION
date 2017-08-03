@@ -1,13 +1,18 @@
 Package: JuliaCall
 Type: Package
-Title: What the Package Does (Title Case)
+Title: JuliaCall for Seamless Integration of R and Julia
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: person("Changcheng Li", email = "cxl508@psu.edu",
+    role = c("aut", "cre"))
+Description: Package JuliaCall is an R interface to 'Julia',
+    which is a high-level, high-performance dynamic programming language
+    for numerical computing, see <https://julialang.org/> for more information.
+License: MIT + file LICENSE
+URL: https://github.com/Non-Contradiction/JuliaCall
+BugReports: https://github.com/Non-Contradiction/JuliaCall/issues
 Encoding: UTF-8
 LazyData: true
 Imports: readr,
     inline
+RoxygenNote: 6.0.1
+SystemRequirements: Julia >= 0.5.0, RCall.jl
