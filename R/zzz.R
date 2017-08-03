@@ -1,5 +1,16 @@
 .julia <- new.env(parent = emptyenv())
 
+#' Do initial setup for the JuliaCall package.
+#'
+#' \code{julia_setup} does the initial setup for the JuliaCall package.
+#'
+#' @return The julia interface, which is an environment with the necessary methods
+#'   like cmd, source and things like that to communicate with julia.
+#'
+#' @examples
+#' julia_setup()
+#'
+#' @export
 julia_setup <- function() {
     libR <- paste0(R.home(), '/lib')
     system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
@@ -106,4 +117,12 @@ julia_setup <- function() {
         includes = "#include <julia.h>",
         cppargs = .julia$cppargs
         )
+
+    .julia$cmd("function eval_string(x) eval(parse(x)) end")
+
+    .julia$eval_string <- function(cmd) .julia$wrap_all("eval_string", list(cmd))
+
+    .julia$call <- function(func_name, ...) .julia$wrap_all(func_name, list(...))
+
+    .julia
 }
