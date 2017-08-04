@@ -4,11 +4,15 @@ sudo: required
 r:
   - release
   - devel
+env:
+  - JULIA_URL: "https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.0-linux-x86_64.tar.gz"
 before_install:
-  - sudo add-apt-repository -y ppa:staticfloat/juliareleases
-  - sudo add-apt-repository -y ppa:staticfloat/julia-deps
-  - sudo apt-get update
-  - sudo apt-get install julia
+  - mkdir -p mkdir $HOME/julia
+  - cd $HOME/julia
+  - wget $JULIA_URL
+  - tar -xvzf julia-0.6.0-linux-x86_64.tar.gz
+  - mv $(tar tzf julia-0.6.0-linux-x86_64.tar.gz | head -1 | sed -e 's/\/.*//') julia-0.6.0
+  - export PATH=$PATH:$HOME/julia/julia-0.6.0/bin
 script:
 - R CMD build .
 - R CMD check *tar.gz
