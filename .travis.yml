@@ -16,8 +16,11 @@ before_install:
   # but no permalink to release download
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget "https://cran.rstudio.com/bin/macosx/$(wget -qO- https://cran.rstudio.com/bin/macosx/ | sed -n 's/.*href="\(R-[^"]*.pkg\)".*/\1/p' | head -n 1)"; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg R-*.pkg -target /; fi
+
+  - mkdir -p mkdir $HOME/R/library
+  - echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
+  - Rscript -e 'install.packages("inline", repos="http://cran.rstudio.com/")'
+  - Rscript -e 'install.packages("readr", repos="http://cran.rstudio.com/")'
 script:
-- R -e 'install.packages("inline")'
-- R -e 'install.packages("readr")'
 - R CMD build .
 - R CMD check *tar.gz
