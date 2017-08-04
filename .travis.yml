@@ -8,11 +8,10 @@ env:
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.0-linux-x86_64.tar.gz"
 before_install:
   - mkdir -p mkdir $HOME/julia
-  - cd $HOME/julia
-  - wget $JULIA_URL
-  - tar -xvzf julia-0.6.0-linux-x86_64.tar.gz
-  - mv $(tar tzf julia-0.6.0-linux-x86_64.tar.gz | head -1 | sed -e 's/\/.*//') julia-0.6.0
-  - export PATH=$PATH:$HOME/julia/julia-0.6.0/bin
+  - wget $JULIA_URL -O $HOME/julia/julia.tar.gz
+  - tar -xzvf $HOME/julia/julia.tar.gz
+  - mv $(tar tzf $HOME/julia/julia.tar.gz | head -1 | sed -e 's/\/.*//') julia
+  - export PATH=$PATH:/$HOME/julia/julia/bin
 script:
 - R CMD build .
 - R CMD check *tar.gz
