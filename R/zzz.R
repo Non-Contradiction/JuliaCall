@@ -113,8 +113,8 @@ julia_setup <- function() {
         body = '
         jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap_all"));
         jl_value_t *func = jl_eval_string(CHAR(STRING_ELT(func_name, 0)));
-        jl_value_t *arg1 = jl_box_int64((uintptr_t)(arg));
-        SEXP out = PROTECT((SEXP)jl_unbox_int64(jl_call2(wrap, func, arg1)));
+        jl_value_t *arg1 = jl_box_uint64((uintptr_t)(arg));
+        SEXP out = PROTECT((SEXP)jl_unbox_uint64(jl_call2(wrap, func, arg1)));
         UNPROTECT(1);
         return out;',
         includes = "#include <julia.h>",
