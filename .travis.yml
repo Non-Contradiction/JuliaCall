@@ -10,7 +10,7 @@ before_install:
   - wget $JULIA_URL -O /tmp/julia.tar.gz
   - tar -xzvf /tmp/julia.tar.gz -C /tmp
   - mv /tmp/$(tar tzf /tmp/julia.tar.gz | head -1 | sed -e 's/\/.*//') /$HOME/julia
-  - export PATH=$PATH:/$HOME/julia
+  - export PATH=$PATH:/$HOME/julia/bin
 script:
 - R CMD build .
 - R CMD check *tar.gz
