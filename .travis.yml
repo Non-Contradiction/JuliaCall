@@ -5,6 +5,7 @@ r:
   - release
   - devel
 env:
+  - JULIA_URL: "https://julialang-s3.julialang.org/bin/linux/x64/0.5/julia-0.5.2-linux-x86_64.tar.gz"
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.0-linux-x86_64.tar.gz"
 addons:
       apt:
