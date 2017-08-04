@@ -1,0 +1,15 @@
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+language: r
+sudo: required
+r:
+  - release
+  - devel
+before_install:
+  - sudo add-apt-repository -y ppa:staticfloat/juliareleases
+  - sudo add-apt-repository -y ppa:staticfloat/julia-deps
+  - sudo apt-get update
+  - sudo apt-get install julia
+script:
+- R CMD build .
+- R CMD check *tar.gz
+cache: packages

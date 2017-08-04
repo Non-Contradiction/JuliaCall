@@ -1,15 +1,21 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
-language: r
+language: julia
 sudo: required
-r:
-  - release
-  - devel
+julia:
+  - 0.5
+  - 0.6
 before_install:
-  - sudo add-apt-repository -y ppa:staticfloat/juliareleases
-  - sudo add-apt-repository -y ppa:staticfloat/julia-deps
-  - sudo apt-get update
-  - sudo apt-get install julia
+  # linux
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu $(lsb_release -s -c)/"; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update -qq -y; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install git r-base r-base-dev r-recommended -y; fi
+
+  # osx
+  # faster than using homebrew/science tap
+  # but no permalink to release download
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget "https://cran.rstudio.com/bin/macosx/$(wget -qO- https://cran.rstudio.com/bin/macosx/ | sed -n 's/.*href="\(R-[^"]*.pkg\)".*/\1/p' | head -n 1)"; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg R-*.pkg -target /; fi
 script:
 - R CMD build .
 - R CMD check *tar.gz
-cache: packages
