@@ -7,6 +7,10 @@ r:
 env:
   - JULIA_URL: 'https://julialang-s3.julialang.org/bin/linux/x64/0.5/julia-0.5-latest-linux-x86_64.tar.gz'
   - JULIA_URL: 'https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6-latest-linux-x86_64.tar.gz'
+addons:
+      apt:
+        sources: [ 'ubuntu-toolchain-r-test']
+        packages: ['libstdc++6']
 before_install:
   - CURL_USER_AGENT="Travis-CI $(curl --version | head -n 1)"
   - mkdir -p ~/julia
