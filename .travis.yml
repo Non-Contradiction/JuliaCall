@@ -18,6 +18,7 @@ before_install:
   - export PATH="${PATH}:${HOME}/julia/bin"
   - Rscript -e 'version'
   - export LD_LIBRARY_PATH=$(R RHOME)/lib:$LD_LIBRARY_PATH
+  - printenv LD_LIBRARY_PATH
   - julia -e 'versioninfo()'
   - julia -e 'Pkg.add("RCall")'
   - julia -e 'using RCall'
