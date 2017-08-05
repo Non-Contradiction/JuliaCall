@@ -29,6 +29,8 @@ julia_setup <- function() {
 
     .julia$VERSION <- system("julia -E 'println(VERSION)'", intern = TRUE)[1]
 
+    message(paste0("Julia version ", .julia$VERSION, " found."))
+
     if (.julia$VERSION < "0.6.0") {
         .julia$init <- inline::cfunction(
             sig = c(dir = "character"),
@@ -56,7 +58,9 @@ julia_setup <- function() {
 
     .julia$cmd <- inline::cfunction(
         sig = c(cmd = "character"),
-        body = "jl_eval_string(CHAR(STRING_ELT(cmd, 0))); return R_NilValue;",
+        body = "jl_eval_string(CHAR(STRING_ELT(cmd, 0)));
+        if (jl_exception_occurred()) printf(\"%s \", jl_typeof_str(jl_exception_occurred()));
+        return R_NilValue;",
         includes = "#include <julia.h>",
         cppargs = .julia$cppargs
     )
@@ -84,7 +88,7 @@ julia_setup <- function() {
 
     reg.finalizer(.julia, function(e){message("Julia exit."); .julia$cmd("exit()")}, onexit = TRUE)
 
-    .julia$cmd("gc_enable(false)")
+    # .julia$cmd("gc_enable(false)")
 
     # .julia$cmd("Pkg.update()")
 
