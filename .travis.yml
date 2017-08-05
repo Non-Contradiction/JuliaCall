@@ -5,17 +5,14 @@ r:
   - release
   - devel
 env:
-  - JULIA_URL: "https://julialang-s3.julialang.org/bin/linux/x64/0.5/julia-0.5.2-linux-x86_64.tar.gz"
-  - JULIA_URL: "https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.0-linux-x86_64.tar.gz"
-addons:
-      apt:
-        sources: [ 'ubuntu-toolchain-r-test']
-        packages: ['libstdc++6']
+  - JULIA_URL: 'https://julialang-s3.julialang.org/bin/linux/x64/0.5/julia-0.5-latest-linux-x86_64.tar.gz'
+  - JULIA_URL: 'https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6-latest-linux-x86_64.tar.gz'
 before_install:
-  - wget $JULIA_URL -O /tmp/julia.tar.gz
-  - tar -xzvf /tmp/julia.tar.gz -C /tmp
-  - mv /tmp/$(tar tzf /tmp/julia.tar.gz | head -1 | sed -e 's/\/.*//') /$HOME/julia
-  - export PATH=$PATH:/$HOME/julia/bin
+  - CURL_USER_AGENT="Travis-CI $(curl --version | head -n 1)"
+  - mkdir -p ~/julia
+  - curl -A "$CURL_USER_AGENT" -s -L --retry 7 $JULIA_URL | tar -C ~/julia -x -z --strip-components=1 -f -
+  - export PATH="${PATH}:${HOME}/julia/bin"
+  - julia -e 'versioninfo()'
 script:
 - R CMD build .
 - R CMD check *tar.gz
