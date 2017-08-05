@@ -16,7 +16,7 @@ before_install:
   - mkdir -p ~/julia
   - curl -A "$CURL_USER_AGENT" -s -L --retry 7 $JULIA_URL | tar -C ~/julia -x -z --strip-components=1 -f -
   - export PATH="${PATH}:${HOME}/julia/bin"
-  - Rscript -e 'sessionInfo'
+  - Rscript -e 'sessionInfo()'
   - export LD_LIBRARY_PATH=$(R RHOME)/lib:$LD_LIBRARY_PATH
   - printenv LD_LIBRARY_PATH
   - julia -e 'versioninfo()'
