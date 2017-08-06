@@ -23,7 +23,9 @@ before_install:
   - julia -e 'Pkg.add("RCall")'
   - R RHOME
   - julia -e 'println(readchomp(`R RHOME`))'
-  - julia -e 'Rhome = readchomp(`R RHOME`); libR = joinpath(Rhome,"lib","libR.$(Libdl.dlext)"); println(Rhome); println(isdir(Rhome)); println(libR); println(isfile(libR)); println(Libdl.dlopen_e(libR))'
+  - julia -e 'Rhome = readchomp(`R RHOME`); libR_dir = joinpath(Rhome,"lib"); libR = joinpath(Rhome,"lib","libR.$(Libdl.dlext)"); println(Rhome); println(isdir(Rhome)); println(libR_dir); println(isdir(libR_dir)); println(libR); println(isfile(libR)); println(Libdl.dlopen_e(libR))'
+  - ls $(R RHOME)
+  - ls $(R RHOME)/lib
   - julia -e 'using RCall'
 script:
 - R CMD build .
