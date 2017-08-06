@@ -4,5 +4,6 @@
 ^README-.*\.png$
 ^\.travis\.yml$
 ^\.travis\.yml1$
+^\.travis\.yml2$
 ^\.travis\.yml_back$
 ^\.travis\.yml_back1$
