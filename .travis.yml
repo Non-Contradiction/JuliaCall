@@ -30,4 +30,3 @@ before_install:
 script:
 - R CMD build .
 - R CMD check *tar.gz
-cache: packages
