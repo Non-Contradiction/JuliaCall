@@ -21,6 +21,9 @@ before_install:
   - printenv LD_LIBRARY_PATH
   - julia -e 'versioninfo()'
   - julia -e 'Pkg.add("RCall")'
+  - R RHOME
+  - julia -e 'readchomp(`R RHOME`)'
+  - julia -e 'Rhome = readchomp(`R RHOME`); libR = joinpath(Rhome,"lib","libR.$(Libdl.dlext)"); println(isdir(Rhome)); println(isfile(libR)); Libdl.dlopen_e(libR)'
   - julia -e 'using RCall'
 script:
 - R CMD build .
