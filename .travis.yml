@@ -1,45 +1,22 @@
-language: julia
-os:
-  - linux
-julia:
-  - 0.5
-  - 0.6
-  - nightly
-
-matrix:
-  allow_failures:
-    - julia: nightly
-
-notifications:
-  email: false
-
+# R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
+language: r
+sudo: required
+env:
+  - JULIA_URL: 'https://julialang-s3.julialang.org/bin/linux/x64/0.5/julia-0.5-latest-linux-x86_64.tar.gz'
+  - JULIA_URL: 'https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6-latest-linux-x86_64.tar.gz'
+addons:
+      apt:
+        sources: [ 'ubuntu-toolchain-r-test']
+        packages: ['libstdc++6']
 before_install:
-  # linux
+  - CURL_USER_AGENT="Travis-CI $(curl --version | head -n 1)"
+  - mkdir -p ~/julia
+  - curl -A "$CURL_USER_AGENT" -s -L --retry 7 $JULIA_URL | tar -C ~/julia -x -z --strip-components=1 -f -
+  - export PATH="${PATH}:${HOME}/julia/bin"
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu $(lsb_release -s -c)/"; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update -qq -y; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install git r-base r-base-dev r-recommended -y; fi
-
-  # osx
-  # faster than using homebrew/science tap
-  # but no permalink to release download
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget "https://cran.rstudio.com/bin/macosx/$(wget -qO- https://cran.rstudio.com/bin/macosx/ | sed -n 's/.*href="\(R-[^"]*.pkg\)".*/\1/p' | head -n 1)"; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg R-*.pkg -target /; fi
-
-  - curl -fLo /tmp/texlive.tar.gz https://github.com/jimhester/ubuntu-bin/releases/download/latest/texlive.tar.gz
-  - tar xzf /tmp/texlive.tar.gz -C ~
-  - export PATH=/$HOME/texlive/bin/x86_64-linux:$PATH
-  - tlmgr update --self
-  - curl -fLo /tmp/pandoc-1.15.2-1-amd64.deb https://github.com/jgm/pandoc/releases/download/1.15.2/pandoc-1.15.2-1-amd64.deb
-  - sudo apt-get install -f
-  - sudo dpkg -i /tmp/pandoc-1.15.2-1-amd64.deb
-  - rm /tmp/pandoc-1.15.2-1-amd64.deb
-
-  - mkdir -p mkdir $HOME/R/library
-  - echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
-  - Rscript -e 'install.packages("inline", repos="http://cran.rstudio.com/")'
-  - Rscript -e 'install.packages("readr", repos="http://cran.rstudio.com/")'
-
   - Rscript -e 'sessionInfo()'
   - julia -e 'versioninfo()'
   - julia -e 'Pkg.add("RCall")'
