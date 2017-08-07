@@ -125,11 +125,15 @@ julia_setup <- function() {
         cppargs = .julia$cppargs
         )
 
+    .julia$call <- function(func_name, ...) .julia$wrap_all(func_name, list(...))
+
+    .julia$cmd("function exists(x) isdefined(Symbol(x)) end")
+
+    .julia$exists <- function(name) .julia$call("exists", name)
+
     .julia$cmd("function eval_string(x) eval(parse(x)) end")
 
-    .julia$eval_string <- function(cmd) .julia$wrap_all("eval_string", list(cmd))
-
-    .julia$call <- function(func_name, ...) .julia$wrap_all(func_name, list(...))
+    .julia$eval_string <- function(cmd) .julia$call("eval_string", cmd)
 
     .julia
 }
