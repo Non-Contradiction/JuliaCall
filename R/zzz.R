@@ -98,7 +98,7 @@ julia_setup <- function() {
 
     .julia$cmd("function transfer_list(x) rcopy(RObject(Ptr{RCall.VecSxp}(x))) end")
     # .julia$cmd("function wrap(f, x) xx = transfer_list(x); f(xx...) end")
-    .julia$cmd("function wrap_all(f, x) xx = transfer_list(x); Int64(RObject(f(xx...)).p) end")
+    .julia$cmd("function wrap_all(f, x) xx = transfer_list(x); UInt64(RObject(f(xx...)).p) end")
 
     # .julia$wrap <- inline::cfunction(
     #     sig = c(func_name = "character", arg = "SEXP"),
