@@ -24,12 +24,14 @@ knitr::opts_chunk$set(
 library(JuliaCall)
 
 julia <- julia_setup()
-```
 
-```{r}
 julia$cmd("println(sqrt(2))")
 
 julia$eval_string("sqrt(2)")
 
 julia$call("sqrt", 2)
+
+julia$eval_string("sqrt")(2)
+
+2 %>J% sqrt
 ```

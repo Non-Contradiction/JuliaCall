@@ -11,10 +11,9 @@ Package JuliaCall is an R interface to 'Julia', which is a high-level, high-perf
 library(JuliaCall)
 
 julia <- julia_setup()
+#> Julia version 0.6.0 found.
 #> Julia initiation...
-```
 
-``` r
 julia$cmd("println(sqrt(2))")
 #> NULL
 
@@ -22,5 +21,11 @@ julia$eval_string("sqrt(2)")
 #> [1] 1.414214
 
 julia$call("sqrt", 2)
+#> [1] 1.414214
+
+julia$eval_string("sqrt")(2)
+#> [1] 1.414214
+
+2 %>J% sqrt
 #> [1] 1.414214
 ```
