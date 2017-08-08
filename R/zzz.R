@@ -12,6 +12,9 @@
 #' julia$cmd("println(sqrt(2))")
 #' julia$eval_string("sqrt(2)")
 #' julia$call("sqrt", 2)
+#' julia$eval_string("sqrt")(2)
+#' julia$exists("sqrt")
+#' julia$exists("c")
 #'
 #' @export
 julia_setup <- function() {
@@ -97,26 +100,26 @@ julia_setup <- function() {
     .julia$using1("RCall")
 
     .julia$cmd("function transfer_list(x) rcopy(RObject(Ptr{RCall.VecSxp}(x))) end")
-    # .julia$cmd("function wrap(f, x) xx = transfer_list(x); f(xx...) end")
-    .julia$cmd("function wrap_all(f, x) xx = transfer_list(x); UInt64(RObject(f(xx...)).p) end")
 
-    # .julia$wrap <- inline::cfunction(
-    #     sig = c(func_name = "character", arg = "SEXP"),
-    #     body = '
-    #     jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap"));
-    #     jl_value_t *func = jl_eval_string(CHAR(STRING_ELT(func_name, 0)));
-    #     jl_value_t *arg1 = jl_box_int64((uintptr_t)(arg));
-    #     jl_call2(wrap, func, arg1);
-    #     return R_NilValue;',
-    #     includes = "#include <julia.h>",
-    #     cppargs = .julia$cppargs
-    #     )
+    .julia$cmd("function transfer_string(x) rcopy(RObject(Ptr{RCall.StrSxp}(x))) end")
+
+    .julia$cmd('function wrap_all(name, x)
+                    fname = transfer_string(name);
+                    try
+                        f = eval(parse(fname))
+                        xx = transfer_list(x);
+                        UInt64(RObject(f(xx...)).p);
+                    catch
+                        println(join(["Error in Julia Call with function name " fname]));
+                        UInt64(RObject(nothing).p);
+                    end;
+               end')
 
     .julia$wrap_all <- inline::cfunction(
         sig = c(func_name = "character", arg = "SEXP"),
         body = '
         jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap_all"));
-        jl_value_t *func = jl_eval_string(CHAR(STRING_ELT(func_name, 0)));
+        jl_value_t *func = jl_box_uint64((uintptr_t)(func_name));
         jl_value_t *arg1 = jl_box_uint64((uintptr_t)(arg));
         SEXP out = PROTECT((SEXP)jl_unbox_uint64(jl_call2(wrap, func, arg1)));
         UNPROTECT(1);
