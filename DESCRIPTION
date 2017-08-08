@@ -16,3 +16,4 @@ Imports: readr,
     inline
 RoxygenNote: 6.0.1
 SystemRequirements: Julia >= 0.5.0, RCall.jl
+Suggests: testthat
