@@ -18,5 +18,8 @@ julia <- julia_setup()
 julia$cmd("println(sqrt(2))")
 julia$eval_string("sqrt(2)")
 julia$call("sqrt", 2)
+julia$eval_string("sqrt")(2)
+julia$exists("sqrt")
+julia$exists("c")
 
 }
