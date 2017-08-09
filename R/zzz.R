@@ -68,20 +68,12 @@ julia_setup <- function() {
         cppargs = .julia$cppargs
     )
 
-    .julia$install_package <- function(pkg_name) {
-        .julia$cmd(paste0('Pkg.add("', pkg_name, '")'))
-    }
-
-    .julia$install_package_if_needed <- function(pkg_name) {
-        .julia$cmd(paste0('if Pkg.installed("', pkg_name, '") == nothing Pkg.add("', pkg_name, '") end'))
-    }
-
     .julia$using <- function(pkg) {
         .julia$cmd(paste0("using ", pkg))
     }
 
     .julia$using1 <- function(pkg) {
-        .julia$install_package_if_needed(pkg)
+        .julia$cmd(paste0('if Pkg.installed("', pkg, '") == nothing Pkg.add("', pkg, '") end'))
         .julia$using(pkg)
     }
 
@@ -126,7 +118,21 @@ julia_setup <- function() {
         cppargs = .julia$cppargs
         )
 
+    .julia$wrap_no_ret <- inline::cfunction(
+        sig = c(func_name = "character", arg = "SEXP"),
+        body = '
+        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap"));
+        jl_value_t *func = jl_box_voidpointer(func_name);
+        jl_value_t *arg1 = jl_box_voidpointer(arg);
+        jl_call2(wrap, func, arg1);
+        return R_NilValue;',
+        includes = "#include <julia.h>",
+        cppargs = .julia$cppargs
+    )
+
     .julia$call <- function(func_name, ...) .julia$wrap(func_name, list(...))
+
+    .julia$call_no_ret <- function(func_name, ...) .julia$wrap_no_ret(func_name, list(...))
 
     .julia$cmd("function exists(x) isdefined(Symbol(x)) end")
 
@@ -141,6 +147,18 @@ julia_setup <- function() {
     .julia$source <- function(file_name) .julia$call("source", file_name)
 
     .julia$include <- function(file_name) .julia$call("include", file_name)
+
+    .julia$install_package <- function(pkg_name) .julia$call_no_ret("Pkg.add", pkg_name)
+
+    .julia$cmd("function installed_package(pkg_name) string(Pkg.installed(pkg_name)) end")
+
+    .julia$installed_package <- function(pkg_name) .julia$call("installed_package", pkg_name)
+
+    .julia$install_package_if_needed <- function(pkg_name){
+        if (.julia$installed_package(pkg_name) == "nothing") {
+            .julia$install_package(pkg_name)
+        }
+    }
 
     .julia
 }
