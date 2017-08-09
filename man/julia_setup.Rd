@@ -15,7 +15,7 @@ The julia interface, which is an environment with the necessary methods
 }
 \examples{
 julia <- julia_setup()
-julia$cmd("println(sqrt(2))")
+julia$command("println(sqrt(2))")
 julia$eval_string("sqrt(2)")
 julia$call("sqrt", 2)
 julia$eval_string("sqrt")(2)
