@@ -14,7 +14,7 @@ julia <- julia_setup()
 #> Julia version 0.6.0 found.
 #> Julia initiation...
 
-julia$cmd("println(sqrt(2))")
+julia$command("println(sqrt(2))")
 #> NULL
 
 julia$eval_string("sqrt(2)")

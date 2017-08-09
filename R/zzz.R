@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' julia <- julia_setup()
-#' julia$cmd("println(sqrt(2))")
+#' julia$command("println(sqrt(2))")
 #' julia$eval_string("sqrt(2)")
 #' julia$call("sqrt", 2)
 #' julia$eval_string("sqrt")(2)
@@ -59,7 +59,7 @@ julia_setup <- function() {
         .julia$init()
     }
 
-    .julia$cmd <- inline::cfunction(
+    .julia$.cmd <- inline::cfunction(
         sig = c(cmd = "character"),
         body = "jl_eval_string(CHAR(STRING_ELT(cmd, 0)));
         if (jl_exception_occurred()) printf(\"%s \", jl_typeof_str(jl_exception_occurred()));
@@ -69,29 +69,29 @@ julia_setup <- function() {
     )
 
     .julia$using <- function(pkg) {
-        .julia$cmd(paste0("using ", pkg))
+        .julia$.cmd(paste0("using ", pkg))
     }
 
     .julia$using1 <- function(pkg) {
-        .julia$cmd(paste0('if Pkg.installed("', pkg, '") == nothing Pkg.add("', pkg, '") end'))
+        .julia$.cmd(paste0('if Pkg.installed("', pkg, '") == nothing Pkg.add("', pkg, '") end'))
         .julia$using(pkg)
     }
 
-    reg.finalizer(.julia, function(e){message("Julia exit."); .julia$cmd("exit()")}, onexit = TRUE)
+    reg.finalizer(.julia, function(e){message("Julia exit."); .julia$.cmd("exit()")}, onexit = TRUE)
 
-    # .julia$cmd("gc_enable(false)")
+    # .julia$.cmd("gc_enable(false)")
 
-    # .julia$cmd("Pkg.update()")
+    # .julia$.cmd("Pkg.update()")
 
-    .julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
+    .julia$.cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
 
     .julia$using1("RCall")
 
-    .julia$cmd("function transfer_list(x) rcopy(RObject(Ptr{RCall.VecSxp}(x))) end")
+    .julia$.cmd("function transfer_list(x) rcopy(RObject(Ptr{RCall.VecSxp}(x))) end")
 
-    .julia$cmd("function transfer_string(x) rcopy(RObject(Ptr{RCall.StrSxp}(x))) end")
+    .julia$.cmd("function transfer_string(x) rcopy(RObject(Ptr{RCall.StrSxp}(x))) end")
 
-    .julia$cmd('function wrap(name, x)
+    .julia$.cmd('function wrap(name, x)
                     fname = transfer_string(name);
                     try
                         f = eval(parse(fname))
@@ -134,15 +134,17 @@ julia_setup <- function() {
 
     .julia$call_no_ret <- function(func_name, ...) .julia$wrap_no_ret(func_name, list(...))
 
-    .julia$cmd("function exists(x) isdefined(Symbol(x)) end")
+    .julia$.cmd("function exists(x) isdefined(Symbol(x)) end")
 
     .julia$exists <- function(name) .julia$call("exists", name)
 
-    .julia$cmd("function eval_string(x) eval(parse(x)) end")
+    .julia$.cmd("function eval_string(x) eval(parse(x)) end")
 
     .julia$eval_string <- function(cmd) .julia$call("eval_string", cmd)
 
-    .julia$cmd("function source(file_name) include(file_name); nothing end")
+    .julia$command <- function(cmd) .julia$call_no_ret("eval_string", cmd)
+
+    .julia$.cmd("function source(file_name) include(file_name); nothing end")
 
     .julia$source <- function(file_name) .julia$call("source", file_name)
 
@@ -150,7 +152,7 @@ julia_setup <- function() {
 
     .julia$install_package <- function(pkg_name) .julia$call_no_ret("Pkg.add", pkg_name)
 
-    .julia$cmd("function installed_package(pkg_name) string(Pkg.installed(pkg_name)) end")
+    .julia$.cmd("function installed_package(pkg_name) string(Pkg.installed(pkg_name)) end")
 
     .julia$installed_package <- function(pkg_name) .julia$call("installed_package", pkg_name)
 

@@ -25,7 +25,7 @@ library(JuliaCall)
 
 julia <- julia_setup()
 
-julia$cmd("println(sqrt(2))")
+julia$command("println(sqrt(2))")
 
 julia$eval_string("sqrt(2)")
 
