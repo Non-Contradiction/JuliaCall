@@ -8,6 +8,11 @@ julia:
 notifications:
   email: false
 
+addons:
+      apt:
+        sources: [ 'ubuntu-toolchain-r-test']
+        packages: ['libstdc++6']
+
 before_install:
   # linux
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9; fi
