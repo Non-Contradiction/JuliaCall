@@ -109,8 +109,9 @@ julia_setup <- function() {
                         f = eval(parse(fname))
                         xx = transfer_list(x);
                         UInt64(RObject(f(xx...)).p);
-                    catch
-                        println(join(["Error in Julia Call with function name " fname]));
+                    catch e
+                        println(join(["Error happens when you try to call function " fname " in Julia"]));
+                        println(join(["The error type is " string(typeof(e))]));
                         UInt64(RObject(nothing).p);
                     end;
                end')
