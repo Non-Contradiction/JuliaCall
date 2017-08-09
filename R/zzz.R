@@ -144,11 +144,9 @@ julia_setup <- function() {
 
     .julia$command <- function(cmd) .julia$call_no_ret("eval_string", cmd)
 
-    .julia$.cmd("function source(file_name) include(file_name); nothing end")
-
-    .julia$source <- function(file_name) .julia$call("source", file_name)
-
     .julia$include <- function(file_name) .julia$call("include", file_name)
+
+    .julia$source <- function(file_name) .julia$call_no_ret("include", file_name)
 
     .julia$install_package <- function(pkg_name) .julia$call_no_ret("Pkg.add", pkg_name)
 
