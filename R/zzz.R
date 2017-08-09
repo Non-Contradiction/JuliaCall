@@ -35,16 +35,14 @@ julia_setup <- function() {
     message(paste0("Julia version ", .julia$VERSION, " found."))
 
     if (.julia$VERSION < "0.6.0") {
-        .julia$init <- inline::cfunction(
+        .julia$init_ <- inline::cfunction(
             sig = c(dir = "character"),
             body = "jl_init(CHAR(STRING_ELT(dir, 0))); return R_NilValue;",
             includes = "#include <julia.h>",
             cppargs = .julia$cppargs
         )
 
-        message("Julia initiation...")
-
-        .julia$init(.julia$bin_dir)
+        .julia$init <- function() .julia$init_(.julia$bin_dir)
     }
     if (.julia$VERSION >= "0.6.0") {
         .julia$init <- inline::cfunction(
@@ -53,11 +51,11 @@ julia_setup <- function() {
             includes = "#include <julia.h>",
             cppargs = .julia$cppargs
         )
-
-        message("Julia initiation...")
-
-        .julia$init()
     }
+
+    message("Julia initiation...")
+
+    .julia$init()
 
     .julia$.cmd <- inline::cfunction(
         sig = c(cmd = "character"),
