@@ -99,7 +99,7 @@ julia_setup <- function() {
 
     .julia$cmd("function transfer_string(x) rcopy(RObject(Ptr{RCall.StrSxp}(x))) end")
 
-    .julia$cmd('function wrap_all(name, x)
+    .julia$cmd('function wrap(name, x)
                     fname = transfer_string(name);
                     try
                         f = eval(parse(fname))
@@ -113,10 +113,10 @@ julia_setup <- function() {
                     end;
                end')
 
-    .julia$wrap_all <- inline::cfunction(
+    .julia$wrap <- inline::cfunction(
         sig = c(func_name = "character", arg = "SEXP"),
         body = '
-        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap_all"));
+        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap"));
         jl_value_t *func = jl_box_voidpointer(func_name);
         jl_value_t *arg1 = jl_box_voidpointer(arg);
         SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(wrap, func, arg1)));
@@ -126,7 +126,7 @@ julia_setup <- function() {
         cppargs = .julia$cppargs
         )
 
-    .julia$call <- function(func_name, ...) .julia$wrap_all(func_name, list(...))
+    .julia$call <- function(func_name, ...) .julia$wrap(func_name, list(...))
 
     .julia$cmd("function exists(x) isdefined(Symbol(x)) end")
 
