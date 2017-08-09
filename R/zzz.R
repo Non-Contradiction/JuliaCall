@@ -69,7 +69,7 @@ julia_setup <- function() {
     )
 
     .julia$source <- function(file_name) {
-        .julia$cmd(readr::read_file(file_name))
+        .julia$cmd('include("', file_name, '")')
     }
 
     .julia$install_package <- function(pkg_name) {
