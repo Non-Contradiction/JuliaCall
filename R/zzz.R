@@ -106,7 +106,7 @@ julia_setup <- function() {
                end')
 
     .julia$wrap <- inline::cfunction(
-        sig = c(func_name = "character", arg = "SEXP"),
+        sig = c(func_name = "character", arg = "list"),
         body = '
         jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap"));
         jl_value_t *func = jl_box_voidpointer(func_name);
@@ -119,7 +119,7 @@ julia_setup <- function() {
         )
 
     .julia$wrap_no_ret <- inline::cfunction(
-        sig = c(func_name = "character", arg = "SEXP"),
+        sig = c(func_name = "character", arg = "list"),
         body = '
         jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap"));
         jl_value_t *func = jl_box_voidpointer(func_name);
