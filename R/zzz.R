@@ -110,8 +110,9 @@ julia_setup <- function() {
                         xx = transfer_list(x);
                         RObject(f(xx...)).p;
                     catch e
-                        println(join(["Error happens when you try to call function " fname " in Julia"]));
-                        println(join(["The error type is " string(typeof(e))]));
+                        println(join(["Error happens when you try to call function " fname " in Julia."]));
+                        showerror(STDOUT, e, catch_stacktrace());
+                        println();
                         RObject(nothing).p;
                     end;
                end')
