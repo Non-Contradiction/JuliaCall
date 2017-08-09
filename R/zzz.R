@@ -108,11 +108,11 @@ julia_setup <- function() {
                     try
                         f = eval(parse(fname))
                         xx = transfer_list(x);
-                        UInt64(RObject(f(xx...)).p);
+                        RObject(f(xx...)).p;
                     catch e
                         println(join(["Error happens when you try to call function " fname " in Julia"]));
                         println(join(["The error type is " string(typeof(e))]));
-                        UInt64(RObject(nothing).p);
+                        RObject(nothing).p;
                     end;
                end')
 
@@ -120,9 +120,9 @@ julia_setup <- function() {
         sig = c(func_name = "character", arg = "SEXP"),
         body = '
         jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap_all"));
-        jl_value_t *func = jl_box_uint64((uintptr_t)(func_name));
-        jl_value_t *arg1 = jl_box_uint64((uintptr_t)(arg));
-        SEXP out = PROTECT((SEXP)jl_unbox_uint64(jl_call2(wrap, func, arg1)));
+        jl_value_t *func = jl_box_voidpointer(func_name);
+        jl_value_t *arg1 = jl_box_voidpointer(arg);
+        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(wrap, func, arg1)));
         UNPROTECT(1);
         return out;',
         includes = "#include <julia.h>",
