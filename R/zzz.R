@@ -105,7 +105,7 @@ julia_setup <- function() {
                     end;
                end')
 
-    .julia$wrap <- inline::cfunction(
+    .julia$wrap_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
         body = '
         jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap"));
@@ -118,7 +118,14 @@ julia_setup <- function() {
         cppargs = .julia$cppargs
         )
 
-    .julia$wrap_no_ret <- inline::cfunction(
+    .julia$wrap <- function(func_name, arg){
+        stopifnot(is.character(func_name))
+        stopifnot(length(func_name) == 1)
+        stopifnot(is.list(arg))
+        .julia$wrap_(func_name, arg)
+    }
+
+    .julia$wrap_no_ret_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
         body = '
         jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap"));
@@ -129,6 +136,13 @@ julia_setup <- function() {
         includes = "#include <julia.h>",
         cppargs = .julia$cppargs
     )
+
+    .julia$wrap_no_ret <- function(func_name, arg){
+        stopifnot(is.character(func_name))
+        stopifnot(length(func_name) == 1)
+        stopifnot(is.list(arg))
+        .julia$wrap_no_ret_(func_name, arg)
+    }
 
     .julia$call <- function(func_name, ...) .julia$wrap(func_name, list(...))
 
