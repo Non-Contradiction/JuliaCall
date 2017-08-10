@@ -93,7 +93,9 @@ julia_setup <- function() {
         stopifnot(is.character(func_name))
         stopifnot(length(func_name) == 1)
         stopifnot(is.list(arg))
-        .julia$wrap_(func_name, arg)
+        r <- .julia$wrap_(func_name, arg)
+        if (inherits(r, "error")) stop(r)
+        r
     }
 
     .julia$wrap_no_ret_ <- inline::cfunction(
@@ -113,7 +115,9 @@ julia_setup <- function() {
         stopifnot(is.character(func_name))
         stopifnot(length(func_name) == 1)
         stopifnot(is.list(arg))
-        .julia$wrap_no_ret_(func_name, arg)
+        r <- .julia$wrap_no_ret_(func_name, arg)
+        if (inherits(r, "error")) stop(r)
+        r
     }
 
     .julia$call <- function(func_name, ...) .julia$wrap(func_name, list(...))
