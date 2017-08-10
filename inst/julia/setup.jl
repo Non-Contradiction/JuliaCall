@@ -1,3 +1,5 @@
+module JuliaCall
+
 # gc_enable(false)
 
 # Pkg.update()
@@ -31,7 +33,7 @@ end
 function wrap(name, x)
     fname = transfer_string(name);
     try
-        f = eval(parse(fname));
+        f = eval(Main, parse(fname));
         xx = transfer_list(x);
         RObject(f(xx...)).p;
     catch e
@@ -42,7 +44,7 @@ end
 function wrap_no_ret(name, x)
     fname = transfer_string(name);
     try
-        f = eval(parse(fname));
+        f = eval(Main, parse(fname));
         xx = transfer_list(x);
         f(xx...);
         RObject(nothing).p;
@@ -56,9 +58,11 @@ function exists(x)
 end
 
 function eval_string(x)
-    eval(parse(x))
+    eval(Main, parse(x))
 end
 
 function installed_package(pkg_name)
     string(Pkg.installed(pkg_name))
+end
+
 end

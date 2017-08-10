@@ -77,7 +77,7 @@ julia_setup <- function() {
     .julia$wrap_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
         body = '
-        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap"));
+        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("JuliaCall.wrap"));
         jl_value_t *func = jl_box_voidpointer(func_name);
         jl_value_t *arg1 = jl_box_voidpointer(arg);
         SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(wrap, func, arg1)));
@@ -99,7 +99,7 @@ julia_setup <- function() {
     .julia$wrap_no_ret_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
         body = '
-        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap_no_ret"));
+        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("JuliaCall.wrap_no_ret"));
         jl_value_t *func = jl_box_voidpointer(func_name);
         jl_value_t *arg1 = jl_box_voidpointer(arg);
         SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(wrap, func, arg1)));
@@ -124,11 +124,11 @@ julia_setup <- function() {
 
     julia$call_no_ret <- function(func_name, ...) .julia$wrap_no_ret(func_name, list(...))
 
-    julia$exists <- function(name) julia$call("exists", name)
+    julia$exists <- function(name) julia$call("JuliaCall.exists", name)
 
-    julia$eval_string <- function(cmd) julia$call("eval_string", cmd)
+    julia$eval_string <- function(cmd) julia$call("JuliaCall.eval_string", cmd)
 
-    julia$command <- function(cmd) julia$call_no_ret("eval_string", cmd)
+    julia$command <- function(cmd) julia$call_no_ret("JuliaCall.eval_string", cmd)
 
     julia$include <- function(file_name) julia$call("include", file_name)
 
@@ -136,7 +136,7 @@ julia_setup <- function() {
 
     julia$install_package <- function(pkg_name) julia$call_no_ret("Pkg.add", pkg_name)
 
-    julia$installed_package <- function(pkg_name) julia$call("installed_package", pkg_name)
+    julia$installed_package <- function(pkg_name) julia$call("JuliaCall.installed_package", pkg_name)
 
     julia$install_package_if_needed <- function(pkg_name){
         if (julia$installed_package(pkg_name) == "nothing") {
