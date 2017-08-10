@@ -70,38 +70,11 @@ julia_setup <- function() {
         .julia$.cmd(paste0("using ", pkg))
     }
 
-    .julia$using1 <- function(pkg) {
-        .julia$.cmd(paste0('if Pkg.installed("', pkg, '") == nothing Pkg.add("', pkg, '") end'))
-        .julia$using(pkg)
-    }
-
     reg.finalizer(.julia, function(e){message("Julia exit."); .julia$.cmd("exit()")}, onexit = TRUE)
-
-    # .julia$.cmd("gc_enable(false)")
-
-    # .julia$.cmd("Pkg.update()")
 
     .julia$.cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
 
-    .julia$using1("RCall")
-
-    .julia$.cmd("function transfer_list(x) rcopy(RObject(Ptr{RCall.VecSxp}(x))) end")
-
-    .julia$.cmd("function transfer_string(x) rcopy(RObject(Ptr{RCall.StrSxp}(x))) end")
-
-    .julia$.cmd('function wrap(name, x)
-                    fname = transfer_string(name);
-                    try
-                        f = eval(parse(fname));
-                        xx = transfer_list(x);
-                        RObject(f(xx...)).p;
-                    catch e
-                        println(join(["Error happens when you try to call function " fname " in Julia."]));
-                        showerror(STDOUT, e, catch_stacktrace());
-                        println();
-                        RObject(nothing).p;
-                    end;
-               end')
+    .julia$.cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
 
     .julia$wrap_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
@@ -122,21 +95,6 @@ julia_setup <- function() {
         stopifnot(is.list(arg))
         .julia$wrap_(func_name, arg)
     }
-
-    .julia$.cmd('function wrap_no_ret(name, x)
-                    fname = transfer_string(name);
-                    try
-                        f = eval(parse(fname));
-                        xx = transfer_list(x);
-                        f(xx...);
-                        RObject(nothing).p;
-                    catch e
-                        println(join(["Error happens when you try to call function " fname " in Julia."]));
-                        showerror(STDOUT, e, catch_stacktrace());
-                        println();
-                        RObject(nothing).p;
-                    end;
-                end')
 
     .julia$wrap_no_ret_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
@@ -162,11 +120,7 @@ julia_setup <- function() {
 
     .julia$call_no_ret <- function(func_name, ...) .julia$wrap_no_ret(func_name, list(...))
 
-    .julia$.cmd("function exists(x) isdefined(Symbol(x)) end")
-
     .julia$exists <- function(name) .julia$call("exists", name)
-
-    .julia$.cmd("function eval_string(x) eval(parse(x)) end")
 
     .julia$eval_string <- function(cmd) .julia$call("eval_string", cmd)
 
@@ -177,8 +131,6 @@ julia_setup <- function() {
     .julia$source <- function(file_name) .julia$call_no_ret("include", file_name)
 
     .julia$install_package <- function(pkg_name) .julia$call_no_ret("Pkg.add", pkg_name)
-
-    .julia$.cmd("function installed_package(pkg_name) string(Pkg.installed(pkg_name)) end")
 
     .julia$installed_package <- function(pkg_name) .julia$call("installed_package", pkg_name)
 
