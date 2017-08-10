@@ -92,7 +92,7 @@ julia_setup <- function() {
     .julia$.cmd('function wrap(name, x)
                     fname = transfer_string(name);
                     try
-                        f = eval(parse(fname))
+                        f = eval(parse(fname));
                         xx = transfer_list(x);
                         RObject(f(xx...)).p;
                     catch e
@@ -126,7 +126,7 @@ julia_setup <- function() {
     .julia$.cmd('function wrap_no_ret(name, x)
                     fname = transfer_string(name);
                     try
-                        f = eval(parse(fname))
+                        f = eval(parse(fname));
                         xx = transfer_list(x);
                         f(xx...);
                         RObject(nothing).p;
