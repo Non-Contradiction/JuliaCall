@@ -1,5 +1,7 @@
 .julia <- new.env(parent = emptyenv())
 
+julia <- new.env(parent = .julia)
+
 #' Do initial setup for the JuliaCall package.
 #'
 #' \code{julia_setup} does the initial setup for the JuliaCall package.
@@ -57,7 +59,7 @@ julia_setup <- function() {
 
     .julia$init()
 
-    .julia$.cmd <- inline::cfunction(
+    .julia$cmd <- inline::cfunction(
         sig = c(cmd = "character"),
         body = "jl_eval_string(CHAR(STRING_ELT(cmd, 0)));
         if (jl_exception_occurred()) printf(\"%s \", jl_typeof_str(jl_exception_occurred()));
@@ -66,11 +68,11 @@ julia_setup <- function() {
         cppargs = .julia$cppargs
     )
 
-    reg.finalizer(.julia, function(e){message("Julia exit."); .julia$.cmd("exit()")}, onexit = TRUE)
+    reg.finalizer(.julia, function(e){message("Julia exit."); .julia$cmd("exit()")}, onexit = TRUE)
 
-    .julia$.cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
+    .julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
 
-    .julia$.cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
+    .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
 
     .julia$wrap_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
@@ -116,33 +118,35 @@ julia_setup <- function() {
         r
     }
 
-    .julia$call <- function(func_name, ...) .julia$wrap(func_name, list(...))
+    julia$VERSION <- .julia$VERSION
 
-    .julia$call_no_ret <- function(func_name, ...) .julia$wrap_no_ret(func_name, list(...))
+    julia$call <- function(func_name, ...) .julia$wrap(func_name, list(...))
 
-    .julia$exists <- function(name) .julia$call("exists", name)
+    julia$call_no_ret <- function(func_name, ...) .julia$wrap_no_ret(func_name, list(...))
 
-    .julia$eval_string <- function(cmd) .julia$call("eval_string", cmd)
+    julia$exists <- function(name) julia$call("exists", name)
 
-    .julia$command <- function(cmd) .julia$call_no_ret("eval_string", cmd)
+    julia$eval_string <- function(cmd) julia$call("eval_string", cmd)
 
-    .julia$include <- function(file_name) .julia$call("include", file_name)
+    julia$command <- function(cmd) julia$call_no_ret("eval_string", cmd)
 
-    .julia$source <- function(file_name) .julia$call_no_ret("include", file_name)
+    julia$include <- function(file_name) julia$call("include", file_name)
 
-    .julia$install_package <- function(pkg_name) .julia$call_no_ret("Pkg.add", pkg_name)
+    julia$source <- function(file_name) julia$call_no_ret("include", file_name)
 
-    .julia$installed_package <- function(pkg_name) .julia$call("installed_package", pkg_name)
+    julia$install_package <- function(pkg_name) julia$call_no_ret("Pkg.add", pkg_name)
 
-    .julia$install_package_if_needed <- function(pkg_name){
-        if (.julia$installed_package(pkg_name) == "nothing") {
-            .julia$install_package(pkg_name)
+    julia$installed_package <- function(pkg_name) julia$call("installed_package", pkg_name)
+
+    julia$install_package_if_needed <- function(pkg_name){
+        if (julia$installed_package(pkg_name) == "nothing") {
+            julia$install_package(pkg_name)
         }
     }
 
-    .julia$using <- function(pkg) {
-        .julia$command(paste0("using ", pkg))
+    julia$using <- function(pkg) {
+        julia$command(paste0("using ", pkg))
     }
 
-    .julia
+    julia
 }
