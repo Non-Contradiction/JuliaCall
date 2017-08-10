@@ -66,10 +66,6 @@ julia_setup <- function() {
         cppargs = .julia$cppargs
     )
 
-    .julia$using <- function(pkg) {
-        .julia$.cmd(paste0("using ", pkg))
-    }
-
     reg.finalizer(.julia, function(e){message("Julia exit."); .julia$.cmd("exit()")}, onexit = TRUE)
 
     .julia$.cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
@@ -142,6 +138,10 @@ julia_setup <- function() {
         if (.julia$installed_package(pkg_name) == "nothing") {
             .julia$install_package(pkg_name)
         }
+    }
+
+    .julia$using <- function(pkg) {
+        .julia$command(paste0("using ", pkg))
     }
 
     .julia
