@@ -123,14 +123,30 @@ julia_setup <- function() {
         .julia$wrap_(func_name, arg)
     }
 
+    .julia$.cmd('function wrap_no_ret(name, x)
+                    fname = transfer_string(name);
+                    try
+                        f = eval(parse(fname))
+                        xx = transfer_list(x);
+                        f(xx...);
+                        RObject(nothing).p;
+                    catch e
+                        println(join(["Error happens when you try to call function " fname " in Julia."]));
+                        showerror(STDOUT, e, catch_stacktrace());
+                        println();
+                        RObject(nothing).p;
+                    end;
+                end')
+
     .julia$wrap_no_ret_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
         body = '
-        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap"));
+        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("wrap_no_ret"));
         jl_value_t *func = jl_box_voidpointer(func_name);
         jl_value_t *arg1 = jl_box_voidpointer(arg);
-        jl_call2(wrap, func, arg1);
-        return R_NilValue;',
+        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(wrap, func, arg1)));
+        UNPROTECT(1);
+        return out;',
         includes = "#include <julia.h>",
         cppargs = .julia$cppargs
     )
