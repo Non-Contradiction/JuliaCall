@@ -14,10 +14,10 @@
 `%>J%` <- function(obj, func_call){
     r <- substitute(func_call)
     if (inherits(r, "name")) {
-        return(.julia$call(deparse(r), obj))
+        return(julia$call(deparse(r), obj))
     }
     if (inherits(r, "call")) {
-        return(.julia$wrap_all(deparse(r[[1]]), append(obj, as.list(r[-1]))))
+        return(julia$do.call(deparse(r[[1]]), append(obj, as.list(r[-1]))))
     }
     return(NULL)
 }
