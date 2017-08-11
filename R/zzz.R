@@ -96,13 +96,7 @@ julia_setup <- function() {
         r
     }
 
-    julia$call <- function(func_name, ...){
-        stopifnot(is.character(func_name))
-        stopifnot(length(func_name) == 1)
-        r <- .julia$do.call_(func_name, list(...))
-        if (inherits(r, "error")) stop(r)
-        r
-    }
+    julia$call <- function(func_name, ...) julia$do.call(func_name, list(...))
 
     .julia$do.call_no_ret_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
@@ -118,6 +112,7 @@ julia_setup <- function() {
     )
 
     julia$do.call_no_ret <- function(func_name, arg){
+
         stopifnot(is.character(func_name))
         stopifnot(length(func_name) == 1)
         stopifnot(is.list(arg))
@@ -126,13 +121,7 @@ julia_setup <- function() {
         r
     }
 
-    julia$call_no_ret <- function(func_name, ...){
-        stopifnot(is.character(func_name))
-        stopifnot(length(func_name) == 1)
-        r <- .julia$do.call_no_ret_(func_name, list(...))
-        if (inherits(r, "error")) stop(r)
-        r
-    }
+    julia$call_no_ret <- function(func_name, ...) julia$do.call_no_ret(func_name, list(...))
 
     julia$VERSION <- .julia$VERSION
 
