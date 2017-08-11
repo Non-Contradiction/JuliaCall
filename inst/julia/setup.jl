@@ -16,6 +16,13 @@ function transfer_string(x)
     rcopy(RObject(Ptr{RCall.StrSxp}(x)))
 end
 
+function error_msg(e)
+    m = IOBuffer()
+    showerror(m, e)
+    seek(m, 0)
+    readstring(m)
+end
+
 function error_msg(e, bt)
     m = IOBuffer()
     showerror(m, e, bt)
@@ -25,7 +32,11 @@ end
 
 function Rerror(fname, e, bt)
     s1 = join(["Error happens when you try to call function " fname " in Julia.\n"])
-    s2 = error_msg(e, bt)
+    if string(VERSION) < "0.6.0"
+        s2 = error_msg(e)
+    else
+        s2 = error_msg(e, bt)
+    end
     s = join([s1 s2])
     rcall(:simpleError, s)
 end
