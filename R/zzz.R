@@ -87,11 +87,14 @@ julia_setup <- function() {
         cppargs = .julia$cppargs
         )
 
-    julia$do.call <- function(func_name, arg){
-        stopifnot(is.character(func_name))
-        stopifnot(length(func_name) == 1)
-        stopifnot(is.list(arg))
-        r <- .julia$do.call_(func_name, arg)
+    julia$do.call <- function(func_name, arg_list){
+        if (!(length(func_name) == 1 && is.character(func_name))) {
+            stop("func_name should be a character scalar.")
+        }
+        if (!(is.list(arg_list))) {
+            stop("arg_list should be the list of arguments.")
+        }
+        r <- .julia$do.call_(func_name, arg_list)
         if (inherits(r, "error")) stop(r)
         r
     }
@@ -101,22 +104,24 @@ julia_setup <- function() {
     .julia$do.call_no_ret_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
         body = '
-        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("JuliaCall.wrap_no_ret"));
+        jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall_no_ret"));
         jl_value_t *func = jl_box_voidpointer(func_name);
         jl_value_t *arg1 = jl_box_voidpointer(arg);
-        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(wrap, func, arg1)));
+        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(docall, func, arg1)));
         UNPROTECT(1);
         return out;',
         includes = "#include <julia.h>",
         cppargs = .julia$cppargs
     )
 
-    julia$do.call_no_ret <- function(func_name, arg){
-
-        stopifnot(is.character(func_name))
-        stopifnot(length(func_name) == 1)
-        stopifnot(is.list(arg))
-        r <- .julia$do.call_no_ret_(func_name, arg)
+    julia$do.call_no_ret <- function(func_name, arg_list){
+        if (!(length(func_name) == 1 && is.character(func_name))) {
+            stop("func_name should be a character scalar.")
+        }
+        if (!(is.list(arg_list))) {
+            stop("arg_list should be the list of arguments.")
+        }
+        r <- .julia$do.call_no_ret_(func_name, arg_list)
         if (inherits(r, "error")) stop(r)
         r
     }
