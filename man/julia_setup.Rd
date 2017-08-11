@@ -15,11 +15,13 @@ The julia interface, which is an environment with the necessary methods
 }
 \examples{
 julia <- julia_setup()
-julia$command("println(sqrt(2))")
+julia$command("a = sqrt(2)"); julia$eval_string("a")
 julia$eval_string("sqrt(2)")
 julia$call("sqrt", 2)
 julia$eval_string("sqrt")(2)
 julia$exists("sqrt")
 julia$exists("c")
+julia$installed_package("RCall")
+julia$using("RCall")
 
 }

@@ -11,12 +11,14 @@ julia <- new.env(parent = .julia)
 #'
 #' @examples
 #' julia <- julia_setup()
-#' julia$command("println(sqrt(2))")
+#' julia$command("a = sqrt(2)"); julia$eval_string("a")
 #' julia$eval_string("sqrt(2)")
 #' julia$call("sqrt", 2)
 #' julia$eval_string("sqrt")(2)
 #' julia$exists("sqrt")
 #' julia$exists("c")
+#' julia$installed_package("RCall")
+#' julia$using("RCall")
 #'
 #' @export
 julia_setup <- function() {
