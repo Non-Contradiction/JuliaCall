@@ -30,7 +30,7 @@ function Rerror(fname, e, bt)
     rcall(:simpleError, s)
 end
 
-function wrap(name, x)
+function docall(name, x)
     fname = transfer_string(name);
     try
         f = eval(Main, parse(fname));
@@ -41,7 +41,7 @@ function wrap(name, x)
     end;
 end
 
-function wrap_no_ret(name, x)
+function docall_no_ret(name, x)
     fname = transfer_string(name);
     try
         f = eval(Main, parse(fname));

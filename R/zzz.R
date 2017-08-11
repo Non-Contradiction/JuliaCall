@@ -74,29 +74,37 @@ julia_setup <- function() {
 
     .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
 
-    .julia$wrap_ <- inline::cfunction(
+    .julia$do.call_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
         body = '
-        jl_function_t *wrap = (jl_function_t*)(jl_eval_string("JuliaCall.wrap"));
+        jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall"));
         jl_value_t *func = jl_box_voidpointer(func_name);
         jl_value_t *arg1 = jl_box_voidpointer(arg);
-        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(wrap, func, arg1)));
+        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(docall, func, arg1)));
         UNPROTECT(1);
         return out;',
         includes = "#include <julia.h>",
         cppargs = .julia$cppargs
         )
 
-    .julia$wrap <- function(func_name, arg){
+    julia$do.call <- function(func_name, arg){
         stopifnot(is.character(func_name))
         stopifnot(length(func_name) == 1)
         stopifnot(is.list(arg))
-        r <- .julia$wrap_(func_name, arg)
+        r <- .julia$do.call_(func_name, arg)
         if (inherits(r, "error")) stop(r)
         r
     }
 
-    .julia$wrap_no_ret_ <- inline::cfunction(
+    julia$call <- function(func_name, ...){
+        stopifnot(is.character(func_name))
+        stopifnot(length(func_name) == 1)
+        r <- .julia$do.call_(func_name, list(...))
+        if (inherits(r, "error")) stop(r)
+        r
+    }
+
+    .julia$do.call_no_ret_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list"),
         body = '
         jl_function_t *wrap = (jl_function_t*)(jl_eval_string("JuliaCall.wrap_no_ret"));
@@ -109,20 +117,24 @@ julia_setup <- function() {
         cppargs = .julia$cppargs
     )
 
-    .julia$wrap_no_ret <- function(func_name, arg){
+    julia$do.call_no_ret <- function(func_name, arg){
         stopifnot(is.character(func_name))
         stopifnot(length(func_name) == 1)
         stopifnot(is.list(arg))
-        r <- .julia$wrap_no_ret_(func_name, arg)
+        r <- .julia$do.call_no_ret_(func_name, arg)
+        if (inherits(r, "error")) stop(r)
+        r
+    }
+
+    julia$call_no_ret <- function(func_name, ...){
+        stopifnot(is.character(func_name))
+        stopifnot(length(func_name) == 1)
+        r <- .julia$do.call_no_ret_(func_name, list(...))
         if (inherits(r, "error")) stop(r)
         r
     }
 
     julia$VERSION <- .julia$VERSION
-
-    julia$call <- function(func_name, ...) .julia$wrap(func_name, list(...))
-
-    julia$call_no_ret <- function(func_name, ...) .julia$wrap_no_ret(func_name, list(...))
 
     julia$exists <- function(name) julia$call("JuliaCall.exists", name)
 
