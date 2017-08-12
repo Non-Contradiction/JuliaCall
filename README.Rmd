@@ -31,7 +31,11 @@ devtools::install_github("Non-Contradiction/JuliaCall")
 ```{r}
 library(JuliaCall)
 
+## Do initial setup
+
 julia <- julia_setup()
+
+## Different ways for using Julia to calculate sqrt(2)
 
 julia$command("a = sqrt(2)"); julia$eval_string("a")
 
@@ -42,6 +46,24 @@ julia$call("sqrt", 2)
 julia$eval_string("sqrt")(2)
 
 2 %>J% sqrt
+
+## You can use `julia$exists` as `exists` in R to test
+## whether a function or name exists in Julia or not
+
+julia$exists("sqrt")
+julia$exists("c")
+
+## You can use `julia$help` to get help for Julia functions
+
+julia$help("sqrt")
+
+## Functions related to installing and using Julia packages
+
+julia$install_package("Optim")
+julia$install_package_if_needed("Optim")
+julia$installed_package("Optim")
+julia$using("Optim") ## Same as julia$library("Optim")
+julia$library("Optim")
 ```
 
 ## How to Get Help?

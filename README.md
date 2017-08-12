@@ -22,9 +22,13 @@ Basic Usage
 ``` r
 library(JuliaCall)
 
+## Do initial setup
+
 julia <- julia_setup()
 #> Julia version 0.6.0 found.
 #> Julia initiation...
+
+## Different ways for using Julia to calculate sqrt(2)
 
 julia$command("a = sqrt(2)"); julia$eval_string("a")
 #> [1] 1.414214
@@ -40,6 +44,34 @@ julia$eval_string("sqrt")(2)
 
 2 %>J% sqrt
 #> [1] 1.414214
+
+## You can use `julia$exists` as `exists` in R to test
+## whether a function or name exists in Julia or not
+
+julia$exists("sqrt")
+#> [1] TRUE
+julia$exists("c")
+#> [1] FALSE
+
+## You can use `julia$help` to get help for Julia functions
+
+julia$help("sqrt")
+#> ```
+#> sqrt(x)
+#> ```
+#> 
+#> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
+
+## Functions related to installing and using Julia packages
+
+julia$install_package("Optim")
+julia$install_package_if_needed("Optim")
+julia$installed_package("Optim")
+#> [1] "0.9.3"
+julia$using("Optim") ## Same as julia$library("Optim")
+#> Second try succeed.
+julia$library("Optim")
+#> Second try succeed.
 ```
 
 How to Get Help?
