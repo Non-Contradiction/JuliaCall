@@ -168,8 +168,15 @@ julia_setup <- function() {
 
     julia$using <- function(pkg){
         tryCatch(julia$command(paste0("using ", pkg)),
-                 error = system(paste0("julia -e 'using ", pkg, "'")),
-                 finally = julia$command(paste0("using ", pkg)))
+                 error = function(e) {
+                     message(paste0("Some error occurs in loading the Julia package ",
+                                    pkg,
+                                    ". Will try again."))
+                     system(paste0("julia -e 'using ", pkg, "'"))
+                     },
+                 finally = {julia$command(paste0("using ", pkg));
+                     message("Second try succeed.")}
+                 )
     }
 
     julia$help <- function(fname){
