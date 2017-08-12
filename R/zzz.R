@@ -153,7 +153,7 @@ julia_setup <- function() {
         }
         r <- .julia$do.call_no_ret_(func_name, arg_list)
         if (inherits(r, "error")) stop(r)
-        r
+        invisible(r)
     }
 
     julia$call_no_ret <- function(func_name, ...) julia$do.call_no_ret(func_name, list(...))
