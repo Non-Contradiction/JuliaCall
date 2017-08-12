@@ -36,7 +36,8 @@ julia$help("sqrt")
 ## Functions related to Julia packages
 
 julia$install_package("Optim")
+julia$install_package_if_needed("Optim")
 julia$installed_package("Optim")
-julia$using("Optim")
+julia$using("Optim") ## Same as julia$library("Optim")
 
 }

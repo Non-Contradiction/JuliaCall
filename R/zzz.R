@@ -32,8 +32,9 @@ julia <- new.env(parent = .julia)
 #' ## Functions related to Julia packages
 #'
 #' julia$install_package("Optim")
+#' julia$install_package_if_needed("Optim")
 #' julia$installed_package("Optim")
-#' julia$using("Optim")
+#' julia$using("Optim") ## Same as julia$library("Optim")
 #'
 #' @export
 julia_setup <- function() {
@@ -180,7 +181,7 @@ julia_setup <- function() {
 
     julia$update_package <- function(...) julia$do.call("Pkg.update", list(...))
 
-    julia$using <- function(pkg){
+    julia$library <- julia$using <- function(pkg){
         tryCatch(julia$command(paste0("using ", pkg)),
                  error = function(e) {
                      message(paste0("Some error occurs in loading the Julia package ",
