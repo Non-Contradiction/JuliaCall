@@ -39,6 +39,8 @@ julia_setup <- function() {
 
     message(paste0("Julia version ", .julia$VERSION, " found."))
 
+    system("julia -e 'if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; using RCall'")
+
     if (.julia$VERSION < "0.6.0") {
         .julia$init_ <- inline::cfunction(
             sig = c(dir = "character"),
@@ -152,6 +154,8 @@ julia_setup <- function() {
             julia$install_package(pkg_name)
         }
     }
+
+    julia$update_package <- function(...) julia$do.call("Pkg.update", list(...))
 
     julia$using <- function(pkg){
         julia$command(paste0("using ", pkg))
