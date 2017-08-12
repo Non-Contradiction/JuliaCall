@@ -23,5 +23,6 @@ julia$exists("sqrt")
 julia$exists("c")
 julia$installed_package("RCall")
 julia$using("RCall")
+julia$help("sqrt")
 
 }

@@ -19,6 +19,7 @@ julia <- new.env(parent = .julia)
 #' julia$exists("c")
 #' julia$installed_package("RCall")
 #' julia$using("RCall")
+#' julia$help("sqrt")
 #'
 #' @export
 julia_setup <- function() {
@@ -152,8 +153,12 @@ julia_setup <- function() {
         }
     }
 
-    julia$using <- function(pkg) {
+    julia$using <- function(pkg){
         julia$command(paste0("using ", pkg))
+    }
+
+    julia$help <- function(fname){
+        cat(julia$call("JuliaCall.help", fname))
     }
 
     julia

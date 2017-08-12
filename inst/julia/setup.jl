@@ -76,4 +76,8 @@ function installed_package(pkg_name)
     string(Pkg.installed(pkg_name))
 end
 
+function help(fname)
+    string(eval_string(join(["@doc " fname])))
+end
+
 end
