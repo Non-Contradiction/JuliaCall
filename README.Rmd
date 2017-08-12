@@ -20,14 +20,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Installation
+## Installation
 
 You can get `JuliaCall` by
 ```{r eval=FALSE}
 devtools::install_github("Non-Contradiction/JuliaCall")
 ```
 
-# Basic Usage
+## Basic Usage
 ```{r}
 library(JuliaCall)
 
@@ -43,7 +43,21 @@ julia$eval_string("sqrt")(2)
 
 2 %>J% sqrt
 ```
-# JuliaCall for R Package Developers
+
+## How to Get Help?
+
+One way to get help is just using `julia$help` like the following example:
+
+```{r}
+julia$help("sqrt")
+
+julia$help("sqrtm")
+```
+
+And you are more than welcome to contact me about `JuliaCall`
+at <lch34677@gmail.com> or <cxl508@psu.edu>.
+
+## JuliaCall for R Package Developers
 
 If you are interested in developing an R package which is an interface for
 a Julia package, `JuliaCall` is an ideal choice for that!
@@ -56,7 +70,8 @@ If you have any issues in developing an `R` package using `JuliaCall`,
 you may report it using the link: <https://github.com/Non-Contradiction/JuliaCall/issues/new>.
 Or email me at <lch34677@gmail.com> or <cxl508@psu.edu>.
 
-# Suggestion and Issue Reporting
+## Suggestion and Issue Reporting
+
 `JuliaCall` is under active development now.
 Any suggestion or issue reporting is welcome!
 You may report it using the link: <https://github.com/Non-Contradiction/JuliaCall/issues/new>.

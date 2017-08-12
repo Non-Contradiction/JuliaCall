@@ -8,7 +8,7 @@ Package JuliaCall is an R interface to 'Julia', which is a high-level, high-perf
 [![Travis-CI Build Status](https://travis-ci.org/Non-Contradiction/JuliaCall.svg?branch=master)](https://travis-ci.org/Non-Contradiction/JuliaCall)
 
 Installation
-============
+------------
 
 You can get `JuliaCall` by
 
@@ -17,7 +17,7 @@ devtools::install_github("Non-Contradiction/JuliaCall")
 ```
 
 Basic Usage
-===========
+-----------
 
 ``` r
 library(JuliaCall)
@@ -43,8 +43,49 @@ julia$eval_string("sqrt")(2)
 #> [1] 1.414214
 ```
 
+How to Get Help?
+----------------
+
+One way to get help is just using `julia$help` like the following example:
+
+``` r
+julia$help("sqrt")
+#> ```
+#> sqrt(x)
+#> ```
+#> 
+#> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
+
+julia$help("sqrtm")
+#> ```
+#> sqrtm(A)
+#> ```
+#> 
+#> If `A` has no negative real eigenvalues, compute the principal matrix square root of `A`, that is the unique matrix $X$ with eigenvalues having positive real part such that $X^2 = A$. Otherwise, a nonprincipal square root is returned.
+#> 
+#> If `A` is symmetric or Hermitian, its eigendecomposition ([`eigfact`](@ref)) is used to compute the square root. Otherwise, the square root is determined by means of the Björck-Hammarling method [^BH83], which computes the complex Schur form ([`schur`](@ref)) and then the complex square root of the triangular factor.
+#> 
+#> [^BH83]: Åke Björck and Sven Hammarling, "A Schur method for the square root of a matrix", Linear Algebra and its Applications, 52-53, 1983, 127-140. [doi:10.1016/0024-3795(83)80010-X](http://dx.doi.org/10.1016/0024-3795(83)80010-X)
+#> 
+#> # Example
+#> 
+#> ```jldoctest
+#> julia> A = [4 0; 0 4]
+#> 2×2 Array{Int64,2}:
+#>  4  0
+#>  0  4
+#> 
+#> julia> sqrtm(A)
+#> 2×2 Array{Float64,2}:
+#>  2.0  0.0
+#>  0.0  2.0
+#> ```
+```
+
+And you are more than welcome to contact me about `JuliaCall` at <lch34677@gmail.com> or <cxl508@psu.edu>.
+
 JuliaCall for R Package Developers
-==================================
+----------------------------------
 
 If you are interested in developing an R package which is an interface for a Julia package, `JuliaCall` is an ideal choice for that!
 
@@ -53,7 +94,7 @@ Basically you only need to find the Julia function or Julia module you want to h
 If you have any issues in developing an `R` package using `JuliaCall`, you may report it using the link: <https://github.com/Non-Contradiction/JuliaCall/issues/new>. Or email me at <lch34677@gmail.com> or <cxl508@psu.edu>.
 
 Suggestion and Issue Reporting
-==============================
+------------------------------
 
 `JuliaCall` is under active development now. Any suggestion or issue reporting is welcome! You may report it using the link: <https://github.com/Non-Contradiction/JuliaCall/issues/new>. Or email me at <lch34677@gmail.com> or <cxl508@psu.edu>.
 
