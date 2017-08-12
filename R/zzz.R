@@ -54,7 +54,8 @@ julia_setup <- function() {
 
     message(paste0("Julia version ", .julia$VERSION, " found."))
 
-    system("julia -e 'if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; using RCall'")
+    system("julia -e 'if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; using RCall'",
+           ignore.stderr = TRUE)
 
     if (.julia$VERSION < "0.6.0") {
         .julia$init_ <- inline::cfunction(
@@ -187,7 +188,7 @@ julia_setup <- function() {
                      message(paste0("Some error occurs in loading the Julia package ",
                                     pkg,
                                     ". Will try again."))
-                     system(paste0("julia -e 'using ", pkg, "'"))
+                     system(paste0("julia -e 'using ", pkg, "'"), ignore.stderr = TRUE)
                      },
                  finally = {julia$command(paste0("using ", pkg));
                      message("Second try succeed.")}
