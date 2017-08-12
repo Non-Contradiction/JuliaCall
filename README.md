@@ -27,7 +27,6 @@ julia <- julia_setup()
 #> Julia initiation...
 
 julia$command("a = sqrt(2)"); julia$eval_string("a")
-#> NULL
 #> [1] 1.414214
 
 julia$eval_string("sqrt(2)")
