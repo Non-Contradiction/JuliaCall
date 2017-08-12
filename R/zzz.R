@@ -64,14 +64,23 @@ julia_setup <- function() {
 
     .julia$init()
 
-    .julia$cmd <- inline::cfunction(
+    .julia$cmd_ <- inline::cfunction(
         sig = c(cmd = "character"),
         body = "jl_eval_string(CHAR(STRING_ELT(cmd, 0)));
-        if (jl_exception_occurred()) printf(\"%s \", jl_typeof_str(jl_exception_occurred()));
-        return R_NilValue;",
+        if (jl_exception_occurred()) {printf(\"%s \", jl_typeof_str(jl_exception_occurred())); return Rf_ScalarLogical(0);};
+        return Rf_ScalarLogical(1);",
         includes = "#include <julia.h>",
         cppargs = .julia$cppargs
     )
+
+    .julia$cmd <- function(cmd){
+        if (!(length(cmd) == 1 && is.character(cmd))) {
+            stop("cmd should be a character scalar.")
+        }
+        if (!.julia$cmd_(cmd)) {
+            stop(paste0("Error happens when you try to execute command ", cmd, " in Julia."))
+        }
+    }
 
     reg.finalizer(.julia, function(e){message("Julia exit."); .julia$cmd("exit()")}, onexit = TRUE)
 
@@ -158,7 +167,9 @@ julia_setup <- function() {
     julia$update_package <- function(...) julia$do.call("Pkg.update", list(...))
 
     julia$using <- function(pkg){
-        julia$command(paste0("using ", pkg))
+        tryCatch(julia$command(paste0("using ", pkg)),
+                 error = system(paste0("julia -e 'using ", pkg, "'")),
+                 finally = julia$command(paste0("using ", pkg)))
     }
 
     julia$help <- function(fname){
