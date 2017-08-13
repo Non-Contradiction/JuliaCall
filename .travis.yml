@@ -35,6 +35,11 @@ before_install:
   - sudo dpkg -i /tmp/pandoc-1.15.2-1-amd64.deb
   - rm /tmp/pandoc-1.15.2-1-amd64.deb
 
+  - curl -fLo /tmp/rstudio.deb https://download1.rstudio.org/rstudio-1.0.153-amd64.deb
+  - sudo apt-get install -f
+  - sudo dpkg -i /tmp/rstudio.deb
+  - rm /tmp/rstudio.deb
+
   - mkdir -p mkdir $HOME/R/library
   - echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
   - Rscript -e 'install.packages("inline", repos="http://cran.rstudio.com/")'
