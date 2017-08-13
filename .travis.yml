@@ -36,8 +36,8 @@ before_install:
   - rm /tmp/pandoc-1.15.2-1-amd64.deb
 
   - curl -fLo /tmp/rstudio.deb https://download1.rstudio.org/rstudio-1.0.153-amd64.deb
-  - sudo apt-get install -f
   - sudo dpkg -i /tmp/rstudio.deb
+  - sudo apt-get install -f
   - rm /tmp/rstudio.deb
 
   - mkdir -p mkdir $HOME/R/library
