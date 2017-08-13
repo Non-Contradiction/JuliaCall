@@ -37,7 +37,7 @@ before_install:
 
   - curl -fLo /tmp/rstudio.deb https://download1.rstudio.org/rstudio-1.0.153-amd64.deb
   - sudo apt-get install gdebi-core
-  - sudo gdebi /tmp/rstudio.deb -y
+  - sudo gdebi  --non-interactive /tmp/rstudio.deb
   - rm /tmp/rstudio.deb
 
   - mkdir -p mkdir $HOME/R/library
