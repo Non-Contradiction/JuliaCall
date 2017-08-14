@@ -40,7 +40,9 @@ before_install:
   - sudo gdebi  --non-interactive /tmp/rstudio.deb
   - rm /tmp/rstudio.deb
 
-  - sudo apt-get install xvfb
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
+  - sleep 3 # give xvfb some time to start
 
   - mkdir -p mkdir $HOME/R/library
   - echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
@@ -59,4 +61,4 @@ before_install:
 script:
 - R CMD build .
 - R CMD check *tar.gz
-- xvfb-run -a rstudio
+- rstudio
