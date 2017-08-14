@@ -48,7 +48,8 @@ julia_setup <- function() {
     .julia$dll <- dyn.load(.julia$dll_file, FALSE, TRUE)
     .julia$include_dir <-
         sub("/bin", "/include/julia", .julia$bin_dir)
-    .julia$cppargs <- paste0("-I ", .julia$include_dir, " -DJULIA_ENABLE_THREADING=1")
+    ## .julia$cppargs <- paste0("-I ", .julia$include_dir, " -DJULIA_ENABLE_THREADING=1")
+    .julia$cppargs <- paste0("-I ", .julia$include_dir)
 
     .julia$VERSION <- system("julia -E 'println(VERSION)'", intern = TRUE)[1]
 
