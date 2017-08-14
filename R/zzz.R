@@ -190,9 +190,9 @@ julia_setup <- function() {
                                     pkg,
                                     ". Will try again."))
                      system(paste0("julia -e 'using ", pkg, "'"), ignore.stderr = TRUE)
-                     },
-                 finally = {julia$command(paste0("using ", pkg));
-                     message("Second try succeed.")}
+                     julia$command(paste0("using ", pkg));
+                     message("Second try succeed.")
+                     }
                  )
     }
 
