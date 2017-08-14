@@ -48,7 +48,6 @@ before_install:
   - echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
   - Rscript -e 'install.packages("inline", repos="http://cran.rstudio.com/")'
   - Rscript -e 'install.packages("testthat", repos="http://cran.rstudio.com/")'
-  - Rscript -e 'install.packages("rstudioapi", repos="http://cran.rstudio.com/")'
 
   #- Rscript -e 'sessionInfo()'
   #- julia -e 'versioninfo()'
