@@ -69,9 +69,7 @@ julia$install_package_if_needed("Optim")
 julia$installed_package("Optim")
 #> [1] "0.9.3"
 julia$using("Optim") ## Same as julia$library("Optim")
-#> Second try succeed.
 julia$library("Optim")
-#> Second try succeed.
 ```
 
 How to Get Help?
