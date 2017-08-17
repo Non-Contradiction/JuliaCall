@@ -4,7 +4,10 @@
 \alias{julia_setup}
 \title{Do initial setup for the JuliaCall package.}
 \usage{
-julia_setup()
+julia_setup(verbose = FALSE)
+}
+\arguments{
+\item{verbose}{whether print out detailed information about construction of julia interface}
 }
 \value{
 The julia interface, which is an environment with the necessary methods

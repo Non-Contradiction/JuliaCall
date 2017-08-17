@@ -6,6 +6,8 @@ julia <- new.env(parent = .julia)
 #'
 #' \code{julia_setup} does the initial setup for the JuliaCall package.
 #'
+#' @param verbose whether print out detailed information about construction of julia interface
+#'
 #' @return The julia interface, which is an environment with the necessary methods
 #'   like cmd, source and things like that to communicate with julia.
 #'
@@ -37,7 +39,7 @@ julia <- new.env(parent = .julia)
 #' julia$using("Optim") ## Same as julia$library("Optim")
 #'
 #' @export
-julia_setup <- function() {
+julia_setup <- function(verbose = FALSE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
@@ -103,7 +105,11 @@ julia_setup <- function() {
 
     .julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
 
+    if (verbose) message("Load setup script for JuliaCall...")
+
     .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
+
+    if (verbose) message("Defining julia$do.call...")
 
     .julia$do.call_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list", need_return = "logical"),
@@ -135,10 +141,14 @@ julia_setup <- function() {
         invisible(r)
     }
 
+    if (verbose) message("Defining julia$call...")
+
     julia$call <- function(func_name, ..., need_return = TRUE)
         julia$do.call(func_name, list(...), need_return)
 
     julia$VERSION <- .julia$VERSION
+
+    if (verbose) message("Defining other utility functions...")
 
     julia$exists <- function(name) julia$call("JuliaCall.exists", name)
 
