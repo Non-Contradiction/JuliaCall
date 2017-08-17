@@ -128,6 +128,9 @@ julia_setup <- function() {
         if (!(is.list(arg_list))) {
             stop("arg_list should be the list of arguments.")
         }
+        if (!(length(need_return) == 1 && is.logical(need_return))) {
+            stop("need_return should be a logical scalar.")
+        }
         r <- .julia$do.call_(func_name, arg_list, need_return)
         if (inherits(r, "error")) stop(r)
         if (need_return) return(r)
