@@ -108,10 +108,13 @@ julia_setup <- function() {
     .julia$do.call_ <- inline::cfunction(
         sig = c(func_name = "character", arg = "list", need_return = "logical"),
         body = '
-        if (LOGICAL(need_return)[0])
-        jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall"));
-        if (!LOGICAL(need_return)[0])
-        jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall_no_ret"));
+        jl_function_t *docall;
+        if (LOGICAL(need_return)[0]) {
+            docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall"));
+        }
+        else {
+            docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall_no_ret"));
+        };
         jl_value_t *func = jl_box_voidpointer(func_name);
         jl_value_t *arg1 = jl_box_voidpointer(arg);
         SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(docall, func, arg1)));
