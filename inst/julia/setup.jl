@@ -16,6 +16,10 @@ function transfer_string(x)
     rcopy(RObject(Ptr{RCall.StrSxp}(x)))
 end
 
+function transfer_logical(x)
+    rcopy(RObject(Ptr{RCall.LglSxp}(x)))
+end
+
 function error_msg(e)
     m = IOBuffer()
     showerror(m, e)
@@ -41,24 +45,18 @@ function Rerror(fname, e, bt)
     rcall(:simpleError, s)
 end
 
-function docall(name, x)
+function docall(name, x, need_return1)
     fname = transfer_string(name);
+    need_return = transfer_logical(need_return1);
     try
         f = eval(Main, parse(fname));
         xx = transfer_list(x);
-        RObject(f(xx...)).p;
-    catch e
-        Rerror(fname, e, catch_stacktrace()).p;
-    end;
-end
-
-function docall_no_ret(name, x)
-    fname = transfer_string(name);
-    try
-        f = eval(Main, parse(fname));
-        xx = transfer_list(x);
-        f(xx...);
-        RObject(nothing).p;
+        r = f(xx...);
+        if need_return
+            RObject(r).p;
+        else
+            RObject(nothing).p;
+        end;
     catch e
         Rerror(fname, e, catch_stacktrace()).p;
     end;
