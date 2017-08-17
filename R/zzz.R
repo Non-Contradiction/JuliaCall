@@ -106,9 +106,12 @@ julia_setup <- function() {
     .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
 
     .julia$do.call_ <- inline::cfunction(
-        sig = c(func_name = "character", arg = "list"),
+        sig = c(func_name = "character", arg = "list", need_return = "logical"),
         body = '
+        if (LOGICAL(need_return)[0])
         jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall"));
+        if (!LOGICAL(need_return)[0])
+        jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall_no_ret"));
         jl_value_t *func = jl_box_voidpointer(func_name);
         jl_value_t *arg1 = jl_box_voidpointer(arg);
         SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(docall, func, arg1)));
@@ -118,46 +121,21 @@ julia_setup <- function() {
         cppargs = .julia$cppargs
         )
 
-    julia$do.call <- function(func_name, arg_list){
+    julia$do.call <- function(func_name, arg_list, need_return = TRUE){
         if (!(length(func_name) == 1 && is.character(func_name))) {
             stop("func_name should be a character scalar.")
         }
         if (!(is.list(arg_list))) {
             stop("arg_list should be the list of arguments.")
         }
-        r <- .julia$do.call_(func_name, arg_list)
+        r <- .julia$do.call_(func_name, arg_list, need_return)
         if (inherits(r, "error")) stop(r)
-        r
-    }
-
-    julia$call <- function(func_name, ...) julia$do.call(func_name, list(...))
-
-    .julia$do.call_no_ret_ <- inline::cfunction(
-        sig = c(func_name = "character", arg = "list"),
-        body = '
-        jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall_no_ret"));
-        jl_value_t *func = jl_box_voidpointer(func_name);
-        jl_value_t *arg1 = jl_box_voidpointer(arg);
-        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call2(docall, func, arg1)));
-        UNPROTECT(1);
-        return out;',
-        includes = "#include <julia.h>",
-        cppargs = .julia$cppargs
-    )
-
-    julia$do.call_no_ret <- function(func_name, arg_list){
-        if (!(length(func_name) == 1 && is.character(func_name))) {
-            stop("func_name should be a character scalar.")
-        }
-        if (!(is.list(arg_list))) {
-            stop("arg_list should be the list of arguments.")
-        }
-        r <- .julia$do.call_no_ret_(func_name, arg_list)
-        if (inherits(r, "error")) stop(r)
+        if (need_return) return(r)
         invisible(r)
     }
 
-    julia$call_no_ret <- function(func_name, ...) julia$do.call_no_ret(func_name, list(...))
+    julia$call <- function(func_name, ..., need_return = TRUE)
+        julia$do.call(func_name, list(...), need_return)
 
     julia$VERSION <- .julia$VERSION
 
@@ -165,13 +143,13 @@ julia_setup <- function() {
 
     julia$eval_string <- function(cmd) julia$call("JuliaCall.eval_string", cmd)
 
-    julia$command <- function(cmd) julia$call_no_ret("JuliaCall.eval_string", cmd)
+    julia$command <- function(cmd) julia$call("JuliaCall.eval_string", cmd, need_return = FALSE)
 
     julia$include <- function(file_name) julia$call("include", file_name)
 
-    julia$source <- function(file_name) julia$call_no_ret("include", file_name)
+    julia$source <- function(file_name) julia$call("include", file_name, need_return = FALSE)
 
-    julia$install_package <- function(pkg_name) julia$call_no_ret("Pkg.add", pkg_name)
+    julia$install_package <- function(pkg_name) julia$call("Pkg.add", pkg_name, need_return = FALSE)
 
     julia$installed_package <- function(pkg_name) julia$call("JuliaCall.installed_package", pkg_name)
 
