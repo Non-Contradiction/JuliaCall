@@ -61,3 +61,12 @@ before_install:
 script:
 - R CMD build .
 - R CMD check *tar.gz
+
+- Rscript -e 'install.packages("remotes", repos="http://cran.rstudio.com/")'
+- Rscript -e 'remotes::install_github("Non-Contradiction/TestWithRStudio")'
+- Rscript -e "library(TestWithRStudio); stopifnot(check_rstudio())"
+- Rscript -e "library(TestWithRStudio); stopifnot(check_code_in_rstudio('1'))"
+- Rscript -e "library(TestWithRStudio); stopifnot(!check_code_in_rstudio('q()'))"
+
+- Rscript -e 'remotes::install_github("Non-Contradiction/JuliaCall")'
+- Rscript -e "library(TestWithRStudio); stopifnot(check_code_in_rstudio('library(JuliaCall); julia <- julia_setup()', 90))"
