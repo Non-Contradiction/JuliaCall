@@ -69,4 +69,6 @@ script:
 - Rscript -e "library(TestWithRStudio); stopifnot(!check_in_rstudio('q()'))"
 
 - Rscript -e 'remotes::install_github("Non-Contradiction/JuliaCall")'
+- julia -e 'Pkg.add("RCall")'
+- julia -e 'using RCall'
 - Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('library(JuliaCall); julia <- julia_setup(startup_safe = TRUE); get(\'call\', julia)(\'sqrt\', 2)', 60))"
