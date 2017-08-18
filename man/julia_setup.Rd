@@ -4,10 +4,12 @@
 \alias{julia_setup}
 \title{Do initial setup for the JuliaCall package.}
 \usage{
-julia_setup(verbose = FALSE)
+julia_setup(verbose = FALSE, startup_safe = FALSE)
 }
 \arguments{
 \item{verbose}{whether print out detailed information about construction of julia interface}
+
+\item{startup_safe}{if you would like to use julia_setup in your .Rprofile, you'd better set startup_safe to TRUE.}
 }
 \value{
 The julia interface, which is an environment with the necessary methods

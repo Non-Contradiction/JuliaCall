@@ -7,6 +7,7 @@ julia <- new.env(parent = .julia)
 #' \code{julia_setup} does the initial setup for the JuliaCall package.
 #'
 #' @param verbose whether print out detailed information about construction of julia interface
+#' @param startup_safe if you would like to use julia_setup in your .Rprofile, you'd better set startup_safe to TRUE.
 #'
 #' @return The julia interface, which is an environment with the necessary methods
 #'   like cmd, source and things like that to communicate with julia.
@@ -39,9 +40,14 @@ julia <- new.env(parent = .julia)
 #' julia$using("Optim") ## Same as julia$library("Optim")
 #'
 #' @export
-julia_setup <- function(verbose = FALSE) {
+julia_setup <- function(verbose = FALSE, startup_safe = FALSE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
+
+    if (!startup_safe) {
+        system("julia -e 'if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; using RCall'",
+               ignore.stderr = TRUE)
+    }
 
     .julia$bin_dir <-
         system("julia -E 'println(JULIA_HOME)'", intern = TRUE)[1]
@@ -55,10 +61,7 @@ julia_setup <- function(verbose = FALSE) {
 
     .julia$VERSION <- system("julia -E 'println(VERSION)'", intern = TRUE)[1]
 
-    message(paste0("Julia version ", .julia$VERSION, " found."))
-
-    system("julia -e 'if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; using RCall'",
-           ignore.stderr = TRUE)
+    if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
 
     if (.julia$VERSION < "0.6.0") {
         .julia$init_ <- inline::cfunction(
@@ -79,7 +82,7 @@ julia_setup <- function(verbose = FALSE) {
         )
     }
 
-    message("Julia initiation...")
+    if (verbose) message("Julia initiation...")
 
     .julia$init()
 
