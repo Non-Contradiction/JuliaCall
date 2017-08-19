@@ -89,7 +89,11 @@ julia_setup <- function(verbose = FALSE, startup_safe = FALSE) {
     .julia$cmd_ <- inline::cfunction(
         sig = c(cmd = "character"),
         body = "jl_eval_string(CHAR(STRING_ELT(cmd, 0)));
-        if (jl_exception_occurred()) {printf(\"%s \", jl_typeof_str(jl_exception_occurred())); return Rf_ScalarLogical(0);};
+        if (jl_exception_occurred()) {
+            jl_call2(jl_get_function(jl_base_module, \"show\"), jl_stderr_obj(), jl_exception_occurred());
+            jl_printf(jl_stderr_stream(), \" \");
+            return Rf_ScalarLogical(0);
+        }
         return Rf_ScalarLogical(1);",
         includes = "#include <julia.h>",
         cppargs = .julia$cppargs
