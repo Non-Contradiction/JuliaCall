@@ -7,7 +7,6 @@ julia <- new.env(parent = .julia)
 #' \code{julia_setup} does the initial setup for the JuliaCall package.
 #'
 #' @param verbose whether print out detailed information about construction of julia interface
-#' @param startup_safe if you would like to use julia_setup in your .Rprofile, you'd better set startup_safe to TRUE.
 #'
 #' @return The julia interface, which is an environment with the necessary methods
 #'   like cmd, source and things like that to communicate with julia.
@@ -40,14 +39,12 @@ julia <- new.env(parent = .julia)
 #' julia$using("Optim") ## Same as julia$library("Optim")
 #'
 #' @export
-julia_setup <- function(verbose = FALSE, startup_safe = FALSE) {
+julia_setup <- function(verbose = FALSE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
-    if (!startup_safe) {
-        system("julia -e 'if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; using RCall'",
-               ignore.stderr = TRUE)
-    }
+    system("julia -e 'if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; Base.compilecache(\"RCall\")'",
+           ignore.stderr = TRUE)
 
     .julia$bin_dir <-
         system("julia -E 'println(JULIA_HOME)'", intern = TRUE)[1]
@@ -179,11 +176,16 @@ julia_setup <- function(verbose = FALSE, startup_safe = FALSE) {
 
     julia$update_package <- function(...) julia$do.call("Pkg.update", list(...))
 
-    julia$library <- julia$using <- function(pkg, ignore = FALSE, startup_safe = FALSE){
-        if (!startup_safe) {
-            system(paste0("julia -e 'using ", pkg, "'"), ignore.stderr = ignore)
-        }
-        julia$command(paste0("using ", pkg))
+    julia$library <- julia$using <- function(pkg, ignore = FALSE){
+        tryCatch({
+            system(paste0("julia -e 'Base.compilecache(\"", pkg, "\")'"), ignore.stderr = ignore)
+            julia$command(paste0("using ", pkg))
+        },
+        error = {
+            system(paste0("julia -e 'Pkg.build(\"", pkg, "\")'"), ignore.stderr = ignore)
+            system(paste0("julia -e 'Base.compilecache(\"", pkg, "\")'"), ignore.stderr = ignore)
+            julia$command(paste0("using ", pkg))
+        })
     }
 
     julia$help <- function(fname){
