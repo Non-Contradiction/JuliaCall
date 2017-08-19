@@ -25,8 +25,6 @@ library(JuliaCall)
 ## Do initial setup
 
 julia <- julia_setup()
-#> Julia version 0.6.0 found.
-#> Julia initiation...
 
 ## Different ways for using Julia to calculate sqrt(2)
 
