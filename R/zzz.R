@@ -175,8 +175,10 @@ julia_setup <- function(verbose = FALSE, startup_safe = FALSE) {
 
     julia$update_package <- function(...) julia$do.call("Pkg.update", list(...))
 
-    julia$library <- julia$using <- function(pkg, ignore = FALSE){
-        system(paste0("julia -e 'Base.compilecache(\"", pkg, "\")'"), ignore.stderr = ignore)
+    julia$library <- julia$using <- function(pkg, ignore = FALSE, startup_safe = FALSE){
+        if (!startup_safe) {
+            system(paste0("julia -e 'Base.compilecache(\"", pkg, "\")'"), ignore.stderr = ignore)
+        }
         julia$command(paste0("using ", pkg))
     }
 
