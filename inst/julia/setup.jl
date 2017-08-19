@@ -5,10 +5,8 @@ module JuliaCall
 # Pkg.update()
 
 if Pkg.installed("RCall") == nothing Pkg.add("RCall") end
-if Pkg.installed("Suppressor") == nothing Pkg.add("Suppressor") end
 
-using Suppressor
-@suppress begin using RCall end
+using RCall
 
 function transfer_list(x)
     rcopy(RObject(Ptr{RCall.VecSxp}(x)))
