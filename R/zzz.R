@@ -177,7 +177,7 @@ julia_setup <- function(verbose = FALSE, startup_safe = FALSE) {
 
     julia$library <- julia$using <- function(pkg, ignore = FALSE, startup_safe = FALSE){
         if (!startup_safe) {
-            system(paste0("julia -e 'Base.compilecache(\"", pkg, "\")'"), ignore.stderr = ignore)
+            system(paste0("julia -e 'using ", pkg, "'"), ignore.stderr = ignore)
         }
         julia$command(paste0("using ", pkg))
     }
