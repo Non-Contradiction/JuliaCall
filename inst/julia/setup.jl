@@ -6,6 +6,8 @@ module JuliaCall
 
 if Pkg.installed("RCall") == nothing Pkg.add("RCall") end
 
+Base.compilecache("RCall")
+
 using RCall
 
 function transfer_list(x)
