@@ -177,15 +177,18 @@ julia_setup <- function(verbose = FALSE) {
     julia$update_package <- function(...) julia$do.call("Pkg.update", list(...))
 
     julia$library <- julia$using <- function(pkg, ignore = FALSE){
-        tryCatch({
-            system(paste0("julia -e 'Base.compilecache(\"", pkg, "\")'"), ignore.stderr = ignore)
-            julia$command(paste0("using ", pkg))
-        },
+        tryCatch(julia$command(paste0("using ", pkg)),
         error = {
-            system(paste0("julia -e 'Pkg.build(\"", pkg, "\")'"), ignore.stderr = ignore)
-            system(paste0("julia -e 'Base.compilecache(\"", pkg, "\")'"), ignore.stderr = ignore)
-            julia$command(paste0("using ", pkg))
-        })
+            tryCatch({
+                system(paste0("julia -e 'Base.compilecache(\"", pkg, "\")'"), ignore.stderr = ignore)
+                julia$command(paste0("using ", pkg))
+            },
+            error = {
+                system(paste0("julia -e 'Pkg.build(\"", pkg, "\")'"), ignore.stderr = ignore)
+                system(paste0("julia -e 'Base.compilecache(\"", pkg, "\")'"), ignore.stderr = ignore)
+                julia$command(paste0("using ", pkg))
+                })
+            })
     }
 
     julia$help <- function(fname){
