@@ -179,7 +179,9 @@ julia_setup <- function(verbose = FALSE) {
     julia$library <- julia$using <- function(pkg, ignore = FALSE){
         tryCatch(julia$command(paste0("using ", pkg)),
         error = {
-            system(paste0("julia -e 'using", pkg, "'"), ignore.stderr = ignore)
+            if (julia$VERSION >= "0.6.0") {
+                system(paste0("julia -e 'using", pkg, "'"), ignore.stderr = ignore)
+            }
             julia$command(paste0("using ", pkg))
         })
     }
