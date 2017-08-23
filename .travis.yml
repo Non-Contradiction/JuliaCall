@@ -34,7 +34,7 @@ before_install:
   - sudo apt-get install -f
   - sudo dpkg -i /tmp/pandoc-1.15.2-1-amd64.deb
   - rm /tmp/pandoc-1.15.2-1-amd64.deb
-  - sudo apt-get install texinfo; fi
+  - sudo apt-get install texinfo
 
   - curl -fLo /tmp/rstudio.deb https://download1.rstudio.org/rstudio-1.0.153-amd64.deb
   - sudo apt-get install gdebi-core
