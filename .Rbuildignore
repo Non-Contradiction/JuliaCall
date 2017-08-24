@@ -8,3 +8,4 @@
 ^\.travis\.yml3$
 ^\.travis\.yml_back$
 ^\.travis\.yml_back1$
+^appveyor\.yml$

@@ -1,0 +1,90 @@
+environment:
+  matrix:
+  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x86/0.5/julia-0.5-latest-win32.exe"
+  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.5/julia-0.5-latest-win64.exe"
+  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x86/0.6/julia-0.6-latest-win32.exe"
+  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
+
+notifications:
+  - provider: Email
+    on_build_success: false
+    on_build_failure: false
+    on_build_status_changed: false
+
+install:
+  - ps: "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12"
+
+# Download most recent Julia Windows binary
+  - ps: (new-object net.webclient).DownloadFile(
+        $env:JULIA_URL,
+        "C:\projects\julia-binary.exe")
+# Run installer silently, output to C:\projects\julia
+  - C:\projects\julia-binary.exe /S /D=C:\projects\julia
+
+  - set PATH=C:\projects\julia\bin;%PATH%
+
+# Download and install R binary
+  - ps: |
+      (new-object net.webclient).DownloadString("http://cran.rstudio.com/bin/windows/base/") -match 'href="(R-[0-9.]*[a-zA-Z]*-win.exe)"';
+      (new-object net.webclient).DownloadFile($("http://cran.rstudio.com/bin/windows/base/"+$matches[1]),"C:\projects\R-binary.exe")
+  - C:\projects\R-binary.exe /VERYSILENT /DIR=C:\projects\R
+
+  # Download and install the most recent RStudio Windows binary
+  - ps: (new-object net.webclient).DownloadFile(
+      "https://download1.rstudio.org/RStudio-1.0.153.exe",
+      "C:\projects\rstudio.exe")
+  - C:\projects\rstudio.exe /S /D=C:\projects\rstudio
+
+  # Download miktex portable
+
+  - ps: (new-object net.webclient).DownloadFile(
+      "http://mirrors.ctan.org/systems/win32/miktex/setup/miktex-portable.exe",
+      "C:\projects\miktex-portable.exe")
+  - 7z x C:\projects\miktex-portable.exe -oC:\miktex >NUL
+  - set "PATH=%PATH%;c:\miktex\texmfs\install\miktex\bin"
+  # autoinstall latex packages (0=no, 1=autoinstall, 2=ask)
+  # this adds this to the registry!
+  - initexmf --set-config-value "[MPM]AutoInstall=1"
+
+  - set PATH=C:\projects\R\bin\x64;C:\projects\rstudio\bin;%PATH%
+
+  # Download and install Rtools
+
+  - ps: (new-object net.webclient).DownloadFile(
+      "https://cran.rstudio.com/bin/windows/Rtools/Rtools34.exe",
+      "C:\projects\rtools.exe")
+  # - C:\projects\rtools.exe /S /D=C:\Rtools
+  - C:\projects\rtools.exe /VERYSILENT /DIR=C:\Rtools
+
+  - set PATH=C:\projects\R\bin\x64;C:\projects\rstudio\bin;%PATH%
+
+  - set PATH=c:\Rtools\bin;c:\Rtools\gcc-4.6.3\bin;%PATH%
+
+build_script:
+# Need to convert from shallow to complete for Pkg.clone to work
+#  - IF EXIST .git\shallow (git fetch --unshallow)
+#  - C:\projects\julia\bin\julia -e "versioninfo();
+#      Pkg.clone(pwd(), \"RCall\"); Pkg.build(\"RCall\")"
+- Rscript -e "sessionInfo()"
+- Rscript -e "install.packages(\"inline\", repos=\"http://cran.rstudio.com/\")"
+- Rscript -e "install.packages(\"testthat\", repos=\"http://cran.rstudio.com/\")"
+
+test_script:
+- R CMD build .
+- R CMD check *tar.gz
+
+- Rscript -e "install.packages(\"remotes\", repos=\"http://cran.rstudio.com/\")"
+- Rscript -e "remotes::install_github(\"Non-Contradiction/TestWithRStudio\")"
+- Rscript -e "library(TestWithRStudio); stopifnot(check_rstudio())"
+- Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('1'))"
+- Rscript -e "library(TestWithRStudio); stopifnot(!check_in_rstudio('q()'))"
+
+- Rscript -e "remotes::install_github(\"Non-Contradiction/JuliaCall\")"
+#- julia -e 'Pkg.add("RCall")'
+#- julia -e 'using RCall'
+- Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('library(JuliaCall); julia <- julia_setup(); get(\'call\', julia)(\'sqrt\', 2)', 60))"
+
+
+on_finish:
+# uncomment to enable RDP to Appveyor
+# - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
