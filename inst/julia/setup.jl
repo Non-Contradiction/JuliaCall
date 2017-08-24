@@ -4,7 +4,7 @@ module JuliaCall
 
 # Pkg.update()
 
-if Pkg.installed("RCall") == nothing Pkg.add("RCall") end
+# if Pkg.installed("RCall") == nothing Pkg.add("RCall") end
 
 using RCall
 
