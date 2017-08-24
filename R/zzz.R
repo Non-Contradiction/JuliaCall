@@ -43,20 +43,20 @@ julia_setup <- function(verbose = FALSE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
-    system("julia -e 'if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; Base.compilecache(\"RCall\")'",
+    system("julia -e \"if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; Base.compilecache(\"RCall\")\"",
            ignore.stderr = TRUE)
 
     .julia$bin_dir <-
-        system("julia -E 'println(JULIA_HOME)'", intern = TRUE)[1]
+        system("julia -E \"println(JULIA_HOME)\"", intern = TRUE)[1]
     .julia$dll_file <-
-        system("julia -E 'println(Libdl.dllist()[1])'", intern = TRUE)[1]
+        system("julia -E \"println(Libdl.dllist()[1])\"", intern = TRUE)[1]
     .julia$dll <- dyn.load(.julia$dll_file, FALSE, TRUE)
     .julia$include_dir <-
         sub("/bin", "/include/julia", .julia$bin_dir)
     ## .julia$cppargs <- paste0("-I ", .julia$include_dir, " -DJULIA_ENABLE_THREADING=1")
     .julia$cppargs <- paste0("-I ", .julia$include_dir)
 
-    .julia$VERSION <- system("julia -E 'println(VERSION)'", intern = TRUE)[1]
+    .julia$VERSION <- system("julia -E \"println(VERSION)\"", intern = TRUE)[1]
 
     if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
 
@@ -180,7 +180,7 @@ julia_setup <- function(verbose = FALSE) {
         tryCatch(julia$command(paste0("using ", pkg)),
         error = {
             if (julia$VERSION >= "0.6.0") {
-                system(paste0("julia -e 'using", pkg, "'"), ignore.stderr = ignore)
+                system(paste0("julia -e \"using", pkg, "\""), ignore.stderr = ignore)
             }
             julia$command(paste0("using ", pkg))
         })
