@@ -43,7 +43,7 @@ julia_setup <- function(verbose = FALSE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
-    system("julia -e \"if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; using RCall\"")
+    system("julia -e \"pkg = string(:RCall); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using RCall\"")
 
     .julia$bin_dir <-
         system("julia -E \"println(JULIA_HOME)\"", intern = TRUE)[1]
