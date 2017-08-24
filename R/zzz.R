@@ -52,28 +52,38 @@ julia_setup <- function(verbose = FALSE) {
     .julia$dll <- dyn.load(.julia$dll_file, FALSE, TRUE)
     .julia$include_dir <- file.path(dirname(.julia$bin_dir), "include", "julia")
     ## .julia$cppargs <- paste0("-I ", .julia$include_dir, " -DJULIA_ENABLE_THREADING=1")
-    .julia$cppargs <- paste0("-I ", .julia$include_dir)
+    .julia$cppargs <- paste0("-I ", .julia$include_dir, " -fpermissive")
 
     .julia$VERSION <- system("julia -E \"println(VERSION)\"", intern = TRUE)[1]
 
     if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
 
+    .julia$inc <- "
+    // Taken from http://tolstoy.newcastle.edu.au/R/e2/devel/06/11/1242.html
+    // Undefine the Realloc macro, which is defined by both R and by Windows stuff
+    #undef Realloc
+    // Also need to undefine the Free macro
+    #undef Free
+
+    #include <julia.h>
+    "
+
+    .julia$compile <- function(sig, body){
+        inline::cfunction(sig = sig, body = body, includes = .julia$inc, cppargs = .julia$cppargs)
+    }
+
     if (.julia$VERSION < "0.6.0") {
-        .julia$init_ <- inline::cfunction(
+        .julia$init_ <- .julia$compile(
             sig = c(dir = "character"),
-            body = "jl_init(CHAR(STRING_ELT(dir, 0))); return R_NilValue;",
-            includes = "#include <julia.h>",
-            cppargs = .julia$cppargs
+            body = "jl_init(CHAR(STRING_ELT(dir, 0))); return R_NilValue;"
         )
 
         .julia$init <- function() .julia$init_(.julia$bin_dir)
     }
     if (.julia$VERSION >= "0.6.0") {
-        .julia$init <- inline::cfunction(
+        .julia$init <- .julia$compile(
             sig = c(),
-            body = "jl_init(); return R_NilValue;",
-            includes = "#include <julia.h>",
-            cppargs = .julia$cppargs
+            body = "jl_init(); return R_NilValue;"
         )
     }
 
@@ -81,7 +91,7 @@ julia_setup <- function(verbose = FALSE) {
 
     .julia$init()
 
-    .julia$cmd_ <- inline::cfunction(
+    .julia$cmd_ <- .julia$compile(
         sig = c(cmd = "character"),
         body = "jl_eval_string(CHAR(STRING_ELT(cmd, 0)));
         if (jl_exception_occurred()) {
@@ -89,9 +99,7 @@ julia_setup <- function(verbose = FALSE) {
             jl_printf(jl_stderr_stream(), \" \");
             return Rf_ScalarLogical(0);
         }
-        return Rf_ScalarLogical(1);",
-        includes = "#include <julia.h>",
-        cppargs = .julia$cppargs
+        return Rf_ScalarLogical(1);"
     )
 
     .julia$cmd <- function(cmd){
@@ -113,7 +121,7 @@ julia_setup <- function(verbose = FALSE) {
 
     if (verbose) message("Defining julia$do.call...")
 
-    .julia$do.call_ <- inline::cfunction(
+    .julia$do.call_ <- .julia$compile(
         sig = c(func_name = "character", arg = "list", need_return = "logical"),
         body = '
         jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall"));
@@ -122,9 +130,7 @@ julia_setup <- function(verbose = FALSE) {
         jl_value_t *need_return1 = jl_box_voidpointer(need_return);
         SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call3(docall, func, arg1, need_return1)));
         UNPROTECT(1);
-        return out;',
-        includes = "#include <julia.h>",
-        cppargs = .julia$cppargs
+        return out;'
         )
 
     julia$do.call <- function(func_name, arg_list, need_return = TRUE){
