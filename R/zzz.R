@@ -43,8 +43,7 @@ julia_setup <- function(verbose = FALSE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
-    system("julia -e \"if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; using RCall\"",
-           ignore.stderr = TRUE)
+    system("julia -e \"if Pkg.installed(\"RCall\") == nothing Pkg.add(\"RCall\") end; using RCall\"")
 
     .julia$bin_dir <-
         system("julia -E \"println(JULIA_HOME)\"", intern = TRUE)[1]
@@ -176,11 +175,11 @@ julia_setup <- function(verbose = FALSE) {
 
     julia$update_package <- function(...) julia$do.call("Pkg.update", list(...))
 
-    julia$library <- julia$using <- function(pkg, ignore = FALSE){
+    julia$library <- julia$using <- function(pkg){
         tryCatch(julia$command(paste0("using ", pkg)),
         error = {
             if (julia$VERSION >= "0.6.0") {
-                system(paste0("julia -e \"using", pkg, "\""), ignore.stderr = ignore)
+                system(paste0("julia -e \"using", pkg, "\""))
             }
             julia$command(paste0("using ", pkg))
         })
