@@ -14,7 +14,7 @@ julia <- new.env(parent = .julia)
 #' @export
 julia_check <- function(){
     tryCatch(system('julia -e "println(1)"', intern = TRUE) == "1",
-             error = function() FALSE)
+             error = function(err) FALSE)
 }
 
 #' Do initial setup for the JuliaCall package.
