@@ -1,6 +1,6 @@
 Package: JuliaCall
 Type: Package
-Title: Seamless Integration between R and Julia
+Title: Seamless Integration Between R and Julia
 Version: 0.1.7
 Authors@R: person("Changcheng Li", email = "cxl508@psu.edu",
     role = c("aut", "cre"))
