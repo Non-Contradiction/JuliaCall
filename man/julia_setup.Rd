@@ -17,30 +17,33 @@ The julia interface, which is an environment with the necessary methods
 \code{julia_setup} does the initial setup for the JuliaCall package.
 }
 \examples{
-julia <- julia_setup()
 
-## Different ways for calculating sqrt(2)
+if (julia_check()) {
+  julia <- julia_setup()
 
-julia$command("a = sqrt(2)"); julia$eval_string("a")
-julia$eval_string("sqrt(2)")
-julia$call("sqrt", 2)
-julia$eval_string("sqrt")(2)
+  ## Different ways for calculating sqrt(2)
 
-## You can use `julia$exists` as `exists` in R to test
-## whether a function or name exists in Julia or not
+  julia$command("a = sqrt(2)"); julia$eval_string("a")
+  julia$eval_string("sqrt(2)")
+  julia$call("sqrt", 2)
+  julia$eval_string("sqrt")(2)
 
-julia$exists("sqrt")
-julia$exists("c")
+  ## You can use `julia$exists` as `exists` in R to test
+  ## whether a function or name exists in Julia or not
 
-## You can use `julia$help` to get help for Julia functions
+  julia$exists("sqrt")
+  julia$exists("c")
 
-julia$help("sqrt")
+  ## You can use `julia$help` to get help for Julia functions
 
-## Functions related to Julia packages
+  julia$help("sqrt")
 
-julia$install_package("Optim")
-julia$install_package_if_needed("Optim")
-julia$installed_package("Optim")
-julia$using("Optim") ## Same as julia$library("Optim")
+  ## Functions related to Julia packages
+
+  julia$install_package("Optim")
+  julia$install_package_if_needed("Optim")
+  julia$installed_package("Optim")
+  julia$using("Optim") ## Same as julia$library("Optim")
+}
 
 }

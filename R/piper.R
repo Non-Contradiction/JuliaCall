@@ -6,9 +6,11 @@
 #' @param func_call the impartial julia function call.
 #'
 #' @examples
-#' julia <- julia_setup()
-#' 2 %>J% sqrt
-#' 3 %>J% log(2)
+#' if (julia_check()) {
+#'   julia <- julia_setup()
+#'   2 %>J% sqrt
+#'   3 %>J% log(2)
+#' }
 #'
 #' @export
 `%>J%` <- function(obj, func_call){

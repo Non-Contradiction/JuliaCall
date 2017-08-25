@@ -15,8 +15,10 @@ obj \%>J\% func_call
 The experimental language piper for julia language.
 }
 \examples{
-julia <- julia_setup()
-2 \%>J\% sqrt
-3 \%>J\% log(2)
+if (julia_check()) {
+  julia <- julia_setup()
+  2 \%>J\% sqrt
+  3 \%>J\% log(2)
+}
 
 }

@@ -2,6 +2,21 @@
 
 julia <- new.env(parent = .julia)
 
+#' Check whether julia is available on the path.
+#'
+#' \code{julia_check} checks if julia is available on the path.
+#'
+#' @return whether julia is available on the path.
+#'
+#' @examples
+#' julia_check()
+#'
+#' @export
+julia_check <- function(){
+    tryCatch(system('julia -e "println(1)"', intern = TRUE) == "1",
+             error = function() FALSE)
+}
+
 #' Do initial setup for the JuliaCall package.
 #'
 #' \code{julia_setup} does the initial setup for the JuliaCall package.
@@ -12,31 +27,34 @@ julia <- new.env(parent = .julia)
 #'   like cmd, source and things like that to communicate with julia.
 #'
 #' @examples
-#' julia <- julia_setup()
 #'
-#' ## Different ways for calculating sqrt(2)
+#' if (julia_check()) {
+#'   julia <- julia_setup()
 #'
-#' julia$command("a = sqrt(2)"); julia$eval_string("a")
-#' julia$eval_string("sqrt(2)")
-#' julia$call("sqrt", 2)
-#' julia$eval_string("sqrt")(2)
+#'   ## Different ways for calculating sqrt(2)
 #'
-#' ## You can use `julia$exists` as `exists` in R to test
-#' ## whether a function or name exists in Julia or not
+#'   julia$command("a = sqrt(2)"); julia$eval_string("a")
+#'   julia$eval_string("sqrt(2)")
+#'   julia$call("sqrt", 2)
+#'   julia$eval_string("sqrt")(2)
 #'
-#' julia$exists("sqrt")
-#' julia$exists("c")
+#'   ## You can use `julia$exists` as `exists` in R to test
+#'   ## whether a function or name exists in Julia or not
 #'
-#' ## You can use `julia$help` to get help for Julia functions
+#'   julia$exists("sqrt")
+#'   julia$exists("c")
 #'
-#' julia$help("sqrt")
+#'   ## You can use `julia$help` to get help for Julia functions
 #'
-#' ## Functions related to Julia packages
+#'   julia$help("sqrt")
 #'
-#' julia$install_package("Optim")
-#' julia$install_package_if_needed("Optim")
-#' julia$installed_package("Optim")
-#' julia$using("Optim") ## Same as julia$library("Optim")
+#'   ## Functions related to Julia packages
+#'
+#'   julia$install_package("Optim")
+#'   julia$install_package_if_needed("Optim")
+#'   julia$installed_package("Optim")
+#'   julia$using("Optim") ## Same as julia$library("Optim")
+#' }
 #'
 #' @export
 julia_setup <- function(verbose = FALSE) {
