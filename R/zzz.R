@@ -45,18 +45,20 @@ julia_setup <- function(verbose = FALSE) {
 
     system("julia -e \"pkg = string(:RCall); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using RCall\"")
 
-    .julia$bin_dir <-
-        system("julia -E \"println(JULIA_HOME)\"", intern = TRUE)[1]
-    .julia$dll_file <-
-        system("julia -E \"println(Libdl.dllist()[1])\"", intern = TRUE)[1]
-    .julia$dll <- dyn.load(.julia$dll_file, FALSE, TRUE)
-    .julia$include_dir <- file.path(dirname(.julia$bin_dir), "include", "julia")
+    .julia$bin_dir <- system("julia -E \"println(JULIA_HOME)\"", intern = TRUE)[1]
+    .julia$config <- file.path(dirname(.julia$bin_dir), "share", "julia", "julia-config.jl")
+    .julia$cppargs <- system(paste0("julia ", .julia$config, " --cflags"), intern = TRUE)
+    .julia$cppargs <- paste0(.julia$cppargs, " -fpermissive")
+    .julia$cppargs <- sub("-std=gnu99", "", .julia$cppargs)
+    .julia$libargs <- system(paste0("julia ", .julia$config, " --ldflags"), intern = TRUE)
+    .julia$libargs <- paste(.julia$libargs,
+                            system(paste0("julia ", .julia$config, " --ldlibs"), intern = TRUE))
+
+    ## .julia$dll_file <- system("julia -E \"println(Libdl.dllist()[1])\"", intern = TRUE)[1]
+    ## .julia$dll <- dyn.load(.julia$dll_file, FALSE, TRUE)
+    ## .julia$include_dir <- file.path(dirname(.julia$bin_dir), "include", "julia")
     ## .julia$cppargs <- paste0("-I ", .julia$include_dir, " -DJULIA_ENABLE_THREADING=1")
-    .julia$cppargs <- paste0("-I ", .julia$include_dir, " -fpermissive")
-
-    .julia$VERSION <- system("julia -E \"println(VERSION)\"", intern = TRUE)[1]
-
-    if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
+    ## .julia$cppargs <- paste0("-I ", .julia$include_dir, " -fpermissive")
 
     .julia$inc <- "
     // Taken from http://tolstoy.newcastle.edu.au/R/e2/devel/06/11/1242.html
@@ -69,8 +71,14 @@ julia_setup <- function(verbose = FALSE) {
     "
 
     .julia$compile <- function(sig, body){
-        inline::cfunction(sig = sig, body = body, includes = .julia$inc, cppargs = .julia$cppargs)
+        inline::cfunction(sig = sig, body = body, includes = .julia$inc,
+                          cppargs = .julia$cppargs,
+                          libargs = .julia$libargs)
     }
+
+    .julia$VERSION <- system("julia -E \"println(VERSION)\"", intern = TRUE)[1]
+
+    if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
 
     if (.julia$VERSION < "0.6.0") {
         .julia$init_ <- .julia$compile(
