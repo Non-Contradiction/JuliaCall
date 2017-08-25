@@ -14,6 +14,7 @@ julia <- new.env(parent = .julia)
 #' @export
 julia_check <- function(){
     tryCatch(system('julia -e "println(1)"', intern = TRUE) == "1",
+             warning = function(war){},
              error = function(err) FALSE)
 }
 
@@ -208,13 +209,14 @@ julia_setup <- function(verbose = FALSE) {
 
     julia$library <- julia$using <- function(pkg){
         tryCatch(julia$command(paste0("using ", pkg)),
-        error = {
-            if (julia$VERSION >= "0.6.0") {
-                system(paste0("julia -e \"using", pkg, "\""))
-            }
-            julia$command(paste0("using ", pkg))
-        })
-    }
+                 warning = function(war){},
+                 error = {
+                     if (julia$VERSION >= "0.6.0") {
+                         system(paste0("julia -e \"using ", pkg, "\""))
+                         }
+                     julia$command(paste0("using ", pkg))
+                 })
+        }
 
     julia$help <- function(fname){
         cat(julia$call("JuliaCall.help", fname))
