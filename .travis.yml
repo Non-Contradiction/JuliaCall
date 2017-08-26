@@ -1,6 +1,10 @@
 language: julia
 os:
   - linux
+  - osx
+
+osx_image: xcode8.1
+
 julia:
   - 0.5
   - 0.6
@@ -20,33 +24,47 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update -qq -y; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install git r-base r-base-dev r-recommended -y; fi
 
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then curl -fLo /tmp/texlive.tar.gz https://github.com/jimhester/ubuntu-bin/releases/download/latest/texlive.tar.gz; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then tar xzf /tmp/texlive.tar.gz -C ~; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export PATH=/$HOME/texlive/bin/x86_64-linux:$PATH; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then tlmgr update --self; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then curl -fLo /tmp/pandoc-1.15.2-1-amd64.deb https://github.com/jgm/pandoc/releases/download/1.15.2/pandoc-1.15.2-1-amd64.deb; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install -f; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo dpkg -i /tmp/pandoc-1.15.2-1-amd64.deb; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then rm /tmp/pandoc-1.15.2-1-amd64.deb; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install texinfo; fi
+
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then curl -fLo /tmp/rstudio.deb https://download1.rstudio.org/rstudio-1.0.153-amd64.deb; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install gdebi-core; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo gdebi  --non-interactive /tmp/rstudio.deb; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then rm /tmp/rstudio.deb; fi
+
   # osx
   # faster than using homebrew/science tap
   # but no permalink to release download
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget "https://cran.rstudio.com/bin/macosx/$(wget -qO- https://cran.rstudio.com/bin/macosx/ | sed -n 's/.*href="\(R-[^"]*.pkg\)".*/\1/p' | head -n 1)"; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg R-*.pkg -target /; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget -O /tmp/R.pkg "https://cran.rstudio.com/bin/macosx/$(wget -qO- https://cran.rstudio.com/bin/macosx/ | sed -n 's/.*href="\(R-[^"]*.pkg\)".*/\1/p' | head -n 1)"; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg /tmp/R.pkg -target /; fi
 
-  - curl -fLo /tmp/texlive.tar.gz https://github.com/jimhester/ubuntu-bin/releases/download/latest/texlive.tar.gz
-  - tar xzf /tmp/texlive.tar.gz -C ~
-  - export PATH=/$HOME/texlive/bin/x86_64-linux:$PATH
-  - tlmgr update --self
-  - curl -fLo /tmp/pandoc-1.15.2-1-amd64.deb https://github.com/jgm/pandoc/releases/download/1.15.2/pandoc-1.15.2-1-amd64.deb
-  - sudo apt-get install -f
-  - sudo dpkg -i /tmp/pandoc-1.15.2-1-amd64.deb
-  - rm /tmp/pandoc-1.15.2-1-amd64.deb
-  - sudo apt-get install texinfo
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then curl -fLo /tmp/rstudio.dmg https://download1.rstudio.org/RStudio-1.0.153.dmg; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo hdiutil attach /tmp/rstudio.dmg; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export PATH=/Volumes/RStudio-1.0.153/RStudio.app/Contents/MacOS:$PATH; fi
 
-  - curl -fLo /tmp/rstudio.deb https://download1.rstudio.org/rstudio-1.0.153-amd64.deb
-  - sudo apt-get install gdebi-core
-  - sudo gdebi  --non-interactive /tmp/rstudio.deb
-  - rm /tmp/rstudio.deb
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then hdiutil unmount juliamnt; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rm -rf juliamnt; fi
+
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget http://tug.org/cgi-bin/mactex-download/BasicTeX.pkg -O "/tmp/BasicTex.pkg"; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg "/tmp/BasicTex.pkg" -target / ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rm "/tmp/BasicTex.pkg"; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo tlmgr update --self; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo tlmgr install inconsolata upquote courier courier-scaled helvetic; fi
 
   - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sh -e /etc/init.d/xvfb start; fi
   - sleep 3 # give xvfb some time to start
 
   - mkdir -p mkdir $HOME/R/library
   - echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
+
   - Rscript -e 'install.packages("inline", repos="http://cran.rstudio.com/")'
   - Rscript -e 'install.packages("testthat", repos="http://cran.rstudio.com/")'
 
