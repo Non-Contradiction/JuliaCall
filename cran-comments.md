@@ -2,7 +2,7 @@
 * local OS X install, R 3.4.0
 * OS X 10.12 (on travis-ci), R 3.4.1 and R-devel
 * ubuntu 14.04 (on travis-ci), R 3.4.1
-* windows (on appveyor), R 3.4.1 and R-devel
+* windows (on appveyor), R 3.4.1 and R-devel with Rtools34
 * win-builder (devel and release)
 
 ## R CMD check results
