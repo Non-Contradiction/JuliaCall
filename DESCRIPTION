@@ -1,7 +1,7 @@
 Package: JuliaCall
 Type: Package
 Title: Seamless Integration Between R and Julia
-Version: 0.1.7
+Version: 0.7.3
 Authors@R: person("Changcheng Li", email = "cxl508@psu.edu",
     role = c("aut", "cre"))
 Description: The 'JuliaCall' package is an R interface to 'Julia',
