@@ -1,9 +1,10 @@
 environment:
   matrix:
-# - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x86/0.5/julia-0.5-latest-win32.exe"
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.5/julia-0.5-latest-win64.exe"
-#  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x86/0.6/julia-0.6-latest-win32.exe"
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
+  matrix:
+  - R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.4.1-win.exe"
+  - R_URL: "https://cran.rstudio.com/bin/windows/base/R-devel-win.exe"
 
 notifications:
   - provider: Email
@@ -24,9 +25,12 @@ install:
   - set PATH=C:\projects\julia\bin;%PATH%
 
 # Download and install R binary
-  - ps: |
-      (new-object net.webclient).DownloadString("http://cran.rstudio.com/bin/windows/base/") -match 'href="(R-[0-9.]*[a-zA-Z]*-win.exe)"';
-      (new-object net.webclient).DownloadFile($("http://cran.rstudio.com/bin/windows/base/"+$matches[1]),"C:\projects\R-binary.exe")
+#  - ps: |
+#      (new-object net.webclient).DownloadString("http://cran.rstudio.com/bin/windows/base/") -match 'href="(R-[0-9.]*[a-zA-Z]*-win.exe)"';
+#      (new-object net.webclient).DownloadFile($("http://cran.rstudio.com/bin/windows/base/"+$matches[1]),"C:\projects\R-binary.exe")
+  - ps: (new-object net.webclient).DownloadFile(
+        $env:R_URL,
+        "C:\projects\R-binary.exe")
   - C:\projects\R-binary.exe /VERYSILENT /DIR=C:\projects\R
 
   # Download and install the most recent RStudio Windows binary
