@@ -27,7 +27,7 @@ julia_setup <- function(verbose = TRUE, force = FALSE) {
     system("julia -e \"pkg = string(:RCall); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using RCall\"",
            ignore.stderr = TRUE)
 
-    system("julia -e \"pkg = string(:Suppressor); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using RCall\"",
+    system("julia -e \"pkg = string(:Suppressor); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using Suppressor\"",
            ignore.stderr = TRUE)
 
     .julia$bin_dir <- system("julia -E \"println(JULIA_HOME)\"", intern = TRUE)[1]
