@@ -13,43 +13,41 @@
 #'
 #'   ## Different ways for calculating `sqrt(2)`
 #'
-#'   julia$command("a = sqrt(2)"); julia$eval_string("a")
+#'   # julia$command("a = sqrt(2)"); julia$eval_string("a")
 #'   julia_command("a = sqrt(2)"); julia_eval_string("a")
 #'
-#'   julia$eval_string("sqrt(2)")
+#'   # julia$eval_string("sqrt(2)")
 #'   julia_eval_string("sqrt(2)")
 #'
-#'   julia$call("sqrt", 2)
+#'   # julia$call("sqrt", 2)
 #'   julia_call("sqrt", 2)
 #'
-#'   julia$eval_string("sqrt")(2)
+#'   # julia$eval_string("sqrt")(2)
 #'   julia_eval_string("sqrt")(2)
 #'
 #'   ## You can use `julia_exists` as `exists` in R to test
 #'   ## whether a function or name exists in Julia or not
 #'
-#'   julia$exists("sqrt")
+#'   # julia$exists("sqrt")
 #'   julia_exists("sqrt")
-#'   julia$exists("c")
-#'   julia_exists("c")
 #'
 #'   ## You can use `julia$help` to get help for Julia functions
 #'
-#'   julia$help("sqrt")
+#'   # julia$help("sqrt")
 #'   julia_help("sqrt")
 #'
 #'   ## You can install and use Julia packages through JuliaCall
 #'
-#'   julia$install_package("Optim")
+#'   # julia$install_package("Optim")
 #'   julia_install_package("Optim")
 #'
-#'   julia$install_package_if_needed("Optim")
+#'   # julia$install_package_if_needed("Optim")
 #'   julia_install_package_if_needed("Optim")
 #'
-#'   julia$installed_package("Optim")
+#'   # julia$installed_package("Optim")
 #'   julia_installed_package("Optim")
 #'
-#'   julia$library("Optim")
+#'   # julia$library("Optim")
 #'   julia_library("Optim")
 #' }
 #'
