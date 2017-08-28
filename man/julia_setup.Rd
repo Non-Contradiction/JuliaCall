@@ -20,30 +20,6 @@ The julia interface, which is an environment with the necessary methods
 
 if (julia_check()) {
   julia <- julia_setup()
-
-  ## Different ways for calculating sqrt(2)
-
-  julia$command("a = sqrt(2)"); julia$eval_string("a")
-  julia$eval_string("sqrt(2)")
-  julia$call("sqrt", 2)
-  julia$eval_string("sqrt")(2)
-
-  ## You can use `julia$exists` as `exists` in R to test
-  ## whether a function or name exists in Julia or not
-
-  julia$exists("sqrt")
-  julia$exists("c")
-
-  ## You can use `julia$help` to get help for Julia functions
-
-  julia$help("sqrt")
-
-  ## Functions related to Julia packages
-
-  julia$install_package("Optim")
-  julia$install_package_if_needed("Optim")
-  julia$installed_package("Optim")
-  julia$using("Optim") ## Same as julia$library("Optim")
 }
 
 }
