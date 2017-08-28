@@ -2,7 +2,7 @@
 % Please edit documentation in R/interface.R
 \name{julia_command}
 \alias{julia_command}
-\title{Evalulate string command in julia.}
+\title{Evaluate string commands in julia.}
 \usage{
 julia_command(cmd)
 }
@@ -10,10 +10,10 @@ julia_command(cmd)
 \item{cmd}{the command string you want to evaluate in julia.}
 }
 \description{
-\code{julia_command} evaluates string command in julia.
-It doesn't return the result.
+\code{julia_command} evaluates string commands in julia
+without returning the result.
 If you need the result, maybe you could
-consider using \code{julia_eval_string}.
+try \code{julia_eval_string}.
 }
 \examples{
 

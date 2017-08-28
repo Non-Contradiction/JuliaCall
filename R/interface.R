@@ -3,7 +3,7 @@
 #' \code{julia_do.call} is the \code{do.call} for julia.
 #'
 #' @param func_name the name of julia function you want to call.
-#' @param arg_list the unamed list of the arguments you want to pass to the julia function.
+#' @param arg_list the unnamed list of the arguments you want to pass to the julia function.
 #' @param need_return whether you want the julia to return value or not.
 #'
 #' @examples
@@ -39,7 +39,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
 #' \code{julia_call} calls julia functions.
 #'
 #' @param func_name the name of julia function you want to call.
-#' @param ... the unamed arguments you want to pass to the julia function.
+#' @param ... the unnamed arguments you want to pass to the julia function.
 #' @param need_return whether you want the julia return value or not.
 #'
 #' @examples
@@ -71,12 +71,12 @@ julia_call <- julia$call <- function(func_name, ..., need_return = TRUE)
 #' @export
 julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", name)
 
-#' Evalulate string command in julia and get the return value.
+#' Evaluate string commands in julia and get the result.
 #'
-#' \code{julia_eval_string} evaluates string command in julia and
-#' returns the result as an R object.
+#' \code{julia_eval_string} evaluates string commands in julia and
+#' returns the result (automatically converted to an R object).
 #' If you don't need the result, maybe you could
-#' consider using \code{julia_command}.
+#' try \code{julia_command}.
 #'
 #' @param cmd the command string you want to evaluate in julia.
 #'
@@ -94,12 +94,12 @@ julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", na
 julia_eval_string <- julia$eval_string <-
     function(cmd) julia$call("JuliaCall.eval_string", cmd)
 
-#' Evalulate string command in julia.
+#' Evaluate string commands in julia.
 #'
-#' \code{julia_command} evaluates string command in julia.
-#' It doesn't return the result.
+#' \code{julia_command} evaluates string commands in julia
+#' without returning the result.
 #' If you need the result, maybe you could
-#' consider using \code{julia_eval_string}.
+#' try \code{julia_eval_string}.
 #'
 #' @param cmd the command string you want to evaluate in julia.
 #'

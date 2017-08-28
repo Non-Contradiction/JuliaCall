@@ -7,7 +7,7 @@
 #' @param force whether to force julia_setup to execute again.
 #'
 #' @return The julia interface, which is an environment with the necessary methods
-#'   like cmd, source and things like that to communicate with julia.
+#'   like command, source and things like that to communicate with julia.
 #'
 #' @examples
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/interface.R
 \name{julia_eval_string}
 \alias{julia_eval_string}
-\title{Evalulate string command in julia and get the return value.}
+\title{Evaluate string commands in julia and get the result.}
 \usage{
 julia_eval_string(cmd)
 }
@@ -13,10 +13,10 @@ julia_eval_string(cmd)
 the R object automatically converted from julia object.
 }
 \description{
-\code{julia_eval_string} evaluates string command in julia and
-returns the result as an R object.
+\code{julia_eval_string} evaluates string commands in julia and
+returns the result (automatically converted to an R object).
 If you don't need the result, maybe you could
-consider using \code{julia_command}.
+try \code{julia_command}.
 }
 \examples{
 

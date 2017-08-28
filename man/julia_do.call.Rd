@@ -9,7 +9,7 @@ julia_do.call(func_name, arg_list, need_return = TRUE)
 \arguments{
 \item{func_name}{the name of julia function you want to call.}
 
-\item{arg_list}{the unamed list of the arguments you want to pass to the julia function.}
+\item{arg_list}{the unnamed list of the arguments you want to pass to the julia function.}
 
 \item{need_return}{whether you want the julia to return value or not.}
 }

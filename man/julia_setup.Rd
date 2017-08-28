@@ -14,7 +14,7 @@ about \code{julia_setup}.}
 }
 \value{
 The julia interface, which is an environment with the necessary methods
-  like cmd, source and things like that to communicate with julia.
+  like command, source and things like that to communicate with julia.
 }
 \description{
 \code{julia_setup} does the initial setup for the JuliaCall package.
