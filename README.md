@@ -25,19 +25,32 @@ library(JuliaCall)
 ## Do initial setup
 
 julia <- julia_setup()
+#> Julia version 0.6.0 found.
+#> Julia initiation...
+#> Finish Julia initiation.
+#> Loading setup script for JuliaCall...
+#> Finish loading setup script for JuliaCall.
 
 ## Different ways for using Julia to calculate sqrt(2)
 
 julia$command("a = sqrt(2)"); julia$eval_string("a")
 #> [1] 1.414214
+julia_command("a = sqrt(2)"); julia_eval_string("a")
+#> [1] 1.414214
 
 julia$eval_string("sqrt(2)")
+#> [1] 1.414214
+julia_eval_string("sqrt(2)")
 #> [1] 1.414214
 
 julia$call("sqrt", 2)
 #> [1] 1.414214
+julia_call("sqrt", 2)
+#> [1] 1.414214
 
 julia$eval_string("sqrt")(2)
+#> [1] 1.414214
+julia_eval_string("sqrt")(2)
 #> [1] 1.414214
 
 2 %>J% sqrt
@@ -48,7 +61,12 @@ julia$eval_string("sqrt")(2)
 
 julia$exists("sqrt")
 #> [1] TRUE
+julia_exists("sqrt")
+#> [1] TRUE
+
 julia$exists("c")
+#> [1] FALSE
+julia_exists("c")
 #> [1] FALSE
 
 ## You can use `julia$help` to get help for Julia functions
@@ -59,15 +77,28 @@ julia$help("sqrt")
 #> ```
 #> 
 #> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
+julia_help("sqrt")
+#> ```
+#> sqrt(x)
+#> ```
+#> 
+#> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
 
 ## Functions related to installing and using Julia packages
 
 julia$install_package("Optim")
+julia_install_package("Optim")
+
 julia$install_package_if_needed("Optim")
+julia_install_package_if_needed("Optim")
+
 julia$installed_package("Optim")
 #> [1] "0.9.3"
-julia$using("Optim") ## Same as julia$library("Optim")
+julia_installed_package("Optim")
+#> [1] "0.9.3"
+
 julia$library("Optim")
+julia_library("Optim")
 ```
 
 How to Get Help?
@@ -82,31 +113,12 @@ julia$help("sqrt")
 #> ```
 #> 
 #> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
-
-julia$help("sqrtm")
+julia_help("sqrt")
 #> ```
-#> sqrtm(A)
+#> sqrt(x)
 #> ```
 #> 
-#> If `A` has no negative real eigenvalues, compute the principal matrix square root of `A`, that is the unique matrix $X$ with eigenvalues having positive real part such that $X^2 = A$. Otherwise, a nonprincipal square root is returned.
-#> 
-#> If `A` is symmetric or Hermitian, its eigendecomposition ([`eigfact`](@ref)) is used to compute the square root. Otherwise, the square root is determined by means of the Björck-Hammarling method [^BH83], which computes the complex Schur form ([`schur`](@ref)) and then the complex square root of the triangular factor.
-#> 
-#> [^BH83]: Åke Björck and Sven Hammarling, "A Schur method for the square root of a matrix", Linear Algebra and its Applications, 52-53, 1983, 127-140. [doi:10.1016/0024-3795(83)80010-X](http://dx.doi.org/10.1016/0024-3795(83)80010-X)
-#> 
-#> # Example
-#> 
-#> ```jldoctest
-#> julia> A = [4 0; 0 4]
-#> 2×2 Array{Int64,2}:
-#>  4  0
-#>  0  4
-#> 
-#> julia> sqrtm(A)
-#> 2×2 Array{Float64,2}:
-#>  2.0  0.0
-#>  0.0  2.0
-#> ```
+#> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
 ```
 
 And you are more than welcome to contact me about `JuliaCall` at <lch34677@gmail.com> or <cxl508@psu.edu>.

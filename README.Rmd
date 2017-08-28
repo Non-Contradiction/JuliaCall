@@ -39,12 +39,16 @@ julia <- julia_setup()
 ## Different ways for using Julia to calculate sqrt(2)
 
 julia$command("a = sqrt(2)"); julia$eval_string("a")
+julia_command("a = sqrt(2)"); julia_eval_string("a")
 
 julia$eval_string("sqrt(2)")
+julia_eval_string("sqrt(2)")
 
 julia$call("sqrt", 2)
+julia_call("sqrt", 2)
 
 julia$eval_string("sqrt")(2)
+julia_eval_string("sqrt")(2)
 
 2 %>J% sqrt
 
@@ -52,19 +56,29 @@ julia$eval_string("sqrt")(2)
 ## whether a function or name exists in Julia or not
 
 julia$exists("sqrt")
+julia_exists("sqrt")
+
 julia$exists("c")
+julia_exists("c")
 
 ## You can use `julia$help` to get help for Julia functions
 
 julia$help("sqrt")
+julia_help("sqrt")
 
 ## Functions related to installing and using Julia packages
 
 julia$install_package("Optim")
+julia_install_package("Optim")
+
 julia$install_package_if_needed("Optim")
+julia_install_package_if_needed("Optim")
+
 julia$installed_package("Optim")
-julia$using("Optim") ## Same as julia$library("Optim")
+julia_installed_package("Optim")
+
 julia$library("Optim")
+julia_library("Optim")
 ```
 
 ## How to Get Help?
@@ -73,8 +87,7 @@ One way to get help is just using `julia$help` like the following example:
 
 ```{r}
 julia$help("sqrt")
-
-julia$help("sqrtm")
+julia_help("sqrt")
 ```
 
 And you are more than welcome to contact me about `JuliaCall`
@@ -110,10 +123,4 @@ It will be much appreciated if you can
 - open `JuliaCall.Rproj` in your RStudio or open `R` from the directory where you download the source of `JuliaCall`,
 - run `devtools::check()` to see the result of `R CMD check` for `JuliaCall` on your machine,
 - and paste the result to the issue report.
-
-
-
-
-
-
 
