@@ -1,4 +1,5 @@
 .julia <- new.env(parent = emptyenv())
+.julia$initialized <- FALSE
 
 julia <- new.env(parent = .julia)
 

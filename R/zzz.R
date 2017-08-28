@@ -2,7 +2,9 @@
 #'
 #' \code{julia_setup} does the initial setup for the JuliaCall package.
 #'
-#' @param verbose whether print out detailed information about construction of julia interface
+#' @param verbose whether to print out detailed information
+#'     about \code{julia_setup}.
+#' @param force whether to force julia_setup to execute again.
 #'
 #' @return The julia interface, which is an environment with the necessary methods
 #'   like cmd, source and things like that to communicate with julia.
@@ -14,11 +16,19 @@
 #' }
 #'
 #' @export
-julia_setup <- function(verbose = FALSE) {
+julia_setup <- function(verbose = TRUE, force = FALSE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
-    system("julia -e \"pkg = string(:RCall); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using RCall\"")
+    if (!force && .julia$initialized) {
+        return(julia)
+    }
+
+    system("julia -e \"pkg = string(:RCall); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using RCall\"",
+           ignore.stderr = TRUE)
+
+    system("julia -e \"pkg = string(:Suppressor); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using RCall\"",
+           ignore.stderr = TRUE)
 
     .julia$bin_dir <- system("julia -E \"println(JULIA_HOME)\"", intern = TRUE)[1]
     .julia$config <- file.path(dirname(.julia$bin_dir), "share", "julia", "julia-config.jl")
@@ -74,7 +84,7 @@ julia_setup <- function(verbose = FALSE) {
 
     .julia$init()
 
-    if (verbose) message("Finish Julia initiation...")
+    if (verbose) message("Finish Julia initiation.")
 
     .julia$cmd_ <- .julia$compile(
         sig = c(cmd = "character"),
@@ -104,7 +114,7 @@ julia_setup <- function(verbose = FALSE) {
 
     .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
 
-    if (verbose) message("Finish loading setup script for JuliaCall...")
+    if (verbose) message("Finish loading setup script for JuliaCall.")
 
     .julia$do.call_ <- .julia$compile(
         sig = c(func_name = "character", arg = "list", need_return = "logical"),
@@ -119,6 +129,8 @@ julia_setup <- function(verbose = FALSE) {
         )
 
     julia$VERSION <- .julia$VERSION
+
+    .julia$initialized <- TRUE
 
     julia
 }
