@@ -1,23 +1,3 @@
-.julia <- new.env(parent = emptyenv())
-
-julia <- new.env(parent = .julia)
-
-#' Check whether julia is available on the path.
-#'
-#' \code{julia_check} checks if julia is available on the path.
-#'
-#' @return whether julia is available on the path.
-#'
-#' @examples
-#' julia_check()
-#'
-#' @export
-julia_check <- function(){
-    tryCatch(system('julia -e "println(1)"', intern = TRUE) == "1",
-             warning = function(war){},
-             error = function(err) FALSE)
-}
-
 #' Do initial setup for the JuliaCall package.
 #'
 #' \code{julia_setup} does the initial setup for the JuliaCall package.
@@ -31,30 +11,6 @@ julia_check <- function(){
 #'
 #' if (julia_check()) {
 #'   julia <- julia_setup()
-#'
-#'   ## Different ways for calculating sqrt(2)
-#'
-#'   julia$command("a = sqrt(2)"); julia$eval_string("a")
-#'   julia$eval_string("sqrt(2)")
-#'   julia$call("sqrt", 2)
-#'   julia$eval_string("sqrt")(2)
-#'
-#'   ## You can use `julia$exists` as `exists` in R to test
-#'   ## whether a function or name exists in Julia or not
-#'
-#'   julia$exists("sqrt")
-#'   julia$exists("c")
-#'
-#'   ## You can use `julia$help` to get help for Julia functions
-#'
-#'   julia$help("sqrt")
-#'
-#'   ## Functions related to Julia packages
-#'
-#'   julia$install_package("Optim")
-#'   julia$install_package_if_needed("Optim")
-#'   julia$installed_package("Optim")
-#'   julia$using("Optim") ## Same as julia$library("Optim")
 #' }
 #'
 #' @export
@@ -118,6 +74,8 @@ julia_setup <- function(verbose = FALSE) {
 
     .julia$init()
 
+    if (verbose) message("Finish Julia initiation...")
+
     .julia$cmd_ <- .julia$compile(
         sig = c(cmd = "character"),
         body = "jl_eval_string(CHAR(STRING_ELT(cmd, 0)));
@@ -142,11 +100,11 @@ julia_setup <- function(verbose = FALSE) {
 
     .julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
 
-    if (verbose) message("Load setup script for JuliaCall...")
+    if (verbose) message("Loading setup script for JuliaCall...")
 
     .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
 
-    if (verbose) message("Defining julia$do.call...")
+    if (verbose) message("Finish loading setup script for JuliaCall...")
 
     .julia$do.call_ <- .julia$compile(
         sig = c(func_name = "character", arg = "list", need_return = "logical"),
@@ -160,67 +118,8 @@ julia_setup <- function(verbose = FALSE) {
         return out;'
         )
 
-    julia$do.call <- function(func_name, arg_list, need_return = TRUE){
-        if (!(length(func_name) == 1 && is.character(func_name))) {
-            stop("func_name should be a character scalar.")
-        }
-        if (!(is.list(arg_list))) {
-            stop("arg_list should be the list of arguments.")
-        }
-        if (!(length(need_return) == 1 && is.logical(need_return))) {
-            stop("need_return should be a logical scalar.")
-        }
-        r <- .julia$do.call_(func_name, arg_list, need_return)
-        if (inherits(r, "error")) stop(r)
-        if (need_return) return(r)
-        invisible(r)
-    }
-
-    if (verbose) message("Defining julia$call...")
-
-    julia$call <- function(func_name, ..., need_return = TRUE)
-        julia$do.call(func_name, list(...), need_return)
-
     julia$VERSION <- .julia$VERSION
-
-    if (verbose) message("Defining other utility functions...")
-
-    julia$exists <- function(name) julia$call("JuliaCall.exists", name)
-
-    julia$eval_string <- function(cmd) julia$call("JuliaCall.eval_string", cmd)
-
-    julia$command <- function(cmd) julia$call("JuliaCall.eval_string", cmd, need_return = FALSE)
-
-    julia$include <- function(file_name) julia$call("include", file_name)
-
-    julia$source <- function(file_name) julia$call("include", file_name, need_return = FALSE)
-
-    julia$install_package <- function(pkg_name) julia$call("Pkg.add", pkg_name, need_return = FALSE)
-
-    julia$installed_package <- function(pkg_name) julia$call("JuliaCall.installed_package", pkg_name)
-
-    julia$install_package_if_needed <- function(pkg_name){
-        if (julia$installed_package(pkg_name) == "nothing") {
-            julia$install_package(pkg_name)
-        }
-    }
-
-    julia$update_package <- function(...) julia$do.call("Pkg.update", list(...))
-
-    julia$library <- julia$using <- function(pkg){
-        tryCatch(julia$command(paste0("using ", pkg)),
-                 warning = function(war){},
-                 error = {
-                     if (julia$VERSION >= "0.6.0") {
-                         system(paste0("julia -e \"using ", pkg, "\""))
-                         }
-                     julia$command(paste0("using ", pkg))
-                 })
-        }
-
-    julia$help <- function(fname){
-        cat(julia$call("JuliaCall.help", fname))
-    }
 
     julia
 }
+
