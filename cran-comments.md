@@ -1,3 +1,12 @@
+## Resubmission
+This is a resubmission. In this version I have:
+
+* Single quote the software name 'Julia' in the Title.
+
+* Remove "The 'JuliaCall' package" in the Description in order to reduce redundancy.
+
+* Use CRAN template for MIT license and change the LICENSE file.
+
 ## Test environments
 * local OS X 10.12, R 3.4.0
 * OS X 10.12 (on travis-ci), R 3.4.1 and R-devel
