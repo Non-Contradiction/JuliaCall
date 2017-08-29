@@ -1,10 +1,10 @@
 Package: JuliaCall
 Type: Package
-Title: Seamless Integration Between R and Julia
+Title: Seamless Integration Between R and 'Julia'
 Version: 0.7.3
 Authors@R: person("Changcheng Li", email = "cxl508@psu.edu",
     role = c("aut", "cre"))
-Description: The 'JuliaCall' package is an R interface to 'Julia',
+Description: Provides an R interface to 'Julia',
     which is a high-level, high-performance dynamic programming language
     for numerical computing, see <https://julialang.org/> for more information.
     It provides a high-level interface as well as a low-level interface.
@@ -12,6 +12,7 @@ Description: The 'JuliaCall' package is an R interface to 'Julia',
     any R function with automatic type conversion. Using the low level interface,
     you could deal with C-level SEXP directly while enjoying the convenience of
     using a high-level programming language like 'Julia'.
+Depends: R (>= 3.2.0)
 License: MIT + file LICENSE
 URL: https://github.com/Non-Contradiction/JuliaCall
 BugReports: https://github.com/Non-Contradiction/JuliaCall/issues
