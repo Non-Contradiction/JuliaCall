@@ -1,11 +1,8 @@
 ## Resubmission
 This is a resubmission. In this version I have:
 
-* Single quote the software name 'Julia' in the Title.
-
-* Remove "The 'JuliaCall' package" in the Description in order to reduce redundancy.
-
-* Use CRAN template for MIT license and change the LICENSE file.
+* Not run the long examples and tests on CRAN.
+  But they are still checked otherwise, on my local machine, travis-ci and appveyor.
 
 ## Test environments
 * local OS X 10.12, R 3.4.0
