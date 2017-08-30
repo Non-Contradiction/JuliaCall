@@ -16,9 +16,11 @@ The experimental language piper for julia language.
 }
 \examples{
 if (julia_check()) {
+  \dontrun{ ## julia_setup is quite time consuming
   julia <- julia_setup()
   2 \%>J\% sqrt
   3 \%>J\% log(2)
+  }
 }
 
 }

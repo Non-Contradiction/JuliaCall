@@ -12,7 +12,9 @@
 #' @examples
 #'
 #' if (julia_check()) {
+#'   \dontrun{ ## julia_setup is quite time consuming
 #'   julia <- julia_setup()
+#'   }
 #' }
 #'
 #' @export

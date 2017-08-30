@@ -19,9 +19,11 @@ julia_call(func_name, ..., need_return = TRUE)
 \examples{
 
 if (julia_check()) {
+  \dontrun{ ## julia_setup is quite time consuming
   julia <- julia_setup()
 
   julia_call("sqrt", 2)
+  }
 }
 
 }

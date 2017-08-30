@@ -9,9 +9,11 @@
 #' @examples
 #'
 #' if (julia_check()) {
+#'   \dontrun{ ## julia_setup is quite time consuming
 #'   julia <- julia_setup()
 #'
 #'   julia_do.call("sqrt", list(2))
+#'   }
 #' }
 #'
 #' @export
@@ -45,9 +47,11 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
 #' @examples
 #'
 #' if (julia_check()) {
+#'   \dontrun{ ## julia_setup is quite time consuming
 #'   julia <- julia_setup()
 #'
 #'   julia_call("sqrt", 2)
+#'   }
 #' }
 #'
 #' @export
@@ -63,9 +67,11 @@ julia_call <- julia$call <- function(func_name, ..., need_return = TRUE)
 #' @examples
 #'
 #' if (julia_check()) {
+#'   \dontrun{ ## julia_setup is quite time consuming
 #'   julia <- julia_setup()
 #'
 #'   julia_exists("sqrt")
+#'   }
 #' }
 #'
 #' @export
@@ -85,9 +91,11 @@ julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", na
 #' @examples
 #'
 #' if (julia_check()) {
+#'   \dontrun{ ## julia_setup is quite time consuming
 #'   julia <- julia_setup()
 #'
 #'   julia_eval_string("sqrt(2)")
+#'   }
 #' }
 #'
 #' @export
@@ -106,9 +114,11 @@ julia_eval_string <- julia$eval_string <-
 #' @examples
 #'
 #' if (julia_check()) {
+#'   \dontrun{ ## julia_setup is quite time consuming
 #'   julia <- julia_setup()
 #'
 #'   julia_command("a = sqrt(2)")
+#'   }
 #' }
 #'
 #' @export
@@ -134,9 +144,11 @@ julia_source <- julia$source <-
 #' @examples
 #'
 #' if (julia_check()) {
+#'   \dontrun{ ## julia_setup is quite time consuming
 #'   julia <- julia_setup()
 #'
 #'   julia_help("sqrt")
+#'   }
 #' }
 #'
 #' @export

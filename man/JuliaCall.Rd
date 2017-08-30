@@ -13,6 +13,8 @@ to use Julia packages as easy as possible.
 
 if (julia_check()) {
 
+  \dontrun{ ## The examples are quite time consuming
+
   ## Do initiation for JuliaCall
 
   julia <- julia_setup()
@@ -55,6 +57,7 @@ if (julia_check()) {
 
   # julia$library("Optim")
   julia_library("Optim")
+  }
 }
 
 }
