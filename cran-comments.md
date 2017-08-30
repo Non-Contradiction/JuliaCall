@@ -2,7 +2,7 @@
 This is a resubmission. In this version I have:
 
 * Not run the long examples and tests on CRAN.
-  But they are still checked otherwise, on my local machine, travis-ci and appveyor.
+  But they are still checked on my local machine, travis-ci and appveyor.
 
 ## Test environments
 * local OS X 10.12, R 3.4.0
