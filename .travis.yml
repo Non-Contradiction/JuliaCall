@@ -5,6 +5,9 @@ os:
 
 osx_image: xcode8.1
 
+env:
+  - NOT_CRAN="true"
+
 julia:
   - 0.5
   - 0.6
@@ -79,18 +82,16 @@ before_install:
   #- ls $(R RHOME)/lib
   #- julia -e 'using RCall'
 script:
-#- R CMD build .
-#- R CMD check *tar.gz
+- R CMD build .
+- R CMD check *tar.gz
 
-- Rscript -e 'install.packages("devtools", repos="http://cran.rstudio.com/", quiet = TRUE, dependencies = c("Depends", "Imports", "LinkingTo", "Suggests"))'
-- Rscript -e 'devtools::check()'
-
-- Rscript -e 'devtools::install_github("Non-Contradiction/TestWithRStudio")'
+- Rscript -e 'install.packages("remotes", repos="http://cran.rstudio.com/")'
+- Rscript -e 'remotes::install_github("Non-Contradiction/TestWithRStudio")'
 - Rscript -e "library(TestWithRStudio); check_rstudio()"
 - Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('1'))"
 - Rscript -e "library(TestWithRStudio); stopifnot(!check_in_rstudio('q()'))"
 
-- Rscript -e 'devtools::install_github("Non-Contradiction/JuliaCall")'
+- Rscript -e 'remotes::install_github("Non-Contradiction/JuliaCall")'
 #- julia -e 'Pkg.add("RCall")'
 #- julia -e 'using RCall'
 - Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('library(JuliaCall); julia <- julia_setup(); get(\'call\', julia)(\'sqrt\', 2)', 60))"

@@ -1,4 +1,5 @@
 environment:
+  NOT_CRAN: "true"
   matrix:
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.5/julia-0.5-latest-win64.exe"
     R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.4.1-win.exe"
@@ -77,18 +78,16 @@ build_script:
 - Rscript -e "install.packages(\"testthat\", repos=\"http://cran.rstudio.com/\")"
 
 test_script:
-#- R CMD build .
-#- R CMD check *tar.gz
+- R CMD build .
+- R CMD check *tar.gz
 
-- Rscript -e "install.packages(\"devtools\", repos=\"http://cran.rstudio.com/\", quiet = TRUE, dependencies = c(\"Depends\", \"Imports\", \"LinkingTo\", \"Suggests\"))"
-- Rscript -e "devtools::check()"
-
-- Rscript -e "devtools::install_github(\"Non-Contradiction/TestWithRStudio\")"
+- Rscript -e "install.packages(\"remotes\", repos=\"http://cran.rstudio.com/\")"
+- Rscript -e "remotes::install_github(\"Non-Contradiction/TestWithRStudio\")"
 - Rscript -e "library(TestWithRStudio); check_rstudio()"
 - Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('1'))"
 - Rscript -e "library(TestWithRStudio); stopifnot(!check_in_rstudio('q()'))"
 
-- Rscript -e "devtools::install_github(\"Non-Contradiction/JuliaCall\")"
+- Rscript -e "remotes::install_github(\"Non-Contradiction/JuliaCall\")"
 #- julia -e 'Pkg.add("RCall")'
 #- julia -e 'using RCall'
 - Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('library(JuliaCall); julia <- julia_setup(); get(\'call\', julia)(\'sqrt\', 2)', 60))"
