@@ -27,6 +27,7 @@ test_that("test of the basic functionality", {
     ## You can use `julia$help` to get help for Julia functions
     # julia$help("sqrt")
     julia_help("sqrt")
+    julia_library("RCall")
     ## You can install and use Julia packages through JuliaCall
     # julia$install_package("Optim")
     # julia_install_package("Optim")
