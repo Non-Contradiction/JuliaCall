@@ -67,7 +67,7 @@ julia_setup <- function(verbose = TRUE, force = FALSE) {
 
     if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
 
-    if (.julia$VERSION < "0.6.0") {
+    if (!newer(.julia$VERSION, "0.6.0")) {
         .julia$init_ <- .julia$compile(
             sig = c(dir = "character"),
             body = "jl_init(CHAR(STRING_ELT(dir, 0))); return R_NilValue;"
@@ -75,7 +75,7 @@ julia_setup <- function(verbose = TRUE, force = FALSE) {
 
         .julia$init <- function() .julia$init_(.julia$bin_dir)
     }
-    if (.julia$VERSION >= "0.6.0") {
+    if (newer(.julia$VERSION, "0.6.0")) {
         .julia$init <- .julia$compile(
             sig = c(),
             body = "jl_init(); return R_NilValue;"

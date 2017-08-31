@@ -18,3 +18,5 @@ julia_check <- function(){
              warning = function(war){},
              error = function(err) FALSE)
 }
+
+newer <- function(x, y) utils::compareVersion(x, y) >= 0
