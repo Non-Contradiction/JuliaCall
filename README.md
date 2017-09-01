@@ -10,7 +10,13 @@ Package JuliaCall is an R interface to 'Julia', which is a high-level, high-perf
 Installation
 ------------
 
-You can get `JuliaCall` by
+`JuliaCall` is on CRAN now! To use package `JuliaCall`, you first have to install `Julia` <https://julialang.org/> on your computer, and then you can install `JuliaCall` just like any other R packages by
+
+``` r
+install.packages("JuliaCall")
+```
+
+You can get the development version of `JuliaCall` by
 
 ``` r
 devtools::install_github("Non-Contradiction/JuliaCall")
