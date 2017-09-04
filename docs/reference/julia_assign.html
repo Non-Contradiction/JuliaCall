@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Call julia functions. — julia_call • JuliaCall</title>
+<title>Assign a value to a name in julia. — julia_assign • JuliaCall</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -80,35 +80,32 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Call julia functions.</h1>
+    <h1>Assign a value to a name in julia.</h1>
     </div>
 
     
-    <p><code>julia_call</code> calls julia functions with automatic type conversion.</p>
+    <p><code>julia_assign</code> assigns a value to a name in julia with automatic type conversion.</p>
     
 
-    <pre class="usage"><span class='fu'>julia_call</span>(<span class='no'>func_name</span>, <span class='no'>...</span>, <span class='kw'>need_return</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>julia_assign</span>(<span class='no'>x</span>, <span class='no'>value</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>func_name</th>
-      <td><p>the name of julia function you want to call.</p></td>
+      <th>x</th>
+      <td><p>a variable name, given as a character string.</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>the unnamed arguments you want to pass to the julia function.</p></td>
-    </tr>
-    <tr>
-      <th>need_return</th>
-      <td><p>whether you want the julia return value or not.</p></td>
+      <th>value</th>
+      <td><p>a value to be assigned to x, note that R value will be converted to
+corresponding julia value automatically.</p></td>
     </tr>
     </table>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
+    <pre class="examples"><div class='input'>#'
 if (julia_check()) {
   </div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:4:0: unexpected end of input</span>
 #&gt; <span class='error'>2: if (julia_check()) {</span>
@@ -117,7 +114,8 @@ if (julia_check()) {
  <span class='co'>## julia_setup is quite time consuming</span>
   <span class='no'>julia</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='julia_setup.html'>julia_setup</a></span>()
 
-  <span class='fu'>julia_call</span>(<span class='st'>"sqrt"</span>, <span class='fl'>2</span>)
+  <span class='fu'>julia_assign</span>(<span class='st'>"x"</span>, <span class='fl'>2</span>)
+  <span class='fu'>julia_assign</span>(<span class='st'>"rsqrt"</span>, <span class='no'>sqrt</span>)
 
 <span class='co'># }</span><div class='input'>}
 
