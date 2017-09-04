@@ -64,9 +64,16 @@ julia_setup <- function(verbose = TRUE, force = FALSE) {
     "
 
     .julia$compile <- function(sig, body){
-        inline::cfunction(sig = sig, body = body, includes = .julia$inc,
-                          cppargs = .julia$cppargs,
-                          libargs = .julia$libargs)
+        withCallingHandlers(
+            inline::cfunction(sig = sig, body = body, includes = .julia$inc,
+                              cppargs = .julia$cppargs,
+                              libargs = .julia$libargs),
+            error = function(e){
+                message("Error in compilation.
+                        Maybe this is because the compiler version is too old.
+                        You should use GCC version 4.7 or later on Linux,
+                        or Clang version 3.1 or later on Mac.")
+            })
     }
 
     .julia$VERSION <- system("julia -E \"println(VERSION)\"", intern = TRUE)[1]
