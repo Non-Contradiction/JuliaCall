@@ -14,7 +14,7 @@ julia_call(func_name, ..., need_return = TRUE)
 \item{need_return}{whether you want the julia return value or not.}
 }
 \description{
-\code{julia_call} calls julia functions.
+\code{julia_call} calls julia functions with automatic type conversion.
 }
 \examples{
 

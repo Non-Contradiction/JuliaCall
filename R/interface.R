@@ -1,6 +1,6 @@
 #' \code{do.call} for julia.
 #'
-#' \code{julia_do.call} is the \code{do.call} for julia.
+#' \code{julia_do.call} is the \code{do.call} for julia with automatic type conversion.
 #'
 #' @param func_name the name of julia function you want to call.
 #' @param arg_list the unnamed list of the arguments you want to pass to the julia function.
@@ -38,7 +38,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
 
 #' Call julia functions.
 #'
-#' \code{julia_call} calls julia functions.
+#' \code{julia_call} calls julia functions with automatic type conversion.
 #'
 #' @param func_name the name of julia function you want to call.
 #' @param ... the unnamed arguments you want to pass to the julia function.
