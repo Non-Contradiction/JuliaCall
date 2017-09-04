@@ -45,8 +45,8 @@ julia_setup <- function(verbose = TRUE, force = FALSE) {
 
     .julia$dll <- withCallingHandlers(dyn.load(.julia$dll_file, FALSE, TRUE),
                                       error = function(e){
-                                          message("Error in loading libjulia.
-                                                  Maybe you should include $JULIA_DIR/lib/julia in LD_LIBRAY_PATH.")
+                                          message("Error in loading libjulia.")
+                                          message("Maybe you should include $JULIA_DIR/lib/julia in LD_LIBRAY_PATH.")
                                       })
 
     ## .julia$include_dir <- file.path(dirname(.julia$bin_dir), "include", "julia")
@@ -69,10 +69,9 @@ julia_setup <- function(verbose = TRUE, force = FALSE) {
                               cppargs = .julia$cppargs,
                               libargs = .julia$libargs),
             error = function(e){
-                message("Error in compilation.
-                        Maybe this is because the compiler version is too old.
-                        You should use GCC version 4.7 or later on Linux,
-                        or Clang version 3.1 or later on Mac.")
+                message("Error in compilation.")
+                message("Maybe this is because the compiler version is too old.")
+                message("You should use GCC version 4.7 or later on Linux, or Clang version 3.1 or later on Mac.")
             })
     }
 
