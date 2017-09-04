@@ -42,7 +42,13 @@ julia_setup <- function(verbose = TRUE, force = FALSE) {
                             system(paste0("julia ", .julia$config, " --ldlibs"), intern = TRUE))
 
     .julia$dll_file <- system("julia -E \"println(Libdl.dllist()[1])\"", intern = TRUE)[1]
-    .julia$dll <- dyn.load(.julia$dll_file, FALSE, TRUE)
+
+    .julia$dll <- withCallingHandlers(dyn.load(.julia$dll_file, FALSE, TRUE),
+                                      error = function(e){
+                                          message("Error in loading libjulia.
+                                                  Maybe you should include $JULIA_DIR/lib/julia in LD_LIBRAY_PATH.")
+                                      })
+
     ## .julia$include_dir <- file.path(dirname(.julia$bin_dir), "include", "julia")
     ## .julia$cppargs <- paste0("-I ", .julia$include_dir, " -DJULIA_ENABLE_THREADING=1")
     ## .julia$cppargs <- paste0("-I ", .julia$include_dir, " -fpermissive")
