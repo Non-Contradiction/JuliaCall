@@ -155,3 +155,26 @@ julia_source <- julia$source <-
 julia_help <- julia$help <- function(fname){
     cat(julia$call("JuliaCall.help", fname))
 }
+
+#' Assign a value to a name in julia.
+#'
+#' \code{julia_assign} assigns a value to a name in julia with automatic type conversion.
+#'
+#' @param x a variable name, given as a character string.
+#' @param value a value to be assigned to x, note that R value will be converted to
+#'   corresponding julia value automatically.
+#'
+#' @examples
+#' #'
+#' if (julia_check()) {
+#'   \dontrun{ ## julia_setup is quite time consuming
+#'   julia <- julia_setup()
+#'
+#'   julia_assign("x", 2)
+#'   julia_assign("rsqrt", sqrt)
+#'   }
+#' }
+#'
+#' @export
+julia_assign <- julia$assign <-
+    function(x, value) julia$call("JuliaCall.assign", x, value, need_return = FALSE)

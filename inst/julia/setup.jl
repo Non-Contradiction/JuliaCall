@@ -82,4 +82,8 @@ function help(fname)
     string(eval_string(join(["@doc " fname])))
 end
 
+function assign(name, x)
+    eval(Main, Expr(:(=), Symbol(name), x))
+end
+
 end
