@@ -59,6 +59,16 @@ julia$eval_string("sqrt")(2)
 julia_eval_string("sqrt")(2)
 #> [1] 1.414214
 
+julia$assign("x", sqrt(2)); julia$eval_string("x")
+#> [1] 1.414214
+julia_assign("x", sqrt(2)); julia_eval_string("x")
+#> [1] 1.414214
+
+julia$assign("rsqrt", sqrt); julia$call("rsqrt", 2)
+#> [1] 1.414214
+julia_assign("rsqrt", sqrt); julia_call("rsqrt", 2)
+#> [1] 1.414214
+
 2 %>J% sqrt
 #> [1] 1.414214
 
@@ -110,7 +120,7 @@ julia_library("Optim")
 How to Get Help?
 ----------------
 
-One way to get help is just using `julia$help` like the following example:
+-   One way to get help for julia functions is just using `julia$help` like the following example:
 
 ``` r
 julia$help("sqrt")
@@ -127,7 +137,9 @@ julia_help("sqrt")
 #> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
 ```
 
-And you are more than welcome to contact me about `JuliaCall` at <lch34677@gmail.com> or <cxl508@psu.edu>.
+-   The GitHub Pages for this repository host the documentation for the development version of `JuliaCall`: <https://non-contradiction.github.io/JuliaCall/>.
+
+-   And you are more than welcome to contact me about `JuliaCall` at <lch34677@gmail.com> or <cxl508@psu.edu>.
 
 JuliaCall for R Package Developers
 ----------------------------------
