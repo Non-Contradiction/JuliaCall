@@ -31,6 +31,7 @@ library(JuliaCall)
 ## Do initial setup
 
 julia <- julia_setup()
+#> Julia at location /Applications/Julia-0.6.app/Contents/Resources/julia/bin will be used.
 #> Julia version 0.6.0 found.
 #> Julia initiation...
 #> Finish Julia initiation.
