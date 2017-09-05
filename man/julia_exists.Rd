@@ -14,12 +14,10 @@ julia_exists(name)
 }
 \examples{
 
-if (julia_check()) {
-  \dontrun{ ## julia_setup is quite time consuming
+\dontrun{ ## julia_setup is quite time consuming
   julia <- julia_setup()
 
   julia_exists("sqrt")
-  }
 }
 
 }

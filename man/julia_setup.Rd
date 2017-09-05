@@ -21,10 +21,8 @@ The julia interface, which is an environment with the necessary methods
 }
 \examples{
 
-if (julia_check()) {
-  \dontrun{ ## julia_setup is quite time consuming
+\dontrun{ ## julia_setup is quite time consuming
   julia <- julia_setup()
-  }
 }
 
 }

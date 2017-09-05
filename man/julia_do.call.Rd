@@ -18,12 +18,10 @@ julia_do.call(func_name, arg_list, need_return = TRUE)
 }
 \examples{
 
-if (julia_check()) {
-  \dontrun{ ## julia_setup is quite time consuming
+\dontrun{ ## julia_setup is quite time consuming
   julia <- julia_setup()
 
   julia_do.call("sqrt", list(2))
-  }
 }
 
 }

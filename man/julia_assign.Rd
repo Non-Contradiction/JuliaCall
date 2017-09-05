@@ -16,14 +16,12 @@ corresponding julia value automatically.}
 \code{julia_assign} assigns a value to a name in julia with automatic type conversion.
 }
 \examples{
-#'
-if (julia_check()) {
-  \dontrun{ ## julia_setup is quite time consuming
+
+\dontrun{ ## julia_setup is quite time consuming
   julia <- julia_setup()
 
   julia_assign("x", 2)
   julia_assign("rsqrt", sqrt)
-  }
 }
 
 }

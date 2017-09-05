@@ -17,12 +17,10 @@ try \code{julia_eval_string}.
 }
 \examples{
 
-if (julia_check()) {
-  \dontrun{ ## julia_setup is quite time consuming
+\dontrun{ ## julia_setup is quite time consuming
   julia <- julia_setup()
 
   julia_command("a = sqrt(2)")
-  }
 }
 
 }

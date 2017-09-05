@@ -1,14 +1,7 @@
 context("Error handling test")
 
-check_julia <- function() {
-    if (!julia_check()) {
-        skip("Julia not available")
-    }
-}
-
 test_that("test of the error handling functionality", {
     skip_on_cran()
-    check_julia()
     julia <- julia_setup()
 
     expect_error(julia_eval_string("abc"))

@@ -20,12 +20,10 @@ try \code{julia_command}.
 }
 \examples{
 
-if (julia_check()) {
-  \dontrun{ ## julia_setup is quite time consuming
+\dontrun{ ## julia_setup is quite time consuming
   julia <- julia_setup()
 
   julia_eval_string("sqrt(2)")
-  }
 }
 
 }

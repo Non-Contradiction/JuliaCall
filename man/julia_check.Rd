@@ -6,13 +6,6 @@
 \usage{
 julia_check()
 }
-\value{
-whether julia is available on the path.
-}
 \description{
-\code{julia_check} checks if julia is available on the path.
-}
-\examples{
-julia_check()
-
+\code{julia_check} checks if julia is available on the path. It is defunct.
 }
