@@ -60,6 +60,9 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li>
+  <a href="../news/index.html">News</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -87,11 +90,18 @@
     <p><code>julia_setup</code> does the initial setup for the JuliaCall package.</p>
     
 
-    <pre class="usage"><span class='fu'>julia_setup</span>(<span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>julia_setup</span>(<span class='kw'>JULIA_HOME</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>JULIA_HOME</th>
+      <td><p>the path to julia binary,
+if not set, JuliaCall will look at the global option JULIA_HOME,
+if the global option is not set, JuliaCall will try to use
+the julia in path.</p></td>
+    </tr>
     <tr>
       <th>verbose</th>
       <td><p>whether to print out detailed information
@@ -111,19 +121,11 @@ about <code>julia_setup</code>.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-if (julia_check()) {
-  </div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:4:0: unexpected end of input</span>
-#&gt; <span class='error'>2: if (julia_check()) {</span>
-#&gt; <span class='error'>3:   </span>
-#&gt; <span class='error'>  ^</span></div><span class='co'># NOT RUN {</span>
+</div><span class='co'># NOT RUN {</span>
  <span class='co'>## julia_setup is quite time consuming</span>
   <span class='no'>julia</span> <span class='kw'>&lt;-</span> <span class='fu'>julia_setup</span>()
-
-<span class='co'># }</span><div class='input'>}
-
-</div><div class='output co'>#&gt; <span class='error'>Error: &lt;text&gt;:1:1: 意外的'}'</span>
-#&gt; <span class='error'>1: }</span>
-#&gt; <span class='error'>    ^</span></div></pre>
+<span class='co'># }</span><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
