@@ -4,9 +4,14 @@
 \alias{julia_setup}
 \title{Do initial setup for the JuliaCall package.}
 \usage{
-julia_setup(verbose = TRUE, force = FALSE)
+julia_setup(JULIA_HOME = NULL, verbose = TRUE, force = FALSE)
 }
 \arguments{
+\item{JULIA_HOME}{the path to julia binary,
+if not set, JuliaCall will look at the global option JULIA_HOME,
+if the global option is not set, JuliaCall will try to use
+the julia in path.}
+
 \item{verbose}{whether to print out detailed information
 about \code{julia_setup}.}
 
