@@ -70,6 +70,9 @@
 <a href="#juliacall-for-seamless-integration-of-r-and-julia" class="anchor"></a>JuliaCall for Seamless Integration of R and Julia</h1></div>
 
 <p>Package JuliaCall is an R interface to ‘Julia’, which is a high-level, high-performance dynamic programming language for numerical computing, see <a href="https://julialang.org/" class="uri">https://julialang.org/</a> for more information.</p>
+<div class="figure">
+<img src="README-JuliaCall.png">
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -95,60 +98,32 @@ julia &lt;-<span class="st"> </span><span class="kw"><a href="reference/julia_se
 
 ## Different ways for using Julia to calculate sqrt(2)
 
-julia<span class="op">$</span><span class="kw">command</span>(<span class="st">"a = sqrt(2)"</span>); julia<span class="op">$</span><span class="kw">eval_string</span>(<span class="st">"a"</span>)
-<span class="co">#&gt; [1] 1.414214</span>
+<span class="co"># julia$command("a = sqrt(2)"); julia$eval_string("a")</span>
 <span class="kw"><a href="reference/julia_command.html">julia_command</a></span>(<span class="st">"a = sqrt(2)"</span>); <span class="kw"><a href="reference/julia_eval_string.html">julia_eval_string</a></span>(<span class="st">"a"</span>)
-<span class="co">#&gt; [1] 1.414214</span>
-
-julia<span class="op">$</span><span class="kw">eval_string</span>(<span class="st">"sqrt(2)"</span>)
 <span class="co">#&gt; [1] 1.414214</span>
 <span class="kw"><a href="reference/julia_eval_string.html">julia_eval_string</a></span>(<span class="st">"sqrt(2)"</span>)
 <span class="co">#&gt; [1] 1.414214</span>
-
-julia<span class="op">$</span><span class="kw">call</span>(<span class="st">"sqrt"</span>, <span class="dv">2</span>)
-<span class="co">#&gt; [1] 1.414214</span>
 <span class="kw"><a href="reference/julia_call.html">julia_call</a></span>(<span class="st">"sqrt"</span>, <span class="dv">2</span>)
-<span class="co">#&gt; [1] 1.414214</span>
-
-julia<span class="op">$</span><span class="kw">eval_string</span>(<span class="st">"sqrt"</span>)(<span class="dv">2</span>)
 <span class="co">#&gt; [1] 1.414214</span>
 <span class="kw"><a href="reference/julia_eval_string.html">julia_eval_string</a></span>(<span class="st">"sqrt"</span>)(<span class="dv">2</span>)
 <span class="co">#&gt; [1] 1.414214</span>
-
-julia<span class="op">$</span><span class="kw">assign</span>(<span class="st">"x"</span>, <span class="kw">sqrt</span>(<span class="dv">2</span>)); julia<span class="op">$</span><span class="kw">eval_string</span>(<span class="st">"x"</span>)
-<span class="co">#&gt; [1] 1.414214</span>
 <span class="kw"><a href="reference/julia_assign.html">julia_assign</a></span>(<span class="st">"x"</span>, <span class="kw">sqrt</span>(<span class="dv">2</span>)); <span class="kw"><a href="reference/julia_eval_string.html">julia_eval_string</a></span>(<span class="st">"x"</span>)
-<span class="co">#&gt; [1] 1.414214</span>
-
-julia<span class="op">$</span><span class="kw">assign</span>(<span class="st">"rsqrt"</span>, sqrt); julia<span class="op">$</span><span class="kw">call</span>(<span class="st">"rsqrt"</span>, <span class="dv">2</span>)
 <span class="co">#&gt; [1] 1.414214</span>
 <span class="kw"><a href="reference/julia_assign.html">julia_assign</a></span>(<span class="st">"rsqrt"</span>, sqrt); <span class="kw"><a href="reference/julia_call.html">julia_call</a></span>(<span class="st">"rsqrt"</span>, <span class="dv">2</span>)
 <span class="co">#&gt; [1] 1.414214</span>
-
 <span class="dv">2</span> <span class="op">%&gt;J%</span><span class="st"> </span>sqrt
 <span class="co">#&gt; [1] 1.414214</span>
 
 ## You can use `julia$exists` as `exists` in R to test
 ## whether a function or name exists in Julia or not
 
-julia<span class="op">$</span><span class="kw">exists</span>(<span class="st">"sqrt"</span>)
-<span class="co">#&gt; [1] TRUE</span>
 <span class="kw"><a href="reference/julia_exists.html">julia_exists</a></span>(<span class="st">"sqrt"</span>)
 <span class="co">#&gt; [1] TRUE</span>
-
-julia<span class="op">$</span><span class="kw">exists</span>(<span class="st">"c"</span>)
-<span class="co">#&gt; [1] FALSE</span>
 <span class="kw"><a href="reference/julia_exists.html">julia_exists</a></span>(<span class="st">"c"</span>)
 <span class="co">#&gt; [1] FALSE</span>
 
 ## You can use `julia$help` to get help for Julia functions
 
-julia<span class="op">$</span><span class="kw">help</span>(<span class="st">"sqrt"</span>)
-<span class="co">#&gt; ```</span>
-<span class="co">#&gt; sqrt(x)</span>
-<span class="co">#&gt; ```</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.</span>
 <span class="kw"><a href="reference/julia_help.html">julia_help</a></span>(<span class="st">"sqrt"</span>)
 <span class="co">#&gt; ```</span>
 <span class="co">#&gt; sqrt(x)</span>
@@ -158,18 +133,10 @@ julia<span class="op">$</span><span class="kw">help</span>(<span class="st">"sqr
 
 ## Functions related to installing and using Julia packages
 
-julia<span class="op">$</span><span class="kw">install_package</span>(<span class="st">"Optim"</span>)
 <span class="kw"><a href="reference/julia_package.html">julia_install_package</a></span>(<span class="st">"Optim"</span>)
-
-julia<span class="op">$</span><span class="kw">install_package_if_needed</span>(<span class="st">"Optim"</span>)
 <span class="kw"><a href="reference/julia_package.html">julia_install_package_if_needed</a></span>(<span class="st">"Optim"</span>)
-
-julia<span class="op">$</span><span class="kw">installed_package</span>(<span class="st">"Optim"</span>)
-<span class="co">#&gt; [1] "0.9.3"</span>
 <span class="kw"><a href="reference/julia_package.html">julia_installed_package</a></span>(<span class="st">"Optim"</span>)
 <span class="co">#&gt; [1] "0.9.3"</span>
-
-julia<span class="op">$</span><span class="kw">library</span>(<span class="st">"Optim"</span>)
 <span class="kw"><a href="reference/julia_package.html">julia_library</a></span>(<span class="st">"Optim"</span>)</code></pre></div>
 </div>
 <div id="how-to-get-help" class="section level2">
@@ -178,13 +145,7 @@ julia<span class="op">$</span><span class="kw">library</span>(<span class="st">"
 <ul>
 <li>One way to get help for julia functions is just using <code>julia$help</code> like the following example:</li>
 </ul>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">julia<span class="op">$</span><span class="kw">help</span>(<span class="st">"sqrt"</span>)
-<span class="co">#&gt; ```</span>
-<span class="co">#&gt; sqrt(x)</span>
-<span class="co">#&gt; ```</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.</span>
-<span class="kw"><a href="reference/julia_help.html">julia_help</a></span>(<span class="st">"sqrt"</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="reference/julia_help.html">julia_help</a></span>(<span class="st">"sqrt"</span>)
 <span class="co">#&gt; ```</span>
 <span class="co">#&gt; sqrt(x)</span>
 <span class="co">#&gt; ```</span>
@@ -239,6 +200,7 @@ julia<span class="op">$</span><span class="kw">library</span>(<span class="st">"
 <ul class="list-unstyled">
 <li><a href="https://travis-ci.org/Non-Contradiction/JuliaCall"><img src="https://travis-ci.org/Non-Contradiction/JuliaCall.svg?branch=master" alt="Travis-CI Build Status"></a></li>
 <li><a href="https://ci.appveyor.com/project/Non-Contradiction/JuliaCall"><img src="https://ci.appveyor.com/api/projects/status/github/Non-Contradiction/JuliaCall?branch=master&amp;svg=true" alt="AppVeyor Build Status"></a></li>
+<li><a href="https://cran.r-project.org/package=JuliaCall"><img src="http://www.r-pkg.org/badges/version/JuliaCall" alt="CRAN_Status_Badge"></a></li>
 </ul>
 </div>
 
