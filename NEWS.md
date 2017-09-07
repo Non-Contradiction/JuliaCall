@@ -9,5 +9,4 @@
 * Add `julia_assign` which can assign a value to a name in julia with automatic type conversion.
 * Give the option to set path for julia.
 * Deprecate `julia_check()`.
-
-
+* Start working on `julia_console`. Now there is a fully functional julia repl in terminal.
