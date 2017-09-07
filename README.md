@@ -7,6 +7,8 @@ JuliaCall for Seamless Integration of R and Julia
 
 Package JuliaCall is an R interface to 'Julia', which is a high-level, high-performance dynamic programming language for numerical computing, see <https://julialang.org/> for more information.
 
+![](README-JuliaCall.png)
+
 Installation
 ------------
 
@@ -40,60 +42,32 @@ julia <- julia_setup()
 
 ## Different ways for using Julia to calculate sqrt(2)
 
-julia$command("a = sqrt(2)"); julia$eval_string("a")
-#> [1] 1.414214
+# julia$command("a = sqrt(2)"); julia$eval_string("a")
 julia_command("a = sqrt(2)"); julia_eval_string("a")
-#> [1] 1.414214
-
-julia$eval_string("sqrt(2)")
 #> [1] 1.414214
 julia_eval_string("sqrt(2)")
 #> [1] 1.414214
-
-julia$call("sqrt", 2)
-#> [1] 1.414214
 julia_call("sqrt", 2)
-#> [1] 1.414214
-
-julia$eval_string("sqrt")(2)
 #> [1] 1.414214
 julia_eval_string("sqrt")(2)
 #> [1] 1.414214
-
-julia$assign("x", sqrt(2)); julia$eval_string("x")
-#> [1] 1.414214
 julia_assign("x", sqrt(2)); julia_eval_string("x")
-#> [1] 1.414214
-
-julia$assign("rsqrt", sqrt); julia$call("rsqrt", 2)
 #> [1] 1.414214
 julia_assign("rsqrt", sqrt); julia_call("rsqrt", 2)
 #> [1] 1.414214
-
 2 %>J% sqrt
 #> [1] 1.414214
 
 ## You can use `julia$exists` as `exists` in R to test
 ## whether a function or name exists in Julia or not
 
-julia$exists("sqrt")
-#> [1] TRUE
 julia_exists("sqrt")
 #> [1] TRUE
-
-julia$exists("c")
-#> [1] FALSE
 julia_exists("c")
 #> [1] FALSE
 
 ## You can use `julia$help` to get help for Julia functions
 
-julia$help("sqrt")
-#> ```
-#> sqrt(x)
-#> ```
-#> 
-#> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
 julia_help("sqrt")
 #> ```
 #> sqrt(x)
@@ -103,18 +77,10 @@ julia_help("sqrt")
 
 ## Functions related to installing and using Julia packages
 
-julia$install_package("Optim")
 julia_install_package("Optim")
-
-julia$install_package_if_needed("Optim")
 julia_install_package_if_needed("Optim")
-
-julia$installed_package("Optim")
-#> [1] "0.9.3"
 julia_installed_package("Optim")
 #> [1] "0.9.3"
-
-julia$library("Optim")
 julia_library("Optim")
 ```
 
@@ -124,12 +90,6 @@ How to Get Help?
 -   One way to get help for julia functions is just using `julia$help` like the following example:
 
 ``` r
-julia$help("sqrt")
-#> ```
-#> sqrt(x)
-#> ```
-#> 
-#> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
 julia_help("sqrt")
 #> ```
 #> sqrt(x)
