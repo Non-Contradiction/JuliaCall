@@ -23,4 +23,7 @@ Imports: inline,
     utils
 RoxygenNote: 6.0.1
 SystemRequirements: Julia >= 0.5.0, RCall.jl
-Suggests: testthat
+Suggests: testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

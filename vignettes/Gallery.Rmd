@@ -1,0 +1,15 @@
+---
+title: "Gallery"
+author: "Changcheng Li"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<img src="JuliaCall.png" style="width: 600px;"/>
+
+
+<img src="RCall.png" style="width: 600px;"/>

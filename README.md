@@ -7,7 +7,7 @@ JuliaCall for Seamless Integration of R and Julia
 
 Package JuliaCall is an R interface to 'Julia', which is a high-level, high-performance dynamic programming language for numerical computing, see <https://julialang.org/> for more information.
 
-![](README-JuliaCall.png)
+![](https://non-contradiction.github.io/JuliaCall/articles/JuliaCall.png)
 
 Installation
 ------------
