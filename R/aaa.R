@@ -21,7 +21,13 @@ julia_locate <- function(JULIA_HOME = NULL){
     }
 
     if (is.null(JULIA_HOME)) {
-        tryCatch(system("julia -E \"println(JULIA_HOME)\"", intern = TRUE)[1],
+        ## In macOS, the environment variables, e.g., PATH of a GUI is set by launchctl not the SHELL.
+        ## You may need to do bash -l -c "which julia" to determine the path to julia.
+        ## This fixes the issue that in macOS, R.app GUI cannot find julia.
+        ## Thank @randy3k
+        tryCatch(ifelse(.Platform$OS.type == "unix",
+                        dirname(system("bash -l -c \"which julia\"", intern = TRUE)),
+                        system("julia -E \"println(JULIA_HOME)\"", intern = TRUE)[1]),
                  warning = function(war){},
                  error = function(err) NULL)
     }
