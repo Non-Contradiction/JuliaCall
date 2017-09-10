@@ -10,3 +10,5 @@
 * Give the option to set path for julia.
 * Deprecate `julia_check()`.
 * Start working on `julia_console`. Now there is a fully functional julia repl in terminal.
+* When `julia_setup()`, there is an option whether or not to use RCall.jl,
+  RCall's R REPL mode and rgui will be set correctly.

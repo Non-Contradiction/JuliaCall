@@ -9,6 +9,8 @@
 #' @param verbose whether to print out detailed information
 #'     about \code{julia_setup}.
 #' @param force whether to force julia_setup to execute again.
+#' @param useRCall whether or not you want to use RCall.jl in julia,
+#'     which is an amazing package to access R in julia.
 #'
 #' @return The julia interface, which is an environment with the necessary methods
 #'   like command, source and things like that to communicate with julia.
@@ -20,7 +22,7 @@
 #' }
 #'
 #' @export
-julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE) {
+julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCall = TRUE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
@@ -154,6 +156,18 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE) {
         )
 
     julia$VERSION <- .julia$VERSION
+
+    ## useRCall will be used later in julia_console,
+    ## because in the hook RCall.rgui_start() will be executed,
+    ## then when we quit the console,
+    ## RCall.rgui_stop() needs to be executed.
+
+    julia$useRCall <- useRCall
+
+    if (useRCall) {
+        julia$command("using RCall")
+        julia$command("Base.atreplinit(JuliaCall.setup_repl)")
+    }
 
     .julia$initialized <- TRUE
 

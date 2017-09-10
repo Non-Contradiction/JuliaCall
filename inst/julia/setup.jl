@@ -12,6 +12,8 @@ using Suppressor
     using RCall
 end
 
+include("REPLhook.jl")
+
 function transfer_list(x)
     rcopy(RObject(Ptr{RCall.VecSxp}(x)))
 end
