@@ -9,7 +9,28 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+## Basic Usage
+
 <img src="JuliaCall.png" style="width: 600px;"/>
 
+## Use RCall.jl together with JuliaCall
 
 <img src="RCall.png" style="width: 600px;"/>
+
+If you set the option of `useRCall = TRUE` in `julia_setup()`,
+which is the default setting.
+You could integrate the use of R and julia even more!
+For example, the julia command `R"Rcommand"` will 
+evaluate "inline" R command,
+and you can go into R REPL mode in `julia_console()` by simply pressing
+`$`.
+
+## Parallel Computation in JuliaCall
+
+<img src="parallel.png" style="width: 600px;"/>
+
+Note that due to a issue in julia v0.6.0 <https://github.com/JuliaLang/julia/issues/14577>,
+it is not possible to do parallel computation using `JuliaCall`
+and julia v0.6.0, but the issue is already fixed,
+and the parallel functionality should work using
+`JuliaCall` and future release of julia.
