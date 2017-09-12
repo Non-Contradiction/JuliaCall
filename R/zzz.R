@@ -171,6 +171,6 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     .julia$initialized <- TRUE
 
-    julia
+    invisible(julia)
 }
 
