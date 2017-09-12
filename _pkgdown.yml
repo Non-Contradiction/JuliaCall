@@ -1,0 +1,44 @@
+url: https://non-contradiction.github.io/JuliaCall/
+
+template:
+  params:
+    bootswatch: cerulean
+
+reference:
+- title: All functions
+  desc: ~
+  contents:
+  - '`%>J%`'
+  - '`julia_assign`'
+  - '`julia_call`'
+  - '`julia_check`'
+  - '`julia_command`'
+  - '`julia_console`'
+  - '`julia_do.call`'
+  - '`julia_eval_string`'
+  - '`julia_exists`'
+  - '`julia_help`'
+  - '`julia_package`'
+  - '`julia_setup`'
+  - '`julia_source`'
+  - '`JuliaCall`'
+
+navbar:
+  title: JuliaCall
+  type: default
+  left:
+  - icon: fa-home fa-lg
+    href: /index.html
+  - text: Reference
+    href: reference/index.html
+  - text: Gallery
+    href: articles/Gallery.html
+  - text: Articles
+    menu:
+    - text: Gallery
+      href: articles/Gallery.html
+  - text: News
+    href: news/index.html
+  right:
+  - icon: fa-github fa-lg
+    href: https://github.com/Non-Contradiction/JuliaCall
