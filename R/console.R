@@ -37,5 +37,30 @@ julia_complete_console <- function(){
 
 julia_incomplete_console <- function(){
     message("It seems that you are not in the terminal. A simple julia console will be started.")
-    message("The simple julia console is not finished yet.")
+    message("Press ESC or CTRL+C to exit.")
+    on.exit(message("Exiting julia console."))
+    buffer <- character()
+
+    rc.options(custom.completer = function(env) {
+        env$comps <- julia_call("JuliaCall.completion", env$token)
+    })
+    on.exit({
+        rc.options(custom.completer = NULL)
+    }, add = TRUE)
+
+    repeat {
+        prompt <- ifelse(length(buffer), "       ", "julia> ")
+        if (nchar(line <- readline(prompt))) {
+            buffer <- paste(buffer, line)
+        }
+        if (identical(buffer, "exit"))
+            break
+        if (length(buffer) && (!julia_call("JuliaCall.incomplete", buffer) || !nchar(line))) {
+            tryCatch(julia_call("JuliaCall.eval_and_print", buffer, need_return = FALSE),
+                     error = function(e) {
+                         message(e$message)
+                     })
+            buffer <- character()
+        }
+    }
 }

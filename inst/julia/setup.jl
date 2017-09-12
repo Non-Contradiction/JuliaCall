@@ -13,6 +13,7 @@ using Suppressor
 end
 
 include("REPLhook.jl")
+include("incomplete_console.jl")
 
 function transfer_list(x)
     rcopy(RObject(Ptr{RCall.VecSxp}(x)))
