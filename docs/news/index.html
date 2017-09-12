@@ -108,6 +108,14 @@
 <a href="#juliacall-0-7-3" class="anchor"></a>JuliaCall 0.7.3</h1>
 <ul>
 <li>First release on CRAN.</li>
+<li>
+<code>julia_setup</code> for initial setup of <code>JuliaCall</code>.</li>
+<li>
+<code>julia_eval_string</code>, <code>julia_command</code> for executing commands in julia.</li>
+<li>
+<code>julia_do.call</code> and <code>julia_call</code> for calling functions in julia.</li>
+<li>Functions to deal with julia packages.</li>
+<li>Helper functions like <code>julia_help</code>.</li>
 </ul>
 </div>
     <div id="juliacall-0-7-4-9000" class="section level1">
@@ -118,9 +126,10 @@
 <li>Add helpful error messages in libjulia DLL load and compilation.</li>
 <li>Add <code>julia_assign</code> which can assign a value to a name in julia with automatic type conversion.</li>
 <li>Give the option to set path for julia.</li>
-<li>Deprecate <code><a href="../reference/julia_check.html">julia_check()</a></code>.</li>
-<li>Start working on <code>julia_console</code>. Now there is a fully functional julia repl in terminal.</li>
-<li>When <code><a href="../reference/julia_setup.html">julia_setup()</a></code>, there is an option whether or not to use RCall.jl, RCall’s R REPL mode and rgui will be set correctly.</li>
+<li>Deprecate <code>julia_check</code>.</li>
+<li>
+<code>julia_console</code>. Now there is a fully functional julia repl in R terminal, and a usable julia console when you use IDE for R.</li>
+<li>In <code>julia_setup</code>, there is an option whether or not to use RCall.jl, RCall’s R REPL mode and rgui will be set correctly.</li>
 </ul>
 </div>
     </div>
