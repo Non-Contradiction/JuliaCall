@@ -41,11 +41,11 @@ julia_incomplete_console <- function(){
     on.exit(message("Exiting julia console."))
     buffer <- character()
 
-    rc.options(custom.completer = function(env) {
+    utils::rc.options(custom.completer = function(env) {
         env$comps <- julia_call("JuliaCall.completion", env$token)
     })
     on.exit({
-        rc.options(custom.completer = NULL)
+        utils::rc.options(custom.completer = NULL)
     }, add = TRUE)
 
     repeat {

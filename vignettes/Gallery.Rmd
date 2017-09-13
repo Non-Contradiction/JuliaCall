@@ -29,7 +29,7 @@ and you can go into R REPL mode in `julia_console()` by simply pressing
 
 <img src="parallel.png" style="width: 600px;"/>
 
-Note that due to a issue in julia v0.6.0 <https://github.com/JuliaLang/julia/issues/14577>,
+Note that due to the issue 14577 in julia v0.6.0,
 it is not possible to do parallel computation using `JuliaCall`
 and julia v0.6.0, but the issue is already fixed,
 and the parallel functionality should work using
