@@ -73,6 +73,11 @@ build_script:
 #  - IF EXIST .git\shallow (git fetch --unshallow)
 #  - C:\projects\julia\bin\julia -e "versioninfo();
 #      Pkg.clone(pwd(), \"RCall\"); Pkg.build(\"RCall\")"
+
+# Not build vignettes
+- rm -rf vignettes
+- Rscript -e "d <- read.dcf('DESCRIPTION'); d[, colnames(d) == 'VignetteBuilder'] <- NA; write.dcf(d, 'DESCRIPTION')"
+
 - Rscript -e "sessionInfo()"
 - Rscript -e "install.packages(\"inline\", repos=\"http://cran.rstudio.com/\")"
 - Rscript -e "install.packages(\"testthat\", repos=\"http://cran.rstudio.com/\")"
