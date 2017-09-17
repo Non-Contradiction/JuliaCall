@@ -5,10 +5,10 @@ environment:
     R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.4.1-win.exe"
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
     R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.4.1-win.exe"
-  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.5/julia-0.5-latest-win64.exe"
-    R_URL: "https://cran.rstudio.com/bin/windows/base/R-devel-win.exe"
-  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
-    R_URL: "https://cran.rstudio.com/bin/windows/base/R-devel-win.exe"
+#  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.5/julia-0.5-latest-win64.exe"
+#    R_URL: "https://cran.rstudio.com/bin/windows/base/R-devel-win.exe"
+#  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
+#    R_URL: "https://cran.rstudio.com/bin/windows/base/R-devel-win.exe"
 
 notifications:
   - provider: Email
