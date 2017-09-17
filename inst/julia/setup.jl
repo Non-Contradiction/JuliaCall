@@ -12,6 +12,7 @@ using Suppressor
     using RCall
 end
 
+include("basic_display.jl")
 include("REPLhook.jl")
 include("incomplete_console.jl")
 
