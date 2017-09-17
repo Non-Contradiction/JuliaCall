@@ -32,6 +32,7 @@ julia_complete_console <- function(){
         ## then when we quit the console,
         ## RCall.rgui_stop() needs to be executed.
         julia_command("RCall.rgui_stop()")
+        julia_command("popdisplay()")
     }
 }
 
