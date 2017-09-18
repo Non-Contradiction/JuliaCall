@@ -105,7 +105,7 @@
     <p><code>julia_call</code> calls julia functions with automatic type conversion.</p>
     
 
-    <pre class="usage"><span class='fu'>julia_call</span>(<span class='no'>func_name</span>, <span class='no'>...</span>, <span class='kw'>need_return</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>julia_call</span>(<span class='no'>func_name</span>, <span class='no'>...</span>, <span class='kw'>need_return</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>show_value</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -116,11 +116,15 @@
     </tr>
     <tr>
       <th>...</th>
-      <td><p>the unnamed arguments you want to pass to the julia function.</p></td>
+      <td><p>the arguments you want to pass to the julia function.</p></td>
     </tr>
     <tr>
       <th>need_return</th>
       <td><p>whether you want the julia return value or not.</p></td>
+    </tr>
+    <tr>
+      <th>show_value</th>
+      <td><p>whether to display julia return value or not.</p></td>
     </tr>
     </table>
     

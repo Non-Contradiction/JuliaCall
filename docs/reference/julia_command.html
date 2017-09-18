@@ -108,7 +108,7 @@ If you need the result, maybe you could
 try <code>julia_eval_string</code>.</p>
     
 
-    <pre class="usage"><span class='fu'>julia_command</span>(<span class='no'>cmd</span>)</pre>
+    <pre class="usage"><span class='fu'>julia_command</span>(<span class='no'>cmd</span>, <span class='kw'>show_value</span> <span class='kw'>=</span> !<span class='fu'>endsWith</span>(<span class='no'>cmd</span>, <span class='st'>";"</span>))</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
@@ -116,6 +116,12 @@ try <code>julia_eval_string</code>.</p>
     <tr>
       <th>cmd</th>
       <td><p>the command string you want to evaluate in julia.</p></td>
+    </tr>
+    <tr>
+      <th>show_value</th>
+      <td><p>whether to display julia return value or not,
+the default value is `FALSE` if the `cmd` ends with semicolon
+and `TRUE` otherwise.</p></td>
     </tr>
     </table>
     
@@ -126,7 +132,7 @@ try <code>julia_eval_string</code>.</p>
  <span class='co'>## julia_setup is quite time consuming</span>
   <span class='no'>julia</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='julia_setup.html'>julia_setup</a></span>()
 
-  <span class='fu'>julia_command</span>(<span class='st'>"a = sqrt(2)"</span>)
+  <span class='fu'>julia_command</span>(<span class='st'>"a = sqrt(2);"</span>)
 <span class='co'># }</span><div class='input'>
 </div></pre>
   </div>
