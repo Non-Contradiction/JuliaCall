@@ -4,7 +4,7 @@
 \alias{julia_command}
 \title{Evaluate string commands in julia.}
 \usage{
-julia_command(cmd)
+julia_command(cmd, show_value = !endsWith(cmd, ";"))
 }
 \arguments{
 \item{cmd}{the command string you want to evaluate in julia.}
