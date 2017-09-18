@@ -4,7 +4,7 @@
 \alias{julia_call}
 \title{Call julia functions.}
 \usage{
-julia_call(func_name, ..., need_return = TRUE)
+julia_call(func_name, ..., need_return = TRUE, show_value = FALSE)
 }
 \arguments{
 \item{func_name}{the name of julia function you want to call.}
@@ -12,6 +12,8 @@ julia_call(func_name, ..., need_return = TRUE)
 \item{...}{the unnamed arguments you want to pass to the julia function.}
 
 \item{need_return}{whether you want the julia return value or not.}
+
+\item{show_value}{whether to display julia return value or not.}
 }
 \description{
 \code{julia_call} calls julia functions with automatic type conversion.

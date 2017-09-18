@@ -144,13 +144,13 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     if (verbose) message("Finish loading setup script for JuliaCall.")
 
     .julia$do.call_ <- .julia$compile(
-        sig = c(func_name = "character", arg = "list", need_return = "logical"),
+        sig = c(func_name = "character", arg = "list", option = "logical"),
         body = '
         jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall"));
         jl_value_t *func = jl_box_voidpointer(func_name);
         jl_value_t *arg1 = jl_box_voidpointer(arg);
-        jl_value_t *need_return1 = jl_box_voidpointer(need_return);
-        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call3(docall, func, arg1, need_return1)));
+        jl_value_t *option1 = jl_box_voidpointer(option);
+        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call3(docall, func, arg1, option1)));
         UNPROTECT(1);
         return out;'
         )

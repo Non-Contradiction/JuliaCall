@@ -8,6 +8,10 @@ julia_command(cmd)
 }
 \arguments{
 \item{cmd}{the command string you want to evaluate in julia.}
+
+\item{show_value}{whether to display julia return value or not,
+the default value is `FALSE` if the `cmd` ends with semicolon
+and `TRUE` otherwise.}
 }
 \description{
 \code{julia_command} evaluates string commands in julia
@@ -20,7 +24,7 @@ try \code{julia_eval_string}.
 \dontrun{ ## julia_setup is quite time consuming
   julia <- julia_setup()
 
-  julia_command("a = sqrt(2)")
+  julia_command("a = sqrt(2);")
 }
 
 }

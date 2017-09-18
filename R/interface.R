@@ -5,6 +5,7 @@
 #' @param func_name the name of julia function you want to call.
 #' @param arg_list the unnamed list of the arguments you want to pass to the julia function.
 #' @param need_return whether you want the julia to return value or not.
+#' @param show_value whether to display julia return value or not.
 #'
 #' @examples
 #'
@@ -15,7 +16,7 @@
 #' }
 #'
 #' @export
-julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TRUE){
+julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TRUE, show_value = FALSE){
     if (!(length(func_name) == 1 && is.character(func_name))) {
         stop("func_name should be a character scalar.")
     }
@@ -28,7 +29,12 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
     if (!(length(need_return) == 1 && is.logical(need_return))) {
         stop("need_return should be a logical scalar.")
     }
-    r <- .julia$do.call_(func_name, arg_list, need_return)
+    if (!(length(show_value) == 1 && is.logical(show_value))) {
+        stop("show_value should be a logical scalar.")
+    }
+    option <- c(need_return, show_value)
+    # print(option)
+    r <- .julia$do.call_(func_name, arg_list, option)
     if (inherits(r, "error")) stop(r)
     if (need_return) return(r)
     invisible(r)
@@ -41,6 +47,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
 #' @param func_name the name of julia function you want to call.
 #' @param ... the unnamed arguments you want to pass to the julia function.
 #' @param need_return whether you want the julia return value or not.
+#' @param show_value whether to display julia return value or not.
 #'
 #' @examples
 #'
@@ -51,8 +58,8 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
 #' }
 #'
 #' @export
-julia_call <- julia$call <- function(func_name, ..., need_return = TRUE)
-    julia$do.call(func_name, list(...), need_return)
+julia_call <- julia$call <- function(func_name, ..., need_return = TRUE, show_value = FALSE)
+    julia$do.call(func_name, list(...), need_return, show_value)
 
 #' Check whether a julia object with the given name exists or not.
 #'
@@ -102,18 +109,24 @@ julia_eval_string <- julia$eval_string <-
 #' try \code{julia_eval_string}.
 #'
 #' @param cmd the command string you want to evaluate in julia.
+#' @param show_value whether to display julia return value or not,
+#'   the default value is `FALSE` if the `cmd` ends with semicolon
+#'   and `TRUE` otherwise.
 #'
 #' @examples
 #'
 #' \dontrun{ ## julia_setup is quite time consuming
 #'   julia <- julia_setup()
 #'
-#'   julia_command("a = sqrt(2)")
+#'   julia_command("a = sqrt(2);")
 #' }
 #'
 #' @export
 julia_command <- julia$command <-
-    function(cmd) julia$call("JuliaCall.eval_string", cmd, need_return = FALSE)
+    function(cmd, show_value = !endsWith(cmd, ";"))
+        julia$call("JuliaCall.eval_string", cmd,
+                   need_return = FALSE,
+                   show_value = show_value)
 
 #' Source a julia source file.
 #'

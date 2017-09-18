@@ -53,13 +53,20 @@ function Rerror(fname, e, bt)
     rcall(:simpleError, s)
 end
 
-function docall(name, x, need_return1)
+function docall(name, x, option1)
     fname = transfer_string(name);
-    need_return = transfer_logical(need_return1);
+    option = transfer_logical(option1)
+    # print(option)
+    need_return = option[1];
+    show_value = option[2];
     try
         f = eval(Main, parse(fname));
         xx = transfer_list(x);
         r = f(xx...);
+        if show_value && r != nothing
+            display(r)
+            proceed(basic_display_manager)
+        end
         if need_return
             RObject(r).p;
         else

@@ -25,14 +25,14 @@ is_terminal <- function(){
 julia_complete_console <- function(){
     message("Preparing julia REPL, press Ctrl + D to quit julia REPL.")
     message("You could get more information in how to use julia REPL at <https://docs.julialang.org/en/stable/manual/interacting-with-julia/>")
-    julia_command("Base._start()")
+    julia_command("Base._start();")
 
     if (julia$useRCall) {
         ## in the hook RCall.rgui_start() will be executed,
         ## then when we quit the console,
         ## RCall.rgui_stop() needs to be executed.
-        julia_command("RCall.rgui_stop()")
-        julia_command("popdisplay()")
+        julia_command("RCall.rgui_stop();")
+        julia_command("popdisplay();")
     }
 }
 
@@ -57,7 +57,7 @@ julia_incomplete_console <- function(){
         if (identical(buffer, "exit"))
             break
         if (length(buffer) && (!julia_call("JuliaCall.incomplete", buffer) || !nchar(line))) {
-            tryCatch(julia_call("JuliaCall.eval_and_print", buffer, need_return = FALSE),
+            tryCatch(julia_command(buffer),
                      error = function(e) {
                          message(e$message)
                      })

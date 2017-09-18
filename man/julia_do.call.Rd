@@ -4,7 +4,7 @@
 \alias{julia_do.call}
 \title{\code{do.call} for julia.}
 \usage{
-julia_do.call(func_name, arg_list, need_return = TRUE)
+julia_do.call(func_name, arg_list, need_return = TRUE, show_value = FALSE)
 }
 \arguments{
 \item{func_name}{the name of julia function you want to call.}
@@ -12,6 +12,8 @@ julia_do.call(func_name, arg_list, need_return = TRUE)
 \item{arg_list}{the unnamed list of the arguments you want to pass to the julia function.}
 
 \item{need_return}{whether you want the julia to return value or not.}
+
+\item{show_value}{whether to display julia return value or not.}
 }
 \description{
 \code{julia_do.call} is the \code{do.call} for julia with automatic type conversion.
