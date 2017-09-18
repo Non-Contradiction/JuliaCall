@@ -18,3 +18,12 @@
   and a usable julia console when you use IDE for R.
 * In `julia_setup`, there is an option whether or not to use RCall.jl,
   RCall's R REPL mode and rgui will be set correctly.
+
+# JuliaCall 0.7.5.9000
+
+* Have a basic julia display system, now the plot functionality in Julia works (mostly).
+* `JuliaCall` is more consistent with julia.
+
+# JuliaCall 0.8.0.9000
+
+* `julia.do_call` and `julia_call` now accept key word arguments.
