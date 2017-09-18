@@ -144,13 +144,11 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     if (verbose) message("Finish loading setup script for JuliaCall.")
 
     .julia$do.call_ <- .julia$compile(
-        sig = c(func_name = "character", arg = "list", option = "logical"),
+        sig = c(jcall = "list"),
         body = '
         jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall"));
-        jl_value_t *func = jl_box_voidpointer(func_name);
-        jl_value_t *arg1 = jl_box_voidpointer(arg);
-        jl_value_t *option1 = jl_box_voidpointer(option);
-        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call3(docall, func, arg1, option1)));
+        jl_value_t *call = jl_box_voidpointer(jcall);
+        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call1(docall, call)));
         UNPROTECT(1);
         return out;'
         )
@@ -167,6 +165,10 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     if (useRCall) {
         julia$command("using RCall")
         julia$command("Base.atreplinit(JuliaCall.setup_repl)")
+    }
+
+    if (interactive()) {
+        julia_command("eval(Base, :(is_interactive = true));")
     }
 
     .julia$initialized <- TRUE

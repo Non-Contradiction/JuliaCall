@@ -23,18 +23,19 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
     if (!(is.list(arg_list))) {
         stop("arg_list should be the list of arguments.")
     }
-    if (!(is.null(names(arg_list)))) {
-        stop("JuliaCall currently doesn't accept named arguments, we are working on that.")
-    }
     if (!(length(need_return) == 1 && is.logical(need_return))) {
         stop("need_return should be a logical scalar.")
     }
     if (!(length(show_value) == 1 && is.logical(show_value))) {
         stop("show_value should be a logical scalar.")
     }
-    option <- c(need_return, show_value)
-    # print(option)
-    r <- .julia$do.call_(func_name, arg_list, option)
+    args <- separate_arguments(arglist = arg_list)
+    jcall <- list(fname = func_name,
+                  named_args = args$named,
+                  unamed_args = args$unamed,
+                  need_return = need_return,
+                  show_value = show_value)
+    r <- .julia$do.call_(jcall)
     if (inherits(r, "error")) stop(r)
     if (need_return) return(r)
     invisible(r)

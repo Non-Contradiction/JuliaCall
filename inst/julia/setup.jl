@@ -20,14 +20,6 @@ function transfer_list(x)
     rcopy(RObject(Ptr{RCall.VecSxp}(x)))
 end
 
-function transfer_string(x)
-    rcopy(RObject(Ptr{RCall.StrSxp}(x)))
-end
-
-function transfer_logical(x)
-    rcopy(RObject(Ptr{RCall.LglSxp}(x)))
-end
-
 function error_msg(e)
     m = IOBuffer()
     showerror(m, e)
@@ -53,16 +45,16 @@ function Rerror(fname, e, bt)
     rcall(:simpleError, s)
 end
 
-function docall(name, x, option1)
-    fname = transfer_string(name);
-    option = transfer_logical(option1)
-    # print(option)
-    need_return = option[1];
-    show_value = option[2];
+function docall(call1)
+    call = transfer_list(call1)
+    fname = call[:fname];
+    named_args = call[:named_args]
+    unamed_args = call[:unamed_args]
+    need_return = call[:need_return];
+    show_value = call[:show_value];
     try
         f = eval(Main, parse(fname));
-        xx = transfer_list(x);
-        r = f(xx...);
+        r = f(unamed_args...; named_args...);
         if show_value && r != nothing
             display(r)
             proceed(basic_display_manager)
