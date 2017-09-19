@@ -52,10 +52,10 @@ julia_incomplete_console <- function(){
     repeat {
         prompt <- ifelse(length(buffer), "       ", "julia> ")
         if (nchar(line <- readline(prompt))) {
+            ## print(line)
+            if (line %in% c("exit", "exit()", "q", "q()")) break
             buffer <- paste(buffer, line)
         }
-        if (identical(buffer, "exit"))
-            break
         if (length(buffer) && (!julia_call("JuliaCall.incomplete", buffer) || !nchar(line))) {
             tryCatch(julia_command(buffer),
                      error = function(e) {
