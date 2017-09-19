@@ -26,4 +26,5 @@
 
 # JuliaCall 0.8.0.9000
 
-* `julia.do_call` and `julia_call` now accept key word arguments.
+* `julia.do_call` and `julia_call` now accept keyword arguments.
+* `JuliaCall` works on Jupyter R notebook, next step is to get it work in R Markdown.
