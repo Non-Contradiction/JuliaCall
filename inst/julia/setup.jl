@@ -12,7 +12,8 @@ using Suppressor
     using RCall
 end
 
-include("basic_display.jl")
+include("./display/basic_display.jl")
+include("./display/IRjulia_display.jl")
 include("REPLhook.jl")
 include("incomplete_console.jl")
 
@@ -57,8 +58,8 @@ function docall(call1)
         r = f(unamed_args...; named_args...);
         if show_value && r != nothing
             display(r)
-            proceed(basic_display_manager)
         end
+        proceed(basic_display_manager)
         if need_return
             RObject(r).p;
         else

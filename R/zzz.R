@@ -171,6 +171,10 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
         julia_command("eval(Base, :(is_interactive = true));")
     }
 
+    if (getOption("jupyter.in_kernel")) {
+        julia_command("Base.pushdisplay(JuliaCall.irjulia_display);")
+    }
+
     .julia$initialized <- TRUE
 
     invisible(julia)
