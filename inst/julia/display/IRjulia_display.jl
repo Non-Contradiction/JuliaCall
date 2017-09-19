@@ -9,6 +9,7 @@ dict = Dict()
 dict["application/json"] = "IRdisplay::display_json"
 dict["application/javascript"] = "IRdisplay::display_javascript"
 dict["text/html"] = "IRdisplay::display_html"
+dict["text/plain"] = "IRdisplay::display_html"
 dict["text/markdown"] =  "IRdisplay::display_markdown"
 dict["text/latex"] = "IRdisplay::display_latex"
 dict["image/png"] = "function(x) IRdisplay::display_png(charToRaw(x))"
@@ -54,7 +55,7 @@ end
 
 function display(d::IRjuliaDisplay, p)
     for m in ["text/html", "image/png", "image/jpeg", "application/pdf", "image/svg+xml",
-        "text/markdown", "text/latex", "application/javascript"]
+        "text/markdown", "text/latex", "application/javascript", "text/plain"]
         try
             display(d,m, p)
             return
