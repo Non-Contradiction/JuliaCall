@@ -1,0 +1,30 @@
+---
+title: "JuliaCall in Jupyter R Notebook"
+author: "Changcheng Li"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<img src="notebook.png" style="width: 800px;"/>
+
+For the whole notebook, please go to
+<https://nbviewer.jupyter.org/gist/Non-Contradiction/0ee469895d828b98cfde5fa853f84434>.
+
+Here I generate a markdown file from the notebook and include
+it in this vignette.
+
+```{r, results='asis', echo=FALSE}
+ls <- readLines("JuliaCall_in_Jupyter_R_Notebook1.md")
+for (l in ls) {
+    cat(l)
+    cat("\n")
+}
+```
