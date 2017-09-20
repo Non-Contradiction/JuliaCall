@@ -37,6 +37,8 @@ navbar:
     menu:
     - text: Gallery
       href: articles/Gallery.html
+    - text: JuliaCall_in_Jupyter_R_Notebook
+      href: articles/JuliaCall_in_Jupyter_R_Notebook.html
   - text: News
     href: news/index.html
   right:

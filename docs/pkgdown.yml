@@ -3,4 +3,5 @@ urls:
   article: https://non-contradiction.github.io/JuliaCall//articles
 articles:
   Gallery: Gallery.html
+  JuliaCall_in_Jupyter_R_Notebook: JuliaCall_in_Jupyter_R_Notebook.html
 

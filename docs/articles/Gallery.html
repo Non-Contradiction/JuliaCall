@@ -50,6 +50,9 @@
 <li>
       <a href="../articles/Gallery.html">Gallery</a>
     </li>
+    <li>
+      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall_in_Jupyter_R_Notebook</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -78,7 +81,7 @@
       <h1>Gallery</h1>
                         <h4 class="author">Changcheng Li</h4>
             
-            <h4 class="date">2017-09-18</h4>
+            <h4 class="date">2017-09-19</h4>
           </div>
 
     
@@ -87,19 +90,25 @@
 <div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic Usage</h2>
-<p><img src="JuliaCall.png" style="width: 600px;"></p>
+<p><img src="JuliaCall.png" style="width: 800px;"></p>
 </div>
 <div id="use-rcall-jl-together-with-juliacall" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use-rcall-jl-together-with-juliacall" class="anchor"></a>Use RCall.jl together with JuliaCall</h2>
-<p><img src="RCall.png" style="width: 600px;"></p>
+<p><img src="RCall.png" style="width: 800px;"></p>
 <p>If you set the option of <code>useRCall = TRUE</code> in <code><a href="../reference/julia_setup.html">julia_setup()</a></code>, which is the default setting. You could integrate the use of R and julia even more! For example, the julia command <code>R"Rcommand"</code> will evaluate “inline” R command, and you can go into R REPL mode in <code><a href="../reference/julia_console.html">julia_console()</a></code> by simply pressing <code>$</code>.</p>
 </div>
 <div id="parallel-computation-in-juliacall" class="section level2">
 <h2 class="hasAnchor">
 <a href="#parallel-computation-in-juliacall" class="anchor"></a>Parallel Computation in JuliaCall</h2>
-<p><img src="parallel.png" style="width: 600px;"></p>
+<p><img src="parallel.png" style="width: 800px;"></p>
 <p>Note that due to the issue 14577 in julia v0.6.0, it is not possible to do parallel computation using <code>JuliaCall</code> and julia v0.6.0, but the issue is already fixed, and the parallel functionality should work using <code>JuliaCall</code> and future release of julia.</p>
+</div>
+<div id="juliacall-in-jupyter-r-notebook" class="section level2">
+<h2 class="hasAnchor">
+<a href="#juliacall-in-jupyter-r-notebook" class="anchor"></a>JuliaCall in Jupyter R Notebook</h2>
+<p>For the whole notebook, please go to <a href="https://nbviewer.jupyter.org/gist/Non-Contradiction/0ee469895d828b98cfde5fa853f84434" class="uri">https://nbviewer.jupyter.org/gist/Non-Contradiction/0ee469895d828b98cfde5fa853f84434</a>.</p>
+<p><img src="notebook.png" style="width: 800px;"></p>
 </div>
 </div>
   </div>
@@ -112,6 +121,7 @@
 <li><a href="#basic-usage">Basic Usage</a></li>
       <li><a href="#use-rcall-jl-together-with-juliacall">Use RCall.jl together with JuliaCall</a></li>
       <li><a href="#parallel-computation-in-juliacall">Parallel Computation in JuliaCall</a></li>
+      <li><a href="#juliacall-in-jupyter-r-notebook">JuliaCall in Jupyter R Notebook</a></li>
       </ul>
 </div>
       </div>
