@@ -27,4 +27,10 @@
 # JuliaCall 0.8.0.9000
 
 * `julia.do_call` and `julia_call` now accept keyword arguments.
-* `JuliaCall` works on Jupyter R notebook, next step is to get it work in R Markdown.
+* `JuliaCall` works in Jupyter R notebook.
+* `JuliaCall` works in R Markdown.
+  The display system currently **only work for html document**.
+  When there is no return from julia function and there is a need to display,
+  a div with class=‘JuliaDisplay’ will be inserted into the html document
+  with the corresponding content.
+* Next step I will try to make `JuliaCall` as an engine in R Markdown.
