@@ -1,0 +1,64 @@
+---
+title: "JuliaCall in R Markdown"
+author: "Changcheng Li"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_document
+---
+
+<style>
+.JuliaDisplay {
+    color: blue;
+}
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## How Does JuliaCall in R Markdown Look Like?
+
+```{r, cache=TRUE}
+library(JuliaCall)
+
+julia_setup()
+
+julia_command("sqrt(2)")
+
+julia_command("@doc sqrt")
+
+julia_library("Gadfly")
+
+julia_command("Gadfly.plot(y = [1 2 3])")
+
+julia_library("Plots")
+
+julia_command("pyplot()")
+
+julia_command("Plots.plot(Plots.fakedata(50,5),w=3)")
+
+julia_command("Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))")
+```
+
+## Limitations
+
+Currently only R Markdown html output is fully supported by
+`JuliaCall`, otherwise julia display like plots won't show in R Markdown document.
+
+## Custom Style of Julia Display in R Markdown Using CSS
+
+When using `JuliaCall` in R Markdown,
+everything that displayed by julia will be wrapped in 
+a div with `class = "JuliaDisplay"`,
+so you could customize the looking of julia display very easily using css,
+for example, I use
+
+```
+    <style>
+    .JuliaDisplay {
+        color: blue;
+    }
+    </style>
+```
+
+in this document.
