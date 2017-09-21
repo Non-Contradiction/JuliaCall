@@ -155,6 +155,9 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     julia$VERSION <- .julia$VERSION
 
+    ## Check whether we need to set up RmdDisplay
+    .julia$rmd <- check_rmd()
+
     ## useRCall will be used later in julia_console,
     ## because in the hook RCall.rgui_start() will be executed,
     ## then when we quit the console,
@@ -175,7 +178,6 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
         julia_command("Base.pushdisplay(JuliaCall.irjulia_display);")
     }
 
-    .julia$rmd <- check_rmd()
     if (.julia$rmd) {
         julia_command("Base.pushdisplay(JuliaCall.rmd_display);")
     }
