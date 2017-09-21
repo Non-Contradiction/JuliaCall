@@ -35,7 +35,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
                   unamed_args = args$unamed,
                   need_return = need_return,
                   show_value = show_value)
-    rmd <- !need_return && show_value && isTRUE(getOption("knitr.in.progress"))
+    rmd <- !need_return && show_value && .julia$rmd
     if (rmd) {
         return(rmd_capture(jcall))
     }

@@ -175,7 +175,8 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
         julia_command("Base.pushdisplay(JuliaCall.irjulia_display);")
     }
 
-    if (isTRUE(getOption("knitr.in.progress"))) {
+    .julia$rmd <- check_rmd()
+    if (.julia$rmd) {
         julia_command("Base.pushdisplay(JuliaCall.rmd_display);")
     }
 
