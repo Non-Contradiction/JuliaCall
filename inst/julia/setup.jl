@@ -15,6 +15,7 @@ end
 include("./display/basic_display.jl")
 include("./display/Rjulia_display.jl")
 include("./display/IRjulia_display.jl")
+include("./display/RmdJulia_display.jl")
 include("REPLhook.jl")
 include("incomplete_console.jl")
 
