@@ -33,4 +33,4 @@
   When there is no return from julia function and there is a need to display,
   a div with class=‘JuliaDisplay’ will be inserted into the html document
   with the corresponding content.
-* Next step I will try to make `JuliaCall` as an engine in R Markdown.
+* Julia engine in R Markdown through `JuliaCall`.
