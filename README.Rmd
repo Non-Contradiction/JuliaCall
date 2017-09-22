@@ -33,7 +33,49 @@ knitr::opts_chunk$set(
 )
 ```
 
-![](https://non-contradiction.github.io/JuliaCall/articles/JuliaCall.png)
+<script language="javascript">
+
+/*
+Random image slideshow- By Tyler Clarke (tyler@ihatecoffee.com)
+For this script and more, visit http://www.javascriptkit.com
+*/
+
+var delay=5000 //set delay in miliseconds
+var curindex=0
+
+var randomimages=new Array()
+
+	randomimages[0]="https://non-contradiction.github.io/JuliaCall/articles/JuliaCall.png"
+	randomimages[1]="https://non-contradiction.github.io/JuliaCall/articles/RCall.png"
+	randomimages[2]="https://non-contradiction.github.io/JuliaCall/articles/parallel.png"
+	randomimages[3]="https://non-contradiction.github.io/JuliaCall/articles/notebook.png"
+
+var preload=new Array()
+
+for (n=0;n<randomimages.length;n++)
+{
+	preload[n]=new Image()
+	preload[n].src=randomimages[n]
+}
+
+document.write('<img name="defaultimage" height="400px" src="'+randomimages[Math.floor(Math.random()*(randomimages.length))]+'">')
+
+function rotateimage()
+{
+
+if (curindex==(tempindex=Math.floor(Math.random()*(randomimages.length)))){
+curindex=curindex==0? 1 : curindex-1
+}
+else
+curindex=tempindex
+
+	document.images.defaultimage.src=randomimages[curindex]
+}
+
+setInterval("rotateimage()",delay)
+
+</script>
+
 
 ## Installation
 
