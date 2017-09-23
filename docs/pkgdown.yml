@@ -4,4 +4,5 @@ urls:
 articles:
   Gallery: Gallery.html
   JuliaCall_in_Jupyter_R_Notebook: JuliaCall_in_Jupyter_R_Notebook.html
+  JuliaCall_in_RMarkdown: JuliaCall_in_RMarkdown.html
 

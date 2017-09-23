@@ -76,6 +76,9 @@
     <li>
       <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall_in_Jupyter_R_Notebook</a>
     </li>
+    <li>
+      <a href="../articles/JuliaCall_in_RMarkdown.html">JuliaCall_in_RMarkdown</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -151,7 +154,10 @@
 <li>
 <code>julia.do_call</code> and <code>julia_call</code> now accept keyword arguments.</li>
 <li>
-<code>JuliaCall</code> works on Jupyter R notebook, next step is to get it work in R Markdown.</li>
+<code>JuliaCall</code> works in Jupyter R notebook.</li>
+<li>
+<code>JuliaCall</code> works in R Markdown. The display system currently <strong>only work for html document</strong>. When there is no return from julia function and there is a need to display, a div with class=‘JuliaDisplay’ will be inserted into the html document with the corresponding content.</li>
+<li>Julia engine in R Markdown through <code>JuliaCall</code>.</li>
 </ul>
 </div>
     </div>

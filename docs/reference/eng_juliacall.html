@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>License • JuliaCall</title>
+<title>Julia language engine in R Markdown — eng_juliacall • JuliaCall</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -20,9 +20,9 @@
 
 
 <!-- pkgdown -->
-<link href="pkgdown.css" rel="stylesheet">
-<script src="jquery.sticky-kit.min.js"></script>
-<script src="pkgdown.js"></script>
+<link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script>
+<script src="../pkgdown.js"></script>
   
   
 <!-- mathjax -->
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-license">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -47,21 +47,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">JuliaCall</a>
+      <a class="navbar-brand" href="../index.html">JuliaCall</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="/index.html">
+  <a href="..//index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="reference/index.html">Reference</a>
+  <a href="../reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="articles/Gallery.html">Gallery</a>
+  <a href="../articles/Gallery.html">Gallery</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -71,18 +71,18 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="articles/Gallery.html">Gallery</a>
+      <a href="../articles/Gallery.html">Gallery</a>
     </li>
     <li>
-      <a href="articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall_in_Jupyter_R_Notebook</a>
+      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall_in_Jupyter_R_Notebook</a>
     </li>
     <li>
-      <a href="articles/JuliaCall_in_RMarkdown.html">JuliaCall_in_RMarkdown</a>
+      <a href="../articles/JuliaCall_in_RMarkdown.html">JuliaCall_in_RMarkdown</a>
     </li>
   </ul>
 </li>
 <li>
-  <a href="news/index.html">News</a>
+  <a href="../news/index.html">News</a>
 </li>
       </ul>
       
@@ -102,19 +102,41 @@
       </header>
 
       <div class="row">
-  <div class="contents col-md-12">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>License</h1>
+    <h1>Julia language engine in R Markdown</h1>
     </div>
 
-<pre>YEAR: 2017
-COPYRIGHT HOLDER: Changcheng Li
-</pre>
+    
+    <p>Julia language engine in R Markdown</p>
+    
+
+    <pre class="usage"><span class='fu'>eng_juliacall</span>(<span class='no'>options</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>options</th>
+      <td><p>a list of chunk options</p></td>
+    </tr>
+    </table>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'>
+<span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/knitr/topics/knit_engines'>knit_engines</a></span>$<span class='fu'>set</span>(<span class='kw'>julia</span> <span class='kw'>=</span> <span class='kw pkg'>JuliaCall</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/JuliaCall/topics/eng_juliacall'>eng_juliacall</a></span>)</div></pre>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
-
 </div>
-
 
       <footer>
       <div class="copyright">

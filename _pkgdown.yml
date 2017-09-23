@@ -4,25 +4,6 @@ template:
   params:
     bootswatch: cerulean
 
-reference:
-- title: All functions
-  desc: ~
-  contents:
-  - '`%>J%`'
-  - '`julia_assign`'
-  - '`julia_call`'
-  - '`julia_check`'
-  - '`julia_command`'
-  - '`julia_console`'
-  - '`julia_do.call`'
-  - '`julia_eval_string`'
-  - '`julia_exists`'
-  - '`julia_help`'
-  - '`julia_package`'
-  - '`julia_setup`'
-  - '`julia_source`'
-  - '`JuliaCall`'
-
 navbar:
   title: JuliaCall
   type: default
@@ -39,6 +20,8 @@ navbar:
       href: articles/Gallery.html
     - text: JuliaCall_in_Jupyter_R_Notebook
       href: articles/JuliaCall_in_Jupyter_R_Notebook.html
+    - text: JuliaCall_in_RMarkdown
+      href: articles/JuliaCall_in_RMarkdown.html
   - text: News
     href: news/index.html
   right:
