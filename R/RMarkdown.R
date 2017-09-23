@@ -49,13 +49,13 @@ eng_juliacall <- function(options) {
         julia_setup()
     }
 
-    doc <- ""
+    doc <- character()
     buffer <- character()
     ss <- character()
 
     for (line in code) {
-        buffer <- paste(buffer, line, sep = "\n")
-        ss <- paste(ss, line, sep = "\n")
+        buffer <- paste(c(buffer, line), collapse = "\n")
+        ss <- paste(c(ss, line), collapse = "\n")
 
         if (length(buffer) && (!julia_call("JuliaCall.incomplete", buffer))) {
             out <- tryCatch(julia_command(buffer),
@@ -65,21 +65,23 @@ eng_juliacall <- function(options) {
             out <- as.character(out)
             if (options$results != 'hide' && length(out) > 0) {
                 if (length(options$echo) > 1L || options$echo) {
-                    doc <- paste(doc,
-                                 knitr::knit_hooks$get('source')(ss, options),
-                                 sep = "\n")
+                    doc <- paste(c(doc,
+                                   knitr::knit_hooks$get('source')(ss, options)
+                                   ),
+                                 collapse = "\n")
                     ss <- character()
                 }
-                doc <- paste(doc, as.character(out), sep = "\n")
+                doc <- paste(c(doc, out), collapse = "\n")
             }
             buffer <- character()
         }
     }
     if (length(ss) > 0) {
         if (length(options$echo) > 1L || options$echo) {
-            doc <- paste(doc,
-                         knitr::knit_hooks$get('source')(ss, options),
-                         sep = "\n")
+            doc <- paste(c(doc,
+                           knitr::knit_hooks$get('source')(ss, options)
+                           ),
+                         collapse = "\n")
             ss <- character()
         }
     }
