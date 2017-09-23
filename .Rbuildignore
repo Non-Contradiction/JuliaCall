@@ -9,3 +9,4 @@
 ^README_cache$
 ^_pkgdown\.yml$
 ^example$
+^\.gitattributes$
