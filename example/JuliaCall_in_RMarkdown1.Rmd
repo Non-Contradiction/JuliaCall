@@ -1,0 +1,93 @@
+---
+title: "Use JuliaCall as Julia Engine in R Markdown"
+author: "Changcheng Li"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_document
+---
+
+<style>
+.JuliaDisplay {
+    color: blue;
+}
+</style>
+
+## How?
+
+To use `JuliaCall` package for julia engine in R Markdown document.
+Just set the engine for julia to `JuliaCall::eng_juliacall` like this:
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::knit_engines$set(julia = JuliaCall::eng_juliacall)
+```
+
+And in the julia code chunk, just use 
+"```{julia}" or "```{r, engine='julia'}".
+
+Below is how it looks like when using `JuliaCall`
+as language engine for Julia. 
+
+## How Does JuliaCall in R Markdown Look Like?
+
+```{julia}
+## This is a julia language chunk.
+## In julia, the command without ending semicolon will trigger the display
+## so is JuliaCall package. 
+## The julia display will follow immediately after the corresponding command
+## just as the R code in R Markdown.
+a = sqrt(2)
+a = sqrt(2);
+
+## And lots of different types of display are supported in JuliaCall.
+## Like markdown and plots.
+@doc sqrt
+using Gadfly
+Gadfly.plot(y = [1 2 3])
+using Plots
+pyplot()
+Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
+```
+
+## Get Access to Julia in R Chunk
+
+And you can also get access to julia variables in R code chunk quite easily
+using `JuliaCall`, for example:
+```{r, cache=TRUE}
+## This is a R language chunk.
+## In the previous julia chunk, we define variable a, 
+## we can use functions in JuliaCall to get access to it.
+JuliaCall::julia_eval_string("a")
+
+## And you can also get access to Julia libraries and functions.
+JuliaCall::julia_library("Gadfly")
+JuliaCall::julia_call("Gadfly.plot", y = c(1:3), 
+                      need_return = FALSE, show_value = TRUE)
+JuliaCall::julia_library("Plots")
+JuliaCall::julia_command("pyplot()")
+JuliaCall::julia_command("Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))")
+```
+
+
+## Current Limitations
+
+Currently only R Markdown html output is fully supported by
+`JuliaCall`.
+
+## Custom Style of Julia Display in R Markdown Using CSS
+
+When using `JuliaCall` in R Markdown,
+every julia display will be wrapped in 
+a div with `class = "JuliaDisplay"`,
+so you could customize the looking of julia display using css,
+for example, I use
+
+```
+    <style>
+    .JuliaDisplay {
+        color: blue;
+    }
+    </style>
+```
+
+in this document.
