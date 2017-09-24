@@ -34,3 +34,9 @@
   a div with class=‘JuliaDisplay’ will be inserted into the html document
   with the corresponding content.
 * Julia engine in R Markdown through `JuliaCall`.
+
+# JuliaCall 0.9.0.9000
+
+* Try to convert julia tuple.
+* Add `JuliaObject`, which serves as a proxy in R for julia object,
+  which is the automatic conversion target when other choices are not possible.
