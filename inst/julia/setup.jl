@@ -18,6 +18,8 @@ include("./display/IRjulia_display.jl")
 include("./display/RmdJulia_display.jl")
 include("REPLhook.jl")
 include("incomplete_console.jl")
+include("convert.jl")
+include("JuliaObject.jl")
 
 function transfer_list(x)
     rcopy(RObject(Ptr{RCall.VecSxp}(x)))
