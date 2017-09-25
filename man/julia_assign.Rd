@@ -18,8 +18,6 @@ corresponding julia value automatically.}
 \examples{
 
 \dontrun{ ## julia_setup is quite time consuming
-  julia <- julia_setup()
-
   julia_assign("x", 2)
   julia_assign("rsqrt", sqrt)
 }

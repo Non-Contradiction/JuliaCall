@@ -10,8 +10,6 @@
 #' @examples
 #'
 #' \dontrun{ ## julia_setup is quite time consuming
-#'   julia <- julia_setup()
-#'
 #'   julia_do.call("sqrt", list(2))
 #' }
 #'
@@ -28,6 +26,11 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
     }
     if (!(length(show_value) == 1 && is.logical(show_value))) {
         stop("show_value should be a logical scalar.")
+    }
+    ## julia_setup() is not necessary,
+    ## unless you want to pass some arguments to it.
+    if (!.julia$initialized) {
+        julia_setup()
     }
     args <- separate_arguments(arglist = arg_list)
     jcall <- list(fname = func_name,
@@ -57,8 +60,6 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
 #' @examples
 #'
 #' \dontrun{ ## julia_setup is quite time consuming
-#'   julia <- julia_setup()
-#'
 #'   julia_call("sqrt", 2)
 #' }
 #'
@@ -75,8 +76,6 @@ julia_call <- julia$call <- function(func_name, ..., need_return = TRUE, show_va
 #' @examples
 #'
 #' \dontrun{ ## julia_setup is quite time consuming
-#'   julia <- julia_setup()
-#'
 #'   julia_exists("sqrt")
 #' }
 #'
@@ -97,8 +96,6 @@ julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", na
 #' @examples
 #'
 #' \dontrun{ ## julia_setup is quite time consuming
-#'   julia <- julia_setup()
-#'
 #'   julia_eval_string("sqrt(2)")
 #' }
 #'
@@ -121,8 +118,6 @@ julia_eval_string <- julia$eval_string <-
 #' @examples
 #'
 #' \dontrun{ ## julia_setup is quite time consuming
-#'   julia <- julia_setup()
-#'
 #'   julia_command("a = sqrt(2);")
 #' }
 #'
@@ -152,8 +147,6 @@ julia_source <- julia$source <-
 #' @examples
 #'
 #' \dontrun{ ## julia_setup is quite time consuming
-#'   julia <- julia_setup()
-#'
 #'   julia_help("sqrt")
 #' }
 #'
@@ -173,8 +166,6 @@ julia_help <- julia$help <- function(fname){
 #' @examples
 #'
 #' \dontrun{ ## julia_setup is quite time consuming
-#'   julia <- julia_setup()
-#'
 #'   julia_assign("x", 2)
 #'   julia_assign("rsqrt", sqrt)
 #' }

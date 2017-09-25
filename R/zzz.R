@@ -22,7 +22,7 @@
 #' }
 #'
 #' @export
-julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCall = TRUE) {
+julia_setup <- function(JULIA_HOME = NULL, verbose = FALSE, force = FALSE, useRCall = TRUE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
@@ -165,6 +165,8 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     julia$useRCall <- useRCall
 
+    .julia$initialized <- TRUE
+
     if (useRCall) {
         julia$command("using RCall")
         julia$command("Base.atreplinit(JuliaCall.setup_repl)")
@@ -181,8 +183,6 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     if (.julia$rmd) {
         julia_command("Base.pushdisplay(JuliaCall.rmd_display);")
     }
-
-    .julia$initialized <- TRUE
 
     invisible(julia)
 }

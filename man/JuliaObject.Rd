@@ -20,8 +20,6 @@ which contains a reference to the corresponding julia object.
 \examples{
 
 \dontrun{ ## julia_setup is quite time consuming
-  julia <- julia_setup()
-
   a <- JuliaObject(1)
 }
 

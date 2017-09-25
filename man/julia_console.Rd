@@ -11,7 +11,6 @@ Open julia console.
 }
 \examples{
 \dontrun{ ## julia_setup is quite time consuming
-  julia <- julia_setup()
   julia_console()
 }
 

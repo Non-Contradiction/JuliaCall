@@ -22,8 +22,6 @@ try \code{julia_eval_string}.
 \examples{
 
 \dontrun{ ## julia_setup is quite time consuming
-  julia <- julia_setup()
-
   julia_command("a = sqrt(2);")
 }
 

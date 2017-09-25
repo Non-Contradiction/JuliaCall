@@ -21,8 +21,6 @@ julia_do.call(func_name, arg_list, need_return = TRUE, show_value = FALSE)
 \examples{
 
 \dontrun{ ## julia_setup is quite time consuming
-  julia <- julia_setup()
-
   julia_do.call("sqrt", list(2))
 }
 

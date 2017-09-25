@@ -40,3 +40,5 @@
 * Try to convert julia tuple.
 * Add `JuliaObject`, which serves as a proxy in R for julia object,
   which is the automatic conversion target when other choices are not possible.
+* `julia_setup()` doesn't need to be called first unless you want to force
+  julia to restart or you need to set the julia path.

@@ -4,7 +4,7 @@
 \alias{julia_setup}
 \title{Do initial setup for the JuliaCall package.}
 \usage{
-julia_setup(JULIA_HOME = NULL, verbose = TRUE, force = FALSE,
+julia_setup(JULIA_HOME = NULL, verbose = FALSE, force = FALSE,
   useRCall = TRUE)
 }
 \arguments{
