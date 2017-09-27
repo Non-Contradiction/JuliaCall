@@ -25,15 +25,22 @@ julia_locate <- function(JULIA_HOME = NULL){
         ## You may need to do bash -l -c "which julia" to determine the path to julia.
         ## This fixes the issue that in macOS, R.app GUI cannot find julia.
         ## Thank @randy3k
-        tryCatch(ifelse(.Platform$OS.type == "unix",
-                        dirname(system("bash -l -c \"which julia\"", intern = TRUE)),
-                        system("julia -E \"println(JULIA_HOME)\"", intern = TRUE)[1]),
-                 warning = function(war){},
+        julia_bin <- Sys.which("julia")
+        if (julia_bin == "") {
+            if (.Platform$OS.type == "unix") {
+                julia_bin <- system2("bash", "-l -c 'which julia'", stdout = TRUE)[1]
+            } else {
+                julia_bin <- "julia"
+            }
+        }
+        tryCatch(system2(julia_bin, "-E \"println(JULIA_HOME)\"", stdout = TRUE),
+                 warning = function(war) {},
                  error = function(err) NULL)
     }
     else {
-        tryCatch(system(paste0(file.path(JULIA_HOME, "julia"), " -E \"println(JULIA_HOME)\""), intern = TRUE)[1],
-                 warning = function(war){},
+        tryCatch(system2(file.path(JULIA_HOME, "julia"),
+                         "-E \"println(JULIA_HOME)\"", stdout = TRUE),
+                 warning = function(war) {},
                  error = function(err) NULL)
     }
 }
