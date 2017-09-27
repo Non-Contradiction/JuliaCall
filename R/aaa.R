@@ -33,13 +33,13 @@ julia_locate <- function(JULIA_HOME = NULL){
                 julia_bin <- "julia"
             }
         }
-        tryCatch(system2(julia_bin, "-E \"println(JULIA_HOME)\"", stdout = TRUE),
+        tryCatch(system2(julia_bin, "-E \"println(JULIA_HOME);\"", stdout = TRUE)[1],
                  warning = function(war) {},
                  error = function(err) NULL)
     }
     else {
         tryCatch(system2(file.path(JULIA_HOME, "julia"),
-                         "-E \"println(JULIA_HOME)\"", stdout = TRUE),
+                         "-E \"println(JULIA_HOME);\"", stdout = TRUE)[1],
                  warning = function(war) {},
                  error = function(err) NULL)
     }
