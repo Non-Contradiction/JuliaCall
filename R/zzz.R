@@ -22,7 +22,7 @@
 #' }
 #'
 #' @export
-julia_setup <- function(JULIA_HOME = NULL, verbose = FALSE, force = FALSE, useRCall = TRUE) {
+julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCall = TRUE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
