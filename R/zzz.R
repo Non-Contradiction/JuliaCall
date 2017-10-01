@@ -40,11 +40,14 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     if (verbose) message(paste0("Julia at location ", JULIA_HOME, " will be used."))
 
-    ## Thanks to randy3k for pointing this out,
+    julia_line("-e \"pkg = string(:RCall); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using Suppressor\"",
+               stderr = FALSE)
+
+    ## Thank to randy3k for pointing this out,
     ## `RCall` needs to be precompiled with the current R.
 
-    julia_line(paste(system.file("julia/RCallprepare.jl", package = "JuliaCall"), R.home()),
-               stderr = FALSE)
+    ## julia_line(paste(system.file("julia/RCallprepare.jl", package = "JuliaCall"), R.home()),
+    ##            stderr = FALSE)
 
     julia_line("-e \"pkg = string(:Suppressor); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using Suppressor\"",
            stderr = FALSE)
