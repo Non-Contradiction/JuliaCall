@@ -41,20 +41,20 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     if (verbose) message(paste0("Julia at location ", JULIA_HOME, " will be used."))
 
     julia_line("-e \"pkg = string(:RCall); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using RCall\"",
-           ignore.stderr = TRUE)
+           stderr = FALSE)
 
     julia_line("-e \"pkg = string(:Suppressor); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using Suppressor\"",
-           ignore.stderr = TRUE)
+           stderr = FALSE)
 
     .julia$config <- file.path(dirname(.julia$bin_dir), "share", "julia", "julia-config.jl")
-    .julia$cppargs <- julia_line(paste0(.julia$config, " --cflags"), intern = TRUE)
+    .julia$cppargs <- julia_line(paste0(.julia$config, " --cflags"), stdout = TRUE)
     .julia$cppargs <- paste0(.julia$cppargs, " -fpermissive")
     .julia$cppargs <- sub("-std=gnu99", "", .julia$cppargs)
-    .julia$libargs <- julia_line(paste0(.julia$config, " --ldflags"), intern = TRUE)
+    .julia$libargs <- julia_line(paste0(.julia$config, " --ldflags"), stdout = TRUE)
     .julia$libargs <- paste(.julia$libargs,
-                            julia_line(paste0(.julia$config, " --ldlibs"), intern = TRUE))
+                            julia_line(paste0(.julia$config, " --ldlibs"), stdout = TRUE))
 
-    .julia$dll_file <- julia_line("-E \"println(Libdl.dllist()[1])\"", intern = TRUE)[1]
+    .julia$dll_file <- julia_line("-E \"println(Libdl.dllist()[1])\"", stdout = TRUE)[1]
 
     .julia$dll <- withCallingHandlers(dyn.load(.julia$dll_file, FALSE, TRUE),
                                       error = function(e){
@@ -88,7 +88,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
             })
     }
 
-    .julia$VERSION <- julia_line("-E \"println(VERSION)\"", intern = TRUE)[1]
+    .julia$VERSION <- julia_line("-E \"println(VERSION)\"", stdout = TRUE)[1]
 
     if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
 
