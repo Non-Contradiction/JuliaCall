@@ -99,6 +99,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
 
     if (!newer(.julia$VERSION, "0.6.0")) {
+        ## message("Before 0.6.0")
         .julia$init_ <- .julia$compile(
             sig = c(dir = "character"),
             body = "jl_init(CHAR(STRING_ELT(dir, 0))); return R_NilValue;"
@@ -106,7 +107,8 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
         .julia$init <- function() .julia$init_(.julia$bin_dir)
     }
-    if (newer(.julia$VERSION, "0.6.0")) {
+    else {
+        ## message("After 0.6.0")
         .julia$init <- .julia$compile(
             sig = c(),
             body = "jl_init(); return R_NilValue;"
@@ -145,7 +147,14 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     if (verbose) message("Loading setup script for JuliaCall...")
 
-    .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
+    if (!newer(.julia$VERSION, "0.7.0")) {
+        ## message("Before 0.7.0")
+        .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
+    }
+    else {
+        ## message("After 0.7.0")
+        .julia$cmd(paste0('Base.include(Main,"', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
+    }
 
     if (verbose) message("Finish loading setup script for JuliaCall.")
 
