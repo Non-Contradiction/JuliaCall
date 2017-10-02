@@ -54,4 +54,8 @@ julia_line <- function(command, ...){
     system2(file.path(.julia$bin_dir, "julia"), command, ...)
 }
 
-newer <- function(x, y) utils::compareVersion(x, y) >= 0
+newer <- function(x, y){
+    x <- substring(x, 1, 5)
+    y <- substring(y, 1, 5)
+    utils::compareVersion(x, y) >= 0
+    }
