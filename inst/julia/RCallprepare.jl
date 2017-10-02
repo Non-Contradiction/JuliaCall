@@ -3,9 +3,9 @@
 ## <https://github.com/Non-Contradiction/JuliaCall/issues/9>
 ## as well as coming up with the solution
 
-check_args(ARGS)
-
 Rhome = ARGS[1]
+
+## println(Rhome)
 
 ENV["R_HOME"] = Rhome
 
