@@ -18,3 +18,19 @@
 JuliaObject <- function(x){
     julia_call("JuliaCall.JuliaObject", x)
 }
+
+#' Print Julia Object.
+#'
+#' \code{print.JuliaObject} is the method of the generic print function
+#' for JuliaObject.
+#'
+#' @param x the Julia object you want to print.
+#' @param ... further arguments to be passed to or from other methods.
+#'   They are ignored in this function.
+#'
+#' @export
+print.JuliaObject <- function(x, ...){
+    cat(paste0("Julia Object of type ", julia_call("JuliaCall.str_typeof", x), ".\n"))
+    julia_call("show", x, need_return = FALSE)
+    invisible(x)
+}
