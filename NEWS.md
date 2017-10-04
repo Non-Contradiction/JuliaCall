@@ -42,3 +42,11 @@
   which is the automatic conversion target when other choices are not possible.
 * `julia_setup()` doesn't need to be called first unless you want to force
   julia to restart or you need to set the julia path.
+
+# JuliaCall 0.9.1.9000
+
+* Improve `JuliaObject`, same Julia object could enter julia_object_dict only once.
+  And the display of `JuliaObject` becomes better.
+  Also every common types of Julia Object could be wrapped by `JuliaObject`.
+  The next step is to give users the choice to pass back Julia Object wrapped by
+  `JuliaObject` to R.
