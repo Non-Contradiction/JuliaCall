@@ -94,4 +94,8 @@ function assign(name, x)
     eval(Main, Expr(:(=), Symbol(name), x))
 end
 
+function str_typeof(x)
+    string(typeof(x))
+end
+
 end
