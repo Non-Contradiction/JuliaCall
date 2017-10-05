@@ -46,7 +46,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
     ## julia_setup() is not necessary,
     ## unless you want to pass some arguments to it.
     if (!.julia$initialized) {
-        julia_setup(verbose = FALSE)
+        julia_setup()
     }
     args <- separate_arguments(arglist = arg_list)
     jcall <- list(fname = func_name,
