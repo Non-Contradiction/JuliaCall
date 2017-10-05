@@ -21,15 +21,21 @@ NULL
 
 #' @rdname call
 #' @export
-julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TRUE, show_value = FALSE){
+julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c("R", "Julia", "None"), show_value = FALSE){
     if (!(length(func_name) == 1 && is.character(func_name))) {
         stop("func_name should be a character scalar.")
     }
     if (!(is.list(arg_list))) {
         stop("arg_list should be the list of arguments.")
     }
-    if (!(length(need_return) == 1 && is.logical(need_return))) {
-        stop("need_return should be a logical scalar.")
+    if (identical(need_return, TRUE)) {
+        need_return <- "R"
+    }
+    if (identical(need_return, FALSE)) {
+        need_return <- "None"
+    }
+    else {
+        need_return <- match.arg(need_return, c("R", "Julia", "None"))
     }
     if (!(length(show_value) == 1 && is.logical(show_value))) {
         stop("show_value should be a logical scalar.")
@@ -45,19 +51,19 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = TR
                   unamed_args = args$unamed,
                   need_return = need_return,
                   show_value = show_value)
-    rmd <- !need_return && show_value && .julia$rmd
+    rmd <- identical(need_return, "None") && show_value && .julia$rmd
     if (rmd) {
         return(rmd_capture(jcall))
     }
     r <- .julia$do.call_(jcall)
     if (inherits(r, "error")) stop(r)
-    if (need_return) return(r)
+    if (!identical(need_return, "None")) return(r)
     invisible(r)
 }
 
 #' @rdname call
 #' @export
-julia_call <- julia$call <- function(func_name, ..., need_return = TRUE, show_value = FALSE)
+julia_call <- julia$call <- function(func_name, ..., need_return = c("R", "Julia", "None"), show_value = FALSE)
     julia$do.call(func_name, list(...), need_return, show_value)
 
 #' Check whether a julia object with the given name exists or not.

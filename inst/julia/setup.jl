@@ -64,8 +64,10 @@ function docall(call1)
             display(r)
         end
         proceed(basic_display_manager)
-        if need_return
+        if need_return == "R"
             RObject(r).p;
+        elseif need_return == "Julia"
+            RObject(JuliaObject(r)).p
         else
             RObject(nothing).p;
         end;
