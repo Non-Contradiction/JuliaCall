@@ -185,8 +185,6 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     if (useRCall) {
         julia$command("using RCall")
         julia$command("Base.atreplinit(JuliaCall.setup_repl)")
-        ## define a macro R2J
-        julia_command("macro R2J_str(script) rcopy(reval(script)) end;")
     }
 
     if (interactive()) {
