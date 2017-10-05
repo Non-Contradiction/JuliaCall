@@ -6,7 +6,10 @@
 #' @param func_name the name of julia function you want to call.
 #' @param arg_list the list of the arguments you want to pass to the julia function.
 #' @param ... the arguments you want to pass to the julia function.
-#' @param need_return whether you want julia to return value or not.
+#' @param need_return whether you want julia to return value as an R object,
+#'   a wrapper for julia object or no return.
+#'   The value of need_return could be TRUE (equal to option "R") or FALSE (equal to option "None"),
+#'   or one of the options "R", "Julia" and "None".
 #' @param show_value whether to display julia return value or not.
 #'
 #' @examples
