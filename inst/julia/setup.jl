@@ -58,8 +58,14 @@ function docall(call1)
     need_return = call[:need_return];
     show_value = call[:show_value];
     try
-        f = eval(Main, parse(fname));
-        r = f(unamed_args...; named_args...);
+        if endswith(fname, ".")
+            fname = chop(fname);
+            f = eval(Main, parse(fname));
+            r = f.(unamed_args...; named_args...);
+        else
+            f = eval(Main, parse(fname));
+            r = f(unamed_args...; named_args...);
+        end
         if show_value && r != nothing
             display(r)
         end
@@ -98,6 +104,4 @@ end
 
 function str_typeof(x)
     string(typeof(x))
-end
-
 end
