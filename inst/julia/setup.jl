@@ -105,3 +105,5 @@ end
 function str_typeof(x)
     string(typeof(x))
 end
+
+end
