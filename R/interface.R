@@ -86,7 +86,7 @@ julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", na
 
 #' Evaluate string commands in julia and get the result.
 #'
-#' \code{julia_eval_string} evaluates string commands in julia and
+#' \code{julia_eval} evaluates string commands in julia and
 #' returns the result (automatically converted to an R object).
 #' If you don't need the result, maybe you could
 #' try \code{julia_command}.
@@ -98,11 +98,11 @@ julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", na
 #' @examples
 #'
 #' \dontrun{ ## julia_setup is quite time consuming
-#'   julia_eval_string("sqrt(2)")
+#'   julia_eval("sqrt(2)")
 #' }
 #'
 #' @export
-julia_eval_string <- julia$eval_string <-
+julia_eval <- julia$eval <-
     function(cmd) julia$call("JuliaCall.eval_string", cmd)
 
 #' Evaluate string commands in julia.
