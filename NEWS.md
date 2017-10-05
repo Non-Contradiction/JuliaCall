@@ -48,5 +48,7 @@
 * Improve `JuliaObject`, same Julia object could enter julia_object_dict only once.
   And the display of `JuliaObject` becomes better.
   Also every common types of Julia Object could be wrapped by `JuliaObject`.
-  The next step is to give users the choice to pass back Julia Object wrapped by
-  `JuliaObject` to R.
+* The users could now choose to have `JuliaObject` type return value instead of
+  R Object.
+* Dot notation in julia is now accepted through the `julia_call` interface.
+* `julia_eval_string` is deprecated in favor of `julia_eval`.
