@@ -170,6 +170,17 @@
 <code><a href="../reference/julia_setup.html">julia_setup()</a></code> doesn’t need to be called first unless you want to force julia to restart or you need to set the julia path.</li>
 </ul>
 </div>
+    <div id="juliacall-0-9-1-9000" class="section level1">
+<h1 class="hasAnchor">
+<a href="#juliacall-0-9-1-9000" class="anchor"></a>JuliaCall 0.9.1.9000</h1>
+<ul>
+<li>Improve <code>JuliaObject</code>, same Julia object could enter julia_object_dict only once. And the display of <code>JuliaObject</code> becomes better. Also every common types of Julia Object could be wrapped by <code>JuliaObject</code>.</li>
+<li>The users could now choose to have <code>JuliaObject</code> type return value instead of R Object.</li>
+<li>Dot notation in julia is now accepted through the <code>julia_call</code> interface.</li>
+<li>
+<code>julia_eval_string</code> is deprecated in favor of <code>julia_eval</code>.</li>
+</ul>
+</div>
     </div>
   </div>
 
@@ -182,6 +193,7 @@
         <li><a href="#juliacall-0-7-5-9000">0.7.5.9000</a></li>
         <li><a href="#juliacall-0-8-0-9000">0.8.0.9000</a></li>
         <li><a href="#juliacall-0-9-0-9000">0.9.0.9000</a></li>
+        <li><a href="#juliacall-0-9-1-9000">0.9.1.9000</a></li>
       </ul>
     </div>
   </div>

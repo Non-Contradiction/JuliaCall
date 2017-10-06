@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>JuliaCall: Seamless Integration Between R and Julia. — JuliaCall • JuliaCall</title>
+<title>Print Julia Object. — print.JuliaObject • JuliaCall</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -104,72 +104,38 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>JuliaCall: Seamless Integration Between R and Julia.</h1>
+    <h1>Print Julia Object.</h1>
     </div>
 
     
-    <p>JuliaCall provides you with functions to call Julia functions and
-to use Julia packages as easy as possible.</p>
+    <p><code>print.JuliaObject</code> is the method of the generic print function
+for JuliaObject.</p>
     
 
-        
+    <pre class="usage"><span class='co'># S3 method for JuliaObject</span>
+<span class='fu'>print</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>x</th>
+      <td><p>the Julia object you want to print.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>further arguments to be passed to or from other methods.
+They are ignored in this function.</p></td>
+    </tr>
+    </table>
+    
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-</div><span class='co'># NOT RUN {</span>
- <span class='co'>## The examples are quite time consuming</span>
-
-  <span class='co'>## Do initiation for JuliaCall</span>
-
-  <span class='no'>julia</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='julia_setup.html'>julia_setup</a></span>()
-
-  <span class='co'>## Different ways for calculating `sqrt(2)`</span>
-
-  <span class='co'># julia$command("a = sqrt(2)"); julia$eval_string("a")</span>
-  <span class='fu'><a href='julia_command.html'>julia_command</a></span>(<span class='st'>"a = sqrt(2)"</span>); <span class='fu'><a href='julia_eval_string.html'>julia_eval_string</a></span>(<span class='st'>"a"</span>)
-
-  <span class='co'># julia$eval_string("sqrt(2)")</span>
-  <span class='fu'><a href='julia_eval_string.html'>julia_eval_string</a></span>(<span class='st'>"sqrt(2)"</span>)
-
-  <span class='co'># julia$call("sqrt", 2)</span>
-  <span class='fu'><a href='call.html'>julia_call</a></span>(<span class='st'>"sqrt"</span>, <span class='fl'>2</span>)
-
-  <span class='co'># julia$eval_string("sqrt")(2)</span>
-  <span class='fu'><a href='julia_eval_string.html'>julia_eval_string</a></span>(<span class='st'>"sqrt"</span>)(<span class='fl'>2</span>)
-
-  <span class='co'>## You can use `julia_exists` as `exists` in R to test</span>
-  <span class='co'>## whether a function or name exists in Julia or not</span>
-
-  <span class='co'># julia$exists("sqrt")</span>
-  <span class='fu'><a href='julia_exists.html'>julia_exists</a></span>(<span class='st'>"sqrt"</span>)
-
-  <span class='co'>## You can use `julia$help` to get help for Julia functions</span>
-
-  <span class='co'># julia$help("sqrt")</span>
-  <span class='fu'><a href='julia_help.html'>julia_help</a></span>(<span class='st'>"sqrt"</span>)
-
-  <span class='co'>## You can install and use Julia packages through JuliaCall</span>
-
-  <span class='co'># julia$install_package("Optim")</span>
-  <span class='fu'><a href='julia_package.html'>julia_install_package</a></span>(<span class='st'>"Optim"</span>)
-
-  <span class='co'># julia$install_package_if_needed("Optim")</span>
-  <span class='fu'><a href='julia_package.html'>julia_install_package_if_needed</a></span>(<span class='st'>"Optim"</span>)
-
-  <span class='co'># julia$installed_package("Optim")</span>
-  <span class='fu'><a href='julia_package.html'>julia_installed_package</a></span>(<span class='st'>"Optim"</span>)
-
-  <span class='co'># julia$library("Optim")</span>
-  <span class='fu'><a href='julia_package.html'>julia_library</a></span>(<span class='st'>"Optim"</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+      <li><a href="#arguments">Arguments</a></li>
+                </ul>
 
   </div>
 </div>
