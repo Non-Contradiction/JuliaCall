@@ -1,0 +1,5 @@
+# julia_setup()
+# julia_command("pushdisplay(JuliaCall.png_display);")
+# julia_library("Plots")
+# julia_command("pyplot()")
+# julia_command("Plots.plot([1 2], [3 4])")
