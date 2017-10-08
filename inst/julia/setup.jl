@@ -12,11 +12,11 @@ using Suppressor
     using RCall
 end
 
-include("./display/basic_display.jl")
-include("./display/Rjulia_display.jl")
-include("./display/IRjulia_display.jl")
-include("./display/RmdJulia_display.jl")
-include("./display/png_display.jl")
+include("./display/basic.jl")
+include("./display/Rjulia.jl")
+include("./display/IRjulia.jl")
+include("./display/RmdJulia.jl")
+include("./display/plots.jl")
 include("REPLhook.jl")
 include("incomplete_console.jl")
 include("convert.jl")
