@@ -52,3 +52,7 @@
   R Object.
 * Dot notation in julia is now accepted through the `julia_call` interface.
 * `julia_eval_string` is deprecated in favor of `julia_eval`.
+
+# JuliaCall 0.9.2.9000
+
+* New Julia display system `plotsViewer()`, which integrates better into R.
