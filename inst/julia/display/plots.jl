@@ -39,7 +39,7 @@ function svgwrite(x, filename)
     content = limitstringmime(MIME("image/svg+xml"), x)
     js = joinpath(".", "library", "plotly-latest.min.js")
     script = "<script src=\"" * js * "\"></script>"
-    content = replace(content, r"<script.*</script>", script)
+    content = replace(content, r"<script.*plotly.*</script>", script)
     write(filename, content)
 end
 
