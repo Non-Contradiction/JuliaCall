@@ -13,3 +13,8 @@ julia_command("Plots.plot([1 2], [3 6])")
 
 julia_command("gr()")
 julia_command("Plots.plot([1 2], [3 7])")
+
+## This currently doesn't work because of Julia issue 14577
+## https://github.com/JuliaLang/julia/issues/14577
+## julia_command("pgfplots()")
+## julia_command("Plots.plot([1 2], [3 7])")
