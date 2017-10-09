@@ -199,6 +199,9 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
         julia_command("Base.pushdisplay(JuliaCall.rmd_display);")
     }
 
+    ## a dirty fix for Plots GR backend
+    julia_command('ENV["GKSwstype"]="pdf";')
+
     invisible(julia)
 }
 
