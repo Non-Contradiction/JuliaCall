@@ -201,6 +201,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     ## a dirty fix for Plots GR backend
     julia_command('ENV["GKSwstype"]="pdf";')
+    julia_command('ENV["GKS_FILEPATH"] = tempdir();')
 
     invisible(julia)
 }
