@@ -16,10 +16,7 @@ svg <- function(){
 }
 
 png <- function(){
-    if (requireNamespace("png", quietly = TRUE) &&
-        requireNamespace("grid", quietly = TRUE)) {
-        julia_command("pushdisplay(JuliaCall.png_display);")
-    }
+    julia_command("pushdisplay(JuliaCall.png_display);")
 }
 
 
