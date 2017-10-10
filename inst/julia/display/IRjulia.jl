@@ -9,6 +9,6 @@ irjulia_dict["text/latex"] = "IRdisplay::display_latex"
 irjulia_dict["image/png"] = "function(x) IRdisplay::display_png(charToRaw(x))"
 irjulia_dict["image/jpeg"] = "function(x) IRdisplay::display_jpeg(charToRaw(x))"
 irjulia_dict["application/pdf"] = "function(x) IRdisplay::display_pdf(charToRaw(x))"
-irjulia_dict["image/svg+xml"] = "function(x) IRdisplay::display_html(JuliaCall:::p_ly(JuliaCall:::html_wrap(x)))"
+irjulia_dict["image/svg+xml"] = "function(x) IRdisplay::display_svg(JuliaCall:::p_ly(x))"
 
 irjulia_display = RjuliaDisplay(irjulia_dict)
