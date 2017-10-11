@@ -42,7 +42,7 @@ using `JuliaCall`, for example:
 ## This is a R language chunk.
 ## In the previous julia chunk, we define variable a, 
 ## we can use functions in JuliaCall to get access to it.
-JuliaCall::julia_eval_string("a")
+JuliaCall::julia_eval("a")
 ```
 
 
