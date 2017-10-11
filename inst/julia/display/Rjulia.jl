@@ -42,7 +42,7 @@ function display(d::RjuliaDisplay, p)
     for m in ["text/html", "image/png", "image/jpeg", "application/pdf", "image/svg+xml",
         "text/markdown", "text/latex", "application/javascript", "text/plain"]
         try
-            display(d,m, p)
+            display(d, m, p)
             return
         end
     end
