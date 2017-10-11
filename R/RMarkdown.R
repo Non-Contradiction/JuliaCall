@@ -16,11 +16,16 @@ rmd_capture <- function(jcall){
     r <- .julia$do.call_(jcall)
     if (inherits(r, "error")) stop(r)
     sink()
-    output <- do.call(paste0, as.list(readLines(tmp)))
-    if (length(output) > 0) {
-        output <- paste0("<div class = 'JuliaDisplay'>",
-                         output,
-                         "</div>")
+    output <- paste(readLines(tmp, warn = FALSE), collapse = "\n")
+    ## Suppress the output when there is no output
+    if (length(output) > 0 && nchar(trimws(output)) > 0) {
+        # print(output)
+        ## A dirty fix
+        ## use <pre> to prevent markdown code block triggered by
+        ## four white spaces,
+        ## which is crucial for displaying plotly plots,
+        ## but it destroys the formatting of markdown
+        output <- paste0("<pre><div class = 'JuliaDisplay'>", output, "</div></pre>")
         return(knitr::asis_output(output))
     }
     invisible()
