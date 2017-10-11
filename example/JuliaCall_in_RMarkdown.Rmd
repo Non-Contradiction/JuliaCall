@@ -30,7 +30,7 @@ as language engine for Julia.
 
 ## How Does JuliaCall in R Markdown Look Like?
 
-```{julia}
+```{julia, cache=TRUE}
 ## This is a julia language chunk.
 ## In julia, the command without ending semicolon will trigger the display
 ## so is JuliaCall package. 
@@ -50,34 +50,34 @@ a = sqrt(2);
 <https://github.com/JuliaPlots/Plots.jl>.
 And `JuliaCall` supports `Plots.jl` of cource!!
 
-```{julia}
+```{julia, cache=TRUE}
 using Plots
 ```
 
 #### PyPlot backend
 
-```{julia}
+```{julia, cache=TRUE}
 pyplot()
 Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
 ```
 
 #### GR backend
 
-```{julia}
+```{julia, cache=TRUE}
 gr()
 Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
 ```
 
 #### PlotlyJS backend
 
-```{julia}
+```{julia, cache=TRUE}
 plotlyjs()
 Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
 ```
 
 #### Plotly backend
 
-```{julia}
+```{julia, cache=TRUE}
 plotly()
 Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
 ```
@@ -86,7 +86,7 @@ Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
 
 And you can also get access to julia variables in R code chunk quite easily
 using `JuliaCall`, for example:
-```{r}
+```{r, cache=TRUE}
 ## This is a R language chunk.
 ## In the previous julia chunk, we define variable a, 
 ## we can use functions in JuliaCall to get access to it.
