@@ -138,25 +138,16 @@ $(document).ready(function () {
 ## The julia display will follow immediately after the corresponding command
 ## just as the R code in R Markdown.
 a = sqrt(2)</code></pre>
-<div class="JuliaDisplay">
-<!-- rnb-html-begin -->
-1.4142135623730951<!-- rnb-html-end -->
-</div>
+<pre><div class="JuliaDisplay">1.4142135623730951</div></pre>
 <pre class="julia"><code>a = sqrt(2);
 
 ## And lots of different types of display are supported in JuliaCall.
 ## Like markdown.
 @doc sqrt</code></pre>
-<div class="JuliaDisplay">
-<!-- rnb-html-begin -->
-<div class="markdown">
-<pre><code>sqrt(x)</code></pre>
-<p>
-Return ${x}$. Throws <a href="@ref"><code>DomainError</code></a> for negative <a href="@ref"><code>Real</code></a> arguments. Use complex negative arguments instead. The prefix operator <code>√</code> is equivalent to <code>sqrt</code>.
-</p>
-</div>
-<!-- rnb-html-end -->
-</div>
+<pre><div class="JuliaDisplay"><div class="markdown"><pre><code>sqrt(x)</code></pre>
+<p>Return $\sqrt{x}$. Throws <a href="@ref"><code>DomainError</code></a> for negative <a href="@ref"><code>Real</code></a> arguments. Use complex negative arguments instead. The prefix operator <code>√</code> is equivalent to <code>sqrt</code>.</p>
+
+</div></div></pre>
 </div>
 <div id="get-access-to-julia-in-r-chunk" class="section level2">
 <h2>Get Access to Julia in R Chunk</h2>
@@ -164,7 +155,7 @@ Return ${x}$. Throws <a href="@ref"><code>DomainError</code></a> for negative <a
 <pre class="r"><code>## This is a R language chunk.
 ## In the previous julia chunk, we define variable a, 
 ## we can use functions in JuliaCall to get access to it.
-JuliaCall::julia_eval_string(&quot;a&quot;)</code></pre>
+JuliaCall::julia_eval(&quot;a&quot;)</code></pre>
 <pre><code>## [1] 1.414214</code></pre>
 </div>
 <div id="current-limitations" class="section level2">
