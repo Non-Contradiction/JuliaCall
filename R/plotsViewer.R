@@ -10,22 +10,12 @@ jslib <- function(){
               file.path(lib, "plotly-latest.min.js"))
 }
 
-svg <- function(){
-    jslib()
-    julia_command("pushdisplay(JuliaCall.svg_display);")
-}
-
-png <- function(){
-    julia_command("pushdisplay(JuliaCall.png_display);")
-}
-
-
 #' Julia plots viewer in R.
 #'
 #' \code{plotsViewer} lets you view julia plots in R.
 #'
 #' @export
 plotsViewer <- function(){
-    png()
-    svg()
+    jslib()
+    julia_command("pushdisplay(JuliaCall.viewer_display);")
 }
