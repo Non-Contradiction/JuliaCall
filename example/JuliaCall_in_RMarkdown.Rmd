@@ -23,7 +23,7 @@ knitr::knit_engines$set(julia = JuliaCall::eng_juliacall)
 ```
 
 And in the julia code chunk, just use 
-"```{julia}" or "```{r, engine='julia'}".
+"```{julia}".
 
 Below is how it looks like when using `JuliaCall`
 as language engine for Julia. 
@@ -42,10 +42,43 @@ a = sqrt(2);
 ## And lots of different types of display are supported in JuliaCall.
 ## Like markdown and plots.
 @doc sqrt
-using Gadfly
-Gadfly.plot(y = [1 2 3])
+```
+
+### Support for `Plots.jl` {.tabset}
+
+`Plots.jl` is an easy to use and powerful julia package for plotting,
+<https://github.com/JuliaPlots/Plots.jl>.
+And `JuliaCall` supports `Plots.jl` of cource!!
+
+```{julia}
 using Plots
+```
+
+#### PyPlot backend
+
+```{julia}
 pyplot()
+Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
+```
+
+#### GR backend
+
+```{julia}
+gr()
+Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
+```
+
+#### PlotlyJS backend
+
+```{julia}
+plotlyjs()
+Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
+```
+
+#### Plotly backend
+
+```{julia}
+plotly()
 Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
 ```
 
@@ -53,19 +86,16 @@ Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
 
 And you can also get access to julia variables in R code chunk quite easily
 using `JuliaCall`, for example:
-```{r, cache=TRUE}
+```{r}
 ## This is a R language chunk.
 ## In the previous julia chunk, we define variable a, 
 ## we can use functions in JuliaCall to get access to it.
-JuliaCall::julia_eval_string("a")
+JuliaCall::julia_eval("a")
 
 ## And you can also get access to Julia libraries and functions.
 JuliaCall::julia_library("Gadfly")
 JuliaCall::julia_call("Gadfly.plot", y = c(1:3), 
                       need_return = FALSE, show_value = TRUE)
-JuliaCall::julia_library("Plots")
-JuliaCall::julia_command("pyplot()")
-JuliaCall::julia_command("Plots.plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))")
 ```
 
 
