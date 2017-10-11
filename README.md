@@ -52,16 +52,16 @@ julia <- julia_setup()
 
 ## Different ways for using Julia to calculate sqrt(2)
 
-# julia$command("a = sqrt(2)"); julia$eval_string("a")
-julia_command("a = sqrt(2)"); julia_eval_string("a")
+# julia$command("a = sqrt(2);"); julia$eval("a")
+julia_command("a = sqrt(2);"); julia_eval("a")
 #> [1] 1.414214
-julia_eval_string("sqrt(2)")
+julia_eval("sqrt(2)")
 #> [1] 1.414214
 julia_call("sqrt", 2)
 #> [1] 1.414214
-julia_eval_string("sqrt")(2)
+julia_eval("sqrt")(2)
 #> [1] 1.414214
-julia_assign("x", sqrt(2)); julia_eval_string("x")
+julia_assign("x", sqrt(2)); julia_eval("x")
 #> [1] 1.414214
 julia_assign("rsqrt", sqrt); julia_call("rsqrt", 2)
 #> [1] 1.414214
