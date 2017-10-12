@@ -1,22 +1,17 @@
-## Resubmission
-This is a resubmission. In this version I have:
-
-* Not run the long examples and tests on CRAN.
-  But they are still checked on my local machine, travis-ci and appveyor.
-
 ## Test environments
-* local OS X 10.12, R 3.4.0
-* OS X 10.12 (on travis-ci), R 3.4.1 and R-devel
-* ubuntu 14.04 (on travis-ci), R 3.4.1
-* windows (on appveyor), R 3.4.1 and R-devel with Rtools34
+* local OS X 10.12, R 3.4.1
+* OS X 10.12 (on travis-ci), R 3.4.2
+* ubuntu 14.04 (on travis-ci), R 3.4.2
+* windows (on appveyor), R 3.4.2 with Rtools34
 * win-builder (devel and release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
-
-* This is a new release.
+0 errors | 0 warnings | 0 note
 
 ## Reverse dependencies
-
-This is a new release, so there are no reverse dependencies.
+I have also run R CMD check on downstream dependencies of JuliaCall.
+There is only one downstream dependency currently -- convexjlr,
+whose maintainer is me.
+The checking result of convexjlr is:
+0 errors | 0 warnings | 0 notes
