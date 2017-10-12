@@ -17,7 +17,7 @@ and `TRUE` otherwise.}
 \code{julia_command} evaluates string commands in julia
 without returning the result.
 If you need the result, maybe you could
-try \code{julia_eval_string}.
+try \code{julia_eval}.
 }
 \examples{
 
