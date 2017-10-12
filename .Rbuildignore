@@ -12,3 +12,4 @@
 ^\.gitattributes$
 ^vignettes/JuliaCall_in_RMarkdown\.Rmd$
 ^vignettes/JuliaCall_in_RMarkdown_cache$
+^revdep$
