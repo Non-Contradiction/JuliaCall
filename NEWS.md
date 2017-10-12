@@ -56,3 +56,9 @@
 # JuliaCall 0.9.2.9000
 
 * New Julia display system `plotsViewer()`, which integrates better into R.
+* Fits several bugs in `JuliaCall`, like removing using of depreated function.
+* Improve display systems of RMarkdown and Jupyter R Notebook.
+
+# JuliaCall 0.9.3
+
+* Second release on CRAN.
