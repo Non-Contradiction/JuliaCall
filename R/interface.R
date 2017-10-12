@@ -110,7 +110,7 @@ julia_eval <- julia$eval <-
 #' \code{julia_command} evaluates string commands in julia
 #' without returning the result.
 #' If you need the result, maybe you could
-#' try \code{julia_eval_string}.
+#' try \code{julia_eval}.
 #'
 #' @param cmd the command string you want to evaluate in julia.
 #' @param show_value whether to display julia return value or not,

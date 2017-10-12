@@ -18,7 +18,7 @@ julia_console <- julia$console <- function(){
 }
 
 is_terminal <- function(){
-    julia_eval_string("isa(STDIN, Base.TTY)")
+    julia_eval("isa(STDIN, Base.TTY)")
 }
 
 julia_complete_console <- function(){
