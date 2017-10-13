@@ -30,6 +30,10 @@ or one of the options "R", "Julia" and "None".}
 \code{julia_do.call} is the \code{do.call} for julia.
 And \code{julia_call} calls julia functions.
 }
+\details{
+Note that named arguments will be discarded if the call uses dot notation,
+  for example, "sqrt.".
+}
 \examples{
 
 \dontrun{ ## julia_setup is quite time consuming

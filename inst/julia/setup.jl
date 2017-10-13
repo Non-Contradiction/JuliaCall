@@ -62,7 +62,7 @@ function docall(call1)
         if endswith(fname, ".")
             fname = chop(fname);
             f = eval(Main, parse(fname));
-            r = f.(unamed_args...; named_args...);
+            r = f.(unamed_args...);
         else
             f = eval(Main, parse(fname));
             r = f(unamed_args...; named_args...);

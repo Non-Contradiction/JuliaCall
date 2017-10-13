@@ -12,6 +12,9 @@
 #'   or one of the options "R", "Julia" and "None".
 #' @param show_value whether to display julia return value or not.
 #'
+#' @details Note that named arguments will be discarded if the call uses dot notation,
+#'   for example, "sqrt.".
+#'
 #' @examples
 #'
 #' \dontrun{ ## julia_setup is quite time consuming
