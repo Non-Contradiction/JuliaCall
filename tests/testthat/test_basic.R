@@ -13,4 +13,7 @@ test_that("test of the basic functionality", {
 
     expect_equal({julia_assign("x", sqrt(2)); julia_eval("x")}, sqrt(2))
     expect_equal({julia_assign("rsqrt", sqrt); julia_eval("rsqrt(2)")}, sqrt(2))
+
+    expect_equal(julia_call("sqrt.", c(1:10)), sqrt(c(1:10)))
+    expect_equal(julia_call("log.", c(1:10)), log(c(1:10)))
 })
