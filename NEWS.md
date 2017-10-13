@@ -62,3 +62,7 @@
 # JuliaCall 0.9.3
 
 * Second release on CRAN.
+
+# JuliaCall 0.9.3.9000
+
+* Performance improvements for dot notation function call.
