@@ -203,6 +203,9 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     julia_command('ENV["GKSwstype"]="pdf";')
     julia_command('ENV["GKS_FILEPATH"] = tempdir();')
 
+    ## Suppress pyplot gui
+    julia_command('ENV["MPLBACKEND"] = "Agg";')
+
     invisible(julia)
 }
 
