@@ -8,7 +8,7 @@ function JuliaArrayWrapper(x, T)
     rcall(:structure, x, class = "JuliaArray", data = string(T))
 end
 
-sexp{T}(x :: Array{T}) = JuliaArrayWrapper(sexp(VecSxp, x), T)
+sexp{T}(x :: AbstractArray{T}) = JuliaArrayWrapper(sexp(VecSxp, x), T)
 
 import RCall.rcopy
 
