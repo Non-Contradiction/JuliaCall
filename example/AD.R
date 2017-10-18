@@ -1,0 +1,7 @@
+library(JuliaCall)
+julia_setup()
+julia_library("ForwardDiff")
+f <- function(x) sum(x^2L)
+julia_assign("ff", f)
+julia_command("g = x -> ForwardDiff.gradient(ff, x);")
+julia_command("g([2.0])")
