@@ -53,13 +53,13 @@ function Rerror(fname, e, bt)
 end
 
 function docall(call1)
-    call = transfer_list(call1)
-    fname = call[:fname];
-    named_args = call[:named_args]
-    unamed_args = call[:unamed_args]
-    need_return = call[:need_return];
-    show_value = call[:show_value];
     try
+        call = transfer_list(call1)
+        fname = call[:fname];
+        named_args = call[:named_args]
+        unamed_args = call[:unamed_args]
+        need_return = call[:need_return];
+        show_value = call[:show_value];
         if endswith(fname, ".")
             fname = chop(fname);
             f = eval(Main, parse(fname));
