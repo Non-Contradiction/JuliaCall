@@ -26,6 +26,8 @@ julia_command("gL([1.0])")
 options(digits = 15)
 julia_eval("gL([1.0])")
 
+julia_command("ForwardDiff.hessian(lambertW, [1.0])")
+
 library(adagio)
 julia_assign("rosen", fnRosenbrock)
 julia_command("gR = x -> ForwardDiff.gradient(rosen, x);")
@@ -37,6 +39,7 @@ julia_command("gR = x -> ForwardDiff.gradient(rosen, x);")
 ## scalar and atomic vector of length 1, the type conversion between R and julia
 ## in this case will be problematic.
 julia_command("gR([1.0, 2.0, 1.0])")
+julia_command("ForwardDiff.hessian(rosen, [1.0, 2.0, 1.0])")
 
 ## We could test the result by writing rosenbrock function directly in julia
 ## and calculate the derivative by ForwardDiff
@@ -44,3 +47,4 @@ julia_eval("function rosenjl(x) n = length(x);
     x1 = x[2:n]; x2 = x[1:(n - 1)]; sum(100 * (x1 - x2.^2).^2 + (1 - x2).^2) end")
 julia_command("gRjl = x -> ForwardDiff.gradient(rosenjl, x);")
 julia_command("gRjl([1.0, 2.0, 1.0])")
+julia_command("ForwardDiff.hessian(rosenjl, [1.0, 2.0, 1.0])")
