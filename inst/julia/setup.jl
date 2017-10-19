@@ -42,7 +42,7 @@ function error_msg(e, bt)
 end
 
 function Rerror(e, bt)
-    s1 = join(["Error happens when you try to call Julia function.\n"])
+    s1 = join(["Error happens in Julia.\n"])
     if string(VERSION) < "0.6.0"
         s2 = error_msg(e)
     else
