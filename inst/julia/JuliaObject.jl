@@ -1,36 +1,25 @@
 import RCall.sexp
 
-julia_object_count = 0
-julia_object_dict = Dict()
-julia_object_reverse_dict = Dict()
+julia_object_stack = []
 
-type JuliaObjectName
-    s :: String
+type JuliaObjectID
+    i :: Int32
 end
 
 type JuliaObject
-    name :: JuliaObjectName
-    JuliaObject(name :: JuliaObjectName) = new(name)
+    id :: JuliaObjectID
+    JuliaObject(id :: JuliaObjectID) = new(id)
 end
 
 function sexp(x :: JuliaObject)
-    r = sexp(x.name.s)
+    r = sexp(x.id.i)
     setclass!(r, sexp("JuliaObject"))
     r
 end
 
 function new_obj(obj)
-    global julia_object_count
-    if !haskey(julia_object_reverse_dict, obj)
-        julia_object_count += 1
-        name = String(Symbol(:J_, julia_object_count))
-        julia_object_dict[name] = obj
-        julia_object_reverse_dict[obj] = name
-    else
-        name = julia_object_reverse_dict[obj]
-    end
-
-    JuliaObject(JuliaObjectName(name))
+    push!(julia_object_stack, obj)
+    JuliaObject(JuliaObjectID(Int32(length(julia_object_stack))))
 end
 
 JuliaObject(x :: JuliaObject) = x
@@ -42,10 +31,10 @@ sexp(x) = sexp(JuliaObject(x))
 
 import RCall.rcopy
 
-function rcopy(::Type{JuliaObject}, s::Ptr{StrSxp})
-    julia_object_dict[rcopy(String, s)]
+function rcopy(::Type{JuliaObject}, i::Ptr{IntSxp})
+    julia_object_stack[rcopy(Int32, i)]
 end
 
 import RCall: RClass, rcopytype
 
-rcopytype(::Type{RClass{:JuliaObject}}, s::Ptr{StrSxp}) = JuliaObject
+rcopytype(::Type{RClass{:JuliaObject}}, s::Ptr{IntSxp}) = JuliaObject
