@@ -41,8 +41,8 @@ function error_msg(e, bt)
     readstring(m)
 end
 
-function Rerror(fname, e, bt)
-    s1 = join(["Error happens when you try to call function " fname " in Julia.\n"])
+function Rerror(e, bt)
+    s1 = join(["Error happens when you try to call Julia function.\n"])
     if string(VERSION) < "0.6.0"
         s2 = error_msg(e)
     else
@@ -80,7 +80,7 @@ function docall(call1)
             RObject(nothing).p;
         end;
     catch e
-        Rerror(fname, e, catch_stacktrace()).p;
+        Rerror(e, catch_stacktrace()).p;
     end;
 end
 
