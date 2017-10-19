@@ -66,3 +66,16 @@
 # JuliaCall 0.9.3.9000
 
 * Performance improvements for dot notation function call.
+
+# JuliaCall 0.10.0.9000
+
+* Implementation of `JuliaArray`.
+
+# JuliaCall 0.10.1.9000
+
+* Bug fix in `JuliaArray`.
+* Do not convert Tuple any more.
+
+# JuliaCall 0.10.2.9000
+
+* Bug fix in `JuliaObject`, for more detail, see github issue #15, issue #12 and #13 are related.
