@@ -78,4 +78,8 @@
 
 # JuliaCall 0.10.2.9000
 
-* Bug fix in `JuliaObject`, for more detail, see github issue #15, issue #12 and #13 are related.
+* Important bug fix in `JuliaObject`, for more detail, see github issue #15, issue #12 and #13 are related.
+
+# JuliaCall 0.10.3.9000
+
+* Dispatching for `JuliaObject` and `JuliaArray`.
