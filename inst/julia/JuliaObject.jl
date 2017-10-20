@@ -38,3 +38,14 @@ end
 import RCall: RClass, rcopytype
 
 rcopytype(::Type{RClass{:JuliaObject}}, s::Ptr{IntSxp}) = JuliaObject
+
+## Regarding to issue #12, #13 and #16,
+## we should use JuliaObject for general AbstractArray
+@suppress begin
+    sexp{T}(x :: AbstractArray{T}) = sexp(JuliaObject(x))
+end
+
+## Preserve BigFloat precision,
+## as the design decision in issue #16
+sexp(x::AbstractArray{BigFloat}) = sexp(JuliaObject(x))
+sexp(x::BigFloat) = sexp(JuliaObject(x))
