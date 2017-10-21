@@ -83,3 +83,7 @@
 # JuliaCall 0.10.3.9000
 
 * Dispatching for `JuliaObject` and `JuliaArray`.
+
+# JuliaCall 0.10.4.9000
+
+* Do not use `JuliaArray`, the discussion is in #16.
