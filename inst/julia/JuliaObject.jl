@@ -47,5 +47,5 @@ end
 
 ## Preserve BigFloat precision,
 ## as the design decision in issue #16
-sexp(x::AbstractArray{BigFloat}) = sexp(JuliaObject(x))
-sexp(x::BigFloat) = sexp(JuliaObject(x))
+# sexp(x::AbstractArray{BigFloat}) = sexp(JuliaObject(x))
+# sexp(x::BigFloat) = sexp(JuliaObject(x))
