@@ -20,7 +20,8 @@ BugReports: https://github.com/Non-Contradiction/JuliaCall/issues
 Encoding: UTF-8
 LazyData: true
 Imports: inline,
-    utils
+    utils,
+    methods
 RoxygenNote: 6.0.1
 SystemRequirements: Julia >= 0.5.0, RCall.jl
 Suggests: testthat,

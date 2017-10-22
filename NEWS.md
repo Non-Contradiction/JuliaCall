@@ -87,3 +87,4 @@
 # JuliaCall 0.10.4.9000
 
 * Do not use `JuliaArray`, the discussion is in #16.
+* `JuliaObject` is an S4 class now, which should be more robust.

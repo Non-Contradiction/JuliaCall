@@ -1,3 +1,9 @@
+setClass("JuliaObject",
+         slots = list(id = "integer"))
+
+## This function will be used by JuliaObject.jl to create new JuliaObject.
+JuliaObjectFromId <- function(id) methods::new("JuliaObject", id = id)
+
 #' Convert an R Object to Julia Object.
 #'
 #' \code{JuliaObject} converts an R object to julia object
@@ -5,8 +11,8 @@
 #'
 #' @param x the R object you want to convert to julia object.
 #'
-#' @return a S3 object with class JuliaObject
-#' which contains a reference to the corresponding julia object.
+#' @return an S4 object of class JuliaObject
+#' which contains an id correspond to the julia object.
 #'
 #' @examples
 #'
@@ -19,18 +25,16 @@ JuliaObject <- function(x){
     julia_call("JuliaCall.JuliaObject", x)
 }
 
-#' Print Julia Object.
+#' Show JuliaObject.
 #'
-#' \code{print.JuliaObject} is the method of the generic print function
-#' for JuliaObject.
+#' S4 method to show JuliaObject.
 #'
-#' @param x the Julia object you want to print.
-#' @param ... further arguments to be passed to or from other methods.
-#'   They are ignored in this function.
+#' @param object the JuliaObject you want to show.
 #'
 #' @export
-print.JuliaObject <- function(x, ...){
-    cat(paste0("Julia Object of type ", julia_call("JuliaCall.str_typeof", x), ".\n"))
-    julia_call("show", x, need_return = FALSE)
-    invisible(x)
-}
+setMethod("show", "JuliaObject",
+          function(object){
+              cat(paste0("Julia Object of type ", julia_call("JuliaCall.str_typeof", object), ".\n"))
+              julia_call("show", object, need_return = FALSE)
+              invisible(NULL)
+          })

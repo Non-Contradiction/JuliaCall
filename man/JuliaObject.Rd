@@ -10,8 +10,8 @@ JuliaObject(x)
 \item{x}{the R object you want to convert to julia object.}
 }
 \value{
-a S3 object with class JuliaObject
-which contains a reference to the corresponding julia object.
+an S4 object of class JuliaObject
+which contains an id correspond to the julia object.
 }
 \description{
 \code{JuliaObject} converts an R object to julia object

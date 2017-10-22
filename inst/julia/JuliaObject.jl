@@ -12,9 +12,7 @@ type JuliaObject
 end
 
 function sexp(x :: JuliaObject)
-    r = sexp(x.id.i)
-    setclass!(r, sexp("JuliaObject"))
-    r
+    reval("JuliaCall:::JuliaObjectFromId")(x.id.i).p
 end
 
 function new_obj(obj)
@@ -31,13 +29,13 @@ sexp(x) = sexp(JuliaObject(x))
 
 import RCall.rcopy
 
-function rcopy(::Type{JuliaObject}, i::Ptr{IntSxp})
-    julia_object_stack[rcopy(Int32, i)]
+function rcopy(::Type{JuliaObject}, x::Ptr{S4Sxp})
+    julia_object_stack[rcopy(Int32, x[:id])]
 end
 
 import RCall: RClass, rcopytype
 
-rcopytype(::Type{RClass{:JuliaObject}}, s::Ptr{IntSxp}) = JuliaObject
+rcopytype(::Type{RClass{:JuliaObject}}, x::Ptr{S4Sxp}) = JuliaObject
 
 ## Regarding to issue #12, #13 and #16,
 ## we should use JuliaObject for general AbstractArray
