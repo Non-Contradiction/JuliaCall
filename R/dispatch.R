@@ -30,33 +30,29 @@ fdot <- function(x) paste0(as.character(x), ".")
 
 ## Compare Group
 
+dot_e1_e2 <- function(e1, e2) julia_call(fdot(.Generic), e1, e2)
+
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("Compare", "JuliaObject",
-          function(e1, e2) julia_call(fdot(.Generic), e1, e2))
+setMethod("Compare", "JuliaObject", dot_e1_e2)
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("Compare", c("ANY", "JuliaObject"),
-          function(e1, e2) julia_call(fdot(.Generic), e1, e2))
+setMethod("Compare", c("ANY", "JuliaObject"), dot_e1_e2)
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("Compare", c("JuliaObject", "JuliaObject"),
-          function(e1, e2) julia_call(fdot(.Generic), e1, e2))
+setMethod("Compare", c("JuliaObject", "JuliaObject"), dot_e1_e2)
 
 ## Arith Group
 
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("Arith", "JuliaObject",
-          function(e1, e2) julia_call(fdot(.Generic), e1, e2))
+setMethod("Arith", "JuliaObject", dot_e1_e2)
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("Arith", c("ANY", "JuliaObject"),
-          function(e1, e2) julia_call(fdot(.Generic), e1, e2))
+setMethod("Arith", c("ANY", "JuliaObject"), dot_e1_e2)
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("Arith", c("JuliaObject", "JuliaObject"),
-          function(e1, e2) julia_call(fdot(.Generic), e1, e2))
+setMethod("Arith", c("JuliaObject", "JuliaObject"), dot_e1_e2)
 
 #' @rdname S4JuliaObjectGeneric
 #' @export
