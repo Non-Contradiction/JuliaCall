@@ -43,6 +43,9 @@ rcopytype(::Type{RClass{:JuliaObject}}, x::Ptr{S4Sxp}) = JuliaObject
     sexp{T}(x :: AbstractArray{T}) = sexp(JuliaObject(x))
 end
 
+## AbstractArray{Any} should be converted to R List
+sexp(x :: AbstractArray{Any}) = sexp(VecSxp, x)
+
 ## Preserve BigFloat precision,
 ## as the design decision in issue #16
 # sexp(x::AbstractArray{BigFloat}) = sexp(JuliaObject(x))
