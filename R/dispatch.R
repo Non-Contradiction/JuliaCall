@@ -1,7 +1,7 @@
 #' @export
 length.JuliaObject <- function(x) julia_call("length", x)
 #' @export
-`[.JuliaObject` <- function(x, i) julia_call("getindex", x, i)
+`[.JuliaObject` <- function(x, i) julia_call("getindex", x, as.integer(i))
 
 #' @export
 as.character.JuliaObject <- function(x, ...)
@@ -91,7 +91,7 @@ setMethod("Math", "JuliaObject",
 #' @rdname S4JuliaObjectGeneric
 #' @export
 setMethod("Math2", "JuliaObject",
-          function(x, digits) julia_call(fdot(.Generic), x, digits))
+          function(x, digits) julia_call(fdot(.Generic), x, as.integer(digits)))
 
 ## Summary Group Unfinished
 
