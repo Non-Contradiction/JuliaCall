@@ -2,6 +2,13 @@
 length.JuliaObject <- function(x) julia_call("length", x)
 #' @export
 `[.JuliaObject` <- function(x, i) julia_call("getindex", x, as.integer(i))
+#' @export
+`[[.JuliaObject` <- function(x, i){
+    if (length(i) > 1) {
+        stop("Attempt to select more than one element.")
+    }
+    julia_call("getindex", x, as.integer(i))
+}
 
 #' @export
 as.character.JuliaObject <- function(x, ...)
