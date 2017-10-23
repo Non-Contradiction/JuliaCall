@@ -92,4 +92,4 @@ setMethod("Math2", "JuliaObject",
 #' @rdname S4JuliaObjectGeneric
 #' @export
 setMethod("Summary", "JuliaObject",
-          function(x, ..., na.rm = FALSE) julia_call(fdot(.Generic), x))
+          function(x, ..., na.rm = FALSE) julia_call(as.character(.Generic), x))
