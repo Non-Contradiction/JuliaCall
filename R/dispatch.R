@@ -1,13 +1,6 @@
 #' @export
 length.JuliaObject <- function(x) julia_call("length", x)
 #' @export
-exp.JuliaObject <- function(x) julia_call("exp.", x)
-#' @export
-sum.JuliaObject <- function(x, ..., na.rm = FALSE){
-    stopifnot(length(list(...)) == 0)
-    julia_call("sum", x)
-}
-#' @export
 `[.JuliaObject` <- function(x, i) julia_call("getindex", x, i)
 
 #' @export
