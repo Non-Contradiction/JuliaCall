@@ -5,13 +5,13 @@ length.JuliaObject <- function(x) julia_call("length", x)
 
 #' @export
 as.character.JuliaObject <- function(x, ...)
-    julia_call("string", x)
+    julia_call("JuliaCall.asCharacter", x)
 #' @export
 as.list.JuliaObject <- function(x, ...)
     julia_call("RCall.sexp", julia_eval("RCall.VecSxp"), x)
 #' @export
 as.double.JuliaObject <- function(x, ...)
-    julia_call("RCall.sexp", julia_eval("RCall.RealSxp"), x)
+    julia_call("JuliaCall.asDouble", x)
 
 #' S4 Group Generic Functions for JuliaObject.
 #'
