@@ -5,12 +5,16 @@
 \alias{S4JuliaObjectGeneric}
 \alias{Compare,JuliaObject,ANY-method}
 \alias{Compare,ANY,JuliaObject-method}
+\alias{Compare,JuliaObject,JuliaObject-method}
 \alias{Arith,JuliaObject,ANY-method}
 \alias{Arith,ANY,JuliaObject-method}
+\alias{Arith,JuliaObject,JuliaObject-method}
 \alias{\%\%,JuliaObject,ANY-method}
 \alias{\%\%,ANY,JuliaObject-method}
+\alias{\%\%,JuliaObject,JuliaObject-method}
 \alias{\%/\%,JuliaObject,ANY-method}
 \alias{\%/\%,ANY,JuliaObject-method}
+\alias{\%/\%,JuliaObject,JuliaObject-method}
 \alias{Math,JuliaObject-method}
 \alias{Math2,JuliaObject-method}
 \alias{Summary,JuliaObject-method}
@@ -20,17 +24,25 @@
 
 \S4method{Compare}{ANY,JuliaObject}(e1, e2)
 
+\S4method{Compare}{JuliaObject,JuliaObject}(e1, e2)
+
 \S4method{Arith}{JuliaObject,ANY}(e1, e2)
 
 \S4method{Arith}{ANY,JuliaObject}(e1, e2)
+
+\S4method{Arith}{JuliaObject,JuliaObject}(e1, e2)
 
 \S4method{\%\%}{JuliaObject,ANY}(e1, e2)
 
 \S4method{\%\%}{ANY,JuliaObject}(e1, e2)
 
+\S4method{\%\%}{JuliaObject,JuliaObject}(e1, e2)
+
 \S4method{\%/\%}{JuliaObject,ANY}(e1, e2)
 
 \S4method{\%/\%}{ANY,JuliaObject}(e1, e2)
+
+\S4method{\%/\%}{JuliaObject,JuliaObject}(e1, e2)
 
 \S4method{Math}{JuliaObject}(x)
 

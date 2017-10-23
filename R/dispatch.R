@@ -45,6 +45,10 @@ setMethod("Compare", "JuliaObject",
 #' @export
 setMethod("Compare", c("ANY", "JuliaObject"),
           function(e1, e2) julia_call(fdot(.Generic), e1, e2))
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("Compare", c("JuliaObject", "JuliaObject"),
+          function(e1, e2) julia_call(fdot(.Generic), e1, e2))
 
 ## Arith Group
 
@@ -58,6 +62,11 @@ setMethod("Arith", c("ANY", "JuliaObject"),
           function(e1, e2) julia_call(fdot(.Generic), e1, e2))
 #' @rdname S4JuliaObjectGeneric
 #' @export
+setMethod("Arith", c("JuliaObject", "JuliaObject"),
+          function(e1, e2) julia_call(fdot(.Generic), e1, e2))
+
+#' @rdname S4JuliaObjectGeneric
+#' @export
 setMethod("%%", "JuliaObject",
           function(e1, e2) julia_call(fdot("mod"), e1, e2))
 #' @rdname S4JuliaObjectGeneric
@@ -66,11 +75,19 @@ setMethod("%%", c("ANY", "JuliaObject"),
           function(e1, e2) julia_call(fdot("mod"), e1, e2))
 #' @rdname S4JuliaObjectGeneric
 #' @export
+setMethod("%%", c("JuliaObject", "JuliaObject"),
+          function(e1, e2) julia_call(fdot("mod"), e1, e2))
+#' @rdname S4JuliaObjectGeneric
+#' @export
 setMethod("%/%", "JuliaObject",
           function(e1, e2) julia_call(fdot("div"), e1, e2))
 #' @rdname S4JuliaObjectGeneric
 #' @export
 setMethod("%/%", c("ANY", "JuliaObject"),
+          function(e1, e2) julia_call(fdot("div"), e1, e2))
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("%/%", c("JuliaObject", "JuliaObject"),
           function(e1, e2) julia_call(fdot("div"), e1, e2))
 
 ## Math Group Unfinished
