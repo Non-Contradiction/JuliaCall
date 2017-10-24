@@ -19,6 +19,9 @@ as.list.JuliaObject <- function(x, ...)
 #' @export
 as.double.JuliaObject <- function(x, ...)
     julia_call("JuliaCall.asDouble", x)
+#' @export
+as.logical.JuliaObject <- function(x, ...)
+    julia_call("JuliaCall.asLogical", x)
 
 #' S4 Group Generic Functions for JuliaObject.
 #'
@@ -84,6 +87,23 @@ setMethod("%/%", c("ANY", "JuliaObject"), jdiv)
 #' @rdname S4JuliaObjectGeneric
 #' @export
 setMethod("%/%", c("JuliaObject", "JuliaObject"), jdiv)
+
+## Logic Group
+
+jlogic <- function(e1, e2){
+    .Generic(as.logical(e1), as.logical(e2))
+}
+
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("Logic", "JuliaObject", jlogic)
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("Logic", c("ANY", "JuliaObject"), jlogic)
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("Logic", c("JuliaObject", "JuliaObject"), jlogic)
+
 
 ## Math Group
 
