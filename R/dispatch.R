@@ -20,6 +20,9 @@ as.list.JuliaObject <- function(x, ...)
 as.double.JuliaObject <- function(x, ...)
     julia_call("JuliaCall.asDouble", x)
 #' @export
+as.integer.JuliaObject <- function(x, ...)
+    as.integer(as.double(x))
+#' @export
 as.logical.JuliaObject <- function(x, ...)
     julia_call("JuliaCall.asLogical", x)
 
