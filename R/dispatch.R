@@ -94,7 +94,7 @@ setMethod("%/%", c("JuliaObject", "JuliaObject"), jdiv)
 ## Logic Group
 
 jlogic <- function(e1, e2){
-    .Generic(as.logical(e1), as.logical(e2))
+    methods::callGeneric(as.logical(e1), as.logical(e2))
 }
 
 #' @rdname S4JuliaObjectGeneric
