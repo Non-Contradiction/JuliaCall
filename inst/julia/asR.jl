@@ -1,7 +1,10 @@
 asDouble(x :: Real) = Float64(x)
 asDouble(x :: AbstractString) = parse(Float64, x)
+asDouble(true) = 1.0
+asDouble(false) = 0.0
 asDouble{T<:Real}(x :: AbstractArray{T}) = AbstractArray{Float64}(x)
 asDouble{T<:AbstractString}(x :: AbstractArray{T}) = [asDouble(xx) for xx in x]
+asDouble(x :: AbstractArray{Bool}) = [asDouble(xx) for xx in x]
 
 asCharacter(x) = string(x)
 
