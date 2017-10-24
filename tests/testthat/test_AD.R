@@ -1,29 +1,9 @@
-context("Automatic Differentiation test")
+context("Automatic Differentiation Test")
 
 ## The basic example of AD here should work if the JuliaObject S4 system and
 ## method dispatching system work correctly.
 
-lambertW <- function(x) {
-    ## add the first line so the function could be accepted by ForwardDiff
-    x <- x[1L]
-    w0 <- 1
-    w1 <- w0 - (w0*exp(w0)-x)/((w0+1)*exp(w0)-(w0+2)*(w0*exp(w0)-x)/(2*w0+2))
-    while (w0 != w1) {
-        w0 <- w1
-        w1 <- w0 -
-            (w0*exp(w0)-x)/((w0+1)*exp(w0)-(w0+2)*(w0*exp(w0)-x)/(2*w0+2))
-    }
-    return(w1)
-}
-
-fnRosenbrock <- function(x){
-    n <- length(x)
-    x1 <- x[2:n]
-    x2 <- x[1:(n - 1)]
-    sum(100 * (x1 - x2^2)^2 + (1 - x2)^2)
-}
-
-test_that("test of AD", {
+test_that("test of AD on basic functions", {
     skip_on_cran()
     julia <- julia_setup()
 
@@ -34,10 +14,46 @@ test_that("test of AD", {
     julia_command("g = x -> ForwardDiff.gradient(ff, x);")
     expect_equal(julia_eval("g([2.0])"), 4)
     expect_equal(julia_eval("g([2.0, 3.0])"), c(4, 6))
+})
+
+test_that("test of AD of lambertW function", {
+    skip_on_cran()
+    julia <- julia_setup()
+
+    julia_install_package_if_needed("ForwardDiff")
+    julia_library("ForwardDiff")
+
+    lambertW <- function(x) {
+        ## add the first line so the function could be accepted by ForwardDiff
+        x <- x[1L]
+        w0 <- 1
+        w1 <- w0 - (w0*exp(w0)-x)/((w0+1)*exp(w0)-(w0+2)*(w0*exp(w0)-x)/(2*w0+2))
+        while (w0 != w1) {
+            w0 <- w1
+            w1 <- w0 -
+                (w0*exp(w0)-x)/((w0+1)*exp(w0)-(w0+2)*(w0*exp(w0)-x)/(2*w0+2))
+        }
+        return(w1)
+    }
 
     julia_assign("lambertW", lambertW)
     julia_command("gL = x -> ForwardDiff.gradient(lambertW, x);")
     expect_equal(julia_eval("gL([1.0])"), 0.361896256634889)
+})
+
+test_that("test of AD of Rosenbrock function", {
+    skip_on_cran()
+    julia <- julia_setup()
+
+    julia_install_package_if_needed("ForwardDiff")
+    julia_library("ForwardDiff")
+
+    fnRosenbrock <- function(x){
+        n <- length(x)
+        x1 <- x[2:n]
+        x2 <- x[1:(n - 1)]
+        sum(100 * (x1 - x2^2)^2 + (1 - x2)^2)
+    }
 
     julia_assign("rosen", fnRosenbrock)
     julia_command("gR = x -> ForwardDiff.gradient(rosen, x);")
