@@ -61,30 +61,29 @@ setMethod("Arith", c("ANY", "JuliaObject"), dot_e1_e2)
 #' @export
 setMethod("Arith", c("JuliaObject", "JuliaObject"), dot_e1_e2)
 
+jmod <- function(e1, e2) julia_call("mod.", e1, e2)
+
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("%%", "JuliaObject",
-          function(e1, e2) julia_call(fdot("mod"), e1, e2))
+setMethod("%%", "JuliaObject", jmod)
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("%%", c("ANY", "JuliaObject"),
-          function(e1, e2) julia_call(fdot("mod"), e1, e2))
+setMethod("%%", c("ANY", "JuliaObject"), jmod)
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("%%", c("JuliaObject", "JuliaObject"),
-          function(e1, e2) julia_call(fdot("mod"), e1, e2))
+setMethod("%%", c("JuliaObject", "JuliaObject"), jmod)
+
+jdiv <- function(e1, e2) julia_call("div.", e1, e2)
+
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("%/%", "JuliaObject",
-          function(e1, e2) julia_call(fdot("div"), e1, e2))
+setMethod("%/%", "JuliaObject", jdiv)
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("%/%", c("ANY", "JuliaObject"),
-          function(e1, e2) julia_call(fdot("div"), e1, e2))
+setMethod("%/%", c("ANY", "JuliaObject"), jdiv)
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("%/%", c("JuliaObject", "JuliaObject"),
-          function(e1, e2) julia_call(fdot("div"), e1, e2))
+setMethod("%/%", c("JuliaObject", "JuliaObject"), jdiv)
 
 ## Math Group Unfinished
 
