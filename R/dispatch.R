@@ -85,12 +85,36 @@ setMethod("%/%", c("ANY", "JuliaObject"), jdiv)
 #' @export
 setMethod("%/%", c("JuliaObject", "JuliaObject"), jdiv)
 
-## Math Group Unfinished
+## Math Group
 
 #' @rdname S4JuliaObjectGeneric
 #' @export
 setMethod("Math", "JuliaObject",
           function(x) julia_call(fdot(.Generic), x))
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("ceiling", "JuliaObject",
+          function(x) julia_call("ceil.", x))
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("cummax", "JuliaObject",
+          function(x) julia_call("JuliaCall.cummax1", x))
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("cummin", "JuliaObject",
+          function(x) julia_call("JuliaCall.cummin1", x))
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("cumsum", "JuliaObject",
+          function(x) julia_call("cumsum", x))
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("cumprod", "JuliaObject",
+          function(x) julia_call("cumprod", x))
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("tanpi", "JuliaObject",
+          function(x) julia_call("JuliaCall.tanpi.", x))
 
 ## Math2 Group
 

@@ -16,6 +16,12 @@
 \alias{\%/\%,ANY,JuliaObject-method}
 \alias{\%/\%,JuliaObject,JuliaObject-method}
 \alias{Math,JuliaObject-method}
+\alias{ceiling,JuliaObject-method}
+\alias{cummax,JuliaObject-method}
+\alias{cummin,JuliaObject-method}
+\alias{cumsum,JuliaObject-method}
+\alias{cumprod,JuliaObject-method}
+\alias{tanpi,JuliaObject-method}
 \alias{round,JuliaObject-method}
 \alias{signif,JuliaObject-method}
 \alias{Summary,JuliaObject-method}
@@ -46,6 +52,18 @@
 \S4method{\%/\%}{JuliaObject,JuliaObject}(e1, e2)
 
 \S4method{Math}{JuliaObject}(x)
+
+\S4method{ceiling}{JuliaObject}(x)
+
+\S4method{cummax}{JuliaObject}(x)
+
+\S4method{cummin}{JuliaObject}(x)
+
+\S4method{cumsum}{JuliaObject}(x)
+
+\S4method{cumprod}{JuliaObject}(x)
+
+\S4method{tanpi}{JuliaObject}(x)
 
 \S4method{round}{JuliaObject}(x, digits = 0)
 
