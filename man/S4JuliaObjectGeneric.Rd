@@ -15,6 +15,9 @@
 \alias{\%/\%,JuliaObject,ANY-method}
 \alias{\%/\%,ANY,JuliaObject-method}
 \alias{\%/\%,JuliaObject,JuliaObject-method}
+\alias{Logic,JuliaObject,ANY-method}
+\alias{Logic,ANY,JuliaObject-method}
+\alias{Logic,JuliaObject,JuliaObject-method}
 \alias{Math,JuliaObject-method}
 \alias{ceiling,JuliaObject-method}
 \alias{cummax,JuliaObject-method}
@@ -50,6 +53,12 @@
 \S4method{\%/\%}{ANY,JuliaObject}(e1, e2)
 
 \S4method{\%/\%}{JuliaObject,JuliaObject}(e1, e2)
+
+\S4method{Logic}{JuliaObject,ANY}(e1, e2)
+
+\S4method{Logic}{ANY,JuliaObject}(e1, e2)
+
+\S4method{Logic}{JuliaObject,JuliaObject}(e1, e2)
 
 \S4method{Math}{JuliaObject}(x)
 
