@@ -96,8 +96,13 @@ setMethod("Math", "JuliaObject",
 
 #' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("Math2", "JuliaObject",
-          function(x, digits) julia_call(fdot(.Generic), x, as.integer(digits)))
+setMethod("round", "JuliaObject",
+          function(x, digits = 0) julia_call("round.", x, as.integer(digits)))
+
+#' @rdname S4JuliaObjectGeneric
+#' @export
+setMethod("signif", "JuliaObject",
+          function(x, digits = 6) julia_call("signif.", x, as.integer(digits)))
 
 ## Summary Group Unfinished
 

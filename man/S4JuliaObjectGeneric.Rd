@@ -16,7 +16,8 @@
 \alias{\%/\%,ANY,JuliaObject-method}
 \alias{\%/\%,JuliaObject,JuliaObject-method}
 \alias{Math,JuliaObject-method}
-\alias{Math2,JuliaObject-method}
+\alias{round,JuliaObject-method}
+\alias{signif,JuliaObject-method}
 \alias{Summary,JuliaObject-method}
 \title{S4 Group Generic Functions for JuliaObject.}
 \usage{
@@ -46,7 +47,9 @@
 
 \S4method{Math}{JuliaObject}(x)
 
-\S4method{Math2}{JuliaObject}(x, digits)
+\S4method{round}{JuliaObject}(x, digits = 0)
+
+\S4method{signif}{JuliaObject}(x, digits = 6)
 
 \S4method{Summary}{JuliaObject}(x, ..., na.rm = FALSE)
 }
