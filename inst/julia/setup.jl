@@ -24,6 +24,7 @@ include("JuliaObject.jl")
 ## include("JuliaArray.jl")
 include("asR.jl")
 include("dispatch.jl")
+include("JuliaTuple.jl")
 
 function transfer_list(x)
     rcopy(RObject(Ptr{RCall.VecSxp}(x)))
