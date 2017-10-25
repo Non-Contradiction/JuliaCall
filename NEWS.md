@@ -88,3 +88,9 @@
 
 * Do not use `JuliaArray`, the discussion is in #16.
 * `JuliaObject` is an S4 class now, which should be more robust.
+
+# JuliaCall 0.10.5.9000
+
+* Implement generics for `JuliaObject`, and fix many small bugs.
+* Fix the bug of the conversion of AbstractArray{Any}.
+* Julia tuple converts to R S3 class of JuliaTuple based on list.
