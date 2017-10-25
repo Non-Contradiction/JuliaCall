@@ -129,11 +129,11 @@ setMethod("cummin", "JuliaObject",
 #' @rdname S4JuliaObjectGeneric
 #' @export
 setMethod("cumsum", "JuliaObject",
-          function(x) julia_call("cumsum", x))
+          function(x) julia_call("JuliaCall.cumsum1", x))
 #' @rdname S4JuliaObjectGeneric
 #' @export
 setMethod("cumprod", "JuliaObject",
-          function(x) julia_call("cumprod", x))
+          function(x) julia_call("JuliaCall.cumprod1", x))
 #' @rdname S4JuliaObjectGeneric
 #' @export
 setMethod("tanpi", "JuliaObject",
