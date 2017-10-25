@@ -10,5 +10,4 @@ cumsum1(x :: Number) = cumsum1([x])
 cumprod1(x) = cumprod(x)
 cumprod1(x :: Number) = cumprod1([x])
 
-
 tanpi(x) = sinpi(x) / cospi(x)
