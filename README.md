@@ -15,9 +15,9 @@ JuliaCall for Seamless Integration of R and Julia
 -   [JuliaCall for R Package Developers](#juliacall-for-r-package-developers)
 -   [Suggestion and Issue Reporting](#suggestion-and-issue-reporting)
 
-Package JuliaCall is an R interface to 'Julia', which is a high-level, high-performance dynamic programming language for numerical computing, see <https://julialang.org/> for more information.
+Package JuliaCall is an R interface to 'Julia', which is a high-level, high-performance dynamic programming language for numerical computing, see <https://julialang.org/> for more information. Below is an image for [Mandelbrot set](https://en.wikipedia.org/wiki/Mandelbrot_set). JuliaCall brings **more than 100 times speedup** of the calculation! See <https://github.com/Non-Contradiction/JuliaCall/tree/master/example/mandelbrot> for more information.
 
-![](https://non-contradiction.github.io/JuliaCall/articles/JuliaCall.png)
+![](https://non-contradiction.github.io/JuliaCall/articles/mandelbrot.png)
 
 Installation
 ------------

@@ -26,6 +26,9 @@ output: github_document
 Package JuliaCall is an R interface to 'Julia',
 which is a high-level, high-performance dynamic programming language
 for numerical computing, see <https://julialang.org/> for more information.
+Below is an image for [Mandelbrot set](https://en.wikipedia.org/wiki/Mandelbrot_set).
+JuliaCall brings **more than 100 times speedup** of the calculation!
+See <https://github.com/Non-Contradiction/JuliaCall/tree/master/example/mandelbrot> for more information.
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
@@ -35,7 +38,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-![](https://non-contradiction.github.io/JuliaCall/articles/JuliaCall.png)
+![](https://non-contradiction.github.io/JuliaCall/articles/mandelbrot.png)
 
 ## Installation
 
