@@ -22,6 +22,8 @@ navbar:
       href: articles/JuliaCall_in_Jupyter_R_Notebook.html
     - text: JuliaCall_in_RMarkdown
       href: articles/JuliaCall_in_RMarkdown.html
+    - text: Improve R's Performance using JuliaCall
+      href: articles/mandelbrot.html
   - text: News
     href: news/index.html
   right:
