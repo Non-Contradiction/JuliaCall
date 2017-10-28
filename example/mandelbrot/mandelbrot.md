@@ -44,7 +44,7 @@ To use Julia from JuliaCall, we first need to do some necessary setup work:
 library(JuliaCall)
 julia_setup()
 #> Julia at location /Applications/Julia-0.6.app/Contents/Resources/julia/bin will be used.
-#> Julia version 0.6.0 found.
+#> Julia version 0.6.1 found.
 #> Julia initiation...
 #> Finish Julia initiation.
 #> Loading setup script for JuliaCall...
@@ -103,7 +103,7 @@ ys <- seq(-step * size, step * size, step) + centery
 ``` r
 system.time(zR <- mandelbrotImage(xs, ys, iterate_max))
 #>    user  system elapsed 
-#>  17.802   0.256  18.956
+#>  21.779   0.183  22.899
 ```
 
 ### Time for Julia Implementation using JuliaCall
@@ -113,7 +113,7 @@ system.time(zR <- mandelbrotImage(xs, ys, iterate_max))
 invisible(julia_call("mandelbrotImage", xs, ys, 2L))
 system.time(zJL <- julia_call("mandelbrotImage", xs, ys, iterate_max))
 #>    user  system elapsed 
-#>   0.202   0.003   0.213
+#>   0.235   0.003   0.243
 ```
 
 We could see that JuliaCall brings **a lot of times speedup** of the calculation, actually, we could see more speedup with larger problem scale, like **100 times speedup** or even more. I won't show the result here because I don't want to wait minutes for this RMarkdown document to be knited.
@@ -168,7 +168,7 @@ And we do the timing again:
 invisible(julia_call("mandelbrotImage1", xs, ys, 2L))
 system.time(zJL <- julia_call("mandelbrotImage1", xs, ys, iterate_max))
 #>    user  system elapsed 
-#>   3.070   0.046   3.168
+#>   4.001   0.356   4.536
 ```
 
 We could see the function becomes much slower, because in the `mandelbrot1` function, `z` is an integer at the beginning, but becomes a complex number in the iteration. We could use `@code_warntype` or `code_warntype` and other tools provided by Julia to check about this problem, see <https://docs.julialang.org/en/stable/manual/performance-tips/> for more information.
@@ -185,5 +185,3 @@ image(xs, ys, zJL, col = topo.colors(12))
 ```
 
 ![](mandelbrot_files/figure-markdown_github-ascii_identifiers/unnamed-chunk-10-1.png)
-
-And there is
