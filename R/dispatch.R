@@ -1,5 +1,10 @@
 #' @export
-length.JuliaObject <- function(x) julia_call("length", x)
+length.JuliaObject <- function(x){
+    tryCatch(julia_call("length", x),
+             warn = function(e){},
+             error = function(e) 1
+    )
+}
 #' @export
 `[.JuliaObject` <- function(x, i) julia_call("getindex", x, as.integer(i))
 #' @export
