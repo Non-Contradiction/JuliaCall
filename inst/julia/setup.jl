@@ -6,7 +6,7 @@ module JuliaCall
 
 # if Pkg.installed("RCall") == nothing Pkg.add("RCall") end
 
-using Suppressor
+include("./suppress.jl")
 
 @suppress begin
     using RCall

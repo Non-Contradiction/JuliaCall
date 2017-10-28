@@ -49,8 +49,8 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     julia_line(paste(system.file("julia/RCallprepare.jl", package = "JuliaCall"), R.home()),
                stderr = FALSE)
 
-    julia_line("-e \"pkg = string(:Suppressor); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using Suppressor\"",
-           stderr = FALSE)
+    # julia_line("-e \"pkg = string(:Suppressor); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using Suppressor\"",
+    #        stderr = FALSE)
 
     .julia$config <- file.path(dirname(.julia$bin_dir), "share", "julia", "julia-config.jl")
     .julia$cppargs <- julia_line(paste0(.julia$config, " --cflags"), stdout = TRUE)
