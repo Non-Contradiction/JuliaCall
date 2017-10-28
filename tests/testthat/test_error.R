@@ -9,5 +9,4 @@ test_that("test of the error handling functionality", {
     expect_error(julia_call("sqrt", -1))
     expect_error(julia_call("sqrt", 1, 2))
     expect_error(julia_library("A"))
-    expect_error(julia_help("abc"))
 })
