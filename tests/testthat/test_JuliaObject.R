@@ -14,7 +14,7 @@ test_that("test of the JuliaObject", {
     end")
     julia_eval("Mytype(1, 12, 1/12)")
     r <- julia_eval("Mytype(1, 12, 1/12)")
-    expect_length(r, 1)
+    expect_equal(length(r), 1)
     expect_equal(julia_call("getfield", r, quote(den)), 12)
     expect_equal(julia_call("getfield", r, quote(num)), 1)
     expect_equal(julia_call("getfield", r, quote(ans)), 1 / 12)
