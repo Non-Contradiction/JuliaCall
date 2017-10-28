@@ -11,8 +11,6 @@ to use Julia packages as easy as possible.
 }
 \examples{
 
-\dontrun{ ## The examples are quite time consuming
-
   ## Do initiation for JuliaCall
 
   julia <- julia_setup()
@@ -55,6 +53,5 @@ to use Julia packages as easy as possible.
 
   # julia$library("Optim")
   julia_library("Optim")
-}
 
 }

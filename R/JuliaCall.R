@@ -5,8 +5,6 @@
 #'
 #' @examples
 #'
-#' \dontrun{ ## The examples are quite time consuming
-#'
 #'   ## Do initiation for JuliaCall
 #'
 #'   julia <- julia_setup()
@@ -49,7 +47,6 @@
 #'
 #'   # julia$library("Optim")
 #'   julia_library("Optim")
-#' }
 #'
 #' @docType package
 #' @name JuliaCall
