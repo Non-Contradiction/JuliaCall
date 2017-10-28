@@ -17,8 +17,10 @@
 #'
 #' @examples
 #'
+#' \dontrun{ ## julia_setup is quite time consuming
 #'   julia_do.call("sqrt", list(2))
 #'   julia_call("sqrt", 2)
+#' }
 #'
 #' @name call
 NULL

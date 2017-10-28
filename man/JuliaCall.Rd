@@ -19,17 +19,17 @@ to use Julia packages as easy as possible.
 
   ## Different ways for calculating `sqrt(2)`
 
-  # julia$command("a = sqrt(2)"); julia$eval_string("a")
-  julia_command("a = sqrt(2)"); julia_eval_string("a")
+  # julia$command("a = sqrt(2)"); julia$eval("a")
+  julia_command("a = sqrt(2)"); julia_eval("a")
 
-  # julia$eval_string("sqrt(2)")
-  julia_eval_string("sqrt(2)")
+  # julia$eval("sqrt(2)")
+  julia_eval("sqrt(2)")
 
   # julia$call("sqrt", 2)
   julia_call("sqrt", 2)
 
-  # julia$eval_string("sqrt")(2)
-  julia_eval_string("sqrt")(2)
+  # julia$eval("sqrt")(2)
+  julia_eval("sqrt")(2)
 
   ## You can use `julia_exists` as `exists` in R to test
   ## whether a function or name exists in Julia or not
