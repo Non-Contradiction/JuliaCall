@@ -12,7 +12,7 @@ type JuliaObject
 end
 
 function sexp(x :: JuliaObject)
-    reval("JuliaCall:::JuliaObjectFromId")(x.id.i).p
+    reval("JuliaCall:::JuliaObjectFromId")(x.id.i)
 end
 
 function new_obj(obj)
@@ -30,7 +30,11 @@ sexp(x) = sexp(JuliaObject(x))
 import RCall.rcopy
 
 function rcopy(::Type{JuliaObject}, x::Ptr{S4Sxp})
-    julia_object_stack[rcopy(Int32, x[:id])]
+    try
+        julia_object_stack[rcopy(Int32, x[:id])]
+    catch e
+        nothing
+    end
 end
 
 import RCall: RClass, rcopytype
