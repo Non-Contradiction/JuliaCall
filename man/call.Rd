@@ -36,9 +36,7 @@ Note that named arguments will be discarded if the call uses dot notation,
 }
 \examples{
 
-\dontrun{ ## julia_setup is quite time consuming
   julia_do.call("sqrt", list(2))
   julia_call("sqrt", 2)
-}
 
 }
