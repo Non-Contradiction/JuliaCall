@@ -14,6 +14,12 @@ length.JuliaObject <- function(x){
     }
     julia_call("getindex", x, as.integer(i))
 }
+#' @export
+`[<-.JuliaObject` <- function(x, i, value)
+    julia_call("setindex!", x, value, as.integer(i))
+#' @export
+`[[<-.JuliaObject` <- function(x, i, value)
+    julia_call("setindex!", x, value, as.integer(i))
 
 #' @export
 as.character.JuliaObject <- function(x, ...)

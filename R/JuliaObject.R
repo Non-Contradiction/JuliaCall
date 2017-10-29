@@ -38,3 +38,56 @@ setMethod("show", "JuliaObject",
               julia_call("show", object, need_return = FALSE)
               invisible(NULL)
           })
+
+#' JuliaObject Fields.
+#'
+#' Get the field names, get or set certain fields of an JuliaObject.
+#'
+#' @param object  the JuliaObject.
+#' @param name  a character string specifying the fields to be accessed or set.
+#' @param value the new value of the field of the JuliaObject.
+#'
+#' @name JuliaObjectFields
+NULL
+
+#' @rdname JuliaObjectFields
+#' @export
+fields <- function(object){
+    UseMethod("fields", object)
+}
+
+#' @rdname JuliaObjectFields
+#' @export
+fields.JuliaObject <- function(object){
+    tryCatch(julia_call("string.",
+                        julia_call("fieldnames", julia_call("typeof", object))),
+             warn = function(w){},
+             error = function(e) NULL)
+}
+
+#' @rdname JuliaObjectFields
+#' @export
+field <- function(object, name){
+    UseMethod("field", object)
+}
+
+#' @rdname JuliaObjectFields
+#' @export
+field.JuliaObject <- function(object, name){
+    tryCatch(julia_call("getfield", object, as.symbol(name)),
+             warn = function(w){},
+             error = function(e) NULL)
+}
+
+#' @rdname JuliaObjectFields
+#' @export
+`field<-` <- function(object, name, value){
+    UseMethod("field<-", object)
+}
+
+#' @rdname JuliaObjectFields
+#' @export
+`field<-.JuliaObject` <- function(object, name, value){
+    julia_call("setfield!", object, as.symbol(name), value)
+    object
+}
