@@ -141,7 +141,13 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
         }
     }
 
-    reg.finalizer(.julia, function(e){message("Julia exit."); .julia$cmd("exit()")}, onexit = TRUE)
+    reg.finalizer(.julia,
+                  function(e){
+                      message("Julia exit.");
+                      .julia$cmd("exit()")
+                      dyn.unload(.julia$dll_file)
+                      },
+                  onexit = TRUE)
 
     .julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
 
