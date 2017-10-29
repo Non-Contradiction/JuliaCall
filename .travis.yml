@@ -84,7 +84,6 @@ before_install:
   #- ls $(R RHOME)/lib
   - julia -e 'using RCall'
 script:
-- R -e './example/mandelbrot/mandelbrot.R'
 - R CMD build .
 - R CMD check *tar.gz
 
