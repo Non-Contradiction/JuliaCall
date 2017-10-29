@@ -22,7 +22,6 @@ addons:
 
 before_install:
   # linux
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export LD_LIBRARY_PATH=${HOME}/julia/lib/julia:$LD_LIBRARY_PATH; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu $(lsb_release -s -c)/"; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update -qq -y; fi
