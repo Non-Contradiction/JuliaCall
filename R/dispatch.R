@@ -42,10 +42,7 @@ as.logical.JuliaObject <- function(x, ...)
 #' S4 Group Generic Functions for JuliaObject, which includes common mathematical
 #'   functions and operators.
 #'
-#' @param x,e1,e2  objects.
-#' @param digits  number of digits to be used in round or signif.
-#' @param ...  further arguments passed to or from methods.
-#' @param na.rm	 logical: should missing values be removed?
+#' @param e1,e2  objects.
 #'
 #' @name S4JuliaObjectGeneric
 NULL
@@ -121,50 +118,31 @@ setMethod("Logic", c("JuliaObject", "JuliaObject"), jlogic)
 
 ## Math Group
 
-#' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("Math", "JuliaObject",
-          function(x) julia_call(fdot(.Generic), x))
-#' @rdname S4JuliaObjectGeneric
+Math.JuliaObject <- function(x, ...) julia_call(fdot(.Generic), x)
 #' @export
-setMethod("ceiling", "JuliaObject",
-          function(x) julia_call("ceil.", x))
-#' @rdname S4JuliaObjectGeneric
+ceiling.JuliaObject <- function(x) julia_call("ceil.", x)
 #' @export
-setMethod("cummax", "JuliaObject",
-          function(x) julia_call("JuliaCall.cummax1", x))
-#' @rdname S4JuliaObjectGeneric
+cummax.JuliaObject <- function(x) julia_call("JuliaCall.cummax1", x)
 #' @export
-setMethod("cummin", "JuliaObject",
-          function(x) julia_call("JuliaCall.cummin1", x))
-#' @rdname S4JuliaObjectGeneric
+cummin.JuliaObject <- function(x) julia_call("JuliaCall.cummin1", x)
 #' @export
-setMethod("cumsum", "JuliaObject",
-          function(x) julia_call("JuliaCall.cumsum1", x))
-#' @rdname S4JuliaObjectGeneric
+cumsum.JuliaObject <- function(x) julia_call("JuliaCall.cumsum1", x)
 #' @export
-setMethod("cumprod", "JuliaObject",
-          function(x) julia_call("JuliaCall.cumprod1", x))
-#' @rdname S4JuliaObjectGeneric
-#' @export
-setMethod("tanpi", "JuliaObject",
-          function(x) julia_call("JuliaCall.tanpi.", x))
+cumprod.JuliaObject <- function(x) julia_call("JuliaCall.cumprod1", x)
 
 ## Math2 Group
 
-#' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("round", "JuliaObject",
-          function(x, digits = 0) julia_call("round.", x, as.integer(digits)))
+round.JuliaObject <-
+    function(x, digits = 0) julia_call("round.", x, as.integer(digits))
 
-#' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("signif", "JuliaObject",
-          function(x, digits = 6) julia_call("signif.", x, as.integer(digits)))
+signif.JuliaObject <-
+    function(x, digits = 6) julia_call("signif.", x, as.integer(digits))
 
 ## Summary Group Unfinished
 
-#' @rdname S4JuliaObjectGeneric
 #' @export
-setMethod("Summary", "JuliaObject",
-          function(x, ..., na.rm = FALSE) julia_call(as.character(.Generic), x))
+Summary.JuliaObject <-
+    function(x, ..., na.rm = FALSE) julia_call(as.character(.Generic), x)

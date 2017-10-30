@@ -18,16 +18,6 @@
 \alias{Logic,JuliaObject,ANY-method}
 \alias{Logic,ANY,JuliaObject-method}
 \alias{Logic,JuliaObject,JuliaObject-method}
-\alias{Math,JuliaObject-method}
-\alias{ceiling,JuliaObject-method}
-\alias{cummax,JuliaObject-method}
-\alias{cummin,JuliaObject-method}
-\alias{cumsum,JuliaObject-method}
-\alias{cumprod,JuliaObject-method}
-\alias{tanpi,JuliaObject-method}
-\alias{round,JuliaObject-method}
-\alias{signif,JuliaObject-method}
-\alias{Summary,JuliaObject-method}
 \title{S4 Group Generic Functions for JuliaObject.}
 \usage{
 \S4method{Compare}{JuliaObject,ANY}(e1, e2)
@@ -59,35 +49,9 @@
 \S4method{Logic}{ANY,JuliaObject}(e1, e2)
 
 \S4method{Logic}{JuliaObject,JuliaObject}(e1, e2)
-
-\S4method{Math}{JuliaObject}(x)
-
-\S4method{ceiling}{JuliaObject}(x)
-
-\S4method{cummax}{JuliaObject}(x)
-
-\S4method{cummin}{JuliaObject}(x)
-
-\S4method{cumsum}{JuliaObject}(x)
-
-\S4method{cumprod}{JuliaObject}(x)
-
-\S4method{tanpi}{JuliaObject}(x)
-
-\S4method{round}{JuliaObject}(x, digits = 0)
-
-\S4method{signif}{JuliaObject}(x, digits = 6)
-
-\S4method{Summary}{JuliaObject}(x, ..., na.rm = FALSE)
 }
 \arguments{
-\item{x, e1, e2}{objects.}
-
-\item{digits}{number of digits to be used in round or signif.}
-
-\item{...}{further arguments passed to or from methods.}
-
-\item{na.rm}{logical: should missing values be removed?}
+\item{e1, e2}{objects.}
 }
 \description{
 S4 Group Generic Functions for JuliaObject, which includes common mathematical
