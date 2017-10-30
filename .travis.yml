@@ -54,6 +54,7 @@ before_install:
 
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then hdiutil unmount juliamnt; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rm -rf juliamnt; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rm -rf julia.dmg; fi
 
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget http://tug.org/cgi-bin/mactex-download/BasicTeX.pkg -O "/tmp/BasicTex.pkg"; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg "/tmp/BasicTex.pkg" -target / ; fi
