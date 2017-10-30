@@ -37,20 +37,11 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then rm /tmp/pandoc-1.15.2-1-amd64.deb; fi
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install texinfo; fi
 
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then curl -fLo /tmp/rstudio.deb https://download1.rstudio.org/rstudio-1.0.153-amd64.deb; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install gdebi-core; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo gdebi  --non-interactive /tmp/rstudio.deb; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then rm /tmp/rstudio.deb; fi
-
   # osx
   # faster than using homebrew/science tap
   # but no permalink to release download
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget -O /tmp/R.pkg "https://cran.rstudio.com/bin/macosx/$(wget -qO- https://cran.rstudio.com/bin/macosx/ | sed -n 's/.*href="\(R-[^"]*.pkg\)".*/\1/p' | head -n 1)"; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg /tmp/R.pkg -target /; fi
-
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then curl -fLo /tmp/rstudio.dmg https://download1.rstudio.org/RStudio-1.0.153.dmg; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo hdiutil attach /tmp/rstudio.dmg; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export PATH=/Volumes/RStudio-1.0.153/RStudio.app/Contents/MacOS:$PATH; fi
 
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then hdiutil unmount juliamnt; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rm -rf juliamnt; fi
@@ -62,10 +53,6 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export PATH=/usr/texbin:/Library/TeX/texbin:$PATH; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo tlmgr update --self; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo tlmgr install inconsolata upquote courier courier-scaled helvetic; fi
-
-  - "export DISPLAY=:99.0"
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sh -e /etc/init.d/xvfb start; fi
-  - sleep 3 # give xvfb some time to start
 
   - mkdir -p mkdir $HOME/R/library
   - echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
@@ -87,17 +74,6 @@ before_install:
 script:
 - R CMD build .
 - R CMD check *tar.gz
-
-#- Rscript -e 'install.packages("remotes", repos="http://cran.rstudio.com/")'
-#- Rscript -e 'remotes::install_github("Non-Contradiction/TestWithRStudio")'
-#- Rscript -e "library(TestWithRStudio); check_rstudio()"
-#- Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('1'))"
-#- Rscript -e "library(TestWithRStudio); stopifnot(!check_in_rstudio('q()'))"
-
-#- Rscript -e 'remotes::install_github("Non-Contradiction/JuliaCall")'
-#- julia -e 'Pkg.add("RCall")'
-#- julia -e 'using RCall'
-#- Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('library(JuliaCall); julia <- julia_setup(); get(\'call\', julia)(\'sqrt\', 2)', 60))"
 
 after_failure:
   - cat /home/travis/build/Non-Contradiction/JuliaCall/JuliaCall.Rcheck/00check.log

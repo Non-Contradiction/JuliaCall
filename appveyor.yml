@@ -37,12 +37,6 @@ install:
         "C:\projects\R-binary.exe")
   - C:\projects\R-binary.exe /VERYSILENT /DIR=C:\projects\R
 
-  # Download and install the most recent RStudio Windows binary
-  - ps: (new-object net.webclient).DownloadFile(
-      "https://download1.rstudio.org/RStudio-1.0.153.exe",
-      "C:\projects\rstudio.exe")
-  - C:\projects\rstudio.exe /S /D=C:\projects\rstudio
-
   # Download miktex portable
 
   - ps: (new-object net.webclient).DownloadFile(
@@ -54,7 +48,7 @@ install:
   # this adds this to the registry!
   - initexmf --set-config-value "[MPM]AutoInstall=1"
 
-  - set PATH=C:\projects\R\bin\x64;C:\projects\rstudio\bin;%PATH%
+  - set PATH=C:\projects\R\bin\x64;%PATH%
 
   # Download and install Rtools
 
@@ -63,8 +57,6 @@ install:
       "C:\projects\rtools.exe")
   # - C:\projects\rtools.exe /S /D=C:\Rtools
   - C:\projects\rtools.exe /VERYSILENT /DIR=C:\Rtools
-
-  - set PATH=C:\projects\R\bin\x64;C:\projects\rstudio\bin;%PATH%
 
   - set PATH=c:\Rtools\bin;c:\Rtools\gcc-4.6.3\bin;%PATH%
 
@@ -87,17 +79,6 @@ build_script:
 test_script:
 - R CMD build .
 - R CMD check *tar.gz
-
-#- Rscript -e "install.packages(\"remotes\", repos=\"http://cran.rstudio.com/\")"
-#- Rscript -e "remotes::install_github(\"Non-Contradiction/TestWithRStudio\")"
-#- Rscript -e "library(TestWithRStudio); check_rstudio()"
-#- Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('1'))"
-#- Rscript -e "library(TestWithRStudio); stopifnot(!check_in_rstudio('q()'))"
-
-#- Rscript -e "remotes::install_github(\"Non-Contradiction/JuliaCall\")"
-#- julia -e 'Pkg.add("RCall")'
-#- julia -e 'using RCall'
-#- Rscript -e "library(TestWithRStudio); stopifnot(check_in_rstudio('library(JuliaCall); julia <- julia_setup(); get(\'call\', julia)(\'sqrt\', 2)', 60))"
 
 on_finish:
 # uncomment to enable RDP to Appveyor
