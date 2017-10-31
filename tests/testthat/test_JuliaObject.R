@@ -18,5 +18,13 @@ test_that("test of the JuliaObject", {
     expect_equal(julia_call("getfield", r, quote(den)), 12)
     expect_equal(julia_call("getfield", r, quote(num)), 1)
     expect_equal(julia_call("getfield", r, quote(ans)), 1 / 12)
+    expect_equal(fields(r), c("num", "den", "ans"))
+    expect_equal(field(r, "num"), 1)
+    expect_equal(field(r, "den"), 12)
+    expect_equal(field(r, "ans"), 1 / 12)
+    field(r, "num") <- 2; field(r, "ans") <- 2 / 12
+    expect_equal(field(r, "num"), 2)
+    expect_equal(field(r, "den"), 12)
+    expect_equal(field(r, "ans"), 2 / 12)
     remove(r)
 })
