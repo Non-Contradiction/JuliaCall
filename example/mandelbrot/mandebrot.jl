@@ -10,11 +10,9 @@ function mandelbrot(c, iterate_max = 500)
 end
 
 function mandelbrotImage(xs, ys, iterate_max = 500)
-    n = length(xs)
-    p = length(ys)
-    z = zeros(Float64, n, p)
-    for i in 1:n
-        for j in 1:p
+    z = zeros(Float64, length(xs), length(ys))
+    for i in 1:length(xs)
+        for j in 1:length(ys)
             z[i, j] = mandelbrot(xs[i] + ys[j] * im, iterate_max) / iterate_max
         end
     end
