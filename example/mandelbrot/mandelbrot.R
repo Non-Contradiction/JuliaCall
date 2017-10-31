@@ -31,9 +31,7 @@ ys <- seq(-step * size, step * size, step) + centery
 
 ## Use Julia implementation through JuliaCall
 
-if (!julia_exists("mandelbrot")) {
-    julia_source("./example/mandelbrot/mandebrot.jl")
-}
+julia_source("./example/mandelbrot/mandelbrot.jl")
 # warm up for julia function
 invisible(julia_call("mandelbrotImage", xs, ys, 2L))
 system.time(zJL <- julia_call("mandelbrotImage", xs, ys, iterate_max))
