@@ -54,3 +54,8 @@ sexp(x :: AbstractArray{Any}) = sexp(VecSxp, x)
 ## as the design decision in issue #16
 # sexp(x::AbstractArray{BigFloat}) = sexp(JuliaObject(x))
 # sexp(x::BigFloat) = sexp(JuliaObject(x))
+
+function setfield1!(object, name, value1)
+    value = fieldtype(typeof(object), name)(value1)
+    setfield!(object, name, value)
+end

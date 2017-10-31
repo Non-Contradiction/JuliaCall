@@ -88,6 +88,6 @@ field.JuliaObject <- function(object, name){
 #' @rdname JuliaObjectFields
 #' @export
 `field<-.JuliaObject` <- function(object, name, value){
-    julia_call("setfield!", object, as.symbol(name), value)
+    julia_call("JuliaCall.setfield1!", object, as.symbol(name), value)
     object
 }
