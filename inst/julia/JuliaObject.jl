@@ -1,16 +1,12 @@
 import RCall.sexp
 import Base.get
 
-type JuliaObjectID
+immutable JuliaObjectID
     i :: Int32
 end
 
 function nextid(id :: JuliaObjectID)
     JuliaObjectID(id.i + 1)
-end
-
-function getPlainID(id :: JuliaObjectID)
-    id.i
 end
 
 JuliaObjectID() = JuliaObjectID(0)
@@ -21,15 +17,11 @@ type JuliaObject
 end
 
 function getPlainID(x :: JuliaObject)
-    getPlainID(x.id)
-end
-
-function getPlainID(x)
-    x
+    x.id.i
 end
 
 type JuliaObjectContainer
-    object_dict :: Dict{fieldtype(JuliaObjectID, :i), Any}
+    object_dict :: Dict{JuliaObjectID, Any}
     ind :: JuliaObjectID
 end
 
@@ -37,12 +29,16 @@ JuliaObjectContainer() = JuliaObjectContainer(Dict(), JuliaObjectID())
 
 function add!(container :: JuliaObjectContainer, x)
     container.ind = nextid(container.ind)
-    container.object_dict[getPlainID(container.ind)] = x
+    container.object_dict[container.ind] = x
     JuliaObject(container.ind)
 end
 
+function get(container :: JuliaObjectContainer, id :: JuliaObjectID)
+    container.object_dict[id]
+end
+
 function get(container :: JuliaObjectContainer, id)
-    container.object_dict[getPlainID(id)]
+    container.object_dict[JuliaObjectID(id)]
 end
 
 ## As long as the interface stays the same, the following code should be fine.
