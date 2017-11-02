@@ -9,9 +9,23 @@ function nextid(id :: JuliaObjectID)
     JuliaObjectID(id.i + 1)
 end
 
+function getPlainID(id :: JuliaObjectID)
+    id.i
+end
+
+JuliaObjectID() = JuliaObjectID(0)
+
 type JuliaObject
     id :: JuliaObjectID
     JuliaObject(id :: JuliaObjectID) = new(id)
+end
+
+function getPlainID(x :: JuliaObject)
+    getPlainID(x.id)
+end
+
+function getPlainID(x)
+    x
 end
 
 type JuliaObjectContainer
@@ -19,27 +33,22 @@ type JuliaObjectContainer
     ind :: JuliaObjectID
 end
 
+JuliaObjectContainer() = JuliaObjectContainer(Dict(), JuliaObjectID())
+
 function add!(container :: JuliaObjectContainer, x)
     container.ind = nextid(container.ind)
-    container.object_dict[container.ind.i] = x
+    container.object_dict[getPlainID(container.ind)] = x
     JuliaObject(container.ind)
 end
 
-function get(container :: JuliaObjectContainer, id :: JuliaObjectID)
-    container.object_dict[id.i]
-end
-
 function get(container :: JuliaObjectContainer, id)
-    container.object_dict[id]
+    container.object_dict[getPlainID(id)]
 end
-
-function sexp(x :: JuliaObject)
-    reval("JuliaCall:::JuliaObjectFromId")(x.id.i)
-end
-
-julia_object_stack = JuliaObjectContainer(Dict(), JuliaObjectID(0))
 
 ## As long as the interface stays the same, the following code should be fine.
+## The global JuliaObjectContainer julia_object_stack
+
+julia_object_stack = JuliaObjectContainer()
 
 function new_obj(obj)
     add!(julia_object_stack, obj)
@@ -50,7 +59,11 @@ JuliaObject(x :: RObject) = new_obj(rcopy(x))
 JuliaObject(x :: RCall.Sxp) = new_obj(RObject(x))
 JuliaObject(x) = new_obj(x)
 
-sexp(x) = sexp(JuliaObject(x))
+## Conversion related to JuliaObject
+
+function sexp(x :: JuliaObject)
+    reval("JuliaCall:::JuliaObjectFromId")(getPlainID(x))
+end
 
 import RCall.rcopy
 
@@ -65,6 +78,10 @@ end
 import RCall: RClass, rcopytype
 
 rcopytype(::Type{RClass{:JuliaObject}}, x::Ptr{S4Sxp}) = JuliaObject
+
+## Fallback conversions
+
+sexp(x) = sexp(JuliaObject(x))
 
 ## Regarding to issue #12, #13 and #16,
 ## we should use JuliaObject for general AbstractArray
