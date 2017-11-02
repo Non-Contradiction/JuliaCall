@@ -10,21 +10,21 @@ function nextid(id :: JuliaObjectID)
 end
 
 type JuliaObjectContainer
-    object_dict :: Dict{JuliaObjectID, Any}
+    object_dict :: Dict{fieldtype(JuliaObjectID, :i), Any}
     ind :: JuliaObjectID
 end
 
 function add!(container :: JuliaObjectContainer, x)
     container.ind = nextid(container.ind)
-    container.object_dict[container.ind] = x
+    container.object_dict[container.ind.i] = x
 end
 
 function get(container :: JuliaObjectContainer, id :: JuliaObjectID)
-    container.object_dict[id]
+    container.object_dict[id.i]
 end
 
 function get(container :: JuliaObjectContainer, id)
-    container.object_dict[JuliaObjectID(id)]
+    container.object_dict[id]
 end
 
 julia_object_stack = JuliaObjectContainer(Dict(), JuliaObjectID(0))
