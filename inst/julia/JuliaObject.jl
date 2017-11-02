@@ -1,10 +1,24 @@
 import RCall.sexp
 
-julia_object_stack = []
-
 type JuliaObjectID
     i :: Int32
 end
+
+function nextid(id :: JuliaObjectID)
+    JuliaObjectID(id.i + 1)
+end
+
+type JuliaObjectContainer
+    object_dict :: Dict{JuliaObjectID, Any}
+    ind :: JuliaObjectID
+end
+
+function add!(container:: JuliaObjectContainer, x)
+    container.ind = nextid(container.ind)
+    container.object_dict[container.ind] = x
+end
+
+julia_object_stack = JuliaObjectContainer(Dict(), JuliaObjectID(0))
 
 type JuliaObject
     id :: JuliaObjectID
@@ -16,8 +30,8 @@ function sexp(x :: JuliaObject)
 end
 
 function new_obj(obj)
-    push!(julia_object_stack, obj)
-    JuliaObject(JuliaObjectID(Int32(length(julia_object_stack))))
+    add!(julia_object_stack, obj)
+    JuliaObject(julia_object_stack.ind)
 end
 
 JuliaObject(x :: JuliaObject) = x
@@ -31,7 +45,7 @@ import RCall.rcopy
 
 function rcopy(::Type{JuliaObject}, x::Ptr{S4Sxp})
     try
-        julia_object_stack[rcopy(Int32, x[:id])]
+        julia_object_stack[JuliaObjectID(rcopy(Int32, x[:id]))]
     catch e
         nothing
     end
