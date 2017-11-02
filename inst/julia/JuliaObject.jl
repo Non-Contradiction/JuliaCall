@@ -33,6 +33,10 @@ function add!(container :: JuliaObjectContainer, x)
     JuliaObject(container.ind)
 end
 
+function remove!(container :: JuliaObjectContainer, id)
+    delete!(container.object_dict, id)
+end
+
 function get(container :: JuliaObjectContainer, id :: JuliaObjectID)
     container.object_dict[id]
 end
@@ -48,6 +52,10 @@ julia_object_stack = JuliaObjectContainer()
 
 function new_obj(obj)
     add!(julia_object_stack, obj)
+end
+
+function rm_obj(id)
+    remove!(julia_object_stack, id)
 end
 
 JuliaObject(x :: JuliaObject) = x
