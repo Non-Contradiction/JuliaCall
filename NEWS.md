@@ -94,3 +94,9 @@
 * Implement generics for `JuliaObject`, and fix many small bugs.
 * Fix the bug of the conversion of AbstractArray{Any}.
 * Julia tuple converts to R S3 class of JuliaTuple based on list.
+* Add `fields`, `field` and `field<-` function for JuliaObjects.
+
+# JuliaCall 0.10.6.9000
+
+* Use R6 for the implementation of `JuliaObject`.
+  It's lightweight, faster, and safer.
