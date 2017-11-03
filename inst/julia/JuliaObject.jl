@@ -66,14 +66,14 @@ JuliaObject(x) = new_obj(x)
 ## Conversion related to JuliaObject
 
 function sexp(x :: JuliaObject)
-    reval("JuliaCall:::JuliaObjectFromId")(getPlainID(x))
+    reval("JuliaCall:::juliaobject[['new']]")(getPlainID(x))
 end
 
 import RCall.rcopy
 
-function rcopy(::Type{JuliaObject}, x::Ptr{S4Sxp})
+function rcopy(::Type{JuliaObject}, x::Ptr{EnvSxp})
     try
-        get(julia_object_stack, rcopy(x[:id]))
+        get(julia_object_stack, rcopy(RObject(x)[:getID]()))
     catch e
         nothing
     end
@@ -81,7 +81,7 @@ end
 
 import RCall: RClass, rcopytype
 
-rcopytype(::Type{RClass{:JuliaObject}}, x::Ptr{S4Sxp}) = JuliaObject
+rcopytype(::Type{RClass{:JuliaObject}}, x::Ptr{EnvSxp}) = JuliaObject
 
 ## Fallback conversions
 

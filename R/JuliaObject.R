@@ -1,8 +1,28 @@
-setClass("JuliaObject",
-         slots = list(id = "integer"))
-
-## This function will be used by JuliaObject.jl to create new JuliaObject.
-JuliaObjectFromId <- function(id) methods::new("JuliaObject", id = id)
+juliaobject <- R6::R6Class("JuliaObject",
+                           public = list(
+                               initialize = function(id = 0L){
+                                   if (private$locked) return(invisible(self))
+                                   private$id <- id
+                                   private$locked <- TRUE
+                               },
+                               getID = function(){
+                                   private$id
+                               },
+                               print = function(...){
+                                   cat(paste0("Julia Object of type ",
+                                              julia_call("JuliaCall.str_typeof", self),
+                                              ".\n"))
+                                   julia_call("show", self, need_return = FALSE)
+                                   invisible(self)
+                               }
+                               # finalize = function() {
+                               #     julia_call("JuliaCall.rm_obj", private$id)
+                               #     invisible(NULL)
+                               # }
+                               ),
+                           private = list(id = 0L, locked = FALSE),
+                           lock_class = TRUE,
+                           cloneable = FALSE)
 
 #' Convert an R Object to Julia Object.
 #'
@@ -24,20 +44,6 @@ JuliaObjectFromId <- function(id) methods::new("JuliaObject", id = id)
 JuliaObject <- function(x){
     julia_call("JuliaCall.JuliaObject", x)
 }
-
-#' Show JuliaObject.
-#'
-#' S4 method to show JuliaObject.
-#'
-#' @param object the JuliaObject you want to show.
-#'
-#' @export
-setMethod("show", "JuliaObject",
-          function(object){
-              cat(paste0("Julia Object of type ", julia_call("JuliaCall.str_typeof", object), ".\n"))
-              julia_call("show", object, need_return = FALSE)
-              invisible(NULL)
-          })
 
 #' JuliaObject Fields.
 #'
