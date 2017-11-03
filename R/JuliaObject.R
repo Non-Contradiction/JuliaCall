@@ -1,3 +1,4 @@
+#' @import R6
 juliaobject <- R6::R6Class("JuliaObject",
                            public = list(
                                initialize = function(id = 0L){
@@ -19,7 +20,7 @@ juliaobject <- R6::R6Class("JuliaObject",
                                #     julia_call("JuliaCall.rm_obj", private$id)
                                #     invisible(NULL)
                                # }
-                               ),
+                           ),
                            private = list(id = 0L, locked = FALSE),
                            lock_class = TRUE,
                            cloneable = FALSE)
