@@ -100,3 +100,7 @@
 
 * Use R6 for the implementation of `JuliaObject`.
   It's lightweight, faster, and safer.
+
+# JuliaCall 0.11.0.9000
+
+* Remove deprecated `julia_eval_string`.
