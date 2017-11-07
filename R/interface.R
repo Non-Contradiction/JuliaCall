@@ -57,11 +57,15 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
                   unamed_args = args$unamed,
                   need_return = need_return,
                   show_value = show_value)
-    rmd <- identical(need_return, "None") && show_value && .julia$rmd
-    if (rmd) {
-        return(rmd_capture(jcall))
-    }
     r <- .julia$do.call_(jcall)
+
+    rmd <- identical(need_return, "None") && show_value && .julia$rmd
+    if (rmd && !is.null(julia$current_plot)) {
+        plt <- julia$current_plot
+        julia$current_plot <- NULL
+        return(plt)
+    }
+
     if (inherits(r, "error")) stop(r)
     if (!identical(need_return, "None")) return(r)
     invisible(r)
