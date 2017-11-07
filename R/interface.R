@@ -51,6 +51,9 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
     if (!.julia$initialized) {
         julia_setup()
     }
+
+    julia$current_plot <- NULL
+
     args <- separate_arguments(arglist = arg_list)
     jcall <- list(fname = func_name,
                   named_args = args$named,
@@ -61,9 +64,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
 
     rmd <- identical(need_return, "None") && show_value && .julia$rmd
     if (rmd && !is.null(julia$current_plot)) {
-        plt <- julia$current_plot
-        julia$current_plot <- NULL
-        return(plt)
+        return(julia$current_plot)
     }
 
     if (inherits(r, "error")) stop(r)
