@@ -37,7 +37,8 @@ finish_plot <- function(){
 text_wrap <- function(x){
     wrap_character <- do.call(":::", list("knitr", quote(wrap.character)))
     knitr::asis_output(
-        wrap_character(x, options = knitr::opts_current$get()))
+        wrap_character(x, options = knitr::opts_current$get())
+        )
 }
 
 ## This function is used by Julia text_display function
@@ -51,28 +52,6 @@ check_rmd <- function(){
     }
     TRUE
 }
-
-# rmd_capture <- function(jcall){
-#     tmp <- tempfile()
-#     sink(tmp)
-#     r <- .julia$do.call_(jcall)
-#     if (inherits(r, "error")) stop(r)
-#     sink()
-#     output <- paste(readLines(tmp, warn = FALSE), collapse = "\n")
-#     ## Suppress the output when there is no output
-#     if (length(output) > 0 && nchar(trimws(output)) > 0) {
-#         # print(output)
-#         ## A dirty fix
-#         ## use <pre> to prevent markdown code block triggered by
-#         ## four white spaces,
-#         ## which is crucial for displaying plotly plots,
-#         ## but it destroys the formatting of markdown
-#         output <- paste0("<pre><div class = 'JuliaDisplay'>", output, "</div></pre>")
-#         return(knitr::asis_output(output))
-#     }
-#     invisible()
-# }
-
 
 #' Julia language engine in R Markdown
 #'
