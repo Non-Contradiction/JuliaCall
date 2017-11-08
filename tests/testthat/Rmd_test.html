@@ -123,11 +123,6 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-.JuliaDisplay {
-    color: blue;
-}
-</style>
 <div id="use-juliacall-as-julia-engine-in-r-markdown" class="section level2">
 <h2>Use JuliaCall as Julia Engine in R Markdown</h2>
 <p>To use <code>JuliaCall</code> package for julia engine in R Markdown document. Just set the engine for julia to <code>JuliaCall::eng_juliacall</code> like this:</p>
@@ -138,16 +133,17 @@ $(document).ready(function () {
 ## The julia display will follow immediately after the corresponding command
 ## just as the R code in R Markdown.
 a = sqrt(2)</code></pre>
-<pre><div class="JuliaDisplay">1.4142135623730951</div></pre>
+<pre><code>## 1.4142135623730951</code></pre>
 <pre class="julia"><code>a = sqrt(2);
 
 ## And lots of different types of display are supported in JuliaCall.
 ## Like markdown.
 @doc sqrt</code></pre>
-<pre><div class="JuliaDisplay"><div class="markdown"><pre><code>sqrt(x)</code></pre>
-<p>Return $\sqrt{x}$. Throws <a href="@ref"><code>DomainError</code></a> for negative <a href="@ref"><code>Real</code></a> arguments. Use complex negative arguments instead. The prefix operator <code>√</code> is equivalent to <code>sqrt</code>.</p>
-
-</div></div></pre>
+<pre><code>## ```
+## sqrt(x)
+## ```
+## 
+## Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.</code></pre>
 </div>
 <div id="get-access-to-julia-in-r-chunk" class="section level2">
 <h2>Get Access to Julia in R Chunk</h2>
@@ -157,20 +153,6 @@ a = sqrt(2)</code></pre>
 ## we can use functions in JuliaCall to get access to it.
 JuliaCall::julia_eval(&quot;a&quot;)</code></pre>
 <pre><code>## [1] 1.414214</code></pre>
-</div>
-<div id="current-limitations" class="section level2">
-<h2>Current Limitations</h2>
-<p>Currently only R Markdown html output is fully supported by <code>JuliaCall</code>.</p>
-</div>
-<div id="custom-style-of-julia-display-in-r-markdown-using-css" class="section level2">
-<h2>Custom Style of Julia Display in R Markdown Using CSS</h2>
-<p>When using <code>JuliaCall</code> in R Markdown, every julia display will be wrapped in a div with <code>class = &quot;JuliaDisplay&quot;</code>, so you could customize the looking of julia display using css, for example, I use</p>
-<pre><code>    &lt;style&gt;
-    .JuliaDisplay {
-        color: blue;
-    }
-    &lt;/style&gt;</code></pre>
-<p>in this document.</p>
 </div>
 
 
