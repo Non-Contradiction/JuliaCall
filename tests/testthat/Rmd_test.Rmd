@@ -5,12 +5,6 @@ date: "2017/9/23"
 output: html_document
 ---
 
-<style>
-.JuliaDisplay {
-    color: blue;
-}
-</style>
-
 ## Use JuliaCall as Julia Engine in R Markdown
 
 To use `JuliaCall` package for julia engine in R Markdown document.
@@ -44,27 +38,3 @@ using `JuliaCall`, for example:
 ## we can use functions in JuliaCall to get access to it.
 JuliaCall::julia_eval("a")
 ```
-
-
-## Current Limitations
-
-Currently only R Markdown html output is fully supported by
-`JuliaCall`.
-
-## Custom Style of Julia Display in R Markdown Using CSS
-
-When using `JuliaCall` in R Markdown,
-every julia display will be wrapped in 
-a div with `class = "JuliaDisplay"`,
-so you could customize the looking of julia display using css,
-for example, I use
-
-```
-    <style>
-    .JuliaDisplay {
-        color: blue;
-    }
-    </style>
-```
-
-in this document.
