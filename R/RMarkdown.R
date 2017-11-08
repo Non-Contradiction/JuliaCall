@@ -14,11 +14,12 @@ begin_plot <- function(){
 finish_plot <- function(){
     options <- knitr::opts_current$get()
     if (is.null(options$fig.cur)) {
-        options$fig.cur <- 2L
+        number <- 1L
     }
     else {
-        options$fig.cur <- options$fig.cur + 1L
+        number <- options$fig.cur
     }
+    knitr::opts_current$set(fig.cur = number + 1L)
     julia$current_plot <- .julia$pending_plot
 }
 
