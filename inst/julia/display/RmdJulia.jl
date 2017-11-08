@@ -12,7 +12,7 @@ end
 
 function text_display(display::RmdDisplay, x)
     s = limitstringmime(MIME("text/plain"), x)
-    RCall.rcall(:cat, s)
+    R"JuliaCall:::text_display"(s)
 end
 
 function display(display::RmdDisplay, x)

@@ -1,3 +1,18 @@
+## This function is used at the beginning of the julia_call interface
+## to eraze the previous outputs
+output_reset <- function(){
+    julia$current_text <- NULL
+    julia$current_plot <- NULL
+}
+
+## This function is used at the end of the julia_call interface
+## to wrap the current output and return it
+output_wrap <- function(){
+    if (!is.null(julia$current_plot)) return(julia$current_plot)
+    if (!is.null(julia$current_text)) return(julia$current_plot)
+}
+
+## This function is used by Julia plot_display function
 begin_plot <- function(){
     options <- knitr::opts_current$get()
     if (is.null(options$Jfig.cur)) {
@@ -13,9 +28,15 @@ begin_plot <- function(){
     path
 }
 
+## This function is used by Julia plot_display function
 finish_plot <- function(){
     knitr::opts_current$set(Jfig.cur = .julia$pending_plot_number + 1L)
     julia$current_plot <- .julia$pending_plot
+}
+
+## This function is used by Julia text_display function
+text_display <- function(x, options = knitr::opts_current$get()){
+    julia$current_text <- knitr::knit_hooks$get('output')(x, options)
 }
 
 check_rmd <- function(){
