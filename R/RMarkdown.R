@@ -8,18 +8,12 @@ begin_plot <- function(){
     }
     path <- knitr::fig_path(options$dev, options, number)
     .julia$pending_plot <- knitr::include_graphics(path)
+    .julia$pending_plot_number <- number
     path
 }
 
 finish_plot <- function(){
-    options <- knitr::opts_current$get()
-    if (is.null(options$fig.cur)) {
-        number <- 1L
-    }
-    else {
-        number <- options$fig.cur
-    }
-    knitr::opts_current$set(fig.cur = number + 1L)
+    knitr::opts_current$set(fig.cur = .julia$pending_plot_number + 1L)
     julia$current_plot <- .julia$pending_plot
 }
 
