@@ -6,7 +6,7 @@ end
 function plot_display(display::RmdDisplay, x)
     path = rcopy(R"JuliaCall:::begin_plot()")
     mkpath(dirname(path))
-    Plots.savefig(x, path)
+    Main.Plots.savefig(x, path)
     R"JuliaCall:::finish_plot()"
 end
 
