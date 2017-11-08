@@ -1,3 +1,7 @@
+check_rmd <- function(){
+    isTRUE(getOption("knitr.in.progress"))
+}
+
 ## This function is used at the beginning of the julia_call interface
 ## to eraze the previous outputs
 output_reset <- function(){
@@ -7,7 +11,7 @@ output_reset <- function(){
 
 ## This function is used at the end of the julia_call interface
 ## to wrap the current output and return it
-output_wrap <- function(){
+output_return <- function(){
     if (!is.null(julia$current_plot)) return(julia$current_plot)
     if (!is.null(julia$current_text)) return(julia$current_text)
 }
@@ -34,23 +38,11 @@ finish_plot <- function(){
     julia$current_plot <- .julia$pending_plot
 }
 
-text_wrap <- function(x){
-    wrap_character <- do.call(":::", list("knitr", quote(wrap.character)))
-    knitr::asis_output(
-        wrap_character(x, options = knitr::opts_current$get())
-        )
-}
-
 ## This function is used by Julia text_display function
 text_display <- function(x, options = knitr::opts_current$get()){
-    julia$current_text <- text_wrap(x)
-}
-
-check_rmd <- function(){
-    if (!isTRUE(getOption("knitr.in.progress"))) {
-        return(FALSE)
-    }
-    TRUE
+    wrap_character <- do.call(":::", list("knitr", quote(wrap.character)))
+    text <- knitr::asis_output(wrap_character(x, options = options))
+    julia$current_text <- text
 }
 
 #' Julia language engine in R Markdown
@@ -87,9 +79,8 @@ eng_juliacall <- function(options) {
 
         if (length(buffer) && (!julia_call("JuliaCall.incomplete", buffer))) {
             out <- tryCatch(julia_command(buffer),
-                            error = function(e) {
-                                e
-                                })
+                            warning = function(w) w,
+                            error = function(e) e)
             out <- wrap(out)
             if (options$results != 'hide' && length(out) > 0  && nchar(trimws(out)) > 0) {
                 if (length(options$echo) > 1L || options$echo) {
