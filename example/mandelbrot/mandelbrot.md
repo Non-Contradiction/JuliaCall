@@ -103,7 +103,7 @@ ys <- seq(-step * size, step * size, step) + centery
 ``` r
 system.time(zR <- mandelbrotImage(xs, ys, iterate_max))
 #>    user  system elapsed 
-#>  21.779   0.183  22.899
+#>  20.190   0.292  21.329
 ```
 
 ### Time for Julia Implementation using JuliaCall
@@ -113,7 +113,7 @@ system.time(zR <- mandelbrotImage(xs, ys, iterate_max))
 invisible(julia_call("mandelbrotImage", xs, ys, 2L))
 system.time(zJL <- julia_call("mandelbrotImage", xs, ys, iterate_max))
 #>    user  system elapsed 
-#>   0.235   0.003   0.243
+#>   0.235   0.008   0.250
 ```
 
 We could see that JuliaCall brings **a lot of times speedup** of the calculation, actually, we could see more speedup with larger problem scale, like **100 times speedup** or even more. I won't show the result here because I don't want to wait minutes for this RMarkdown document to be knited.
@@ -168,7 +168,7 @@ And we do the timing again:
 invisible(julia_call("mandelbrotImage1", xs, ys, 2L))
 system.time(zJL <- julia_call("mandelbrotImage1", xs, ys, iterate_max))
 #>    user  system elapsed 
-#>   4.001   0.356   4.536
+#>   4.107   0.466   4.855
 ```
 
 We could see the function becomes much slower, because in the `mandelbrot1` function, `z` is an integer at the beginning, but becomes a complex number in the iteration. We could use `@code_warntype` or `code_warntype` and other tools provided by Julia to check about this problem, see <https://docs.julialang.org/en/stable/manual/performance-tips/> for more information.
