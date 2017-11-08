@@ -52,7 +52,9 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
         julia_setup()
     }
 
-    julia$current_plot <- NULL
+    ## This function is used to reset the RMarkdown output,
+    ## see RMarkdown.R for more details.
+    output_reset()
 
     args <- separate_arguments(arglist = arg_list)
     jcall <- list(fname = func_name,
@@ -63,9 +65,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
     r <- .julia$do.call_(jcall)
 
     rmd <- identical(need_return, "None") && show_value && .julia$rmd
-    if (rmd && !is.null(julia$current_plot)) {
-        return(julia$current_plot)
-    }
+    if (rmd) return(output_wrap())
 
     if (inherits(r, "error")) stop(r)
     if (!identical(need_return, "None")) return(r)
