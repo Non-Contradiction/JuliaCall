@@ -67,6 +67,8 @@ check_rmd <- function(){
 eng_juliacall <- function(options) {
     code <- options$code
 
+    wrap <- do.call(":::", list("knitr", quote(wrap)))
+
     if (!options$eval) {
         knitr::engine_output(options, paste(code, collapse = "\n"), "")
     }
@@ -86,10 +88,10 @@ eng_juliacall <- function(options) {
         if (length(buffer) && (!julia_call("JuliaCall.incomplete", buffer))) {
             out <- tryCatch(julia_command(buffer),
                             error = function(e) {
-                                e$message
+                                e
                                 })
-            out <- as.character(out)
-            if (options$results != 'hide' && length(out) > 0) {
+            out <- wrap(out)
+            if (options$results != 'hide' && length(out) > 0  && nchar(trimws(out)) > 0) {
                 if (length(options$echo) > 1L || options$echo) {
                     doc <- paste(c(doc,
                                    knitr::knit_hooks$get('source')(ss, options)
