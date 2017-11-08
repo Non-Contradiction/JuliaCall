@@ -34,9 +34,15 @@ finish_plot <- function(){
     julia$current_plot <- .julia$pending_plot
 }
 
+text_wrap <- function(x){
+    wrap_character <- do.call(":::", list("knitr", quote(wrap.character)))
+    knitr::asis_output(
+        wrap_character(x, options = knitr::opts_current$get()))
+}
+
 ## This function is used by Julia text_display function
 text_display <- function(x, options = knitr::opts_current$get()){
-    julia$current_text <- knitr::knit_hooks$get('output')(x, options)
+    julia$current_text <- text_wrap(x)
 }
 
 check_rmd <- function(){
