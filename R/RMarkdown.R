@@ -9,7 +9,7 @@ output_reset <- function(){
 ## to wrap the current output and return it
 output_wrap <- function(){
     if (!is.null(julia$current_plot)) return(julia$current_plot)
-    if (!is.null(julia$current_text)) return(julia$current_plot)
+    if (!is.null(julia$current_text)) return(julia$current_text)
 }
 
 ## This function is used by Julia plot_display function
