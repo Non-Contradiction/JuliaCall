@@ -79,6 +79,9 @@
     <li>
       <a href="../articles/JuliaCall_in_RMarkdown.html">JuliaCall_in_RMarkdown</a>
     </li>
+    <li>
+      <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -125,17 +128,17 @@ to use Julia packages as easy as possible.</p>
 
   <span class='co'>## Different ways for calculating `sqrt(2)`</span>
 
-  <span class='co'># julia$command("a = sqrt(2)"); julia$eval_string("a")</span>
-  <span class='fu'><a href='julia_command.html'>julia_command</a></span>(<span class='st'>"a = sqrt(2)"</span>); <span class='fu'><a href='julia_eval_string.html'>julia_eval_string</a></span>(<span class='st'>"a"</span>)
+  <span class='co'># julia$command("a = sqrt(2)"); julia$eval("a")</span>
+  <span class='fu'><a href='julia_command.html'>julia_command</a></span>(<span class='st'>"a = sqrt(2)"</span>); <span class='fu'><a href='julia_eval.html'>julia_eval</a></span>(<span class='st'>"a"</span>)
 
-  <span class='co'># julia$eval_string("sqrt(2)")</span>
-  <span class='fu'><a href='julia_eval_string.html'>julia_eval_string</a></span>(<span class='st'>"sqrt(2)"</span>)
+  <span class='co'># julia$eval("sqrt(2)")</span>
+  <span class='fu'><a href='julia_eval.html'>julia_eval</a></span>(<span class='st'>"sqrt(2)"</span>)
 
   <span class='co'># julia$call("sqrt", 2)</span>
   <span class='fu'><a href='call.html'>julia_call</a></span>(<span class='st'>"sqrt"</span>, <span class='fl'>2</span>)
 
-  <span class='co'># julia$eval_string("sqrt")(2)</span>
-  <span class='fu'><a href='julia_eval_string.html'>julia_eval_string</a></span>(<span class='st'>"sqrt"</span>)(<span class='fl'>2</span>)
+  <span class='co'># julia$eval("sqrt")(2)</span>
+  <span class='fu'><a href='julia_eval.html'>julia_eval</a></span>(<span class='st'>"sqrt"</span>)(<span class='fl'>2</span>)
 
   <span class='co'>## You can use `julia_exists` as `exists` in R to test</span>
   <span class='co'>## whether a function or name exists in Julia or not</span>

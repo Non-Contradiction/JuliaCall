@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert an R Object to Julia Object. — JuliaObject • JuliaCall</title>
+<title>JuliaObject Fields. — JuliaObjectFields • JuliaCall</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -107,48 +107,52 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert an R Object to Julia Object.</h1>
+    <h1>JuliaObject Fields.</h1>
     </div>
 
     
-    <p><code>JuliaObject</code> converts an R object to julia object
-  and returns a reference of the corresponding julia object.</p>
+    <p>Get the field names, get or set certain fields of an JuliaObject.</p>
     
 
-    <pre class="usage"><span class='fu'>JuliaObject</span>(<span class='no'>x</span>)</pre>
+    <pre class="usage"><span class='fu'>fields</span>(<span class='no'>object</span>)
+
+<span class='co'># S3 method for JuliaObject</span>
+<span class='fu'>fields</span>(<span class='no'>object</span>)
+
+<span class='fu'>field</span>(<span class='no'>object</span>, <span class='no'>name</span>)
+
+<span class='co'># S3 method for JuliaObject</span>
+<span class='fu'>field</span>(<span class='no'>object</span>, <span class='no'>name</span>)
+
+<span class='fu'>field</span>(<span class='no'>object</span>, <span class='no'>name</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span>
+
+<span class='co'># S3 method for JuliaObject</span>
+<span class='fu'>field</span>(<span class='no'>object</span>, <span class='no'>name</span>) <span class='kw'>&lt;-</span> <span class='no'>value</span></pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
-      <td><p>the R object you want to convert to julia object.</p></td>
+      <th>object</th>
+      <td><p>the JuliaObject.</p></td>
+    </tr>
+    <tr>
+      <th>name</th>
+      <td><p>a character string specifying the fields to be accessed or set.</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>the new value of the field of the JuliaObject.</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an S4 object of class JuliaObject
-which contains an id correspond to the julia object.</p>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-</div><span class='co'># NOT RUN {</span>
- <span class='co'>## julia_setup is quite time consuming</span>
-  <span class='no'>a</span> <span class='kw'>&lt;-</span> <span class='fu'>JuliaObject</span>(<span class='fl'>1</span>)
-<span class='co'># }</span><div class='input'>
-</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

@@ -56,6 +56,9 @@
     <li>
       <a href="../articles/JuliaCall_in_RMarkdown.html">JuliaCall_in_RMarkdown</a>
     </li>
+    <li>
+      <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -125,7 +128,7 @@ mandelbrotImage &lt;-<span class="st"> </span><span class="cf">function</span>(x
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(JuliaCall)
 <span class="kw"><a href="../reference/julia_setup.html">julia_setup</a></span>()
 <span class="co">#&gt; Julia at location /Applications/Julia-0.6.app/Contents/Resources/julia/bin will be used.</span>
-<span class="co">#&gt; Julia version 0.6.0 found.</span>
+<span class="co">#&gt; Julia version 0.6.1 found.</span>
 <span class="co">#&gt; Julia initiation...</span>
 <span class="co">#&gt; Finish Julia initiation.</span>
 <span class="co">#&gt; Loading setup script for JuliaCall...</span>
@@ -141,9 +144,9 @@ mandelbrotImage &lt;-<span class="st"> </span><span class="cf">function</span>(x
 <span class="st">        end</span>
 <span class="st">    end</span>
 <span class="st">    iterate_max</span>
-<span class="st">end"</span>)</code></pre></div>
-<pre><div class="JuliaDisplay">mandelbrot (generic function with 2 methods)</div></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="st">end"</span>)
+<span class="co">#&gt; mandelbrot (generic function with 2 methods)</span>
+
 <span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"</span>
 <span class="st">function mandelbrotImage(xs, ys, iterate_max = 500)</span>
 <span class="st">    z = zeros(Float64, length(xs), length(ys))</span>
@@ -153,8 +156,8 @@ mandelbrotImage &lt;-<span class="st"> </span><span class="cf">function</span>(x
 <span class="st">        end</span>
 <span class="st">    end</span>
 <span class="st">    z</span>
-<span class="st">end"</span>)</code></pre></div>
-<pre><div class="JuliaDisplay">mandelbrotImage (generic function with 2 methods)</div></pre>
+<span class="st">end"</span>)
+<span class="co">#&gt; mandelbrotImage (generic function with 2 methods)</span></code></pre></div>
 </div>
 <div id="performance-comparison-between-r-and-julia-implementation" class="section level2">
 <h2 class="hasAnchor">
@@ -172,7 +175,7 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <a href="#time-for-pure-r-implementation" class="anchor"></a>Time for Pure R Implementation</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(zR &lt;-<span class="st"> </span><span class="kw">mandelbrotImage</span>(xs, ys, iterate_max))
 <span class="co">#&gt;   用户   系统   流逝 </span>
-<span class="co">#&gt; 17.550  0.234 18.632</span></code></pre></div>
+<span class="co">#&gt; 19.767  0.191 20.810</span></code></pre></div>
 </div>
 <div id="time-for-julia-implementation-using-juliacall" class="section level3">
 <h3 class="hasAnchor">
@@ -181,7 +184,7 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <span class="kw">invisible</span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, 2L))
 <span class="kw">system.time</span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, iterate_max))
 <span class="co">#&gt;  用户  系统  流逝 </span>
-<span class="co">#&gt; 0.206 0.003 0.214</span></code></pre></div>
+<span class="co">#&gt; 0.225 0.003 0.240</span></code></pre></div>
 <p>We could see that JuliaCall brings <strong>a lot of times speedup</strong> of the calculation, actually, we could see more speedup with larger problem scale, like <strong>100 times speedup</strong> or even more. I won’t show the result here because I don’t want to wait minutes for this RMarkdown document to be knited.</p>
 </div>
 </div>
@@ -208,9 +211,9 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <span class="st">        end</span>
 <span class="st">    end</span>
 <span class="st">    iterate_max</span>
-<span class="st">end"</span>)</code></pre></div>
-<pre><div class="JuliaDisplay">mandelbrot1 (generic function with 2 methods)</div></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="st">end"</span>)
+<span class="co">#&gt; mandelbrot1 (generic function with 2 methods)</span>
+
 <span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"</span>
 <span class="st">function mandelbrotImage1(xs, ys, iterate_max = 500)</span>
 <span class="st">    z = zeros(Float64, length(xs), length(ys))</span>
@@ -220,14 +223,14 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <span class="st">        end</span>
 <span class="st">    end</span>
 <span class="st">    z</span>
-<span class="st">end"</span>)</code></pre></div>
-<pre><div class="JuliaDisplay">mandelbrotImage1 (generic function with 2 methods)</div></pre>
+<span class="st">end"</span>)
+<span class="co">#&gt; mandelbrotImage1 (generic function with 2 methods)</span></code></pre></div>
 <p>And we do the timing again:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A little warm up for Julia implementation</span>
 <span class="kw">invisible</span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, 2L))
 <span class="kw">system.time</span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, iterate_max))
 <span class="co">#&gt;  用户  系统  流逝 </span>
-<span class="co">#&gt; 3.284 0.059 3.486</span></code></pre></div>
+<span class="co">#&gt; 3.933 0.081 4.492</span></code></pre></div>
 <p>We could see the function becomes much slower, because in the <code>mandelbrot1</code> function, <code>z</code> is an integer at the beginning, but becomes a complex number in the iteration. We could use <code>@code_warntype</code> or <code>code_warntype</code> and other tools provided by Julia to check about this problem, see <a href="https://docs.julialang.org/en/stable/manual/performance-tips/" class="uri">https://docs.julialang.org/en/stable/manual/performance-tips/</a> for more information.</p>
 </div>
 </div>
