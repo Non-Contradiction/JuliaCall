@@ -17,8 +17,10 @@ end
 
 function display(display::RmdDisplay, x)
     try
-        plot_display(display, x)
-        return
+        if isa(x, Main.Plots.Plot)
+            plot_display(display, x)
+            return
+        end
     end
     try
         text_display(display, x)
