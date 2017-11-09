@@ -133,7 +133,7 @@ a = sqrt(<span class="fl">2</span>)</code></pre></div>
 <a href="#pyplot-backend" class="anchor"></a>PyPlot backend</h4>
 <div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">pyplot()</code></pre></div>
 <pre><code>## Plots.PyPlotBackend()</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">plot(sin,(x-&gt;<span class="kw">begin</span> sin(<span class="fl">2</span>x) <span class="kw">end</span>),<span class="fl">0</span>,<span class="fl">2</span>pi,line=<span class="fl">4</span>,leg=false,fill=(<span class="fl">0</span>,:orange))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">plot(Plots.fakedata(<span class="fl">50</span>,<span class="fl">5</span>),w=<span class="fl">3</span>)</code></pre></div>
 <p><img src="JuliaCall_in_RMarkdown_files/figure-html/unnamed-chunk-3J-1.png" width="600"></p>
 </div>
 <div id="gr-backend" class="section level4">
@@ -141,7 +141,7 @@ a = sqrt(<span class="fl">2</span>)</code></pre></div>
 <a href="#gr-backend" class="anchor"></a>GR backend</h4>
 <div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">gr()</code></pre></div>
 <pre><code>## Plots.GRBackend()</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">plot(sin,(x-&gt;<span class="kw">begin</span> sin(<span class="fl">2</span>x) <span class="kw">end</span>),<span class="fl">0</span>,<span class="fl">2</span>pi,line=<span class="fl">4</span>,leg=false,fill=(<span class="fl">0</span>,:orange))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">plot(Plots.fakedata(<span class="fl">50</span>,<span class="fl">5</span>),w=<span class="fl">3</span>)</code></pre></div>
 <p><img src="JuliaCall_in_RMarkdown_files/figure-html/unnamed-chunk-4J-1.png" width="600"></p>
 </div>
 </div>
@@ -156,12 +156,6 @@ a = sqrt(<span class="fl">2</span>)</code></pre></div>
 ## we can use functions in JuliaCall to get access to it.
 <span class="kw"><a href="../reference/julia_eval.html">julia_eval</a></span>(<span class="st">"a"</span>)</code></pre></div>
 <pre><code>## [1] 1.414214</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## And you can also get access to Julia libraries and functions.
-<span class="kw"><a href="../reference/julia_package.html">julia_library</a></span>(<span class="st">"Plots"</span>)
-<span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"gr()"</span>)</code></pre></div>
-<pre><code>## Plots.GRBackend()</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"plot(Plots.fakedata(50,5),w=3)"</span>)</code></pre></div>
-<p><img src="JuliaCall_in_RMarkdown_files/figure-html/unnamed-chunk-5J-1.png" width="300"></p>
 </div>
 </div>
   </div>

@@ -52,14 +52,14 @@ using Plots
 
 ```{julia, cache=TRUE}
 pyplot()
-plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
+plot(Plots.fakedata(50,5),w=3)
 ```
 
 #### GR backend
 
 ```{julia, cache=TRUE}
 gr()
-plot(sin,(x->begin sin(2x) end),0,2pi,line=4,leg=false,fill=(0,:orange))
+plot(Plots.fakedata(50,5),w=3)
 ```
 
 ## Get Access to Julia in R Chunk
@@ -72,9 +72,4 @@ library(JuliaCall)
 ## In the previous julia chunk, we define variable a, 
 ## we can use functions in JuliaCall to get access to it.
 julia_eval("a")
-
-## And you can also get access to Julia libraries and functions.
-julia_library("Plots")
-julia_command("gr()")
-julia_command("plot(Plots.fakedata(50,5),w=3)")
 ```
