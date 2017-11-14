@@ -28,8 +28,8 @@ begin_plot <- function(){
     else {
         number <- options$Jfig.cur
     }
-    path <- knitr::fig_chunk(label = paste0(options$label, "J"),
-                             ext = options$dev, number = number)
+    path <- knitr::fig_chunk(label = options$label,
+                             ext = options$dev, number = paste0("J", number))
     .julia$pending_plot <- knitr::include_graphics(path)
     .julia$pending_plot_number <- number
     path
