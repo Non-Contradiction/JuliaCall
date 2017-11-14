@@ -41,14 +41,11 @@ finish_plot <- function(){
     julia$current_plot <- .julia$pending_plot
 }
 
-#' @importFrom knitr knit_print
-#' @export
-knit_print.julia_text <- function(x, ...) cat(x)
-
 ## This function is used by Julia text_display function
 ## x will be the text representation of the Julia result.
-text_display <- function(x){
-    text <- structure(x, class = "julia_text")
+text_display <- function(x, options = knitr::opts_current$get()){
+    wrap_character <- do.call(":::", list("knitr", quote(wrap.character)))
+    text <- knitr::asis_output(wrap_character(x, options = options))
     julia$current_text <- text
 }
 
