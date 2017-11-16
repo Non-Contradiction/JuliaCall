@@ -3,7 +3,7 @@ title: "JuliaCall in R Markdown"
 author: "Changcheng Li"
 date: "`r Sys.Date()`"
 output: 
-  rmarkdown::html_document
+  rmarkdown::github_document
 ---
 
 ## Use JuliaCall as Julia Engine in R Markdown
@@ -15,9 +15,6 @@ Just set the engine for julia to `JuliaCall::eng_juliacall` like this:
 knitr::opts_chunk$set(echo = TRUE)
 knitr::knit_engines$set(julia = JuliaCall::eng_juliacall)
 ```
-
-And in the julia code chunk, just use 
-"```{julia}".
 
 Below is how it looks like when using `JuliaCall`
 as language engine for Julia. 
@@ -38,7 +35,7 @@ a = sqrt(2);
 @doc sqrt
 ```
 
-### Support for `Plots.jl` {.tabset}
+### Support for `Plots.jl`
 
 `Plots.jl` is an easy to use and powerful julia package for plotting,
 <https://github.com/JuliaPlots/Plots.jl>.
