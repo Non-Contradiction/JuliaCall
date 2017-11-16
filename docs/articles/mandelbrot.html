@@ -166,7 +166,7 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <a href="#time-for-pure-r-implementation" class="anchor"></a>Time for Pure R Implementation</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(zR &lt;-<span class="st"> </span><span class="kw">mandelbrotImage</span>(xs, ys, iterate_max))
 <span class="co">#&gt;   用户   系统   流逝 </span>
-<span class="co">#&gt; 19.806  0.190 20.562</span></code></pre></div>
+<span class="co">#&gt; 17.512  0.109 17.908</span></code></pre></div>
 </div>
 <div id="time-for-julia-implementation-using-juliacall" class="section level3">
 <h3 class="hasAnchor">
@@ -175,7 +175,7 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <span class="kw">invisible</span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, 2L))
 <span class="kw">system.time</span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, iterate_max))
 <span class="co">#&gt;  用户  系统  流逝 </span>
-<span class="co">#&gt; 0.227 0.003 0.236</span></code></pre></div>
+<span class="co">#&gt; 0.196 0.001 0.199</span></code></pre></div>
 <p>We could see that JuliaCall brings <strong>a lot of times speedup</strong> of the calculation, actually, we could see more speedup with larger problem scale, like <strong>100 times speedup</strong> or even more. I won’t show the result here because I don’t want to wait minutes for this RMarkdown document to be knited.</p>
 </div>
 </div>
@@ -221,7 +221,7 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <span class="kw">invisible</span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, 2L))
 <span class="kw">system.time</span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, iterate_max))
 <span class="co">#&gt;  用户  系统  流逝 </span>
-<span class="co">#&gt; 3.402 0.048 3.528</span></code></pre></div>
+<span class="co">#&gt; 3.197 0.029 3.271</span></code></pre></div>
 <p>We could see the function becomes much slower, because in the <code>mandelbrot1</code> function, <code>z</code> is an integer at the beginning, but becomes a complex number in the iteration. We could use <code>@code_warntype</code> or <code>code_warntype</code> and other tools provided by Julia to check about this problem, see <a href="https://docs.julialang.org/en/stable/manual/performance-tips/" class="uri">https://docs.julialang.org/en/stable/manual/performance-tips/</a> for more information.</p>
 </div>
 </div>

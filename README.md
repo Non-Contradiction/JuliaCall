@@ -11,7 +11,6 @@ JuliaCall for Seamless Integration of R and Julia
 -   [Installation](#installation)
 -   [Basic Usage](#basic-usage)
 -   [How to Get Help?](#how-to-get-help)
--   [Gallery of JuliaCall](#gallery-of-juliacall)
 -   [JuliaCall for R Package Developers](#juliacall-for-r-package-developers)
 -   [Suggestion and Issue Reporting](#suggestion-and-issue-reporting)
 
@@ -111,11 +110,6 @@ julia_help("sqrt")
 -   The GitHub Pages for this repository host the documentation for the development version of `JuliaCall`: <https://non-contradiction.github.io/JuliaCall/>.
 
 -   And you are more than welcome to contact me about `JuliaCall` at <lch34677@gmail.com> or <cxl508@psu.edu>.
-
-Gallery of JuliaCall
---------------------
-
-From the GitHub Pages for this repository you can find the gallery for `JuliaCall`: <https://non-contradiction.github.io/JuliaCall/articles/Gallery.html>.
 
 JuliaCall for R Package Developers
 ----------------------------------
