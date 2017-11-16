@@ -1,5 +1,5 @@
 ## Test environments
-* local OS X 10.12, R 3.4.1
+* local OS X 10.13.1, R 3.4.2
 * OS X 10.12 (on travis-ci), R 3.4.2
 * ubuntu 14.04 (on travis-ci), R 3.4.2
 * windows (on appveyor), R 3.4.2 with Rtools34
