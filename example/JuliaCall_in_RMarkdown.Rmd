@@ -39,7 +39,7 @@ a = sqrt(2);
 
 `Plots.jl` is an easy to use and powerful julia package for plotting,
 <https://github.com/JuliaPlots/Plots.jl>.
-And `JuliaCall` supports `Plots.jl` of cource!!
+And `JuliaCall` supports `Plots.jl` of course!!
 
 ```{julia, cache=TRUE}
 using Plots

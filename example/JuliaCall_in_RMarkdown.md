@@ -45,7 +45,7 @@ a = sqrt(2);
 
 ### Support for `Plots.jl`
 
-`Plots.jl` is an easy to use and powerful julia package for plotting, <https://github.com/JuliaPlots/Plots.jl>. And `JuliaCall` supports `Plots.jl` of cource!!
+`Plots.jl` is an easy to use and powerful julia package for plotting, <https://github.com/JuliaPlots/Plots.jl>. And `JuliaCall` supports `Plots.jl` of course!!
 
 ``` julia
 using Plots
