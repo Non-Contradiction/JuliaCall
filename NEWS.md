@@ -106,4 +106,4 @@
 * Remove deprecated `julia_eval_string`.
 * Improve *JuliaCall* RMarkdown engine.
   The display system should work for all kinds of documents that rmarkdown supports.
-  
+* Should use older version of RCall with older version of R.
