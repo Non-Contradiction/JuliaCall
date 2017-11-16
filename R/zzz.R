@@ -46,7 +46,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     ## Thank to randy3k for pointing this out,
     ## `RCall` needs to be precompiled with the current R.
 
-    julia_line(paste(system.file("julia/RCallprepare.jl", package = "JuliaCall"), R.home()),
+    julia_line(paste(system.file("julia/RCallprepare.jl", package = "JuliaCall"), R.home(), getRversion()),
                stderr = FALSE)
 
     # julia_line("-e \"pkg = string(:Suppressor); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using Suppressor\"",
