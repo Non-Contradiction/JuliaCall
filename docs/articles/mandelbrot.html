@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> • JuliaCall</title>
+<title>Improve R’s Performance using JuliaCall with Mandel Set Example • JuliaCall</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -37,9 +37,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/Gallery.html">Gallery</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -48,16 +45,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Gallery.html">Gallery</a>
+      <a href="../articles/Julia_in_RMarkdown.html">Julia in RMarkdown</a>
     </li>
     <li>
-      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall_in_Jupyter_R_Notebook</a>
+      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall in Jupyter R Notebook</a>
     </li>
     <li>
-      <a href="../articles/JuliaCall_in_RMarkdown.html">JuliaCall_in_RMarkdown</a>
-    </li>
-    <li>
-      <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall</a>
+      <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall with Mandel Set Example</a>
     </li>
   </ul>
 </li>
@@ -84,16 +78,13 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1></h1>
+      <h1>Improve R’s Performance using JuliaCall with Mandel Set Example</h1>
             
           </div>
 
     
     
 <div class="contents">
-<div id="improve-rs-performance-using-juliacall-with-mandel-set-example" class="section level1">
-<h1 class="hasAnchor">
-<a href="#improve-rs-performance-using-juliacall-with-mandel-set-example" class="anchor"></a>Improve R’s Performance using JuliaCall with Mandel Set Example</h1>
 <div id="what-is-mandelbrot-set" class="section level2">
 <h2 class="hasAnchor">
 <a href="#what-is-mandelbrot-set" class="anchor"></a>What is Mandelbrot Set?</h2>
@@ -175,7 +166,7 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <a href="#time-for-pure-r-implementation" class="anchor"></a>Time for Pure R Implementation</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(zR &lt;-<span class="st"> </span><span class="kw">mandelbrotImage</span>(xs, ys, iterate_max))
 <span class="co">#&gt;   用户   系统   流逝 </span>
-<span class="co">#&gt; 18.697  0.072 18.891</span></code></pre></div>
+<span class="co">#&gt; 19.806  0.190 20.562</span></code></pre></div>
 </div>
 <div id="time-for-julia-implementation-using-juliacall" class="section level3">
 <h3 class="hasAnchor">
@@ -184,7 +175,7 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <span class="kw">invisible</span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, 2L))
 <span class="kw">system.time</span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, iterate_max))
 <span class="co">#&gt;  用户  系统  流逝 </span>
-<span class="co">#&gt; 0.227 0.001 0.229</span></code></pre></div>
+<span class="co">#&gt; 0.227 0.003 0.236</span></code></pre></div>
 <p>We could see that JuliaCall brings <strong>a lot of times speedup</strong> of the calculation, actually, we could see more speedup with larger problem scale, like <strong>100 times speedup</strong> or even more. I won’t show the result here because I don’t want to wait minutes for this RMarkdown document to be knited.</p>
 </div>
 </div>
@@ -230,7 +221,7 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <span class="kw">invisible</span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, 2L))
 <span class="kw">system.time</span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, iterate_max))
 <span class="co">#&gt;  用户  系统  流逝 </span>
-<span class="co">#&gt; 3.570 0.028 3.631</span></code></pre></div>
+<span class="co">#&gt; 3.402 0.048 3.528</span></code></pre></div>
 <p>We could see the function becomes much slower, because in the <code>mandelbrot1</code> function, <code>z</code> is an integer at the beginning, but becomes a complex number in the iteration. We could use <code>@code_warntype</code> or <code>code_warntype</code> and other tools provided by Julia to check about this problem, see <a href="https://docs.julialang.org/en/stable/manual/performance-tips/" class="uri">https://docs.julialang.org/en/stable/manual/performance-tips/</a> for more information.</p>
 </div>
 </div>
@@ -244,7 +235,6 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <p><img src="mandelbrot_files/figure-html/unnamed-chunk-10-1.png" width="672"></p>
 </div>
 </div>
-</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -252,16 +242,12 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li>
-<a href="#improve-rs-performance-using-juliacall-with-mandel-set-example">Improve R’s Performance using JuliaCall with Mandel Set Example</a><ul class="nav nav-pills nav-stacked">
 <li><a href="#what-is-mandelbrot-set">What is Mandelbrot Set?</a></li>
       <li><a href="#pure-r-implementation">Pure R Implementation</a></li>
       <li><a href="#julia-implementation-in-r-using-juliacall">Julia Implementation in R using JuliaCall</a></li>
       <li><a href="#performance-comparison-between-r-and-julia-implementation">Performance Comparison Between R and Julia Implementation</a></li>
       <li><a href="#tips-for-julia-performance">Tips for Julia Performance</a></li>
       <li><a href="#conclusion">Conclusion</a></li>
-      </ul>
-</li>
       </ul>
 </div>
       </div>

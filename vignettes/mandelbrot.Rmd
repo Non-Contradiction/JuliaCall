@@ -1,8 +1,7 @@
 ---
+title: "Improve R's Performance using JuliaCall with Mandel Set Example"
 output: github_document
 ---
-
-# Improve R's Performance using JuliaCall with Mandel Set Example
 
 ## What is Mandelbrot Set? 
 

@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JuliaCall in R Markdown • JuliaCall</title>
+<title>Julia in RMarkdown • JuliaCall</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 <!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
@@ -37,9 +37,6 @@
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
-<li>
-  <a href="../articles/Gallery.html">Gallery</a>
-</li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
     Articles
@@ -48,16 +45,13 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Gallery.html">Gallery</a>
+      <a href="../articles/Julia_in_RMarkdown.html">Julia in RMarkdown</a>
     </li>
     <li>
-      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall_in_Jupyter_R_Notebook</a>
+      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall in Jupyter R Notebook</a>
     </li>
     <li>
-      <a href="../articles/JuliaCall_in_RMarkdown.html">JuliaCall_in_RMarkdown</a>
-    </li>
-    <li>
-      <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall</a>
+      <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall with Mandel Set Example</a>
     </li>
   </ul>
 </li>
@@ -84,10 +78,10 @@
       </header><div class="row">
   <div class="col-md-9">
     <div class="page-header toc-ignore">
-      <h1>JuliaCall in R Markdown</h1>
+      <h1>Julia in RMarkdown</h1>
                         <h4 class="author">Changcheng Li</h4>
             
-            <h4 class="date">2017-11-08</h4>
+            <h4 class="date">2017-11-16</h4>
           </div>
 
     
@@ -99,7 +93,6 @@
 <p>To use <code>JuliaCall</code> package for julia engine in R Markdown document. Just set the engine for julia to <code><a href="http://www.rdocumentation.org/packages/JuliaCall/topics/eng_juliacall">JuliaCall::eng_juliacall</a></code> like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>)
 knitr<span class="op">::</span>knit_engines<span class="op">$</span><span class="kw">set</span>(<span class="dt">julia =</span> JuliaCall<span class="op">::</span>eng_juliacall)</code></pre></div>
-<p>And in the julia code chunk, just use “```{julia}”.</p>
 <p>Below is how it looks like when using <code>JuliaCall</code> as language engine for Julia.</p>
 </div>
 <div id="how-does-juliacall-in-r-markdown-look-like" class="section level2">
@@ -122,11 +115,11 @@ a = sqrt(<span class="fl">2</span>)</code></pre></div>
 ## ```
 ## 
 ## Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.</code></pre>
-<div id="support-for-plots-jl" class="section level3 tabset">
+<div id="support-for-plots-jl" class="section level3">
 <h3 class="hasAnchor">
 <a href="#support-for-plots-jl" class="anchor"></a>Support for <code>Plots.jl</code>
 </h3>
-<p><code>Plots.jl</code> is an easy to use and powerful julia package for plotting, <a href="https://github.com/JuliaPlots/Plots.jl" class="uri">https://github.com/JuliaPlots/Plots.jl</a>. And <code>JuliaCall</code> supports <code>Plots.jl</code> of cource!!</p>
+<p><code>Plots.jl</code> is an easy to use and powerful julia package for plotting, <a href="https://github.com/JuliaPlots/Plots.jl" class="uri">https://github.com/JuliaPlots/Plots.jl</a>. And <code>JuliaCall</code> supports <code>Plots.jl</code> of course!!</p>
 <div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">using Plots</code></pre></div>
 <div id="pyplot-backend" class="section level4">
 <h4 class="hasAnchor">
@@ -134,7 +127,7 @@ a = sqrt(<span class="fl">2</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">pyplot()</code></pre></div>
 <pre><code>## Plots.PyPlotBackend()</code></pre>
 <div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">plot(Plots.fakedata(<span class="fl">50</span>,<span class="fl">5</span>),w=<span class="fl">3</span>)</code></pre></div>
-<p><img src="JuliaCall_in_RMarkdown_files/figure-html/unnamed-chunk-3J-1.png" width="600"></p>
+<p><img src="JuliaCall_in_RMarkdown_files/figure-markdown_github/unnamed-chunk-3-J1.png" width="600"></p>
 </div>
 <div id="gr-backend" class="section level4">
 <h4 class="hasAnchor">
@@ -142,7 +135,7 @@ a = sqrt(<span class="fl">2</span>)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">gr()</code></pre></div>
 <pre><code>## Plots.GRBackend()</code></pre>
 <div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">plot(Plots.fakedata(<span class="fl">50</span>,<span class="fl">5</span>),w=<span class="fl">3</span>)</code></pre></div>
-<p><img src="JuliaCall_in_RMarkdown_files/figure-html/unnamed-chunk-4J-1.png" width="600"></p>
+<p><img src="JuliaCall_in_RMarkdown_files/figure-markdown_github/unnamed-chunk-4-J1.png" width="600"></p>
 </div>
 </div>
 </div>

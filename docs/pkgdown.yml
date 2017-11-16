@@ -2,8 +2,7 @@ urls:
   reference: https://non-contradiction.github.io/JuliaCall//reference
   article: https://non-contradiction.github.io/JuliaCall//articles
 articles:
-  Gallery: Gallery.html
+  Julia_in_RMarkdown: Julia_in_RMarkdown.html
   JuliaCall_in_Jupyter_R_Notebook: JuliaCall_in_Jupyter_R_Notebook.html
-  JuliaCall_in_RMarkdown: JuliaCall_in_RMarkdown.html
   mandelbrot: mandelbrot.html
 

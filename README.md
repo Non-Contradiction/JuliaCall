@@ -44,7 +44,7 @@ library(JuliaCall)
 
 julia <- julia_setup()
 #> Julia at location /Applications/Julia-0.6.app/Contents/Resources/julia/bin will be used.
-#> Julia version 0.6.0 found.
+#> Julia version 0.6.1 found.
 #> Julia initiation...
 #> Finish Julia initiation.
 #> Loading setup script for JuliaCall...
@@ -90,7 +90,7 @@ julia_help("sqrt")
 julia_install_package("Optim")
 julia_install_package_if_needed("Optim")
 julia_installed_package("Optim")
-#> [1] "0.9.3"
+#> [1] "0.10.1"
 julia_library("Optim")
 ```
 
