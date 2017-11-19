@@ -115,6 +115,11 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
         )
     }
 
+    .julia$atexit_hook <- .julia$compile(
+        sig = c(),
+        body = "jl_atexit_hook(0); return R_NilValue;"
+    )
+
     if (verbose) message("Julia initiation...")
 
     .julia$init()
@@ -144,7 +149,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     reg.finalizer(.julia,
                   function(e){
                       message("Julia exit.");
-                      .julia$cmd("exit()")
+                      .julia$atexit_hook();
                       dyn.unload(.julia$dll_file)
                       },
                   onexit = TRUE)
