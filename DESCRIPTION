@@ -1,10 +1,12 @@
 Package: JuliaCall
 Type: Package
 Title: Seamless Integration Between R and 'Julia'
-Version: 0.11.1
-Date: 2017-11-15
-Authors@R: person("Changcheng Li", email = "cxl508@psu.edu",
-    role = c("aut", "cre"))
+Version: 0.11.1.9000
+Date: 2017-11-19
+Authors@R: c(
+    person("Changcheng", "Li", , "cxl508@psu.edu", c("aut", "cre")),
+    person("Randy", "Lai", role = "ctb")
+    )
 Description: Provides an R interface to 'Julia',
     which is a high-level, high-performance dynamic programming language
     for numerical computing, see <https://julialang.org/> for more information.
