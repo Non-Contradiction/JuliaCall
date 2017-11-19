@@ -107,7 +107,7 @@ test_that("test of Math and Math2 group", {
     testJuliaObjectGeneric(sinpi, 1)
     testJuliaObjectGeneric(tan, 1)
     testJuliaObjectGeneric(tanh, 1)
-    testJuliaObjectGeneric(tanpi, 1)
+#    testJuliaObjectGeneric(tanpi, 1)
     testJuliaObjectGeneric(gamma, 1)
 
     testJuliaObjectGeneric(round, 1)
