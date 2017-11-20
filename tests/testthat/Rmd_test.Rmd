@@ -2,7 +2,7 @@
 title: "Test"
 author: "Changcheng Li"
 date: "2017/9/23"
-output: html_document
+output: github_document
 ---
 
 ## Use JuliaCall as Julia Engine in R Markdown
