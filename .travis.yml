@@ -9,7 +9,6 @@ env:
   - NOT_CRAN="true"
 
 julia:
-  - 0.5
   - 0.6
 
 notifications:
@@ -57,7 +56,6 @@ before_install:
   - mkdir -p mkdir $HOME/R/library
   - echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
 
-  - Rscript -e 'install.packages("inline", repos="http://cran.rstudio.com/")'
   - Rscript -e 'install.packages("testthat", repos="http://cran.rstudio.com/")'
   - Rscript -e 'install.packages("knitr", repos="http://cran.rstudio.com/")'
   - Rscript -e 'install.packages("rmarkdown", repos="http://cran.rstudio.com/")'
