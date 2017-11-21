@@ -38,11 +38,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// juliacall_atexit_hook
+void juliacall_atexit_hook(int status);
+RcppExport SEXP _JuliaCall_juliacall_atexit_hook(SEXP statusSEXP) {
+BEGIN_RCPP
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type status(statusSEXP);
+    juliacall_atexit_hook(status);
+    return R_NilValue;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_JuliaCall_juliacall_initialize", (DL_FUNC) &_JuliaCall_juliacall_initialize, 1},
     {"_JuliaCall_juliacall_cmd", (DL_FUNC) &_JuliaCall_juliacall_cmd, 1},
     {"_JuliaCall_juliacall_docall", (DL_FUNC) &_JuliaCall_juliacall_docall, 1},
+    {"_JuliaCall_juliacall_atexit_hook", (DL_FUNC) &_JuliaCall_juliacall_atexit_hook, 1},
     {NULL, NULL, 0}
 };
 

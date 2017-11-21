@@ -13,3 +13,7 @@ juliacall_docall <- function(jcall) {
     .Call('_JuliaCall_juliacall_docall', PACKAGE = 'JuliaCall', jcall)
 }
 
+juliacall_atexit_hook <- function(status) {
+    invisible(.Call('_JuliaCall_juliacall_atexit_hook', PACKAGE = 'JuliaCall', status))
+}
+

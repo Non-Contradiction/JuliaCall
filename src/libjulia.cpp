@@ -75,6 +75,8 @@ bool SharedLibrary::loadSymbols() {
     LOAD_JULIA_SYMBOL(jl_get_global);
 
     LOAD_JULIA_SYMBOL(jl_init);
+    LOAD_JULIA_SYMBOL(jl_is_initialized);
+    LOAD_JULIA_SYMBOL(jl_atexit_hook);
     LOAD_JULIA_SYMBOL(jl_eval_string);
 
     LOAD_JULIA_SYMBOL(jl_exception_occurred);
