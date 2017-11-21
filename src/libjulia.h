@@ -120,6 +120,7 @@ JL_EXTERN jl_value_t* (*jl_stdout_obj)(void);
 JL_EXTERN jl_value_t* (*jl_stderr_obj)(void);
 
 
+std::string getLastSymbol();
 std::string getLastDLErrorMessage();
 
 class SharedLibrary {
