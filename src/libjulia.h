@@ -83,6 +83,8 @@ STATIC_INLINE jl_function_t *jl_get_function(jl_module_t *m, const char *name)
 
 // initialization functions
 JL_EXTERN void (*jl_init)(void);
+JL_EXTERN int (*jl_is_initialized)(void);
+JL_EXTERN void (*jl_atexit_hook)(int status);
 
 // front end interface
 JL_EXTERN jl_value_t* (*jl_eval_string)(const char *str);

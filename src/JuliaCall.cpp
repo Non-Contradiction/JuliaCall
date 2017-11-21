@@ -37,3 +37,9 @@ SEXP juliacall_docall(SEXP jcall) {
     SEXP out = (SEXP) jl_unbox_voidpointer(jl_call1(docall, call));
     return out;
 }
+
+
+// [[Rcpp::export]]
+void juliacall_atexit_hook(int status) {
+    jl_atexit_hook(status);
+}
