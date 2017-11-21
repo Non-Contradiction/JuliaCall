@@ -27,7 +27,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
     if (!force && .julia$initialized) {
-        return(julia)
+        return(invisible(julia))
     }
 
     JULIA_HOME <- julia_locate(JULIA_HOME)
@@ -43,105 +43,24 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     ## julia_line("-e \"pkg = string(:RCall); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using Suppressor\"",
     ##            stderr = FALSE)
 
-    ## Thank to randy3k for pointing this out,
-    ## `RCall` needs to be precompiled with the current R.
-
-    julia_line(paste(system.file("julia/RCallprepare.jl", package = "JuliaCall"), R.home(), getRversion()),
-               stderr = FALSE)
-
-    # julia_line("-e \"pkg = string(:Suppressor); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using Suppressor\"",
-    #        stderr = FALSE)
-
-    .julia$config <- file.path(dirname(.julia$bin_dir), "share", "julia", "julia-config.jl")
-    .julia$cppargs <- julia_line(paste0(.julia$config, " --cflags"), stdout = TRUE)
-    .julia$cppargs <- paste0(.julia$cppargs, " -fpermissive")
-    .julia$cppargs <- sub("-std=gnu99", "", .julia$cppargs)
-    .julia$libargs <- julia_line(paste0(.julia$config, " --ldflags"), stdout = TRUE)
-    .julia$libargs <- paste(.julia$libargs,
-                            julia_line(paste0(.julia$config, " --ldlibs"), stdout = TRUE))
 
     .julia$dll_file <- julia_line("-E \"println(Libdl.dllist()[1])\"", stdout = TRUE)[1]
-
-    .julia$dll <- withCallingHandlers(dyn.load(.julia$dll_file, FALSE, TRUE),
-                                      error = function(e){
-                                          message("Error in loading libjulia.")
-                                          message("Maybe you should include $JULIA_DIR/lib/julia in LD_LIBRAY_PATH.")
-                                      })
-
-    ## .julia$include_dir <- file.path(dirname(.julia$bin_dir), "include", "julia")
-    ## .julia$cppargs <- paste0("-I ", .julia$include_dir, " -DJULIA_ENABLE_THREADING=1")
-    ## .julia$cppargs <- paste0("-I ", .julia$include_dir, " -fpermissive")
-
-    .julia$inc <- "
-    // Taken from http://tolstoy.newcastle.edu.au/R/e2/devel/06/11/1242.html
-    // Undefine the Realloc macro, which is defined by both R and by Windows stuff
-    #undef Realloc
-    // Also need to undefine the Free macro
-    #undef Free
-
-    #include <julia.h>
-    "
-
-    .julia$compile <- function(sig, body){
-        withCallingHandlers(
-            inline::cfunction(sig = sig, body = body, includes = .julia$inc,
-                              cppargs = .julia$cppargs,
-                              libargs = .julia$libargs),
-            error = function(e){
-                message("Error in compilation.")
-                message("Maybe this is because the compiler version is too old.")
-                message("You should use GCC version 4.7 or later on Linux, or Clang version 3.1 or later on Mac.")
-            })
-    }
 
     .julia$VERSION <- julia_line("-E \"println(VERSION)\"", stdout = TRUE)[1]
 
     if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
 
-    if (!newer(.julia$VERSION, "0.6.0")) {
-        ## message("Before 0.6.0")
-        .julia$init_ <- .julia$compile(
-            sig = c(dir = "character"),
-            body = "jl_init(CHAR(STRING_ELT(dir, 0))); return R_NilValue;"
-        )
-
-        .julia$init <- function() .julia$init_(.julia$bin_dir)
-    }
-    else {
-        ## message("After 0.6.0")
-        .julia$init <- .julia$compile(
-            sig = c(),
-            body = "jl_init(); return R_NilValue;"
-        )
-    }
-
-    .julia$atexit_hook <- .julia$compile(
-        sig = c(),
-        body = "jl_atexit_hook(0); return R_NilValue;"
-    )
-
     if (verbose) message("Julia initiation...")
 
-    .julia$init()
+    juliacall_initialize(.julia$dll_file)
 
     if (verbose) message("Finish Julia initiation.")
-
-    .julia$cmd_ <- .julia$compile(
-        sig = c(cmd = "character"),
-        body = "jl_eval_string(CHAR(STRING_ELT(cmd, 0)));
-        if (jl_exception_occurred()) {
-            jl_call2(jl_get_function(jl_base_module, \"show\"), jl_stderr_obj(), jl_exception_occurred());
-            jl_printf(jl_stderr_stream(), \" \");
-            return Rf_ScalarLogical(0);
-        }
-        return Rf_ScalarLogical(1);"
-    )
 
     .julia$cmd <- function(cmd){
         if (!(length(cmd) == 1 && is.character(cmd))) {
             stop("cmd should be a character scalar.")
         }
-        if (!.julia$cmd_(cmd)) {
+        if (!juliacall_cmd(cmd)) {
             stop(paste0("Error happens when you try to execute command ", cmd, " in Julia."))
         }
     }
@@ -158,6 +77,10 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     if (verbose) message("Loading setup script for JuliaCall...")
 
+    ## `RCall` needs to be precompiled with the current R.
+    julia_line(paste(system.file("julia/RCallprepare.jl", package = "JuliaCall"), R.home(), getRversion()),
+               stderr = FALSE)
+
     if (!newer(.julia$VERSION, "0.7.0")) {
         ## message("Before 0.7.0")
         .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
@@ -169,15 +92,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     if (verbose) message("Finish loading setup script for JuliaCall.")
 
-    .julia$do.call_ <- .julia$compile(
-        sig = c(jcall = "list"),
-        body = '
-        jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall"));
-        jl_value_t *call = jl_box_voidpointer(jcall);
-        SEXP out = PROTECT((SEXP)jl_unbox_voidpointer(jl_call1(docall, call)));
-        UNPROTECT(1);
-        return out;'
-        )
+    .julia$do.call_ <- juliacall_docall
 
     julia$VERSION <- .julia$VERSION
 
@@ -219,4 +134,3 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     invisible(julia)
 }
-

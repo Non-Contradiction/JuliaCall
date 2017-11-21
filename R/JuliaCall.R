@@ -52,5 +52,7 @@
 #' }
 #'
 #' @docType package
+#' @useDynLib JuliaCall
+#' @import Rcpp
 #' @name JuliaCall
 NULL

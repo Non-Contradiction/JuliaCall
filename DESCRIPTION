@@ -21,11 +21,14 @@ URL: https://github.com/Non-Contradiction/JuliaCall
 BugReports: https://github.com/Non-Contradiction/JuliaCall/issues
 Encoding: UTF-8
 LazyData: true
-Imports: inline,
-    utils,
-    R6
+Imports: utils,
+    R6,
+    Rcpp (>= 0.12.7)
 RoxygenNote: 6.0.1
-SystemRequirements: Julia >= 0.5.0, RCall.jl
+LinkingTo: Rcpp
+NeedsCompilation: yes
+ByteCompile: yes
+SystemRequirements: Julia >= 0.6.0, RCall.jl
 Suggests: testthat,
     knitr,
     rmarkdown
