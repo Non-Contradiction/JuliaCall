@@ -9,10 +9,10 @@ SharedLibrary jl_library;
 bool juliacall_initialize(const std::string& libpath) {
     jl_library = SharedLibrary();
     if (!jl_library.load(libpath)) {
-        Rcpp::stop("error in loading julia shared library.");
+        Rcpp::stop(getLastDLErrorMessage());
     }
     if (!jl_library.loadSymbols()) {
-        Rcpp::stop("error in loading julia symbols.");
+        Rcpp::stop(getLastDLErrorMessage());
     }
     jl_init();
     return true;
