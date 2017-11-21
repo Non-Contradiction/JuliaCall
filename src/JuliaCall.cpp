@@ -12,7 +12,7 @@ bool juliacall_initialize(const std::string& libpath) {
         Rcpp::stop(getLastDLErrorMessage());
     }
     if (!jl_library.loadSymbols()) {
-        Rcpp::stop(getLastDLErrorMessage());
+        Rcpp::stop(getLastSymbol() + "-" + getLastDLErrorMessage());
     }
     jl_init();
     return true;

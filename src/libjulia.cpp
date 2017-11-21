@@ -12,6 +12,12 @@
 
 namespace libjulia {
 
+std::string lastSymbol;
+
+std::string getLastSymbol() {
+    return lastSymbol;
+}
+
 std::string getLastDLErrorMessage() {
     std::string Error;
 #ifdef _WIN32
@@ -46,6 +52,8 @@ std::string getLastDLErrorMessage() {
 }
 
 bool loadSymbol(void* plib, const std::string& name, void** ppSymbol) {
+
+    lastSymbol = name;
     *ppSymbol = NULL;
 #ifdef _WIN32
     *ppSymbol = (void*)::GetProcAddress((HINSTANCE)plib, name.c_str());
