@@ -70,8 +70,8 @@ before_install:
   #- ls $(R RHOME)/lib
   #- julia -e 'using RCall'
 script:
-- R CMD build .
-- R CMD check *tar.gz
+- R_LD_LIBRARY_PATH=/home/travis/julia/lib/julia R CMD build .
+- R_LD_LIBRARY_PATH=/home/travis/julia/lib/julia R CMD check *tar.gz
 
 after_failure:
   - cat /home/travis/build/Non-Contradiction/JuliaCall/JuliaCall.Rcheck/00check.log
