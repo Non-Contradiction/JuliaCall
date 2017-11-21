@@ -12,6 +12,39 @@
 
 namespace libjulia {
 
+std::string getLastDLErrorMessage() {
+    std::string Error;
+#ifdef _WIN32
+    LPVOID lpMsgBuf;
+    DWORD dw = ::GetLastError();
+
+    DWORD length = ::FormatMessage(
+        FORMAT_MESSAGE_ALLOCATE_BUFFER |
+        FORMAT_MESSAGE_FROM_SYSTEM |
+        FORMAT_MESSAGE_IGNORE_INSERTS,
+        NULL,
+        dw,
+        MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT),
+        (LPTSTR) &lpMsgBuf,
+        0, NULL );
+
+    if (length != 0) {
+        std::string msg((LPTSTR)lpMsgBuf);
+        LocalFree(lpMsgBuf);
+        Error.assign(msg);
+    } else {
+        Error.assign("(Unknown error)");
+    }
+#else
+    const char* msg = ::dlerror();
+    if (msg != NULL)
+        Error.assign(msg);
+    else
+        Error.assign("(Unknown error)");
+#endif
+    return Error;
+}
+
 bool loadSymbol(void* plib, const std::string& name, void** ppSymbol) {
     *ppSymbol = NULL;
 #ifdef _WIN32
