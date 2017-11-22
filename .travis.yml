@@ -52,6 +52,7 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export PATH=/usr/texbin:/Library/TeX/texbin:$PATH; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo tlmgr update --self; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo tlmgr install inconsolata upquote courier courier-scaled helvetic; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install pandoc; fi
 
   - mkdir -p mkdir $HOME/R/library
   - echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
