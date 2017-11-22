@@ -51,7 +51,7 @@ julia_locate <- function(JULIA_HOME = NULL){
 ## We need to call julia from the command line to precompile packages.
 ## It is currently used in julia_setup in zzz.R and julia_library in package.R
 julia_line <- function(command, ...){
-    system2(file.path(.julia$bin_dir, "julia"), command, ...)
+    system2(file.path(.julia$bin_dir, "julia"), shQuote(command), ...)
 }
 
 newer <- function(x, y){
