@@ -40,13 +40,9 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     if (verbose) message(paste0("Julia at location ", JULIA_HOME, " will be used."))
 
-    ## julia_line("-e \"pkg = string(:RCall); if Pkg.installed(pkg) == nothing Pkg.add(pkg) end; using Suppressor\"",
-    ##            stderr = FALSE)
+    .julia$dll_file <- julia_line(c("-e", "print(Libdl.dlpath(\"libjulia\"))"), stdout = TRUE)
 
-
-    .julia$dll_file <- julia_line("-E \"println(Libdl.dllist()[1])\"", stdout = TRUE)[1]
-
-    .julia$VERSION <- julia_line("-E \"println(VERSION)\"", stdout = TRUE)[1]
+    .julia$VERSION <- julia_line(c("-e", "print(VERSION)"), stdout = TRUE)
 
     if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
 
@@ -77,16 +73,18 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     if (verbose) message("Loading setup script for JuliaCall...")
 
     ## `RCall` needs to be precompiled with the current R.
-    julia_line(paste(system.file("julia/RCallprepare.jl", package = "JuliaCall"), R.home(), getRversion()),
+    julia_line(c(system.file("julia/RCallprepare.jl", package = "JuliaCall"),
+                 R.home(), getRversion()),
                stderr = FALSE)
 
     if (!newer(.julia$VERSION, "0.7.0")) {
         ## message("Before 0.7.0")
-        .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
+        .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"), '")'))
     }
     else {
         ## message("After 0.7.0")
-        .julia$cmd(paste0('Base.include(Main,"', system.file("julia/setup.jl", package = "JuliaCall"),'")'))
+        .julia$cmd(paste0('Base.include(Main,"',
+                          system.file("julia/setup.jl", package = "JuliaCall"), '")'))
     }
 
     if (verbose) message("Finish loading setup script for JuliaCall.")

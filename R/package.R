@@ -39,7 +39,7 @@ julia_library <- julia$library <- function(pkg_name){
              warning = function(war){},
              error = {
                  if (julia$VERSION >= "0.6.0") {
-                     julia_line(paste0("-e \"using ", pkg_name, "\""))
+                     julia_line(c("-e", paste0("using ", pkg_name)))
                  }
                  julia$command(paste0("using ", pkg_name), show_value = FALSE)
              })
