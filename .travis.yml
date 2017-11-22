@@ -1,74 +1,28 @@
-language: julia
+language: r
 os:
   - linux
   - osx
 
-env:
-  - NOT_CRAN="true"
-
-julia:
-  - 0.6
+addons:
+  apt:
+    sources: [ 'ubuntu-toolchain-r-test']
+    packages: ['libstdc++6']
 
 notifications:
   email: false
 
-addons:
-      apt:
-        sources: [ 'ubuntu-toolchain-r-test']
-        packages: ['libstdc++6']
-
 before_install:
-  # linux
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo add-apt-repository -y "deb http://cran.rstudio.com/bin/linux/ubuntu $(lsb_release -s -c)/"; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get update -qq -y; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install git r-base r-base-dev r-recommended -y; fi
+  - mkdir -p ~/Downloads
 
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then curl -fLo /tmp/texlive.tar.gz https://github.com/jimhester/ubuntu-bin/releases/download/latest/texlive.tar.gz; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then tar xzf /tmp/texlive.tar.gz -C ~; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export PATH=/$HOME/texlive/bin/x86_64-linux:$PATH; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then tlmgr update --self; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then curl -fLo /tmp/pandoc-1.15.2-1-amd64.deb https://github.com/jgm/pandoc/releases/download/1.15.2/pandoc-1.15.2-1-amd64.deb; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install -f; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo dpkg -i /tmp/pandoc-1.15.2-1-amd64.deb; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then rm /tmp/pandoc-1.15.2-1-amd64.deb; fi
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get install texinfo; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then curl -L https://julialang-s3.julialang.org/bin/linux/x64/0.6/julia-0.6.1-linux-x86_64.tar.gz -o "$HOME/Downloads/julia.tar.gz"; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then tar xzf "$HOME/Downloads/julia.tar.gz" -C "$HOME/Downloads"; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then cp -r "$(find "$HOME/Downloads" -maxdepth 2 -name "julia*" -type d | head -n 1)" "$HOME/julia"; fi
 
-  # osx
-  # faster than using homebrew/science tap
-  # but no permalink to release download
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget -O /tmp/R.pkg "https://cran.rstudio.com/bin/macosx/$(wget -qO- https://cran.rstudio.com/bin/macosx/ | sed -n 's/.*href="\(R-[^"]*.pkg\)".*/\1/p' | head -n 1)"; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg /tmp/R.pkg -target /; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then curl -L https://julialang-s3.julialang.org/bin/mac/x64/0.6/julia-0.6.1-mac64.dmg -o "$HOME/Downloads/julia.dmg"; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then hdiutil attach ~/Downloads/julia.dmg; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cp -r /Volumes/Julia*/Julia*/Contents/Resources/julia $HOME/julia; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then hdiutil detach -force /Volumes/Julia*; fi
 
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then wget http://tug.org/cgi-bin/mactex-download/BasicTeX.pkg -O "/tmp/BasicTex.pkg"; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo installer -pkg "/tmp/BasicTex.pkg" -target / ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rm "/tmp/BasicTex.pkg"; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then export PATH=/usr/texbin:/Library/TeX/texbin:$PATH; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo tlmgr update --self; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then sudo tlmgr install inconsolata upquote courier courier-scaled helvetic; fi
-
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then rvm --default use 2.3.1; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install pandoc; fi
-
-  - mkdir -p mkdir $HOME/R/library
-  - echo 'R_LIBS_USER="~/R/library"' >  $HOME/.Renviron
-
-  - Rscript -e 'install.packages("testthat", repos="http://cran.rstudio.com/")'
-  - Rscript -e 'install.packages("knitr", repos="http://cran.rstudio.com/")'
-  - Rscript -e 'install.packages("rmarkdown", repos="http://cran.rstudio.com/")'
-
-  #- Rscript -e 'sessionInfo()'
-  #- julia -e 'versioninfo()'
-  #- julia -e 'Pkg.add("RCall")'
-  #- R RHOME
-  #- julia -e 'println(readchomp(`R RHOME`))'
-  #- julia -e 'Rhome = readchomp(`R RHOME`); libR_dir = joinpath(Rhome,"lib"); libR = joinpath(Rhome,"lib","libR.$(Libdl.dlext)"); println(Rhome); println(isdir(Rhome)); println(libR_dir); println(isdir(libR_dir)); println(libR); println(isfile(libR)); println(Libdl.dlopen_e(libR))'
-  #- ls $(R RHOME)
-  #- ls $(R RHOME)/lib
-  #- julia -e 'using RCall'
-script:
-- R_LD_LIBRARY_PATH=/home/travis/julia/lib/julia R CMD build .
-- R_LD_LIBRARY_PATH=/home/travis/julia/lib/julia R CMD check *tar.gz
-
-after_failure:
-  - cat /home/travis/build/Non-Contradiction/JuliaCall/JuliaCall.Rcheck/00check.log
+  - rm -rf ~/Downloads/julia*
+  - export PATH="$HOME/julia/bin:$PATH"
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export R_LD_LIBRARY_PATH="$(R RHOME)/lib:$HOME/julia/lib/julia"; fi
