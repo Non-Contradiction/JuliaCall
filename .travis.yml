@@ -8,6 +8,8 @@ addons:
     sources: [ 'ubuntu-toolchain-r-test']
     packages: ['libstdc++6']
 
+warnings_are_errors: false
+
 notifications:
   email: false
 
