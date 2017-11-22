@@ -3,8 +3,6 @@ os:
   - linux
   - osx
 
-osx_image: xcode8.1
-
 env:
   - NOT_CRAN="true"
 
