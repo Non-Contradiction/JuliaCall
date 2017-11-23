@@ -2,20 +2,27 @@
 #include "libjulia.h"
 
 using namespace libjulia;
+using namespace Rcpp;
 
-SharedLibrary jl_library;
 
 // [[Rcpp::export]]
 bool juliacall_initialize(const std::string& libpath) {
-    jl_library = SharedLibrary();
-    if (!jl_library.load(libpath)) {
-        Rcpp::stop(getLastDLErrorMessage());
+    if (jl_main_module != NULL) {
+        return true;
     }
-    if (!jl_library.loadSymbols()) {
-        Rcpp::stop(getLastSymbol() + "-" + getLastDLErrorMessage());
+    if (!load_libjulia(libpath)) {
+        stop(libpath + " - " + get_last_dl_error_message());
     }
+    if (!load_libjulia_symbols()) {
+        stop(get_last_loaded_symbol() + " - " + get_last_dl_error_message());
+    }
+
     jl_init();
-    jl_library.loadModules();
+
+    if (!load_libjulia_modules()) {
+        stop(get_last_dl_error_message());
+    }
+
     return true;
 }
 
