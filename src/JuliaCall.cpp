@@ -15,6 +15,7 @@ bool juliacall_initialize(const std::string& libpath) {
         Rcpp::stop(getLastSymbol() + "-" + getLastDLErrorMessage());
     }
     jl_init();
+    jl_library.loadModules();
     return true;
 }
 

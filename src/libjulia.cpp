@@ -110,9 +110,6 @@ bool SharedLibrary::loadSymbols() {
     LOAD_JULIA_SYMBOL(jl_box_voidpointer);
     LOAD_JULIA_SYMBOL(jl_unbox_voidpointer);
 
-    LOAD_JULIA_SYMBOL(jl_main_module);
-    LOAD_JULIA_SYMBOL(jl_core_module);
-    LOAD_JULIA_SYMBOL(jl_base_module);
     LOAD_JULIA_SYMBOL(jl_get_global);
 
     LOAD_JULIA_SYMBOL(jl_init);
@@ -134,6 +131,13 @@ bool SharedLibrary::loadSymbols() {
     LOAD_JULIA_SYMBOL(jl_stdout_obj);
     LOAD_JULIA_SYMBOL(jl_stderr_obj);
 
+    return true;
+}
+
+bool SharedLibrary::loadModules() {
+    jl_main_module = (jl_module_t*) jl_eval_string("Main");
+    jl_core_module = (jl_module_t*) jl_eval_string("Core");
+    jl_base_module = (jl_module_t*) jl_eval_string("Base");
     return true;
 }
 

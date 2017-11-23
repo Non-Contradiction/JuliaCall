@@ -128,6 +128,7 @@ class SharedLibrary {
         bool load(const std::string& libpath);
         bool unload();
         bool loadSymbols();
+        bool loadModules();
         void* plib;
         ~SharedLibrary() {}
         SharedLibrary() : plib(NULL) {}
