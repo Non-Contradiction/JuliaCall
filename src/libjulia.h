@@ -66,6 +66,9 @@ typedef struct _jl_module_t {
 
 typedef struct uv_stream_s uv_stream_t;
 
+// type predicates and basic operations
+JL_EXTERN const char* (*jl_typeof_str)(jl_value_t *v);
+
 // constructors
 JL_EXTERN jl_sym_t* (*jl_symbol)(const char *str);
 JL_EXTERN jl_value_t* (*jl_box_voidpointer)(void *x);
@@ -82,8 +85,8 @@ STATIC_INLINE jl_function_t *jl_get_function(jl_module_t *m, const char *name)
 }
 
 // initialization functions
-JL_EXTERN void (*jl_init)(void);
 JL_EXTERN int (*jl_is_initialized)(void);
+JL_EXTERN void (*jl_init)(void);
 JL_EXTERN void (*jl_atexit_hook)(int status);
 
 // front end interface
@@ -120,19 +123,14 @@ JL_EXTERN jl_value_t* (*jl_stdout_obj)(void);
 JL_EXTERN jl_value_t* (*jl_stderr_obj)(void);
 
 
-std::string getLastSymbol();
-std::string getLastDLErrorMessage();
+std::string get_last_loaded_symbol();
+std::string get_last_dl_error_message();
 
-class SharedLibrary {
-    public:
-        bool load(const std::string& libpath);
-        bool unload();
-        bool loadSymbols();
-        bool loadModules();
-        void* plib;
-        ~SharedLibrary() {}
-        SharedLibrary() : plib(NULL) {}
-};
+JL_EXTERN void* libjulia_t;
+bool load_libjulia(const std::string& libpath);
+bool unloa_libjulia();
+bool load_libjulia_symbols();
+bool load_libjulia_modules();
 
 } // namespace libjulia
 

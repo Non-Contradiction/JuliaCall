@@ -12,13 +12,14 @@
 
 namespace libjulia {
 
-std::string lastSymbol;
 
-std::string getLastSymbol() {
-    return lastSymbol;
+std::string last_loaded_symbol;
+
+std::string get_last_loaded_symbol() {
+    return last_loaded_symbol;
 }
 
-std::string getLastDLErrorMessage() {
+std::string get_last_dl_error_message() {
     std::string Error;
 #ifdef _WIN32
     LPVOID lpMsgBuf;
@@ -51,9 +52,9 @@ std::string getLastDLErrorMessage() {
     return Error;
 }
 
-bool loadSymbol(void* plib, const std::string& name, void** ppSymbol) {
+bool load_symbol(void* plib, const std::string& name, void** ppSymbol) {
 
-    lastSymbol = name;
+    last_loaded_symbol = name;
     *ppSymbol = NULL;
 #ifdef _WIN32
     *ppSymbol = (void*)::GetProcAddress((HINSTANCE)plib, name.c_str());
@@ -67,26 +68,26 @@ bool loadSymbol(void* plib, const std::string& name, void** ppSymbol) {
     }
 }
 
-bool SharedLibrary::load(const std::string& libpath) {
-    plib = NULL;
+bool load_libjulia(const std::string& libpath) {
+    libjulia_t = NULL;
 #ifdef _WIN32
-    plib = (void*)::LoadLibraryEx(libpath.c_str(), NULL, 0);
+    libjulia_t = (void*)::LoadLibraryEx(libpath.c_str(), NULL, 0);
 #else
-    plib = ::dlopen(libpath.c_str(), RTLD_NOW|RTLD_GLOBAL);
+    libjulia_t = ::dlopen(libpath.c_str(), RTLD_NOW|RTLD_GLOBAL);
 #endif
-    if (plib == NULL) {
+    if (libjulia_t == NULL) {
         return false;
     } else {
         return true;
     }
 }
 
-bool SharedLibrary::unload() {
-  if (plib != NULL) {
+bool unload_libjulia() {
+  if (libjulia_t != NULL) {
 #ifdef _WIN32
-    if (!::FreeLibrary((HMODULE)plib)) {
+    if (!::FreeLibrary((HMODULE)libjulia_t)) {
 #else
-    if (::dlclose(plib) != 0) {
+    if (::dlclose(libjulia_t) != 0) {
 #endif
       return false;
     } else {
@@ -98,22 +99,24 @@ bool SharedLibrary::unload() {
 }
 
 #define LOAD_JULIA_SYMBOL_AS(name, as) \
-if (!loadSymbol(plib, #name, (void**) &as)) \
+if (!load_symbol(libjulia_t, #name, (void**) &as)) \
     return false;
 
 #define LOAD_JULIA_SYMBOL(name) \
-if (!loadSymbol(plib, #name, (void**) &name)) \
+if (!load_symbol(libjulia_t, #name, (void**) &name)) \
     return false;
 
-bool SharedLibrary::loadSymbols() {
+bool load_libjulia_symbols() {
+    LOAD_JULIA_SYMBOL(jl_typeof_str);
+
     LOAD_JULIA_SYMBOL(jl_symbol);
     LOAD_JULIA_SYMBOL(jl_box_voidpointer);
     LOAD_JULIA_SYMBOL(jl_unbox_voidpointer);
 
     LOAD_JULIA_SYMBOL(jl_get_global);
 
-    LOAD_JULIA_SYMBOL(jl_init);
     LOAD_JULIA_SYMBOL(jl_is_initialized);
+    LOAD_JULIA_SYMBOL(jl_init);
     LOAD_JULIA_SYMBOL(jl_atexit_hook);
     LOAD_JULIA_SYMBOL(jl_eval_string);
 
@@ -134,7 +137,8 @@ bool SharedLibrary::loadSymbols() {
     return true;
 }
 
-bool SharedLibrary::loadModules() {
+bool load_libjulia_modules() {
+    // not sure why LOAD_JULIA_SYMBOL fails
     jl_main_module = (jl_module_t*) jl_eval_string("Main");
     jl_core_module = (jl_module_t*) jl_eval_string("Core");
     jl_base_module = (jl_module_t*) jl_eval_string("Base");
