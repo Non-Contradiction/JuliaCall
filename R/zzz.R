@@ -38,13 +38,15 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     .julia$bin_dir <- JULIA_HOME
 
-    if (verbose) message(paste0("Julia at location ", JULIA_HOME, " will be used."))
-
-    .julia$dll_file <- julia_line(c("-e", "print(Libdl.dlpath(\"libjulia\"))"), stdout = TRUE)
-
     .julia$VERSION <- julia_line(c("-e", "print(VERSION)"), stdout = TRUE)
 
-    if (verbose) message(paste0("Julia version ", .julia$VERSION, " found."))
+    if (verbose) message(paste0("Julia version ",
+                                .julia$VERSION,
+                                " at location ",
+                                JULIA_HOME,
+                                " will be used."))
+
+    .julia$dll_file <- julia_line(c("-e", "print(Libdl.dlpath(\"libjulia\"))"), stdout = TRUE)
 
     if (verbose) message("Julia initiation...")
 
@@ -52,7 +54,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
         libopenlibm <- julia_line(c("-e", "print(Libdl.dlpath(\"libopenlibm\"))"), stdout = TRUE)
         dyn.load(libopenlibm)
     }
-    
+
     juliacall_initialize(.julia$dll_file)
 
     if (verbose) message("Finish Julia initiation.")
@@ -73,14 +75,11 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
                       },
                   onexit = TRUE)
 
-    .julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
+    ##.julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
 
     if (verbose) message("Loading setup script for JuliaCall...")
 
-    ## `RCall` needs to be precompiled with the current R.
-    julia_line(c(system.file("julia/RCallprepare.jl", package = "JuliaCall"),
-                 R.home(), getRversion()),
-               stderr = FALSE)
+    juliacall_dependency()
 
     if (!newer(.julia$VERSION, "0.7.0")) {
         ## message("Before 0.7.0")
@@ -135,4 +134,11 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     julia_command('ENV["MPLBACKEND"] = "Agg";')
 
     invisible(julia)
+}
+
+juliacall_dependency <- function(){
+    ## `RCall` needs to be precompiled with the current R.
+    julia_line(c(system.file("julia/RCallprepare.jl", package = "JuliaCall"),
+                 R.home(), as.character(getRversion())),
+               stderr = FALSE)
 }
