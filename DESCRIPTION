@@ -15,7 +15,7 @@ Description: Provides an R interface to 'Julia',
     any R function with automatic type conversion. Using the low level interface,
     you could deal with C-level SEXP directly while enjoying the convenience of
     using a high-level programming language like 'Julia'.
-Depends: R (>= 3.2.0)
+Depends: R (>= 3.4.0)
 License: MIT + file LICENSE
 URL: https://github.com/Non-Contradiction/JuliaCall
 BugReports: https://github.com/Non-Contradiction/JuliaCall/issues
