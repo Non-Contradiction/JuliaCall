@@ -3,6 +3,12 @@
 ## <https://github.com/Non-Contradiction/JuliaCall/issues/9>
 ## as well as coming up with the solution
 
+if Pkg.installed("Suppressor") == nothing
+    Pkg.add("Suppressor")
+end;
+
+using Suppressor
+
 Rhome = ARGS[1]
 Rversion = ARGS[2]
 

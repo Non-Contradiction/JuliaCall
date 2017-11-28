@@ -79,7 +79,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     if (verbose) message("Loading setup script for JuliaCall...")
 
-    juliacall_dependency()
+    install_dependency()
 
     if (!newer(.julia$VERSION, "0.7.0")) {
         ## message("Before 0.7.0")
@@ -136,9 +136,9 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     invisible(julia)
 }
 
-juliacall_dependency <- function(){
+install_dependency <- function(){
     ## `RCall` needs to be precompiled with the current R.
-    julia_line(c(system.file("julia/RCallprepare.jl", package = "JuliaCall"),
+    julia_line(c(system.file("julia/install_dependency.jl", package = "JuliaCall"),
                  R.home(), as.character(getRversion())),
                stderr = FALSE)
 }
