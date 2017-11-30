@@ -51,8 +51,8 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     if (verbose) message("Julia initiation...")
 
     if (.Platform$OS.type == "windows") {
-        libopenlibm <- julia_line(c("-e", "print(Libdl.dlpath(\"libopenlibm\"))"), stdout = TRUE)
-        dyn.load(libopenlibm)
+        libm <- julia_line(c("-e", "print(Libdl.dlpath(Base.libm_name))"), stdout = TRUE)
+        dyn.load(libm)
     }
 
     juliacall_initialize(.julia$dll_file)
