@@ -1,5 +1,6 @@
 # JuliaCall 0.12.0.9000
 
+* `JuliaCall` requires Julia 0.6 as Julia 0.5 is now officially unmaintained.
 * Don't use inline to compile functions at `julia_setup()` any more,
   accelerate the startup time.
 
@@ -10,7 +11,7 @@
 # JuliaCall 0.11.0.9000
 
 * Remove deprecated `julia_eval_string`.
-* Improve *JuliaCall* RMarkdown engine.
+* Improve `JuliaCall` RMarkdown engine.
   The display system should work for all kinds of documents that rmarkdown supports.
 * Should use older version of RCall with older version of R.
 
