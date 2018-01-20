@@ -1,3 +1,4 @@
+Base.load_juliarc()
 module JuliaCall
 
 # gc_enable(false)

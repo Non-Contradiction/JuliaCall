@@ -52,12 +52,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     if (.Platform$OS.type == "windows") {
         libm <- julia_line(c("-e", "print(Libdl.dlpath(Base.libm_name))"), stdout = TRUE)
-        dyn.load(libm, DLLpath= .julia$bin_dir)
-
-        # following is required to load dll dependencies from JULIA_HOME
-        cur_dir <- getwd()
-        setwd(.julia$bin_dir)
-        on.exit(setwd(cur_dir))
+        dyn.load(libm)
     }
 
     juliacall_initialize(.julia$dll_file)
@@ -122,8 +117,6 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     if (interactive()) {
         julia_command("eval(Base, :(is_interactive = true));")
     }
-
-    julia_call("Base.load_juliarc")
 
     if (isTRUE(getOption("jupyter.in_kernel"))) {
         julia_command("Base.pushdisplay(JuliaCall.irjulia_display);")
