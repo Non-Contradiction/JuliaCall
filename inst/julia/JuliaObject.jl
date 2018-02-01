@@ -1,7 +1,7 @@
 import RCall.sexp
 import Base.get
 
-immutable JuliaObjectID
+struct JuliaObjectID
     i :: Int32
 end
 
@@ -11,7 +11,7 @@ end
 
 JuliaObjectID() = JuliaObjectID(0)
 
-type JuliaObject
+struct JuliaObject
     id :: JuliaObjectID
     JuliaObject(id :: JuliaObjectID) = new(id)
 end
@@ -20,7 +20,7 @@ function getPlainID(x :: JuliaObject)
     x.id.i
 end
 
-type JuliaObjectContainer
+mutable struct JuliaObjectContainer
     object_dict :: Dict{JuliaObjectID, Any}
     ind :: JuliaObjectID
 end

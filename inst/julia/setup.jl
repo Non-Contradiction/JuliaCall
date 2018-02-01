@@ -22,7 +22,6 @@ include("REPLhook.jl")
 include("incomplete_console.jl")
 include("convert.jl")
 include("JuliaObject.jl")
-## include("JuliaArray.jl")
 include("asR.jl")
 include("dispatch.jl")
 
