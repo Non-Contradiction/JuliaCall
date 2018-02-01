@@ -3,6 +3,9 @@
 * `JuliaCall` requires Julia 0.6 as Julia 0.5 is now officially unmaintained.
 * Don't use inline to compile functions at `julia_setup()` any more,
   accelerate the startup time.
+* Load juliarc in `julia_setup`.
+* Fix the bug that `julia_setup()` fails to correctly load libjulia.dll
+  if JULIA_HOME is not in path on windows.
 
 # JuliaCall 0.11.1
 
