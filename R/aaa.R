@@ -20,7 +20,11 @@ julia_locate <- function(JULIA_HOME = NULL){
         JULIA_HOME <- getOption("JULIA_HOME")
     }
     if (is.null(JULIA_HOME)) {
-        JULIA_HOME <- Sys.getenv("JULIA_HOME")
+        JULIA_HOME <- if(Sys.getenv("JULIA_HOME") == ""){
+            NULL
+        } else{
+            Sys.getenv("JULIA_HOME")
+        }
     }
 
     if (is.null(JULIA_HOME)) {
