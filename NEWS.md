@@ -6,6 +6,7 @@
 * Load juliarc in `julia_setup`.
 * Fix the bug that `julia_setup()` fails to correctly load libjulia.dll
   if JULIA_HOME is not in path on windows.
+* Get JULIA_HOME from environment variable.
 
 # JuliaCall 0.11.1
 

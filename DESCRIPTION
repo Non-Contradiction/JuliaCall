@@ -6,7 +6,8 @@ Date: 2017-11-27
 Authors@R: c(
     person("Changcheng", "Li", , "cxl508@psu.edu", c("aut", "cre")),
     person("Randy", "Lai", role = "ctb"),
-    person("Dmitri", "Grominski", role = "ctb")
+    person("Dmitri", "Grominski", role = "ctb"),
+    person("Nagi", "Teramo", role = "ctb")
     )
 Description: Provides an R interface to 'Julia',
     which is a high-level, high-performance dynamic programming language
