@@ -1,3 +1,7 @@
+# JuliaCall 0.12.1
+
+* Fourth release on CRAN.
+
 # JuliaCall 0.12.0.9000
 
 * `JuliaCall` requires Julia 0.6 as Julia 0.5 is now officially unmaintained.
