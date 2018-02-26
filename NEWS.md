@@ -1,3 +1,7 @@
+# JuliaCall 0.12.1.9000
+
+* Clearer documentation for `JULIA_HOME`.
+
 # JuliaCall 0.12.1
 
 * Fourth release on CRAN.
