@@ -2,9 +2,11 @@
 #'
 #' \code{julia_setup} does the initial setup for the JuliaCall package.
 #'
-#' @param JULIA_HOME the path to julia binary,
+#' @param JULIA_HOME the file folder which contains julia binary,
 #'     if not set, JuliaCall will look at the global option JULIA_HOME,
-#'     if the global option is not set, JuliaCall will try to use
+#'     if the global option is not set,
+#'     JuliaCall will then look at the environmental variable JULIA_HOME,
+#'     if still not found, JuliaCall will try to use
 #'     the julia in path.
 #' @param verbose whether to print out detailed information
 #'     about \code{julia_setup}.

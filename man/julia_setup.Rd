@@ -8,9 +8,11 @@ julia_setup(JULIA_HOME = NULL, verbose = TRUE, force = FALSE,
   useRCall = TRUE)
 }
 \arguments{
-\item{JULIA_HOME}{the path to julia binary,
+\item{JULIA_HOME}{the file folder which contains julia binary,
 if not set, JuliaCall will look at the global option JULIA_HOME,
-if the global option is not set, JuliaCall will try to use
+if the global option is not set,
+JuliaCall will then look at the environmental variable JULIA_HOME,
+if still not found, JuliaCall will try to use
 the julia in path.}
 
 \item{verbose}{whether to print out detailed information
