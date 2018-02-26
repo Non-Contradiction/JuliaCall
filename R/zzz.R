@@ -71,7 +71,9 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
             stop("cmd should be a character scalar.")
         }
         if (!juliacall_cmd(cmd)) {
-            stop(paste0("Error happens when you try to execute command ", cmd, " in Julia."))
+            stop(paste0("Error happens when you try to execute command ", cmd, " in Julia.
+                        To have more helpful error messages,
+                        you could considering running the command in Julia directly"))
         }
     }
 
