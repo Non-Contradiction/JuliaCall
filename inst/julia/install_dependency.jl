@@ -10,7 +10,6 @@ end;
 using Suppressor
 
 Rhome = ARGS[1]
-Rversion = ARGS[2]
 
 ## println(Rhome)
 
