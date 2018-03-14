@@ -21,8 +21,9 @@ output: github_document
   - [How to Get Help?](#how-to-get-help)
   - [JuliaCall for R Package Developers](#juliacall-for-r-package-developers)
   - [Suggestion and Issue Reporting](#suggestion-and-issue-reporting)
+  - [Interfaces between R and Julia](#interfaces-between-r-and-julia)
 
-Package JuliaCall is an R interface to 'Julia',
+Package `JuliaCall` is an R interface to `Julia`,
 which is a high-level, high-performance dynamic programming language
 for numerical computing, see <https://julialang.org/> for more information.
 Below is an image for [Mandelbrot set](https://en.wikipedia.org/wiki/Mandelbrot_set).
@@ -134,3 +135,9 @@ It will be much appreciated if you can
 - open `JuliaCall.Rproj` in your RStudio or open `R` from the directory where you download the source of `JuliaCall`,
 - run `devtools::check()` to see the result of `R CMD check` for `JuliaCall` on your machine,
 - and paste the result to the issue report.
+
+## Interfaces between R and Julia
+
+* There is a `Julia` package called `RCall.jl` which embedds `R` in `Julia`. `JuliaCall` is inspired by `RCall.jl` and depends on `RCall.jl` for many functionalities like much of the type conversion between `R` and `Julia`.
+* There is an `R` package `XRJulia`, based on John Chambers' `XR` package and allow for structured integration of `R` with `Julia`. It connects to `Julia` and uses JSON to transfer data between `Julia` and `R`.
+* There is another `R` package `RJulia`, which embedds `Julia` in `R` as well as `JuliaCall`. It is not on CRAN yet and I haven't tested it.
