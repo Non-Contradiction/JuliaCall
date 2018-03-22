@@ -45,11 +45,7 @@ end
 
 function Rerror(e, bt)
     s1 = join(["Error happens in Julia.\n"])
-    if string(VERSION) < "0.6.0"
-        s2 = error_msg(e)
-    else
-        s2 = error_msg(e, bt)
-    end
+    s2 = error_msg(e, bt)
     s = join([s1 s2])
     rcall(:simpleError, s)
 end
