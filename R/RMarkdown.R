@@ -71,7 +71,8 @@ text_display <- function(x, options = knitr::opts_current$get()){
 eng_juliacall <- function(options) {
     code <- options$code
 
-    wrap <- do.call(":::", list("knitr", quote(wrap)))
+    wrap_ <- do.call(":::", list("knitr", quote(wrap)))
+    wrap <- function(x) wrap_(x, options = options)
 
     if (!options$eval) {
         knitr::engine_output(options, paste(code, collapse = "\n"), "")
