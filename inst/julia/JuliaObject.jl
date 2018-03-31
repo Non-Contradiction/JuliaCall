@@ -89,7 +89,7 @@ sexp(x) = sexp(JuliaObject(x))
 
 ## Regarding to issue #12, #13 and #16,
 ## we should use JuliaObject for general AbstractArray
-@suppress begin
+@suppress_err begin
     sexp{T}(x :: AbstractArray{T}) = sexp(JuliaObject(x))
 end
 

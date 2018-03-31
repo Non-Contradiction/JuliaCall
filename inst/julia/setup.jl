@@ -9,7 +9,7 @@ module JuliaCall
 
 using Suppressor
 
-@suppress begin
+@suppress_err begin
     using RCall
 end
 
