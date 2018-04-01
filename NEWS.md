@@ -1,6 +1,9 @@
 # JuliaCall 0.12.1.9000
 
 * Clearer documentation for `JULIA_HOME`.
+* More helpful error message for `julia_setup()`
+* Bug fix for `julia` engine in `Rnw` files.
+* Bug fix for `JuliaCall` in `rtichoke`.
 
 # JuliaCall 0.12.1
 
