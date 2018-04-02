@@ -9,18 +9,32 @@ end;
 
 using Suppressor
 
-Rhome = ARGS[1]
+CurrentRhome = ARGS[1]
 
 ## println(Rhome)
 
-ENV["R_HOME"] = Rhome
+ENV["R_HOME"] = CurrentRhome
 
 if Pkg.installed("RCall") == nothing
     Pkg.add("RCall")
 end;
 
-using RCall
 
-if RCall.Rhome != Rhome
-    Base.compilecache("RCall")
+depsjl = Base.Pkg.dir("RCall", "deps", "deps.jl")
+if isfile(depsjl)
+    include(depsjl)
+
+    if Rhome != CurrentRhome
+        Pkg.build("RCall")
+    end
+else
+    using RCall
+
+    if RCall.Rhome != CurrentRhome
+        if Pkg.installed("RCall") >= v"0.10.2"
+            Pkg.build("RCall")
+        else
+            Base.compilecache("RCall")
+        end
+    end
 end
