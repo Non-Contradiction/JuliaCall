@@ -1,3 +1,12 @@
+# JuliaCall 0.12.2.9000
+
+* Speed up `RCall` checking.
+* Use some tricks to get around `julia` issue #14577.
+
+# JuliaCall 0.12.2
+
+* Fifth release on CRAN.
+
 # JuliaCall 0.12.1.9000
 
 * Clearer documentation for `JULIA_HOME`.
