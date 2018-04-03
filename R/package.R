@@ -35,12 +35,5 @@ julia_update_package <- julia$update_package <-
 #' @rdname julia_package
 #' @export
 julia_library <- julia$library <- function(pkg_name){
-    tryCatch(julia$command(paste0("using ", pkg_name), show_value = FALSE),
-             warning = function(war){},
-             error = {
-                 if (julia$VERSION >= "0.6.0") {
-                     julia_line(c("-e", paste0("using ", pkg_name)))
-                 }
-                 julia$command(paste0("using ", pkg_name), show_value = FALSE)
-             })
+    julia$command(paste0("using ", pkg_name))
 }
