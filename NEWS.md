@@ -1,3 +1,7 @@
+# JuliaCall 0.12.3.9000
+
+* Fix the issue in displaying `JuliaObject`, especially in `Rmd` documents. Fix #43.
+
 # JuliaCall 0.12.2.9000
 
 * Speed up `RCall` checking.
