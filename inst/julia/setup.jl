@@ -113,4 +113,10 @@ function str_typeof(x)
     string(typeof(x))
 end
 
+function show_string(x)
+    buf = IOBuffer()
+    show(IOContext(buf, :limit=>true), x)
+    return String(take!(buf))
+end
+
 end

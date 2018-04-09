@@ -12,8 +12,10 @@ juliaobject <- R6::R6Class("JuliaObject",
                                print = function(...){
                                    cat(paste0("Julia Object of type ",
                                               julia_call("JuliaCall.str_typeof", self),
-                                              ".\n"))
-                                   julia_call("show", self, need_return = FALSE)
+                                              ".\n",
+                                              julia_call("JuliaCall.show_string", self)))
+                                   #julia_call("show", self, need_return = FALSE)
+
                                    invisible(self)
                                }
                                # finalize = function() {
