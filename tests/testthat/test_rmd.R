@@ -2,6 +2,7 @@ context("rmd test")
 
 test_that("test juliacall in rmd", {
     skip_on_cran()
+    skip_on_appveyor()
 
     tmp <- tempfile()
     rmarkdown::render(test_path("Rmd_test.Rmd"), output_file = tmp)
