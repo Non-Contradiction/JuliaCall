@@ -3,10 +3,10 @@ Test
 Changcheng Li
 2017/9/23
 
-Use JuliaCall as Julia Engine in R Markdown
--------------------------------------------
+## Use JuliaCall as Julia Engine in R Markdown
 
-To use `JuliaCall` package for julia engine in R Markdown document. Just set the engine for julia to `JuliaCall::eng_juliacall` like this:
+To use `JuliaCall` package for julia engine in R Markdown document. Just
+set the engine for julia to `JuliaCall::eng_juliacall` like this:
 
 ``` r
 knitr::knit_engines$set(julia = JuliaCall::eng_juliacall)
@@ -37,10 +37,10 @@ a = sqrt(2);
     ## 
     ## Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
 
-Get Access to Julia in R Chunk
-------------------------------
+## Get Access to Julia in R Chunk
 
-And you can also get access to julia variables in R code chunk quite easily using `JuliaCall`, for example:
+And you can also get access to julia variables in R code chunk quite
+easily using `JuliaCall`, for example:
 
 ``` r
 ## This is a R language chunk.
