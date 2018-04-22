@@ -1,4 +1,8 @@
 language: r
+cache: packages
+r:
+  - release
+  - devel
 os:
   - linux
   - osx
