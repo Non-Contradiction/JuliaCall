@@ -8,7 +8,7 @@ length.JuliaObject <- function(x){
 #' @export
 `[.JuliaObject` <- function(x, i) julia_call("getindex", x, as.integer(i))
 #' @export
-`[[.JuliaObject` <- function(x, i){
+`[[.JuliaObject` <- function(x, i, exact = TRUE){
     if (length(i) > 1) {
         stop("Attempt to select more than one element.")
     }

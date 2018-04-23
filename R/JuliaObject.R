@@ -100,3 +100,10 @@ field.JuliaObject <- function(object, name){
     julia_call("JuliaCall.setfield1!", object, as.symbol(name), value)
     object
 }
+
+#' @export
+`$.JuliaObject` <- function(x, name){
+    if (as.character(substitute(name)) %in% names(x))
+        NextMethod(x, name)
+    else field(x, name)
+}
