@@ -11,7 +11,7 @@ to use Julia packages as easy as possible.
 }
 \examples{
 
-\dontrun{ ## The examples are quite time consuming
+\donttest{ ## The examples are quite time consuming
 
   ## Do initiation for JuliaCall
 

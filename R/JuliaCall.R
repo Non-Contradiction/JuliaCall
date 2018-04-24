@@ -5,7 +5,7 @@
 #'
 #' @examples
 #'
-#' \dontrun{ ## The examples are quite time consuming
+#' \donttest{ ## The examples are quite time consuming
 #'
 #'   ## Do initiation for JuliaCall
 #'

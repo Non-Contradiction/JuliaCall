@@ -39,7 +39,7 @@ juliaobject <- R6::R6Class("JuliaObject",
 #'
 #' @examples
 #'
-#' \dontrun{ ## julia_setup is quite time consuming
+#' \donttest{ ## julia_setup is quite time consuming
 #'   a <- JuliaObject(1)
 #' }
 #'

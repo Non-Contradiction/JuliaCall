@@ -14,7 +14,7 @@ julia_help(fname)
 }
 \examples{
 
-\dontrun{ ## julia_setup is quite time consuming
+\donttest{ ## julia_setup is quite time consuming
   julia_help("sqrt")
 }
 

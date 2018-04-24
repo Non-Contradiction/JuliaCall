@@ -32,7 +32,7 @@ The julia interface, which is an environment with the necessary methods
 }
 \examples{
 
-\dontrun{ ## julia_setup is quite time consuming
+\donttest{ ## julia_setup is quite time consuming
   julia <- julia_setup()
 }
 

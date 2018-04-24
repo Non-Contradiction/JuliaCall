@@ -6,7 +6,7 @@
 #' @param func_call the impartial julia function call.
 #'
 #' @examples
-#' \dontrun{ ## julia_setup is quite time consuming
+#' \donttest{ ## julia_setup is quite time consuming
 #'   2 %>J% sqrt
 #'   3 %>J% log(2)
 #' }

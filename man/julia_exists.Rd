@@ -14,7 +14,7 @@ julia_exists(name)
 }
 \examples{
 
-\dontrun{ ## julia_setup is quite time consuming
+\donttest{ ## julia_setup is quite time consuming
   julia_exists("sqrt")
 }
 

@@ -17,7 +17,7 @@ corresponding julia value automatically.}
 }
 \examples{
 
-\dontrun{ ## julia_setup is quite time consuming
+\donttest{ ## julia_setup is quite time consuming
   julia_assign("x", 2)
   julia_assign("rsqrt", sqrt)
 }

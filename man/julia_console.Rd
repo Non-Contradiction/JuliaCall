@@ -10,7 +10,7 @@ julia_console()
 Open julia console.
 }
 \examples{
-\dontrun{ ## julia_setup is quite time consuming
+\donttest{ ## julia_setup is quite time consuming
   julia_console()
 }
 

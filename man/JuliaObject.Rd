@@ -19,7 +19,7 @@ which contains an id correspond to the julia object.
 }
 \examples{
 
-\dontrun{ ## julia_setup is quite time consuming
+\donttest{ ## julia_setup is quite time consuming
   a <- JuliaObject(1)
 }
 

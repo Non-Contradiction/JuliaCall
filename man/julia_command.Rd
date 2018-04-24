@@ -21,7 +21,7 @@ try \code{julia_eval}.
 }
 \examples{
 
-\dontrun{ ## julia_setup is quite time consuming
+\donttest{ ## julia_setup is quite time consuming
   julia_command("a = sqrt(2);")
 }
 
