@@ -2,7 +2,7 @@ environment:
   NOT_CRAN: "true"
   matrix:
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
-    R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.4.4-win.exe"
+    R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.5.0-win.exe"
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
     R_URL: "https://cran.rstudio.com/bin/windows/base/R-devel-win.exe"
 
@@ -49,7 +49,7 @@ install:
   # Download and install Rtools
 
   - ps: (new-object net.webclient).DownloadFile(
-      "https://cran.rstudio.com/bin/windows/Rtools/Rtools34.exe",
+      "https://cran.rstudio.com/bin/windows/Rtools/Rtools35.exe",
       "C:\projects\rtools.exe")
   # - C:\projects\rtools.exe /S /D=C:\Rtools
   - C:\projects\rtools.exe /VERYSILENT /DIR=C:\Rtools
