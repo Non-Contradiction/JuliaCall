@@ -1,6 +1,7 @@
 # JuliaCall 0.12.3.9000
 
 * Fix the issue in displaying `JuliaObject`, especially in `Rmd` documents. Fix #43.
+* `x$name` could be used to get access to `field(x, name)` for `JuliaObject`.
 
 # JuliaCall 0.12.2.9000
 
