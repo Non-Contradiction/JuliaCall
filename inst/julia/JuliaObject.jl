@@ -13,11 +13,16 @@ JuliaObjectID() = JuliaObjectID(0)
 
 struct JuliaObject
     id :: JuliaObjectID
-    JuliaObject(id :: JuliaObjectID) = new(id)
+    typ :: String
+    JuliaObject(id :: JuliaObjectID, typ = "Regular") = new(id, typ)
 end
 
 function getPlainID(x :: JuliaObject)
     x.id.i
+end
+
+function getType(x :: JuliaObject)
+    x.typ
 end
 
 mutable struct JuliaObjectContainer
@@ -27,10 +32,10 @@ end
 
 JuliaObjectContainer() = JuliaObjectContainer(Dict(), JuliaObjectID())
 
-function add!(container :: JuliaObjectContainer, x)
+function add!(container :: JuliaObjectContainer, x, typ = "Regular")
     container.ind = nextid(container.ind)
     container.object_dict[container.ind] = x
-    JuliaObject(container.ind)
+    JuliaObject(container.ind, typ)
 end
 
 # function remove!(container :: JuliaObjectContainer, id)
@@ -50,23 +55,23 @@ end
 
 julia_object_stack = JuliaObjectContainer()
 
-function new_obj(obj)
-    add!(julia_object_stack, obj)
+function new_obj(obj, typ = "Regular")
+    add!(julia_object_stack, obj, typ)
 end
 
 # function rm_obj(id)
 #     remove!(julia_object_stack, id)
 # end
 
-JuliaObject(x :: JuliaObject) = x
-JuliaObject(x :: RObject) = new_obj(rcopy(x))
-JuliaObject(x :: RCall.Sxp) = new_obj(RObject(x))
-JuliaObject(x) = new_obj(x)
+JuliaObject(x :: JuliaObject, typ = "Regular") = x
+JuliaObject(x :: RObject, typ = "Regular") = new_obj(rcopy(x), typ)
+JuliaObject(x :: RCall.Sxp, typ = "Regular") = new_obj(RObject(x), typ)
+JuliaObject(x, typ = "Regular") = new_obj(x, typ)
 
 ## Conversion related to JuliaObject
 
 function sexp(x :: JuliaObject)
-    reval("JuliaCall:::juliaobject[['new']]")(getPlainID(x))
+    reval("JuliaCall:::juliaobject[['new']]")(getPlainID(x), getType(x))
 end
 
 import RCall.rcopy

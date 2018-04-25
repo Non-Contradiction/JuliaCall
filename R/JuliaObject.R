@@ -1,10 +1,13 @@
 #' @import R6
 juliaobject <- R6::R6Class("JuliaObject",
                            public = list(
-                               initialize = function(id = 0L){
+                               initialize = function(id = 0L, type = "Regular"){
                                    if (private$locked) return(invisible(self))
                                    private$id <- id
                                    private$locked <- TRUE
+                                   if (!identical(type, "Regular")) {
+                                       extendJuliaObj(self, type)
+                                   }
                                },
                                getID = function(){
                                    private$id
