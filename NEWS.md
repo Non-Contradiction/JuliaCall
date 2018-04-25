@@ -1,3 +1,7 @@
+# JuliaCall 0.12.4.9000
+
+* Add `autowrap`, which can generates automatic wrappers for `julia` types.
+
 # JuliaCall 0.12.3.9000
 
 * Fix the issue in displaying `JuliaObject`, especially in `Rmd` documents. Fix #43.
