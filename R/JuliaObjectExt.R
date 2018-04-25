@@ -1,4 +1,4 @@
-.julia$ObjTable <- list()
+.juliaobjtable <- new.env(parent = emptyenv())
 
 autowrap <- function(type, fields = NULL, methods = c()){
     addExt(type, fields, methods)
@@ -7,6 +7,7 @@ autowrap <- function(type, fields = NULL, methods = c()){
                   ') = sexp(JuliaObject(x, "',
                   type,
                   '")) end;')
+    print(cmd)
     julia_command(cmd)
 }
 
@@ -14,33 +15,25 @@ addExt <- function(type, fields = NULL, methods = c()){
     if (is.null(fields)) {
         fields <- julia_call("string.", julia_eval(paste0("fieldnames(", type, ")")))
     }
-    .julia$ObjTable[[type]] <- list(fields = fields, methods = methods)
+    .juliaobjtable[[type]] <- list(fields = fields, methods = methods)
 }
 
 extendJuliaObj <- function(env, type){
-    r <- .julia$ObjTable[[type]]
+    r <- .juliaobjtable[[type]]
     if (!is.null(r)) {
-        makeAttrs(env, r$fields)
-        makeMethods(env, r$methods)
+        for (field in r$fields) makeAttr(env, field)
+        for (method in r$methods) makeMethod(env, method)
     }
 }
 
-makeAttrs <- function(env, names){
-  for (name in names) {
-    f <- function(){
-      force(env); force(name)
-      field(env, name)
-    }
-    makeActiveBinding(name, f, env)
-  }
+makeAttr <- function(env, name){
+    force(name)
+    force(env)
+    makeActiveBinding(name, function() field(env, name), env)
 }
 
-makeMethods <- function(env, names){
-    for (name in names) {
-        f <- function(...){
-            force(env); force(name)
-            julia_call(name, env, ...)
-        }
-        env[[name]] <- f
-    }
+makeMethod <- function(env, name){
+    force(name)
+    force(env)
+    env[[name]] <- function(...) julia_call(name, env, ...)
 }
