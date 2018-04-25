@@ -1,5 +1,15 @@
 .julia$ObjTable <- list()
 
+autowrap <- function(type, fields = NULL, methods = c()){
+    addExt(type, fields, methods)
+    cmd <- paste0('@eval JuliaCall @suppress_err begin sexp(x :: Main.',
+                  type,
+                  ') = sexp(JuliaObject(x, "',
+                  type,
+                  '")) end;')
+    julia_command(cmd)
+}
+
 addExt <- function(type, fields = NULL, methods = c()){
     if (is.null(fields)) {
         fields <- julia_call("string.", julia_eval(paste0("fieldnames(", type, ")")))
