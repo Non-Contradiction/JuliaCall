@@ -45,5 +45,5 @@ makeAttr <- function(env, name){
 makeMethod <- function(env, name){
     force(name)
     force(env)
-    env[[name]] <- function(...) julia_call(name, env, ...)
+    assign(name, function(...) julia_call(name, env, ...), env)
 }
