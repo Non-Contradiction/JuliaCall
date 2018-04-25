@@ -27,6 +27,7 @@ juliaobject <- R6::R6Class("JuliaObject",
                                # }
                            ),
                            private = list(id = 0L, locked = FALSE),
+                           lock_objects = FALSE,
                            lock_class = TRUE,
                            cloneable = FALSE)
 
