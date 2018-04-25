@@ -17,7 +17,7 @@ autowrap <- function(type, fields = NULL, methods = c()){
                   ') = sexp(JuliaObject(x, "',
                   type,
                   '")) end;')
-    print(cmd)
+    # print(cmd)
     julia_command(cmd)
 }
 
