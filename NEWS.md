@@ -1,6 +1,7 @@
 # JuliaCall 0.12.4.9000
 
 * Add `autowrap`, which can generates automatic wrappers for `julia` types.
+* Fix bugs in passing arguments in `julia_docall` and `julia_call`.
 
 # JuliaCall 0.12.3.9000
 
