@@ -42,9 +42,8 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-`JuliaCall` is on CRAN now! To use package `JuliaCall`, you first have to install `Julia`
-<https://julialang.org/> on your computer, and then you can install `JuliaCall` just like
-any other R packages by
+`JuliaCall` is on CRAN now! To use package `JuliaCall`, you first have to install [`Julia`](https://julialang.org/) on your computer, you can download a generic binary from 
+<https://julialang.org/downloads/> and add it to your path, and then you can install `JuliaCall` just like any other R packages by
 ```{r eval=FALSE}
 install.packages("JuliaCall")
 ```
@@ -61,6 +60,10 @@ library(JuliaCall)
 ## Do initial setup
 
 julia <- julia_setup()
+
+## If you want to use a julia at a specific location, you could do the following:
+## julia_setup(JULIA_HOME = "the folder that contains julia binary"), 
+## or you can set JULIA_HOME in command line environment or use `options(...)`
 
 ## Different ways for using Julia to calculate sqrt(2)
 
@@ -91,7 +94,19 @@ julia_installed_package("Optim")
 julia_library("Optim")
 ```
 
-## How to Get Help?
+## Trouble Shooting and Way to Get Help
+
+### Julia is not found
+
+Make sure the `Julia` installation is correct.
+`JuliaCall` is able to find `Julia` on PATH,
+and there are three ways for `JuliaCall` to find `Julia` not on PATH.
+
+- Use `julia_setup(JULIA_HOME = "the folder that contains julia binary")`
+- Use `options(JULIA_HOME = "the folder that contains julia binary")`
+- Set `JULIA_HOME` in command line environment.
+
+### How to Get Help
 
 - One way to get help for julia functions is just using `julia$help` like the following example:
 
