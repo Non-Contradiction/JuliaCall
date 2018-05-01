@@ -18,7 +18,7 @@ output: github_document
 - [JuliaCall for Seamless Integration of R and Julia](#juliacall-for-seamless-integration-of-r-and-julia)
   - [Installation](#installation)
   - [Basic Usage](#basic-usage)
-  - [How to Get Help?](#how-to-get-help)
+  - [Trouble Shooting and Way to Get Help](#trouble-shooting-and-way-to-get-help)
   - [JuliaCall for R Package Developers](#juliacall-for-r-package-developers)
   - [Suggestion and Issue Reporting](#suggestion-and-issue-reporting)
   - [Interfaces between R and Julia](#interfaces-between-r-and-julia)

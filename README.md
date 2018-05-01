@@ -18,7 +18,8 @@ Status](https://ci.appveyor.com/api/projects/status/github/Non-Contradiction/Jul
     Julia](#juliacall-for-seamless-integration-of-r-and-julia)
       - [Installation](#installation)
       - [Basic Usage](#basic-usage)
-      - [How to Get Help?](#how-to-get-help)
+      - [Trouble Shooting and Way to Get
+        Help](#trouble-shooting-and-way-to-get-help)
       - [JuliaCall for R Package
         Developers](#juliacall-for-r-package-developers)
       - [Suggestion and Issue
