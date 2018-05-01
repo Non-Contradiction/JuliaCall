@@ -3,7 +3,7 @@
 #' @description Open julia console.
 #'
 #' @examples
-#' \donttest{ ## julia_setup is quite time consuming
+#' \dontrun{ ## julia_setup is quite time consuming
 #'   julia_console()
 #' }
 #'
