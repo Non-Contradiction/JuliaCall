@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • JuliaCall</title>
+<title>Changelog • JuliaCall</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -18,13 +18,18 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="Changelog" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +37,8 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -47,12 +54,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">JuliaCall</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">JuliaCall</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.12.4.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -68,10 +79,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Julia_in_RMarkdown.html">Julia in RMarkdown</a>
+      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall in Jupyter R Notebook</a>
     </li>
     <li>
-      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall in Jupyter R Notebook</a>
+      <a href="../articles/Julia_in_RMarkdown.html">Julia in RMarkdown</a>
     </li>
     <li>
       <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall with Mandel Set Example</a>
@@ -79,7 +90,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -91,6 +102,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -98,17 +110,204 @@
       
       </header>
 
-      <div class="row">
-
-  <div class="col-md-9">
+<div class="row">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+      <h1>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/Non-Contradiction/JuliaCall/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="contents">
+    <div id="juliacall-0-12-4-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-12-4-9000" class="anchor"></a>JuliaCall 0.12.4.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Add <code>autowrap</code>, which can generates automatic wrappers for <code>julia</code> types.</li>
+<li>Fix bugs in passing arguments in <code>julia_docall</code> and <code>julia_call</code>.</li>
+</ul>
+</div>
+    <div id="juliacall-0-12-3-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-12-3-9000" class="anchor"></a>JuliaCall 0.12.3.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Fix the issue in displaying <code>JuliaObject</code>, especially in <code>Rmd</code> documents. Fix <a href='https://github.com/Non-Contradiction/JuliaCall/issues/43'>#43</a>.</li>
+<li>
+<code>x$name</code> could be used to get access to <code><a href="../reference/JuliaObjectFields.html">field(x, name)</a></code> for <code>JuliaObject</code>.</li>
+</ul>
+</div>
+    <div id="juliacall-0-12-2-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-12-2-9000" class="anchor"></a>JuliaCall 0.12.2.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Speed up <code>RCall</code> checking.</li>
+<li>Use some tricks to get around <code>julia</code> issue <a href='https://github.com/Non-Contradiction/JuliaCall/issues/14577'>#14577</a>.</li>
+</ul>
+</div>
+    <div id="juliacall-0-12-2" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-12-2" class="anchor"></a>JuliaCall 0.12.2<small> 2018-04-01 </small>
+</h1>
+<ul>
+<li>Fifth release on CRAN.</li>
+</ul>
+</div>
+    <div id="juliacall-0-12-1-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-12-1-9000" class="anchor"></a>JuliaCall 0.12.1.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Clearer documentation for <code>JULIA_HOME</code>.</li>
+<li>More helpful error message for <code><a href="../reference/julia_setup.html">julia_setup()</a></code>
+</li>
+<li>Bug fix for <code>julia</code> engine in <code>Rnw</code> files.</li>
+<li>Bug fix for <code>JuliaCall</code> in <code>rtichoke</code>.</li>
+</ul>
+</div>
+    <div id="juliacall-0-12-1" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-12-1" class="anchor"></a>JuliaCall 0.12.1<small> 2018-02-24 </small>
+</h1>
+<ul>
+<li>Fourth release on CRAN.</li>
+</ul>
+</div>
+    <div id="juliacall-0-12-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-12-0-9000" class="anchor"></a>JuliaCall 0.12.0.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code>JuliaCall</code> requires Julia 0.6 as Julia 0.5 is now officially unmaintained.</li>
+<li>Don’t use inline to compile functions at <code><a href="../reference/julia_setup.html">julia_setup()</a></code> any more, accelerate the startup time.</li>
+<li>Load juliarc in <code>julia_setup</code>.</li>
+<li>Fix the bug that <code><a href="../reference/julia_setup.html">julia_setup()</a></code> fails to correctly load libjulia.dll if JULIA_HOME is not in path on windows.</li>
+<li>Get JULIA_HOME from environment variable.</li>
+</ul>
+</div>
+    <div id="juliacall-0-11-1" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-11-1" class="anchor"></a>JuliaCall 0.11.1<small> 2017-11-16 </small>
+</h1>
+<ul>
+<li>Third release on CRAN.</li>
+</ul>
+</div>
+    <div id="juliacall-0-11-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-11-0-9000" class="anchor"></a>JuliaCall 0.11.0.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Remove deprecated <code>julia_eval_string</code>.</li>
+<li>Improve <code>JuliaCall</code> RMarkdown engine. The display system should work for all kinds of documents that rmarkdown supports.</li>
+<li>Should use older version of RCall with older version of R.</li>
+</ul>
+</div>
+    <div id="juliacall-0-10-0-9000---0-10-6-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-10-0-9000---0-10-6-9000" class="anchor"></a>JuliaCall 0.10.0.9000 - 0.10.6.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Important bug fix in <code>JuliaObject</code>, for more detail, see github issue <a href='https://github.com/Non-Contradiction/JuliaCall/issues/15'>#15</a>, issue <a href='https://github.com/Non-Contradiction/JuliaCall/issues/12'>#12</a> and <a href='https://github.com/Non-Contradiction/JuliaCall/issues/13'>#13</a> are related.</li>
+<li>Implement generics for <code>JuliaObject</code>, and fix many small bugs.</li>
+<li>Julia tuple converts to R S3 class of JuliaTuple based on list.</li>
+<li>Add <code>fields</code>, <code>field</code> and <code>field&lt;-</code> function for JuliaObjects.</li>
+<li>Use R6 for the implementation of <code>JuliaObject</code>. It’s lightweight, faster, and safer.</li>
+</ul>
+</div>
+    <div id="juliacall-0-9-3-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-9-3-9000" class="anchor"></a>JuliaCall 0.9.3.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Performance improvements for dot notation function call.</li>
+</ul>
+</div>
+    <div id="juliacall-0-9-3" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-9-3" class="anchor"></a>JuliaCall 0.9.3<small> 2017-10-12 </small>
+</h1>
+<ul>
+<li>Second release on CRAN.</li>
+</ul>
+</div>
+    <div id="juliacall-0-9-2-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-9-2-9000" class="anchor"></a>JuliaCall 0.9.2.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>New Julia display system <code><a href="../reference/plotsViewer.html">plotsViewer()</a></code>, which integrates better into R.</li>
+<li>Fits several bugs in <code>JuliaCall</code>, like removing using of depreated function.</li>
+<li>Improve display systems of RMarkdown and Jupyter R Notebook.</li>
+</ul>
+</div>
+    <div id="juliacall-0-9-1-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-9-1-9000" class="anchor"></a>JuliaCall 0.9.1.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Improve <code>JuliaObject</code>, same Julia object could enter julia_object_dict only once. And the display of <code>JuliaObject</code> becomes better. Also every common types of Julia Object could be wrapped by <code>JuliaObject</code>.</li>
+<li>The users could now choose to have <code>JuliaObject</code> type return value instead of R Object.</li>
+<li>Dot notation in julia is now accepted through the <code>julia_call</code> interface.</li>
+<li>
+<code>julia_eval_string</code> is deprecated in favor of <code>julia_eval</code>.</li>
+</ul>
+</div>
+    <div id="juliacall-0-9-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-9-0-9000" class="anchor"></a>JuliaCall 0.9.0.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Try to convert julia tuple.</li>
+<li>Add <code>JuliaObject</code>, which serves as a proxy in R for julia object, which is the automatic conversion target when other choices are not possible.</li>
+<li>
+<code><a href="../reference/julia_setup.html">julia_setup()</a></code> doesn’t need to be called first unless you want to force julia to restart or you need to set the julia path.</li>
+</ul>
+</div>
+    <div id="juliacall-0-8-0-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-8-0-9000" class="anchor"></a>JuliaCall 0.8.0.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code>julia.do_call</code> and <code>julia_call</code> now accept keyword arguments.</li>
+<li>
+<code>JuliaCall</code> works in Jupyter R notebook.</li>
+<li>
+<code>JuliaCall</code> works in R Markdown. The display system currently <strong>only work for html document</strong>. When there is no return from julia function and there is a need to display, a div with class=‘JuliaDisplay’ will be inserted into the html document with the corresponding content.</li>
+<li>Julia engine in R Markdown through <code>JuliaCall</code>.</li>
+</ul>
+</div>
+    <div id="juliacall-0-7-5-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-7-5-9000" class="anchor"></a>JuliaCall 0.7.5.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Have a basic julia display system, now the plot functionality in Julia works (mostly).</li>
+<li>
+<code>JuliaCall</code> is more consistent with julia.</li>
+</ul>
+</div>
+    <div id="juliacall-0-7-4-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-7-4-9000" class="anchor"></a>JuliaCall 0.7.4.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
+<li>Add helpful error messages in libjulia DLL load and compilation.</li>
+<li>Add <code>julia_assign</code> which can assign a value to a name in julia with automatic type conversion.</li>
+<li>Give the option to set path for julia.</li>
+<li>Deprecate <code>julia_check</code>.</li>
+<li>
+<code>julia_console</code>. Now there is a fully functional julia repl in R terminal, and a usable julia console when you use IDE for R.</li>
+<li>In <code>julia_setup</code>, there is an option whether or not to use RCall.jl, RCall’s R REPL mode and rgui will be set correctly.</li>
+</ul>
+</div>
     <div id="juliacall-0-7-3" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-7-3" class="anchor"></a>JuliaCall 0.7.3</h1>
+<h1 class="page-header">
+<a href="#juliacall-0-7-3" class="anchor"></a>JuliaCall 0.7.3<small> 2017-09-01 </small>
+</h1>
 <ul>
 <li>First release on CRAN.</li>
 <li>
@@ -121,174 +320,31 @@
 <li>Helper functions like <code>julia_help</code>.</li>
 </ul>
 </div>
-    <div id="juliacall-0-7-4-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-7-4-9000" class="anchor"></a>JuliaCall 0.7.4.9000</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>Add helpful error messages in libjulia DLL load and compilation.</li>
-<li>Add <code>julia_assign</code> which can assign a value to a name in julia with automatic type conversion.</li>
-<li>Give the option to set path for julia.</li>
-<li>Deprecate <code>julia_check</code>.</li>
-<li>
-<code>julia_console</code>. Now there is a fully functional julia repl in R terminal, and a usable julia console when you use IDE for R.</li>
-<li>In <code>julia_setup</code>, there is an option whether or not to use RCall.jl, RCall’s R REPL mode and rgui will be set correctly.</li>
-</ul>
-</div>
-    <div id="juliacall-0-7-5-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-7-5-9000" class="anchor"></a>JuliaCall 0.7.5.9000</h1>
-<ul>
-<li>Have a basic julia display system, now the plot functionality in Julia works (mostly).</li>
-<li>
-<code>JuliaCall</code> is more consistent with julia.</li>
-</ul>
-</div>
-    <div id="juliacall-0-8-0-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-8-0-9000" class="anchor"></a>JuliaCall 0.8.0.9000</h1>
-<ul>
-<li>
-<code>julia.do_call</code> and <code>julia_call</code> now accept keyword arguments.</li>
-<li>
-<code>JuliaCall</code> works in Jupyter R notebook.</li>
-<li>
-<code>JuliaCall</code> works in R Markdown. The display system currently <strong>only work for html document</strong>. When there is no return from julia function and there is a need to display, a div with class=‘JuliaDisplay’ will be inserted into the html document with the corresponding content.</li>
-<li>Julia engine in R Markdown through <code>JuliaCall</code>.</li>
-</ul>
-</div>
-    <div id="juliacall-0-9-0-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-9-0-9000" class="anchor"></a>JuliaCall 0.9.0.9000</h1>
-<ul>
-<li>Try to convert julia tuple.</li>
-<li>Add <code>JuliaObject</code>, which serves as a proxy in R for julia object, which is the automatic conversion target when other choices are not possible.</li>
-<li>
-<code><a href="../reference/julia_setup.html">julia_setup()</a></code> doesn’t need to be called first unless you want to force julia to restart or you need to set the julia path.</li>
-</ul>
-</div>
-    <div id="juliacall-0-9-1-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-9-1-9000" class="anchor"></a>JuliaCall 0.9.1.9000</h1>
-<ul>
-<li>Improve <code>JuliaObject</code>, same Julia object could enter julia_object_dict only once. And the display of <code>JuliaObject</code> becomes better. Also every common types of Julia Object could be wrapped by <code>JuliaObject</code>.</li>
-<li>The users could now choose to have <code>JuliaObject</code> type return value instead of R Object.</li>
-<li>Dot notation in julia is now accepted through the <code>julia_call</code> interface.</li>
-<li>
-<code>julia_eval_string</code> is deprecated in favor of <code>julia_eval</code>.</li>
-</ul>
-</div>
-    <div id="juliacall-0-9-2-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-9-2-9000" class="anchor"></a>JuliaCall 0.9.2.9000</h1>
-<ul>
-<li>New Julia display system <code><a href="../reference/plotsViewer.html">plotsViewer()</a></code>, which integrates better into R.</li>
-<li>Fits several bugs in <code>JuliaCall</code>, like removing using of depreated function.</li>
-<li>Improve display systems of RMarkdown and Jupyter R Notebook.</li>
-</ul>
-</div>
-    <div id="juliacall-0-9-3" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-9-3" class="anchor"></a>JuliaCall 0.9.3</h1>
-<ul>
-<li>Second release on CRAN.</li>
-</ul>
-</div>
-    <div id="juliacall-0-9-3-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-9-3-9000" class="anchor"></a>JuliaCall 0.9.3.9000</h1>
-<ul>
-<li>Performance improvements for dot notation function call.</li>
-</ul>
-</div>
-    <div id="juliacall-0-10-0-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-10-0-9000" class="anchor"></a>JuliaCall 0.10.0.9000</h1>
-<ul>
-<li>Implementation of <code>JuliaArray</code>.</li>
-</ul>
-</div>
-    <div id="juliacall-0-10-1-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-10-1-9000" class="anchor"></a>JuliaCall 0.10.1.9000</h1>
-<ul>
-<li>Bug fix in <code>JuliaArray</code>.</li>
-<li>Do not convert Tuple any more.</li>
-</ul>
-</div>
-    <div id="juliacall-0-10-2-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-10-2-9000" class="anchor"></a>JuliaCall 0.10.2.9000</h1>
-<ul>
-<li>Important bug fix in <code>JuliaObject</code>, for more detail, see github issue #15, issue #12 and #13 are related.</li>
-</ul>
-</div>
-    <div id="juliacall-0-10-3-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-10-3-9000" class="anchor"></a>JuliaCall 0.10.3.9000</h1>
-<ul>
-<li>Dispatching for <code>JuliaObject</code> and <code>JuliaArray</code>.</li>
-</ul>
-</div>
-    <div id="juliacall-0-10-4-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-10-4-9000" class="anchor"></a>JuliaCall 0.10.4.9000</h1>
-<ul>
-<li>Do not use <code>JuliaArray</code>, the discussion is in #16.</li>
-<li>
-<code>JuliaObject</code> is an S4 class now, which should be more robust.</li>
-</ul>
-</div>
-    <div id="juliacall-0-10-5-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-10-5-9000" class="anchor"></a>JuliaCall 0.10.5.9000</h1>
-<ul>
-<li>Implement generics for <code>JuliaObject</code>, and fix many small bugs.</li>
-<li>Fix the bug of the conversion of AbstractArray{Any}.</li>
-<li>Julia tuple converts to R S3 class of JuliaTuple based on list.</li>
-<li>Add <code>fields</code>, <code>field</code> and <code>field&lt;-</code> function for JuliaObjects.</li>
-</ul>
-</div>
-    <div id="juliacall-0-10-6-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-10-6-9000" class="anchor"></a>JuliaCall 0.10.6.9000</h1>
-<ul>
-<li>Use R6 for the implementation of <code>JuliaObject</code>. It’s lightweight, faster, and safer.</li>
-</ul>
-</div>
-    <div id="juliacall-0-11-0-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#juliacall-0-11-0-9000" class="anchor"></a>JuliaCall 0.11.0.9000</h1>
-<ul>
-<li>Remove deprecated <code>julia_eval_string</code>.</li>
-<li>Improve <em>JuliaCall</em> RMarkdown engine. The display system should work for all kinds of documents that rmarkdown supports.</li>
-<li>Should use older version of RCall with older version of R.</li>
-</ul>
-</div>
-    </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#juliacall-0-7-3">0.7.3</a></li>
-        <li><a href="#juliacall-0-7-4-9000">0.7.4.9000</a></li>
-        <li><a href="#juliacall-0-7-5-9000">0.7.5.9000</a></li>
-        <li><a href="#juliacall-0-8-0-9000">0.8.0.9000</a></li>
-        <li><a href="#juliacall-0-9-0-9000">0.9.0.9000</a></li>
-        <li><a href="#juliacall-0-9-1-9000">0.9.1.9000</a></li>
-        <li><a href="#juliacall-0-9-2-9000">0.9.2.9000</a></li>
-        <li><a href="#juliacall-0-9-3">0.9.3</a></li>
-        <li><a href="#juliacall-0-9-3-9000">0.9.3.9000</a></li>
-        <li><a href="#juliacall-0-10-0-9000">0.10.0.9000</a></li>
-        <li><a href="#juliacall-0-10-1-9000">0.10.1.9000</a></li>
-        <li><a href="#juliacall-0-10-2-9000">0.10.2.9000</a></li>
-        <li><a href="#juliacall-0-10-3-9000">0.10.3.9000</a></li>
-        <li><a href="#juliacall-0-10-4-9000">0.10.4.9000</a></li>
-        <li><a href="#juliacall-0-10-5-9000">0.10.5.9000</a></li>
-        <li><a href="#juliacall-0-10-6-9000">0.10.6.9000</a></li>
+        <li><a href="#juliacall-0-12-4-9000">0.12.4.9000</a></li>
+        <li><a href="#juliacall-0-12-3-9000">0.12.3.9000</a></li>
+        <li><a href="#juliacall-0-12-2-9000">0.12.2.9000</a></li>
+        <li><a href="#juliacall-0-12-2">0.12.2</a></li>
+        <li><a href="#juliacall-0-12-1-9000">0.12.1.9000</a></li>
+        <li><a href="#juliacall-0-12-1">0.12.1</a></li>
+        <li><a href="#juliacall-0-12-0-9000">0.12.0.9000</a></li>
+        <li><a href="#juliacall-0-11-1">0.11.1</a></li>
         <li><a href="#juliacall-0-11-0-9000">0.11.0.9000</a></li>
+        <li><a href="#juliacall-0-10-0-9000---0-10-6-9000">0.10.0.9000</a></li>
+        <li><a href="#juliacall-0-9-3-9000">0.9.3.9000</a></li>
+        <li><a href="#juliacall-0-9-3">0.9.3</a></li>
+        <li><a href="#juliacall-0-9-2-9000">0.9.2.9000</a></li>
+        <li><a href="#juliacall-0-9-1-9000">0.9.1.9000</a></li>
+        <li><a href="#juliacall-0-9-0-9000">0.9.0.9000</a></li>
+        <li><a href="#juliacall-0-8-0-9000">0.8.0.9000</a></li>
+        <li><a href="#juliacall-0-7-5-9000">0.7.5.9000</a></li>
+        <li><a href="#juliacall-0-7-4-9000">0.7.4.9000</a></li>
+        <li><a href="#juliacall-0-7-3">0.7.3</a></li>
       </ul>
     </div>
   </div>
@@ -301,11 +357,14 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+

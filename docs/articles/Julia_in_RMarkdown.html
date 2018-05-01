@@ -8,14 +8,17 @@
 <title>Julia in RMarkdown • JuliaCall</title>
 <!-- jquery --><script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><!-- Font Awesome icons --><link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-<!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../jquery.sticky-kit.min.js"></script><script src="../pkgdown.js"></script><meta property="og:title" content="Julia in RMarkdown">
+<meta property="og:description" content="">
+<meta name="twitter:card" content="summary">
+<!-- mathjax --><script src="https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
 <body>
-    <div class="container template-vignette">
+    <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -24,12 +27,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">JuliaCall</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">JuliaCall</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.12.4.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -45,10 +52,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/Julia_in_RMarkdown.html">Julia in RMarkdown</a>
+      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall in Jupyter R Notebook</a>
     </li>
     <li>
-      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall in Jupyter R Notebook</a>
+      <a href="../articles/Julia_in_RMarkdown.html">Julia in RMarkdown</a>
     </li>
     <li>
       <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall with Mandel Set Example</a>
@@ -56,7 +63,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -76,40 +83,43 @@
 
       
       </header><div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Julia in RMarkdown</h1>
                         <h4 class="author">Changcheng Li</h4>
             
-            <h4 class="date">2017-11-16</h4>
-          </div>
+            <h4 class="date">2018-04-30</h4>
+      
+      <small class="dont-index">Source: <a href="https://github.com/Non-Contradiction/JuliaCall/blob/master/vignettes/Julia_in_RMarkdown.Rmd"><code>vignettes/Julia_in_RMarkdown.Rmd</code></a></small>
+      <div class="hidden name"><code>Julia_in_RMarkdown.Rmd</code></div>
+
+    </div>
 
     
     
-<div class="contents">
 <div id="use-juliacall-as-julia-engine-in-r-markdown" class="section level2">
 <h2 class="hasAnchor">
 <a href="#use-juliacall-as-julia-engine-in-r-markdown" class="anchor"></a>Use JuliaCall as Julia Engine in R Markdown</h2>
-<p>To use <code>JuliaCall</code> package for julia engine in R Markdown document. Just set the engine for julia to <code><a href="http://www.rdocumentation.org/packages/JuliaCall/topics/eng_juliacall">JuliaCall::eng_juliacall</a></code> like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>)
-knitr<span class="op">::</span>knit_engines<span class="op">$</span><span class="kw">set</span>(<span class="dt">julia =</span> JuliaCall<span class="op">::</span>eng_juliacall)</code></pre></div>
+<p>To use <code>JuliaCall</code> package for julia engine in R Markdown document. Just set the engine for julia to <code><a href="../reference/eng_juliacall.html">JuliaCall::eng_juliacall</a></code> like this:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">knitr<span class="op">::</span>knit_engines<span class="op">$</span><span class="kw">set</span>(<span class="dt">julia =</span> JuliaCall<span class="op">::</span>eng_juliacall)</a></code></pre></div>
 <p>Below is how it looks like when using <code>JuliaCall</code> as language engine for Julia.</p>
 </div>
 <div id="how-does-juliacall-in-r-markdown-look-like" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-does-juliacall-in-r-markdown-look-like" class="anchor"></a>How Does JuliaCall in R Markdown Look Like?</h2>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia"><span class="co">## This is a julia language chunk.</span>
-<span class="co">## In julia, the command without ending semicolon will trigger the display</span>
-<span class="co">## so is JuliaCall package. </span>
-<span class="co">## The julia display will follow immediately after the corresponding command</span>
-<span class="co">## just as the R code in R Markdown.</span>
-a = sqrt(<span class="fl">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="co">## This is a julia language chunk.</span></a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">## In julia, the command without ending semicolon will trigger the display</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">## so is JuliaCall package. </span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">## The julia display will follow immediately after the corresponding command</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">## just as the R code in R Markdown.</span></a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">a = sqrt(<span class="fl">2</span>)</a></code></pre></div>
 <pre><code>## 1.4142135623730951</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">a = sqrt(<span class="fl">2</span>);
-
-<span class="co">## And lots of different types of display are supported in JuliaCall.</span>
-<span class="co">## Like markdown and plots.</span>
-@doc sqrt</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb4-1" data-line-number="1">a = sqrt(<span class="fl">2</span>);</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">## And lots of different types of display are supported in JuliaCall.</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">## Like markdown and plots.</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">@doc sqrt</a></code></pre></div>
 <pre><code>## ```
 ## sqrt(x)
 ## ```
@@ -120,21 +130,21 @@ a = sqrt(<span class="fl">2</span>)</code></pre></div>
 <a href="#support-for-plots-jl" class="anchor"></a>Support for <code>Plots.jl</code>
 </h3>
 <p><code>Plots.jl</code> is an easy to use and powerful julia package for plotting, <a href="https://github.com/JuliaPlots/Plots.jl" class="uri">https://github.com/JuliaPlots/Plots.jl</a>. And <code>JuliaCall</code> supports <code>Plots.jl</code> of course!!</p>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">using Plots</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb6-1" data-line-number="1">using Plots</a></code></pre></div>
 <div id="pyplot-backend" class="section level4">
 <h4 class="hasAnchor">
 <a href="#pyplot-backend" class="anchor"></a>PyPlot backend</h4>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">pyplot()</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb7-1" data-line-number="1">pyplot()</a></code></pre></div>
 <pre><code>## Plots.PyPlotBackend()</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">plot(Plots.fakedata(<span class="fl">50</span>,<span class="fl">5</span>),w=<span class="fl">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb9-1" data-line-number="1">plot(Plots.fakedata(<span class="fl">50</span>,<span class="fl">5</span>),w=<span class="fl">3</span>)</a></code></pre></div>
 <p><img src="JuliaCall_in_RMarkdown_files/figure-markdown_github/unnamed-chunk-3-J1.png" width="600"></p>
 </div>
 <div id="gr-backend" class="section level4">
 <h4 class="hasAnchor">
 <a href="#gr-backend" class="anchor"></a>GR backend</h4>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">gr()</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb10-1" data-line-number="1">gr()</a></code></pre></div>
 <pre><code>## Plots.GRBackend()</code></pre>
-<div class="sourceCode"><pre class="sourceCode julia"><code class="sourceCode julia">plot(Plots.fakedata(<span class="fl">50</span>,<span class="fl">5</span>),w=<span class="fl">3</span>)</code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode julia"><code class="sourceCode julia"><a class="sourceLine" id="cb12-1" data-line-number="1">plot(Plots.fakedata(<span class="fl">50</span>,<span class="fl">5</span>),w=<span class="fl">3</span>)</a></code></pre></div>
 <p><img src="JuliaCall_in_RMarkdown_files/figure-markdown_github/unnamed-chunk-4-J1.png" width="600"></p>
 </div>
 </div>
@@ -143,13 +153,12 @@ a = sqrt(<span class="fl">2</span>)</code></pre></div>
 <h2 class="hasAnchor">
 <a href="#get-access-to-julia-in-r-chunk" class="anchor"></a>Get Access to Julia in R Chunk</h2>
 <p>And you can also get access to julia variables in R code chunk quite easily using <code>JuliaCall</code>, for example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(JuliaCall)
-## This is a R language chunk.
-## In the previous julia chunk, we define variable a, 
-## we can use functions in JuliaCall to get access to it.
-<span class="kw"><a href="../reference/julia_eval.html">julia_eval</a></span>(<span class="st">"a"</span>)</code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">library</span>(JuliaCall)</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">## This is a R language chunk.</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">## In the previous julia chunk, we define variable a, </a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">## we can use functions in JuliaCall to get access to it.</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="kw"><a href="../reference/julia_eval.html">julia_eval</a></span>(<span class="st">"a"</span>)</a></code></pre></div>
 <pre><code>## [1] 1.414214</code></pre>
-</div>
 </div>
   </div>
 
@@ -173,11 +182,13 @@ a = sqrt(<span class="fl">2</span>)</code></pre></div>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
 </div>
+
+  
 
   </body>
 </html>

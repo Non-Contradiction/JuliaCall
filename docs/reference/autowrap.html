@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Julia language engine in R Markdown — eng_juliacall • JuliaCall</title>
+<title>Use automatic wrapper for julia type. — autowrap • JuliaCall</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -27,9 +27,9 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-<meta property="og:title" content="Julia language engine in R Markdown — eng_juliacall" />
+<meta property="og:title" content="Use automatic wrapper for julia type. — autowrap" />
 
-<meta property="og:description" content="Julia language engine in R Markdown" />
+<meta property="og:description" content="autowrap tells `JuliaCall` to use automatic wrapper for julia type." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -116,40 +116,44 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Julia language engine in R Markdown</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Non-Contradiction/JuliaCall/blob/master/R/RMarkdown.R'><code>R/RMarkdown.R</code></a></small>
-    <div class="hidden name"><code>eng_juliacall.Rd</code></div>
+    <h1>Use automatic wrapper for julia type.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Non-Contradiction/JuliaCall/blob/master/R/JuliaObjectExt.R'><code>R/JuliaObjectExt.R</code></a></small>
+    <div class="hidden name"><code>autowrap.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Julia language engine in R Markdown</p>
+    <p><code>autowrap</code> tells `JuliaCall` to use automatic wrapper for julia type.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>eng_juliacall</span>(<span class='no'>options</span>)</pre>
+    <pre class="usage"><span class='fu'>autowrap</span>(<span class='no'>type</span>, <span class='kw'>fields</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>methods</span> <span class='kw'>=</span> <span class='fu'>c</span>())</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>options</th>
-      <td><p>a list of chunk options</p></td>
+      <th>type</th>
+      <td><p>the julia type to wrap.</p></td>
+    </tr>
+    <tr>
+      <th>fields</th>
+      <td><p>names of fields to be included in the wrapper.
+If the value is NULL, then every julia fields will be included in the wrapper.</p></td>
+    </tr>
+    <tr>
+      <th>methods</th>
+      <td><p>names of methods to be overloaded for the wrapper.</p></td>
     </tr>
     </table>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'>
-<span class='kw pkg'>knitr</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/knitr/topics/knit_engines'>knit_engines</a></span>$<span class='fu'>set</span>(<span class='kw'>julia</span> <span class='kw'>=</span> <span class='kw pkg'>JuliaCall</span><span class='kw ns'>::</span><span class='no'><a href='http://www.rdocumentation.org/packages/JuliaCall/topics/eng_juliacall'>eng_juliacall</a></span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+                </ul>
 
   </div>
 </div>

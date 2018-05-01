@@ -18,13 +18,22 @@
 <!-- Font Awesome icons -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
 
+<!-- clipboard.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
+
+
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
-  
-  
+<meta property="og:title" content="JuliaCall: Seamless Integration Between R and Julia. — JuliaCall" />
+
+<meta property="og:description" content="JuliaCall provides you with functions to call Julia functions and
+to use Julia packages as easy as possible." />
+<meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -32,6 +41,8 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
+
+
 
 
   </head>
@@ -47,12 +58,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">JuliaCall</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">JuliaCall</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.12.4.9000</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="..//index.html">
+  <a href="../index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
@@ -68,10 +83,10 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/Julia_in_RMarkdown.html">Julia in RMarkdown</a>
+      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall in Jupyter R Notebook</a>
     </li>
     <li>
-      <a href="../articles/JuliaCall_in_Jupyter_R_Notebook.html">JuliaCall in Jupyter R Notebook</a>
+      <a href="../articles/Julia_in_RMarkdown.html">Julia in RMarkdown</a>
     </li>
     <li>
       <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall with Mandel Set Example</a>
@@ -79,7 +94,7 @@
   </ul>
 </li>
 <li>
-  <a href="../news/index.html">News</a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -91,6 +106,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -98,53 +114,53 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>JuliaCall: Seamless Integration Between R and Julia.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Non-Contradiction/JuliaCall/blob/master/R/JuliaCall.R'><code>R/JuliaCall.R</code></a></small>
+    <div class="hidden name"><code>JuliaCall.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>JuliaCall provides you with functions to call Julia functions and
 to use Julia packages as easy as possible.</p>
     
+    </div>
 
         
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
-</div><span class='co'># NOT RUN {</span>
- <span class='co'>## The examples are quite time consuming</span>
+</div><div class='input'> <span class='co'>## The examples are quite time consuming</span>
 
   <span class='co'>## Do initiation for JuliaCall</span>
 
-  <span class='no'>julia</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='julia_setup.html'>julia_setup</a></span>()
-
+  <span class='no'>julia</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='julia_setup.html'>julia_setup</a></span>()</div><div class='output co'>#&gt; <span class='message'>Julia version 0.6.2 at location /Applications/Julia-0.6.app/Contents/Resources/julia/bin will be used.</span></div><div class='output co'>#&gt; <span class='message'>Julia initiation...</span></div><div class='output co'>#&gt; <span class='message'>Finish Julia initiation.</span></div><div class='output co'>#&gt; <span class='message'>Loading setup script for JuliaCall...</span></div><div class='output co'>#&gt; <span class='message'>Finish loading setup script for JuliaCall.</span></div><div class='input'>
   <span class='co'>## Different ways for calculating `sqrt(2)`</span>
 
   <span class='co'># julia$command("a = sqrt(2)"); julia$eval("a")</span>
-  <span class='fu'><a href='julia_command.html'>julia_command</a></span>(<span class='st'>"a = sqrt(2)"</span>); <span class='fu'><a href='julia_eval.html'>julia_eval</a></span>(<span class='st'>"a"</span>)
-
+  <span class='fu'><a href='julia_command.html'>julia_command</a></span>(<span class='st'>"a = sqrt(2)"</span>); <span class='fu'><a href='julia_eval.html'>julia_eval</a></span>(<span class='st'>"a"</span>)</div><div class='output co'>#&gt; [1] 1.414214</div><div class='input'>
   <span class='co'># julia$eval("sqrt(2)")</span>
-  <span class='fu'><a href='julia_eval.html'>julia_eval</a></span>(<span class='st'>"sqrt(2)"</span>)
-
+  <span class='fu'><a href='julia_eval.html'>julia_eval</a></span>(<span class='st'>"sqrt(2)"</span>)</div><div class='output co'>#&gt; [1] 1.414214</div><div class='input'>
   <span class='co'># julia$call("sqrt", 2)</span>
-  <span class='fu'><a href='call.html'>julia_call</a></span>(<span class='st'>"sqrt"</span>, <span class='fl'>2</span>)
-
+  <span class='fu'><a href='call.html'>julia_call</a></span>(<span class='st'>"sqrt"</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 1.414214</div><div class='input'>
   <span class='co'># julia$eval("sqrt")(2)</span>
-  <span class='fu'><a href='julia_eval.html'>julia_eval</a></span>(<span class='st'>"sqrt"</span>)(<span class='fl'>2</span>)
-
+  <span class='fu'><a href='julia_eval.html'>julia_eval</a></span>(<span class='st'>"sqrt"</span>)(<span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 1.414214</div><div class='input'>
   <span class='co'>## You can use `julia_exists` as `exists` in R to test</span>
   <span class='co'>## whether a function or name exists in Julia or not</span>
 
   <span class='co'># julia$exists("sqrt")</span>
-  <span class='fu'><a href='julia_exists.html'>julia_exists</a></span>(<span class='st'>"sqrt"</span>)
-
+  <span class='fu'><a href='julia_exists.html'>julia_exists</a></span>(<span class='st'>"sqrt"</span>)</div><div class='output co'>#&gt; [1] TRUE</div><div class='input'>
   <span class='co'>## You can use `julia$help` to get help for Julia functions</span>
 
   <span class='co'># julia$help("sqrt")</span>
-  <span class='fu'><a href='julia_help.html'>julia_help</a></span>(<span class='st'>"sqrt"</span>)
-
+  <span class='fu'><a href='julia_help.html'>julia_help</a></span>(<span class='st'>"sqrt"</span>)</div><div class='output co'>#&gt; ```
+#&gt; sqrt(x)
+#&gt; ```
+#&gt; 
+#&gt; Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.</div><div class='input'>
   <span class='co'>## You can install and use Julia packages through JuliaCall</span>
 
   <span class='co'># julia$install_package("Optim")</span>
@@ -154,11 +170,9 @@ to use Julia packages as easy as possible.</p>
   <span class='fu'><a href='julia_package.html'>julia_install_package_if_needed</a></span>(<span class='st'>"Optim"</span>)
 
   <span class='co'># julia$installed_package("Optim")</span>
-  <span class='fu'><a href='julia_package.html'>julia_installed_package</a></span>(<span class='st'>"Optim"</span>)
-
+  <span class='fu'><a href='julia_package.html'>julia_installed_package</a></span>(<span class='st'>"Optim"</span>)</div><div class='output co'>#&gt; [1] "0.14.1"</div><div class='input'>
   <span class='co'># julia$library("Optim")</span>
-  <span class='fu'><a href='julia_package.html'>julia_library</a></span>(<span class='st'>"Optim"</span>)
-<span class='co'># }</span><div class='input'>
+  <span class='fu'><a href='julia_package.html'>julia_library</a></span>(<span class='st'>"Optim"</span>)</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -177,11 +191,14 @@ to use Julia packages as easy as possible.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="http://hadley.github.io/pkgdown/">pkgdown</a>.</p>
+  <p>Site built with <a href="http://pkgdown.r-lib.org/">pkgdown</a>.</p>
 </div>
 
       </footer>
    </div>
 
+  
+
   </body>
 </html>
+
