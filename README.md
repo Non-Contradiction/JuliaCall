@@ -41,8 +41,10 @@ information.
 ## Installation
 
 `JuliaCall` is on CRAN now\! To use package `JuliaCall`, you first have
-to install `Julia` <https://julialang.org/> on your computer, and then
-you can install `JuliaCall` just like any other R packages by
+to install [`Julia`](https://julialang.org/) on your computer, you can
+download a generic binary from <https://julialang.org/downloads/> and
+add it to your path, and then you can install `JuliaCall` just like any
+other R packages by
 
 ``` r
 install.packages("JuliaCall")
@@ -67,6 +69,10 @@ julia <- julia_setup()
 #> Finish Julia initiation.
 #> Loading setup script for JuliaCall...
 #> Finish loading setup script for JuliaCall.
+
+## If you want to use a julia at a specific location, you could do the following:
+## julia_setup(JULIA_HOME = "the folder that contains julia binary"), 
+## or you can set JULIA_HOME in command line environment or use `options(...)`
 
 ## Different ways for using Julia to calculate sqrt(2)
 
@@ -108,11 +114,24 @@ julia_help("sqrt")
 julia_install_package("Optim")
 julia_install_package_if_needed("Optim")
 julia_installed_package("Optim")
-#> [1] "0.14.0"
+#> [1] "0.14.1"
 julia_library("Optim")
 ````
 
-## How to Get Help?
+## Trouble Shooting and Way to Get Help
+
+### Julia is not found
+
+Make sure the `Julia` installation is correct. `JuliaCall` is able to
+find `Julia` on PATH, and there are three ways for `JuliaCall` to find
+`Julia` not on PATH.
+
+  - Use `julia_setup(JULIA_HOME = "the folder that contains julia
+    binary")`
+  - Use `options(JULIA_HOME = "the folder that contains julia binary")`
+  - Set `JULIA_HOME` in command line environment.
+
+### How to Get Help
 
   - One way to get help for julia functions is just using `julia$help`
     like the following example:
@@ -142,8 +161,30 @@ for a Julia package, `JuliaCall` is an ideal choice for that\!
 
 Basically you only need to find the Julia function or Julia module you
 want to have in `R` and then just `using` the module and `call` the
-function. An example is `ipoptjlr`, which can be found at
-<https://github.com/Non-Contradiction/ipoptjlr>.
+function. Several examples are:
+
+  - [`diffeqr`](https://github.com/JuliaDiffEq/diffeqr) is a package for
+    solving differential equations in `R`. It utilizes
+    [DifferentialEquations.jl](http://docs.juliadiffeq.org/latest/) for
+    its core routines to give high performance solving of ordinary
+    differential equations (ODEs), stochastic differential equations
+    (SDEs), delay differential equations (DDEs), and
+    differential-algebraic equations (DAEs) directly in `R`.
+  - [`convexjlr`](https://github.com/Non-Contradiction/convexjlr) is an
+    `R` package for Disciplined Convex Programming (DCP) by providing a
+    high level wrapper for `Julia` package
+    [`Convex.jl`](https://github.com/JuliaOpt/Convex.jl). `convexjlr`
+    can solve linear programs, second order cone programs, semidefinite
+    programs, exponential cone programs, mixed-integer linear programs,
+    and some other DCP-compliant convex programs through `Convex.jl`.
+  - [`ipoptjlr`](https://github.com/Non-Contradiction/ipoptjlr) provides
+    an `R` interface to the `Ipopt` nonlinear optimization solver. It
+    provides a simple high-level wrapper for `Julia` package
+    \[`Ipopt.jl`\] (<https://github.com/JuliaOpt/Ipopt.jl>).
+  - [Julia MixedModels from R](http://rpubs.com/dmbates/377897)
+    illustrates how to use `JuliaCall` and `Julia` package
+    [`MixedModels.jl`](https://github.com/dmbates/MixedModels.jl) to
+    build mixed models in `R`.
 
 If you have any issues in developing an `R` package using `JuliaCall`,
 you may report it using the link:
