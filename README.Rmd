@@ -158,6 +158,6 @@ It will be much appreciated if you can
 
 ## Interfaces between R and Julia
 
-* There is a `Julia` package called `RCall.jl` which embedds `R` in `Julia`. `JuliaCall` is inspired by `RCall.jl` and depends on `RCall.jl` for many functionalities like much of the type conversion between `R` and `Julia`.
-* There is an `R` package `XRJulia`, based on John Chambers' `XR` package and allow for structured integration of `R` with `Julia`. It connects to `Julia` and uses JSON to transfer data between `Julia` and `R`.
-* There is another `R` package `RJulia`, which embedds `Julia` in `R` as well as `JuliaCall`. It is not on CRAN yet and I haven't tested it.
+- [`RCall.jl`](https://github.com/JuliaInterop/RCall.jl) is a `Julia` package which embeds `R` in `Julia`. `JuliaCall` is inspired by `RCall.jl` and depends on `RCall.jl` for many functionalities like much of the type conversion between `R` and `Julia`.
+- [`XRJulia`](https://github.com/johnmchambers/XRJulia) is an `R` package based on John Chambers' `XR` package and allow for structured integration of `R` with `Julia`. It connects to `Julia` and uses JSON to transfer data between `Julia` and `R`.
+- [`RJulia`](https://github.com/armgong/rjulia) is an `R` package which embeds `Julia` in `R` as well as `JuliaCall`. It is not on CRAN yet and I haven't tested it.
