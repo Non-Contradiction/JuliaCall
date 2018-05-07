@@ -1,3 +1,11 @@
+# JuliaCall 0.13.0.9000
+
+* Important bug fixes.
+
+# JuliaCall 0.13.0
+
+* Sixth release on CRAN.
+
 # JuliaCall 0.12.4.9000
 
 * Add `autowrap`, which can generates automatic wrappers for `julia` types.
