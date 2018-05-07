@@ -16,9 +16,7 @@ if !is_windows()
     end
 end
 
-@suppress_err begin
-    using RCall
-end
+using RCall
 
 include("./display/basic.jl")
 include("./display/Rjulia.jl")
