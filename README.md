@@ -186,6 +186,12 @@ function. Several examples are:
     illustrates how to use `JuliaCall` and `Julia` package
     [`MixedModels.jl`](https://github.com/dmbates/MixedModels.jl) to
     build mixed models in `R`.
+  - [`autodiffr`](https://github.com/Non-Contradiction/autodiffr)
+    provides automatic differentiation to native `R` functions by
+    wrapping `Julia` packages
+    [`ForwardDiff.jl`](https://github.com/JuliaDiff/ForwardDiff.jl) and
+    [`ReverseDiff.jl`](https://github.com/JuliaDiff/ReverseDiff.jl)
+    through `JuliaCall`, which is a work in progress.
 
 If you have any issues in developing an `R` package using `JuliaCall`,
 you may report it using the link:

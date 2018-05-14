@@ -133,6 +133,7 @@ Several examples are:
 - [`convexjlr`](https://github.com/Non-Contradiction/convexjlr) is an `R` package for Disciplined Convex Programming (DCP) by providing a high level wrapper for `Julia` package [`Convex.jl`](https://github.com/JuliaOpt/Convex.jl). `convexjlr` can solve linear programs, second order cone programs, semidefinite programs, exponential cone programs, mixed-integer linear programs, and some other DCP-compliant convex programs through `Convex.jl`.
 - [`ipoptjlr`](https://github.com/Non-Contradiction/ipoptjlr) provides an `R` interface to the `Ipopt` nonlinear optimization solver. It provides a simple high-level wrapper for `Julia` package [`Ipopt.jl`] (https://github.com/JuliaOpt/Ipopt.jl).
 - [Julia MixedModels from R](http://rpubs.com/dmbates/377897) illustrates how to use `JuliaCall` and `Julia` package [`MixedModels.jl`](https://github.com/dmbates/MixedModels.jl) to build mixed models in `R`.
+- [`autodiffr`](https://github.com/Non-Contradiction/autodiffr) provides automatic differentiation to native `R` functions by wrapping `Julia` packages [`ForwardDiff.jl`](https://github.com/JuliaDiff/ForwardDiff.jl) and [`ReverseDiff.jl`](https://github.com/JuliaDiff/ReverseDiff.jl) through `JuliaCall`, which is a work in progress.
 
 If you have any issues in developing an `R` package using `JuliaCall`,
 you may report it using the link: <https://github.com/Non-Contradiction/JuliaCall/issues/new>.
