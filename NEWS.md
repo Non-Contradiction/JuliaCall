@@ -1,6 +1,7 @@
 # JuliaCall 0.13.0.9000
 
 * Important bug fixes.
+* Reduce the number of messages in `julia_setup(verbose = TRUE)`.
 
 # JuliaCall 0.13.0
 
