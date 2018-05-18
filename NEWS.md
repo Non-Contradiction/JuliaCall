@@ -1,7 +1,10 @@
 # JuliaCall 0.13.0.9000
 
 * Important bug fixes.
-* Reduce the number of messages in `julia_setup(verbose = TRUE)`.
+* Reduce the number of messages from `julia_setup(verbose = TRUE)`.
+* Add `need_return` argument to `julia_eval`, now there is a possibility to return
+  the result as an `JuliaObject`, which is convenient for many use cases requiring
+  an R object corresponding to a julia object.
 
 # JuliaCall 0.13.0
 
