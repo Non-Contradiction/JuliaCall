@@ -106,7 +106,7 @@ julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", na
 #'
 #' @export
 julia_eval <- julia$eval <- function(cmd, need_return = c("R", "Julia"))
-        julia$call("JuliaCall.eval_string", cmd, need_return = need_return)
+        julia$call("JuliaCall.eval_string", cmd, need_return = match.arg(need_return))
 
 #' Evaluate string commands in julia.
 #'
