@@ -4,17 +4,20 @@
 \alias{julia_eval}
 \title{Evaluate string commands in julia and get the result.}
 \usage{
-julia_eval(cmd)
+julia_eval(cmd, need_return = c("R", "Julia"))
 }
 \arguments{
 \item{cmd}{the command string you want to evaluate in julia.}
+
+\item{need_return}{whether you want julia to return value as an R object or
+a wrapper for julia object.}
 }
 \value{
 the R object automatically converted from julia object.
 }
 \description{
 \code{julia_eval} evaluates string commands in julia and
-returns the result (automatically converted to an R object).
+returns the result (automatically converted to an R object or a JuliaObject wrapper).
 If you don't need the result, maybe you could
 try \code{julia_command}.
 }

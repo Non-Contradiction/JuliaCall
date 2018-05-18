@@ -88,11 +88,13 @@ julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", na
 #' Evaluate string commands in julia and get the result.
 #'
 #' \code{julia_eval} evaluates string commands in julia and
-#' returns the result (automatically converted to an R object).
+#' returns the result (automatically converted to an R object or a JuliaObject wrapper).
 #' If you don't need the result, maybe you could
 #' try \code{julia_command}.
 #'
 #' @param cmd the command string you want to evaluate in julia.
+#' @param need_return whether you want julia to return value as an R object or
+#'   a wrapper for julia object.
 #'
 #' @return the R object automatically converted from julia object.
 #'
@@ -103,8 +105,8 @@ julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", na
 #' }
 #'
 #' @export
-julia_eval <- julia$eval <-
-    function(cmd) julia$call("JuliaCall.eval_string", cmd)
+julia_eval <- julia$eval <- function(cmd, need_return = c("R", "Julia"))
+        julia$call("JuliaCall.eval_string", cmd, need_return = need_return)
 
 #' Evaluate string commands in julia.
 #'
