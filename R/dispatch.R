@@ -42,7 +42,12 @@ fdot <- function(x) paste0(as.character(x), ".")
 ## Ops Group
 
 #' @export
-Ops.JuliaObject <- function(e1, e2) julia_call(fdot(.Generic), e1, e2)
+Ops.JuliaObject <- function(e1, e2 = NULL){
+    if (is.null(e2)) {
+        return(julia_call(fdot(.Generic), e1))
+    }
+    julia_call(fdot(.Generic), e1, e2)
+}
 #' @export
 `%%.JuliaObject` <- function(e1, e2) julia_call("mod.", e1, e2)
 #' @export
