@@ -69,6 +69,10 @@ test_that("test of Arith group", {
     testJuliaObjectGeneric(`%%`, 2)
     testJuliaObjectGeneric(`%/%`, 2)
     testJuliaObjectGeneric(`/`, 2)
+
+    ## Need to test for + and - as unary operators
+    testJuliaObjectGeneric(`+`, 1)
+    testJuliaObjectGeneric(`-`, 1)
 })
 
 test_that("test of Logic group", {
