@@ -4,7 +4,7 @@ test_that("test of the JuliaObject", {
     skip_on_cran()
     julia <- julia_setup()
 
-    expect_equal(julia_eval("1//2") ^ 2, 0.25)
+    expect_equal(c(julia_eval("1//2") ^ 2), 0.25)
 
     julia_command("
     type Mytype
