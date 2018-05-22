@@ -6,7 +6,12 @@ length.JuliaObject <- function(x){
     )
 }
 #' @export
-`[.JuliaObject` <- function(x, i) julia_call("getindex", x, as.integer(i))
+`[.JuliaObject` <- function(x, i){
+    if (is.logical(i)) {
+        return(julia_call("getindex", x, i))
+    }
+    julia_call("getindex", x, as.integer(i))
+}
 #' @export
 `[[.JuliaObject` <- function(x, i, exact = TRUE){
     if (length(i) > 1) {
@@ -15,8 +20,12 @@ length.JuliaObject <- function(x){
     julia_call("getindex", x, as.integer(i))
 }
 #' @export
-`[<-.JuliaObject` <- function(x, i, value)
+`[<-.JuliaObject` <- function(x, i, value){
+    if (is.logical(i)) {
+        return(julia_call("setindex!", x, value, i))
+    }
     julia_call("setindex!", x, value, as.integer(i))
+}
 #' @export
 `[[<-.JuliaObject` <- function(x, i, value)
     julia_call("setindex!", x, value, as.integer(i))
