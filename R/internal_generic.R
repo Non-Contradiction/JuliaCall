@@ -8,7 +8,7 @@
 # }
 
 #' @export
-rep.JuliaObject <- function(x, times = 1, length.out = NA, each = 1){
+rep.JuliaObject <- function(x, times = 1, length.out = NA, each = 1, ...){
     if (!is.na(length.out)) {
         times <- ceiling(length.out / length(x))
         return(julia_call("JuliaCall.rep", x, as.integer(times))[1:length.out])
