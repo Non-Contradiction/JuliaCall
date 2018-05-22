@@ -11,3 +11,7 @@ cumprod1(x) = cumprod(x)
 cumprod1(x :: Number) = cumprod1([x])
 
 tanpi(x) = sinpi(x) / cospi(x)
+
+unlist(x) = vcat(x...)
+
+rep(x, times) = repmat(vcat(x), times)
