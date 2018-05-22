@@ -1,10 +1,11 @@
-#' @export
-unlist.JuliaObject <- function(x, recursive = TRUE, use.names = TRUE){
-    tryCatch(julia_call("JuliaCall.vcat", x),
-             warn = function(e){},
-             error = function(e) x
-    )
-}
+# the way devtools deal with unlist has bugs, so temporarily commented out
+#' #' @export
+#' unlist.JuliaObject <- function(x, recursive = TRUE, use.names = TRUE){
+#'     tryCatch(julia_call("JuliaCall.vcat", x),
+#'              warn = function(e){},
+#'              error = function(e) x
+#'     )
+#' }
 
 #' @export
 rep.JuliaObject <- function(x, times, ...){
