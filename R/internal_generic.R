@@ -1,6 +1,6 @@
 #' @export
 unlist.JuliaObject <- function(x, recursive = TRUE, use.names = TRUE){
-    tryCatch(julia_call("JuliaCall::vcat", x),
+    tryCatch(julia_call("JuliaCall.vcat", x),
              warn = function(e){},
              error = function(e) x
     )
@@ -8,5 +8,5 @@ unlist.JuliaObject <- function(x, recursive = TRUE, use.names = TRUE){
 
 #' @export
 rep.JuliaObject <- function(x, times, ...){
-    julia_call("JuliaCall::rep", x, as.integer(times))
+    julia_call("JuliaCall.rep", x, as.integer(times))
 }
