@@ -15,3 +15,23 @@ tanpi(x) = sinpi(x) / cospi(x)
 unlist(x) = vcat(x...)
 
 rep(x, times) = repmat(vcat(x), times)
+
+function assign!(x :: AbstractArray, value :: AbstractArray, i)
+    try
+        setindex!(x, value, i)
+    catch e
+        commontype = promote_type(eltype(x), eltype(value))
+        x = AbstractArray{commontype}(x)
+        setindex!(x, value, i)
+    end
+end
+
+function assign!(x :: AbstractArray, value, i)
+    try
+        setindex!(x, value, i)
+    catch e
+        commontype = promote_type(eltype(x), typeof(value))
+        x = AbstractArray{commontype}(x)
+        setindex!(x, value, i)
+    end
+end

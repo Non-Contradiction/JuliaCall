@@ -22,13 +22,13 @@ length.JuliaObject <- function(x){
 #' @export
 `[<-.JuliaObject` <- function(x, i, value){
     if (is.logical(i)) {
-        return(julia_call("setindex!", x, value, i))
+        return(julia_call("JuliaCall.assign!", x, value, i))
     }
-    julia_call("setindex!", x, value, as.integer(i))
+    julia_call("JuliaCall.assign!", x, value, as.integer(i))
 }
 #' @export
 `[[<-.JuliaObject` <- function(x, i, value)
-    julia_call("setindex!", x, value, as.integer(i))
+    julia_call("JuliaCall.assign!", x, value, as.integer(i))
 
 #' @export
 as.character.JuliaObject <- function(x, ...)
