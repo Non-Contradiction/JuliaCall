@@ -118,11 +118,11 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     .julia$initialized <- TRUE
 
-    .julia$embedded <- !julia_eval("Main.isdefined(:RObject)")
+    display_needed <- julia_eval("length(Base.Multimedia.displays)") < 2
 
-    # print(.julia$embedded)
+    # print(display_needed)
 
-    if (.julia$embedded) {
+    if (display_needed) {
         julia_command("Base.pushdisplay(JuliaCall.basic_display);")
     }
 
