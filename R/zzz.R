@@ -118,9 +118,17 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     .julia$initialized <- TRUE
 
+    .julia$embedded <- !julia_eval("Main.isdefined(:RObject)")
+
+    # print(.julia$embedded)
+
+    if (.julia$embedded) {
+        julia_command("Base.pushdisplay(JuliaCall.basic_display);")
+    }
+
     if (useRCall) {
         julia$command("using RCall")
-        julia$command("Base.atreplinit(JuliaCall.setup_repl)")
+        julia$command("Base.atreplinit(JuliaCall.setup_repl);")
     }
 
     if (interactive()) {
