@@ -34,13 +34,6 @@ function transfer_list(x)
     rcopy(RObject(Ptr{RCall.VecSxp}(x)))
 end
 
-function error_msg(e)
-    m = IOBuffer()
-    showerror(m, e)
-    seek(m, 0)
-    readstring(m)
-end
-
 function error_msg(e, bt)
     m = IOBuffer()
     showerror(m, e, bt)
