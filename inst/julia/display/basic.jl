@@ -6,7 +6,7 @@ basic_repl = Base.REPL.BasicREPL(out_terminal)
 
 basic_display = Base.REPL.REPLDisplay(basic_repl)
 
-# Base.pushdisplay(basic_display)
+Base.pushdisplay(basic_display)
 
 type DisplayManager
     repl_display :: Base.REPL.REPLDisplay

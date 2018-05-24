@@ -18,11 +18,15 @@ end
 
 using RCall
 
-include("./display/basic.jl")
-include("./display/Rjulia.jl")
-include("./display/IRjulia.jl")
-include("./display/RmdJulia.jl")
-include("./display/plotsViewer.jl")
+const need_display = length(Base.Multimedia.displays) < 2
+
+if need_display
+    include("./display/basic.jl")
+    include("./display/Rjulia.jl")
+    include("./display/IRjulia.jl")
+    include("./display/RmdJulia.jl")
+    include("./display/plotsViewer.jl")
+end
 include("REPLhook.jl")
 include("incomplete_console.jl")
 include("convert.jl")
@@ -67,7 +71,9 @@ function docall(call1)
         if show_value && r != nothing
             display(r)
         end
-        proceed(basic_display_manager)
+        if need_display
+            proceed(basic_display_manager)
+        end
         if need_return == "R"
             RObject(r).p;
         elseif need_return == "Julia"

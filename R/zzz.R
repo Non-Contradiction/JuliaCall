@@ -118,13 +118,15 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     .julia$initialized <- TRUE
 
-    display_needed <- julia_eval("length(Base.Multimedia.displays)") < 2
-
-    # print(display_needed)
-
-    if (display_needed) {
-        julia_command("Base.pushdisplay(JuliaCall.basic_display);")
-    }
+    # This part of code has all been integrated into setup.jl script
+    #
+    # display_needed <- julia_eval("length(Base.Multimedia.displays)") < 2
+    #
+    # # print(display_needed)
+    #
+    # if (display_needed) {
+    #     julia_command("Base.pushdisplay(JuliaCall.basic_display);")
+    # }
 
     if (useRCall) {
         julia$command("using RCall")
