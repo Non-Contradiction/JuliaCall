@@ -15,11 +15,13 @@ end
 
 DisplayManager(repl_display :: Base.REPL.REPLDisplay) = DisplayManager(repl_display, 0)
 
+function Rprint(s) ccall((:Rprintf,RCall.libR),Void,(Ptr{Cchar},), s) end
+
 function proceed(dm :: DisplayManager)
     if dm.location < dm.repl_display.repl.terminal.out_stream.ptr-1
-        print(readstring(seek(dm.repl_display.repl.terminal.out_stream, dm.location)))
+        Rprint(readstring(seek(dm.repl_display.repl.terminal.out_stream, dm.location)))
         dm.location = dm.repl_display.repl.terminal.out_stream.ptr-1
-        print("  \n")
+        Rprint("  \n")
     end
 end
 
