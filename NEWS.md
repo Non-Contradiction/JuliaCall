@@ -5,6 +5,14 @@
 * Add `need_return` argument to `julia_eval`, now there is a possibility to return
   the result as an `JuliaObject`, which is convenient for many use cases requiring
   an R object corresponding to a julia object.
+* Bug fixing for unary operators on `JuliaObject`.
+* Implement `rep.JuliaObject`.
+* Important bug fix for assign of `JuliaObject`.
+* New experimental `assign!` to match behavior for assign in R and use it for `JuliaObject`.
+* Experimental `JuliaPlain` idea to alleviate the problem that R dispatches only on the first argument,
+  make `ifelse` possible to work for `JuliaObject`.
+* Fix display issue #54 when using `JuliaCall` from julia and `RCall.jl`.
+* Speed up the loading a little.
 
 # JuliaCall 0.13.0
 
