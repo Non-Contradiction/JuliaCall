@@ -15,7 +15,7 @@ test_that("test of is.array", {
     julia <- julia_setup()
 
     expect_true(is.array(JuliaObject(matrix(1,3,3))))
-    expect_true(is.matrix(JuliaObject(1:3)))
+    expect_true(is.array(JuliaObject(1:3)))
     expect_true(is.array(julia_eval("[1//1 2//2; 3//3 4//4]")))
     expect_true(is.array(julia_eval("[1//1; 2//2]")))
 })
@@ -36,6 +36,6 @@ test_that("test of diag", {
 
     expect_equal(diag(JuliaObject(matrix(1,3,3))), rep(1, 3))
     expect_error(diag(JuliaObject(1:3)))
-    expect_true(diag(julia_eval("[1//1 2//2; 3//3 4//4]")) == julia_eval("[1//1; 3//3]"))
+    expect_true(all(diag(julia_eval("[1//1 2//2; 3//3 4//4]")) == julia_eval("[1//1; 3//3]")))
     expect_error(diag(julia_eval("[1//1; 2//2]")))
 })
