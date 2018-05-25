@@ -35,3 +35,13 @@ function assign!(x :: AbstractArray, value, i)
         setindex!(x, value, i)
     end
 end
+
+## Array related dispatching methods
+
+isMatrix(x :: AbstractArray) = length(size(x)) == 2
+isMatrix(x) = false
+
+isArray(x :: AbstractArray) = true
+isArray(x) = false
+
+dim(x) = vcat(size(x)...)

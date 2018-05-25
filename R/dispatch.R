@@ -96,3 +96,14 @@ signif.JuliaObject <-
 #' @export
 Summary.JuliaObject <-
     function(x, ..., na.rm = FALSE) julia_call(as.character(.Generic), x)
+
+## Array related
+
+#' @export
+dim.JuliaObject <- function(x) julia_call("JuliaCall.dim", x)
+
+#' @export
+is.array.JuliaObject <- function(x) julia_call("JuliaCall.isArray", x)
+
+#' @export
+is.matrix.JuliaObject <- function(x) julia_call("JuliaCall.isMatrix", x)
