@@ -6,7 +6,7 @@ test_that("test of rep", {
 
     expect_equal(rep(1, 3), c(rep(JuliaObject(1), 3)))
     expect_equal(rep(1:2, 3), c(rep(JuliaObject(1:2), 3)))
-    expect_equal(rep(1:2, length.out = 5), c(rep(JuliaObject(1), length.out = 5)))
+    expect_equal(rep(1:2, length.out = 5), c(rep(JuliaObject(1:2), length.out = 5)))
 
     expect_true(all(julia_eval("[1//1;1//1;1//1]") == rep(julia_eval("1//1"), 3)))
     expect_true(all(julia_eval("[1//1;2//1;1//1;2//1;1//1;2//1]") == rep(julia_eval("[1//1;2//1]"), 3)))
