@@ -13,6 +13,7 @@
   make `ifelse` possible to work for `JuliaObject`.
 * Fix display issue #54 when using `JuliaCall` from julia and `RCall.jl`.
 * Speed up the loading a little.
+* Array related methods `dim.JuliaObject`, `is.array.JuliaObject` and `is.matrix.JuliaObject`.
 
 # JuliaCall 0.13.0
 
