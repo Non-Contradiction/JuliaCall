@@ -26,13 +26,13 @@ function assign!(x :: AbstractArray, value :: AbstractArray, i)
     end
 end
 
-function assign!(x :: AbstractArray, value, i)
+function assign!(x :: AbstractArray, value, i...)
     try
-        setindex!(x, value, i)
+        setindex!(x, value, i...)
     catch e
         commontype = promote_type(eltype(x), typeof(value))
         x = AbstractArray{commontype}(x)
-        setindex!(x, value, i)
+        setindex!(x, value, i...)
     end
 end
 

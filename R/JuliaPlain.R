@@ -19,11 +19,8 @@ as.logical.JuliaPlain <- function(x, ...){
 `[[<-.JuliaPlain` <- function(x, i, value)
     julia_call("JuliaCall.assign!", x, value, as.integer(i))
 #' @export
-`[<-.JuliaPlain` <- function(x, i, value){
-    if (is.logical(i)) {
-        return(julia_call("JuliaCall.assign!", x, value, i))
-    }
-    julia_call("JuliaCall.assign!", x, value, as.integer(i))
+`[<-.JuliaPlain` <- function(x, ..., value){
+    julia_do.call("JuliaCall.assign!", c(x, value, as_indexes(list(...))))
 }
 
 
