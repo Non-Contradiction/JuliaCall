@@ -20,7 +20,7 @@ as.logical.JuliaPlain <- function(x, ...){
     julia_call("JuliaCall.assign!", x, value, as.integer(i))
 #' @export
 `[<-.JuliaPlain` <- function(x, ..., value){
-    julia_do.call("JuliaCall.assign!", c(x, value, as_indexes(list(...))))
+    julia_do.call("JuliaCall.assign!", c(list(x, value), as_indexes(list(...))))
 }
 
 
