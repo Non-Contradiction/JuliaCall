@@ -139,3 +139,8 @@ c.JuliaObject <- function(...){
     if (length(dots) == 1) return(dots[[1]])
     julia_do.call("vcat", dots)
 }
+
+#' @export
+t.JuliaObject <- function(x){
+    julia_call("transpose", x)
+}
