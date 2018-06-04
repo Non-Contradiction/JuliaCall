@@ -104,7 +104,15 @@ Summary.JuliaObject <-
 ## Array related
 
 #' @export
+as.vector.JuliaObject <- function(x, mode = "any")
+    julia_call("vec", x)
+
+#' @export
 dim.JuliaObject <- function(x) julia_call("JuliaCall.dim", x)
+
+#' @export
+`dim<-.JuliaObject` <- function(x, value)
+    julia_do.call("reshape", c(list(x), as.integer(value)))
 
 #' @export
 is.array.JuliaObject <- function(x) julia_call("JuliaCall.isArray", x)
