@@ -121,7 +121,7 @@ mean.JuliaObject <- function(x, ...) julia_call("mean", x)
 determinant.JuliaObject <- function(x, logarithm = TRUE, ...){
     r <- julia_call("logabsdet", x)
     names(r) <- c("modulus", "sign")
-    r["sign"] <- r["sign"] >= 0
+    r$sign <- r$sign + 0.0
     r
 }
 
