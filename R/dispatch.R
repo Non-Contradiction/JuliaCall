@@ -111,3 +111,24 @@ is.array.JuliaObject <- function(x) julia_call("JuliaCall.isArray", x)
 
 #' @export
 is.matrix.JuliaObject <- function(x) julia_call("JuliaCall.isMatrix", x)
+
+## Mean
+
+#' @export
+mean.JuliaObject <- function(x, ...) julia_call("mean", x)
+
+#' @export
+determinant.JuliaObject <- function(x, logarithm = TRUE, ...){
+    r <- julia_call("logabsdet", x)
+    names(r) <- c("modulus", "sign")
+    r["sign"] <- r["sign"] >= 0
+    r
+}
+
+#' @export
+solve.JuliaObject <- function(a, b, ...){
+    if (missing(b)) {
+        return(julia_call("inv", a))
+    }
+    julia_call("\\", a, b)
+}
