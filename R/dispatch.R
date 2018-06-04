@@ -17,7 +17,7 @@ as_indexes <- function(ii){
 
 #' @export
 `[.JuliaObject` <- function(x, ...){
-    julia_do.call("getindex", c(x, as_indexes(list(...))))
+    julia_do.call("getindex", c(list(x), as_indexes(list(...))))
 }
 #' @export
 `[[.JuliaObject` <- function(x, i, exact = TRUE){
