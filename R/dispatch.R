@@ -132,3 +132,10 @@ solve.JuliaObject <- function(a, b, ...){
     }
     julia_call("\\", a, b)
 }
+
+#' @export
+c.JuliaObject <- function(...){
+    dots <- list(...)
+    if (length(dots) == 1) return(dots[[1]])
+    julia_do.call("vcat", dots)
+}
