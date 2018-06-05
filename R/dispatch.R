@@ -115,6 +115,10 @@ dim.JuliaObject <- function(x) julia_call("JuliaCall.dim", x)
     julia_do.call("reshape", c(list(x), as.integer(value)))
 
 #' @export
+aperm.JuliaObject <- function(a, perm, ...)
+    julia_call("permutedims", a, as.integer(perm))
+
+#' @export
 is.array.JuliaObject <- function(x) julia_call("JuliaCall.isArray", x)
 
 #' @export
