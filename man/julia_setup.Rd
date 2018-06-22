@@ -5,7 +5,7 @@
 \title{Do initial setup for the JuliaCall package.}
 \usage{
 julia_setup(JULIA_HOME = NULL, verbose = TRUE, force = FALSE,
-  useRCall = TRUE, libjulia = NULL)
+  useRCall = TRUE)
 }
 \arguments{
 \item{JULIA_HOME}{the file folder which contains julia binary,
@@ -22,10 +22,6 @@ about \code{julia_setup}.}
 
 \item{useRCall}{whether or not you want to use RCall.jl in julia,
 which is an amazing package to access R in julia.}
-
-\item{libjulia}{the position of the libjulia.
-By default, it will be determined automatically, but sometimes you need to explicitly set it
-to avoid some problems.}
 }
 \value{
 The julia interface, which is an environment with the necessary methods

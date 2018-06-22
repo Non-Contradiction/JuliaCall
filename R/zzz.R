@@ -13,9 +13,6 @@
 #' @param force whether to force julia_setup to execute again.
 #' @param useRCall whether or not you want to use RCall.jl in julia,
 #'     which is an amazing package to access R in julia.
-#' @param libjulia the position of the libjulia.
-#'     By default, it will be determined automatically, but sometimes you need to explicitly set it
-#'     to avoid some problems.
 #'
 #' @return The julia interface, which is an environment with the necessary methods
 #'   like command, source and things like that to communicate with julia.
@@ -27,7 +24,7 @@
 #' }
 #'
 #' @export
-julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCall = TRUE, libjulia = NULL) {
+julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCall = TRUE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
