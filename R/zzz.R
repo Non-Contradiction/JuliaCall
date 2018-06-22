@@ -51,12 +51,8 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
                                 JULIA_HOME,
                                 " will be used."))
 
-    if (is.null(libjulia)) {
-        .julia$dll_file <- julia_line(c("-e", "print(Libdl.dlpath(\"libjulia\"))"), stdout = TRUE)
-    }
-    else {
-        .julia$dll_file <- libjulia
-    }
+    dll_command <- system.file("julia/libjulia.jl", package = "JuliaCall")
+    .julia$dll_file <- julia_line(dll_command, stdout = TRUE)
 
     ## if (verbose) message("Julia initiation...")
 
