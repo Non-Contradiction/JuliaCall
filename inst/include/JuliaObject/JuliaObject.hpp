@@ -39,6 +39,6 @@ UNARY_FUNC(log, log.);
 
 UNARY_FUNC(sqrt, sqrt.);
 
-UNARY_FUNC(sum, sum.);
+UNARY_FUNC(sum, sum);
 
 #endif // hinterface__hinterface__hpp
