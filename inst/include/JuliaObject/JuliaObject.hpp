@@ -14,8 +14,14 @@ public:
 #include <Rcpp.h>
 using namespace Rcpp;
 
-const Environment julia = Environment("package:JuliaCall");
-const Function jcall = julia["julia_call"];
+Function init_jcall(){
+    Environment base = Environment("package:base");
+    Function eval = base["eval"];
+    Function parse = base["parse"];
+    return eval(parse("", -1, "JuliaCall::julia_call"));
+}
+
+const Function jcall = init_jcall();
 
 JuliaObject::JuliaObject(SEXP x1){
     x = jcall("JuliaCall.JuliaObject", x1);
