@@ -36,7 +36,7 @@ install:
   # Download miktex portable
 
   - ps: (new-object net.webclient).DownloadFile(
-      "http://mirrors.ctan.org/systems/win32/miktex/setup/windows-x86/miktex-portable.exe",
+      "http://mirrors.ctan.org/systems/win32/miktex/setup/windows-x86/miktex-portable-2.9.6753.exe",
       "C:\projects\miktex-portable.exe")
   - 7z x C:\projects\miktex-portable.exe -oC:\miktex >NUL
   - set "PATH=%PATH%;c:\miktex\texmfs\install\miktex\bin"
