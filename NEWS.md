@@ -1,3 +1,17 @@
+# JuliaCall 0.13.2.9000
+
+* Use more robust way to locate libjulia, fix #29 and #57.
+* A simple interface to get access to `JuliaCall` from `Rcpp`.
+* Bug correction for `as.vector.JuliaObject`.
+
+# JuliaCall 0.13.1.9000
+
+* Various small bug fixes.
+* `JuliaObject` supports multiple index.
+* Implementation of `mean`, `determinant` and `solve` generics for `JuliaObject`.
+* Implementation of `c` and `t` generics for `JuliaObject`.
+* Implementation of `aperm`, `dim<-` and `as.vector` generics for `JuliaObject`.
+
 # JuliaCall 0.13.0.9000
 
 * Important bug fixes.
