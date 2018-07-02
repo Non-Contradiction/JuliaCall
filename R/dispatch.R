@@ -104,8 +104,10 @@ Summary.JuliaObject <-
 ## Array related
 
 #' @export
-as.vector.JuliaObject <- function(x, mode = "any")
-    julia_call("vec", x)
+as.vector.JuliaObject <- function(x, mode = "any"){
+    if (length(x) == 1) x
+    else julia_call("vec", x)
+}
 
 #' @export
 dim.JuliaObject <- function(x) julia_call("JuliaCall.dim", x)
