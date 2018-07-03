@@ -36,19 +36,33 @@ as_indexes <- function(ii){
 
 #' @export
 as.character.JuliaObject <- function(x, ...)
-    julia_call("JuliaCall.asCharacter", x)
+    tryCatch(julia_call("JuliaCall.asCharacter", x),
+             warning = function(w){},
+             error = function(e){warning("as.character(x) failed; return(x) instead."); x}
+    )
+
 #' @export
 as.list.JuliaObject <- function(x, ...)
-    julia_call("RCall.sexp", julia_eval("RCall.VecSxp"), x)
+    tryCatch(julia_call("RCall.sexp", julia_eval("RCall.VecSxp"), x),
+             warning = function(w){},
+             error = function(e){list(x)})
+
 #' @export
 as.double.JuliaObject <- function(x, ...)
-    julia_call("JuliaCall.asDouble", x)
+    tryCatch(julia_call("JuliaCall.asDouble", x),
+             warning = function(w){},
+             error = function(e){warning("as.double(x) failed; return(x) instead."); x}
+    )
+
 #' @export
 as.integer.JuliaObject <- function(x, ...)
     as.integer(as.double(x))
 #' @export
 as.logical.JuliaObject <- function(x, ...)
-    julia_call("JuliaCall.asLogical", x)
+    tryCatch(julia_call("JuliaCall.asLogical", x),
+             warning = function(w){},
+             error = function(e){warning("as.logical(x) failed; return(x) instead."); x}
+    )
 
 fdot <- function(x) paste0(as.character(x), ".")
 
@@ -106,7 +120,7 @@ Summary.JuliaObject <-
 #' @export
 as.vector.JuliaObject <- function(x, mode = "any"){
     if (length(x) == 1) x
-    else julia_call("vec", x)
+    else tryCatch(julia_call("vec", x), warning = function(w){}, error = function(e){x})
 }
 
 #' @export
