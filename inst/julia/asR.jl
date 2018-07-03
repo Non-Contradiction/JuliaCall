@@ -1,11 +1,6 @@
-# since as.double is equivalent to as.numeric?
-asDouble(x :: Real) = x
-asDouble{T<:Real}(x :: AbstractArray{T}) = x
-asDouble(x :: Integer) = float(x)
+asDouble(x :: Real) = float(x)
 asDouble(x :: Complex) = asDouble(real(x))
-asDouble(x :: AbstractString) = parse(Float64, x)
-asDouble(x :: Bool) = ifelse(x, 1.0, 0.0)
-asDouble(x :: AbstractArray) = [asDouble(xx) for xx in x]
+asDouble(x :: AbstractArray{T}) where {T <: Complex} = [asDouble(xx) for xx in x]
 
 asCharacter(x) = string(x)
 
