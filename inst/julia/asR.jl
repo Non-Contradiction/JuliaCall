@@ -1,6 +1,4 @@
-asDouble(x :: Real) = float(x)
-asDouble(x :: Complex) = asDouble(real(x))
-asDouble(x :: AbstractArray{T}) where {T <: Complex} = [asDouble(xx) for xx in x]
+asDouble(x) = float(x)
 
 asCharacter(x) = string(x)
 
