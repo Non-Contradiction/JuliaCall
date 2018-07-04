@@ -42,6 +42,11 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
 
     .julia$VERSION <- julia_line(c("-e", "print(VERSION)"), stdout = TRUE)
 
+    if (newer("0.5.3", .julia$VERSION)) {
+        stop(paste0("Julia version ", .julia$VERSION, " at location ", JULIA_HOME, " is found.",
+                    " But the version is too old and is not supported. Please install current release julia from https://julialang.org/downloads/ to use JuliaCall"))
+    }
+
     if (verbose) message(paste0("Julia version ",
                                 .julia$VERSION,
                                 " at location ",
