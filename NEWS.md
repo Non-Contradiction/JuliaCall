@@ -3,6 +3,9 @@
 * Use more robust way to locate libjulia, fix #29 and #57.
 * A simple interface to get access to `JuliaCall` from `Rcpp`.
 * Bug correction for `as.vector.JuliaObject`.
+* Bug correction for `as.double.JuliaObject`.
+* Add error message that old version julia is not supported.
+* Add error message when libjulia located is not a valid file.
 
 # JuliaCall 0.13.1.9000
 
