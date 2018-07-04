@@ -56,6 +56,14 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     dll_command <- system.file("julia/libjulia.jl", package = "JuliaCall")
     .julia$dll_file <- julia_line(dll_command, stdout = TRUE)
 
+    if (!is.character(.julia$dll_file)) {
+        stop("libjulia cannot be located.")
+    }
+
+    if (!isTRUE(file.exists(.julia$dll_file))) {
+        stop("libjulia located at ", .julia$dll_file, " is not a valid file.")
+    }
+
     ## if (verbose) message("Julia initiation...")
 
     if (.Platform$OS.type == "windows") {
