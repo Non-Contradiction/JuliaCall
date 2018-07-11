@@ -1,3 +1,11 @@
+# JuliaCall 0.14.1.9000
+
+* More performant and secure method to find function in `docall` interface.
+
+# JuliaCall 0.14.0
+
+* Seventh release on CRAN.
+
 # JuliaCall 0.13.2.9000
 
 * Use more robust way to locate libjulia, fix #29 and #57.
