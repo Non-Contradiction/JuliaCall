@@ -2,7 +2,7 @@ environment:
   NOT_CRAN: "true"
   matrix:
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
-    R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.5.0-win.exe"
+    R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.5.1-win.exe"
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
     R_URL: "https://cran.rstudio.com/bin/windows/base/R-devel-win.exe"
 
