@@ -52,6 +52,15 @@ function Rerror(e, bt)
     rcall(:simpleError, s)
 end
 
+function funcfind(name)
+    r = Main
+    ns = split(name, ".")
+    for n in ns
+        r = getfield(r, Symbol(n))
+    end
+    r
+end
+
 function docall(call1)
     try
         call = transfer_list(call1)
@@ -62,10 +71,12 @@ function docall(call1)
         show_value = call[:show_value];
         if endswith(fname, ".")
             fname = chop(fname);
-            f = eval(Main, parse(fname));
+            # f = eval(Main, parse(fname));
+            f = funcfind(fname);
             r = f.(unamed_args...);
         else
-            f = eval(Main, parse(fname));
+            # f = eval(Main, parse(fname));
+            f = funcfind(fname);
             r = f(unamed_args...; named_args...);
         end
         if show_value && r != nothing
