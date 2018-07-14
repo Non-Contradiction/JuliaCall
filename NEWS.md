@@ -1,6 +1,6 @@
 # JuliaCall 0.14.1.9000
 
-* More performant and secure method to find function in `docall` interface.
+* Make the error in `install_dependency` not muted.
 
 # JuliaCall 0.14.0
 

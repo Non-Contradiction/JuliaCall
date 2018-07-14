@@ -173,5 +173,6 @@ install_dependency <- function(){
     ## `RCall` needs to be precompiled with the current R.
     julia_line(c(system.file("julia/install_dependency.jl", package = "JuliaCall"),
                  R.home()),
-               stderr = FALSE)
+               stdout = TRUE,
+               stderr = TRUE)
 }
