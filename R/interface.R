@@ -51,7 +51,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
 
     args <- separate_arguments(arglist = arg_list)
     jcall <- list(fname = func_name,
-                  named_args = args$named,
+                  named_args = as.pairlist(args$named),
                   unamed_args = args$unamed,
                   need_return = need_return,
                   show_value = show_value)
