@@ -34,10 +34,6 @@ include("JuliaObject.jl")
 include("asR.jl")
 include("dispatch.jl")
 
-function transfer_list(x)
-    rcopy(RObject(Ptr{RCall.VecSxp}(x)))
-end
-
 function error_msg(e, bt)
     m = IOBuffer()
     showerror(m, e, bt)
@@ -74,14 +70,31 @@ end
 #     # r
 # end
 
+function call_decompose(call1)
+    call = rcopy(RObject(Ptr{RCall.VecSxp}(call1)))
+    (call[:fname], call[:named_args], call[:unamed_args], call[:need_return], call[:show_value])
+end
+
+# function call_decompose(x)
+#     args = Any[]
+#     kwargs = Any[]
+#     for (k,a) in enumerate(l)
+#         # TODO: provide a mechanism for users to specify their own
+#         # conversion routines
+#         if k == sexp(Const.NilValue)
+#             push!(args, rcopy(a))
+#         else
+#             push!(kwargs, (rcopy(Symbol,k), rcopy(a)))
+#         end
+#     end
+#
+#     # call function
+#     y = f(args...;kwargs...)
+# end
+
 function docall(call1)
     try
-        call = transfer_list(call1)
-        fname = call[:fname];
-        named_args = call[:named_args]
-        unamed_args = call[:unamed_args]
-        need_return = call[:need_return];
-        show_value = call[:show_value];
+        fname, named_args, unamed_args, need_return, show_value = call_decompose(call1);
         if endswith(fname, ".")
             fname = chop(fname);
             f = eval(Main, parse(fname));
