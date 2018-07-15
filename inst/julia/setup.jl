@@ -70,27 +70,20 @@ end
 #     # r
 # end
 
-function call_decompose(call1)
-    call = rcopy(RObject(Ptr{RCall.VecSxp}(call1)))
-    (call[:fname], call[:named_args], call[:unamed_args], call[:need_return], call[:show_value])
-end
-
-# function call_decompose(x)
-#     args = Any[]
-#     kwargs = Any[]
-#     for (k,a) in enumerate(l)
-#         # TODO: provide a mechanism for users to specify their own
-#         # conversion routines
-#         if k == sexp(Const.NilValue)
-#             push!(args, rcopy(a))
-#         else
-#             push!(kwargs, (rcopy(Symbol,k), rcopy(a)))
-#         end
-#     end
-#
-#     # call function
-#     y = f(args...;kwargs...)
+# function call_decompose(call1)
+#     call = rcopy(RObject(Ptr{RCall.VecSxp}(call1)))
+#     (call[:fname], call[:named_args], call[:unamed_args], call[:need_return], call[:show_value])
 # end
+
+function call_decompose(call1)
+    call = RObject(Ptr{RCall.VecSxp}(call1))
+    fname = rcopy(String, call[:fname])
+    named_args = Any[(rcopy(Symbol, k), rcopy(i)) for (k, i) in enumerate(call[:named_args])]
+    unamed_args = Any[rcopy(i) for i in call[:unamed_args]]
+    need_return = rcopy(String, call[:need_return])
+    show_value = rcopy(Bool, call[:show_value])
+    (fname, named_args, unamed_args, need_return, show_value)
+end
 
 function docall(call1)
     try
