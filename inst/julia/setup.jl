@@ -77,12 +77,12 @@ function docall(call1)
         fname, named_args, unamed_args, need_return, show_value = call_decompose(call1);
         if endswith(fname, ".")
             fname = chop(fname);
-            f = eval(Main, parse(fname));
-            # f = funcfind(fname);
+            # f = eval(Main, parse(fname));
+            f = funcfind(fname);
             r = f.(unamed_args...);
         else
-            f = eval(Main, parse(fname));
-            # f = funcfind(fname);
+            # f = eval(Main, parse(fname));
+            f = funcfind(fname);
             r = f(unamed_args...; named_args...);
         end
         if show_value && r != nothing
