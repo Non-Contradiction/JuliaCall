@@ -40,7 +40,9 @@ bool juliacall_cmd(const char* libpath) {
 
 // [[Rcpp::export]]
 SEXP juliacall_docall(SEXP jcall) {
-    jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall"));
+    // jl_function_t *docall = (jl_function_t*)(jl_eval_string("JuliaCall.docall"));
+    jl_module_t *JuliaCall = (jl_module_t*)jl_get_global(jl_main_module, jl_symbol("JuliaCall"));
+    jl_function_t *docall = jl_get_global(JuliaCall, jl_symbol("docall"));
     jl_value_t *call = jl_box_voidpointer(jcall);
     SEXP out = (SEXP) jl_unbox_voidpointer(jl_call1(docall, call));
     return out;
