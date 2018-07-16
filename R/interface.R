@@ -28,8 +28,12 @@ NULL
 #' @rdname call
 #' @export
 julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c("R", "Julia", "None"), show_value = FALSE){
-    stopifnot(length(func_name) == 1, is.character(func_name), is.list(arg_list),
-              length(show_value) == 1, is.logical(show_value))
+    ## stopifnot is quite slow, use multiple if
+    # stopifnot(length(func_name) == 1, is.character(func_name), is.list(arg_list),
+    #           length(show_value) == 1, is.logical(show_value))
+    if (!length(func_name) == 1 || !is.character(func_name)) stop("func_name must be a character scalar.")
+    if (!is.list(arg_list)) stop("arg_list must be a list of arguments.")
+    if (!length(show_value) == 1 || !is.logical(show_value)) stop("show_value must be a logical scalar.")
     if (identical(need_return, TRUE)) {
         need_return <- "R"
     }
