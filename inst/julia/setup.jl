@@ -48,27 +48,14 @@ function Rerror(e, bt)
     rcall(:simpleError, s)
 end
 
-# function _funcfind(n)
-#     getfield(Main, Symbol(n))
-# end
-#
-# function _funcfind(n1, n2)
-#     getfield(getfield(Main, Symbol(n1)), Symbol(n2))
-# end
-#
-# function _funcfind(n1, n2, n3)
-#     getfield((getfield(Main, Symbol(n1)), Symbol(n2)), Symbol(n3))
-# end
-#
-# function funcfind(name)
-#     # r = Main
-#     ns = split(name, ".")
-#     _funcfind(ns...)
-#     # for n in ns
-#     #     r = getfield(r, Symbol(n))
-#     # end
-#     # r
-# end
+function funcfind(name)
+    r = Main
+    ns = split(name, ".")
+    for n in ns
+        r = getfield(r, Symbol(n))
+    end
+    r
+end
 
 # function call_decompose(call1)
 #     call = rcopy(RObject(Ptr{RCall.VecSxp}(call1)))
