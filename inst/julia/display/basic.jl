@@ -1,10 +1,10 @@
-output = IOBuffer()
+const output = IOBuffer()
 
-out_terminal = Base.Terminals.TerminalBuffer(output)
+const out_terminal = Base.Terminals.TerminalBuffer(output)
 
-basic_repl = Base.REPL.BasicREPL(out_terminal)
+const basic_repl = Base.REPL.BasicREPL(out_terminal)
 
-basic_display = Base.REPL.REPLDisplay(basic_repl)
+const basic_display = Base.REPL.REPLDisplay(basic_repl)
 
 Base.pushdisplay(basic_display)
 
