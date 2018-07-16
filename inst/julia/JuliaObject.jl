@@ -53,7 +53,7 @@ end
 ## As long as the interface stays the same, the following code should be fine.
 ## The global JuliaObjectContainer julia_object_stack
 
-julia_object_stack = JuliaObjectContainer()
+const julia_object_stack = JuliaObjectContainer()
 
 function new_obj(obj, typ = "Regular")
     add!(julia_object_stack, obj, typ)
