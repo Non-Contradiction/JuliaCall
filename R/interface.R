@@ -34,15 +34,18 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
     if (!length(func_name) == 1 || !is.character(func_name)) stop("func_name must be a character scalar.")
     if (!is.list(arg_list)) stop("arg_list must be a list of arguments.")
     if (!length(show_value) == 1 || !is.logical(show_value)) stop("show_value must be a logical scalar.")
-    if (identical(need_return, TRUE)) {
-        need_return <- "R"
-    }
-    if (identical(need_return, FALSE)) {
-        need_return <- "None"
-    }
-    else {
+    if (is.character(need_return)) {
         need_return <- match.arg(need_return, c("R", "Julia", "None"))
     }
+    else {
+        if (identical(need_return, TRUE)) {
+            need_return <- "R"
+        }
+        else {
+            need_return <- "None"
+        }
+    }
+
     ## julia_setup() is not necessary,
     ## unless you want to pass some arguments to it.
     if (!.julia$initialized) {
