@@ -1,6 +1,7 @@
 # JuliaCall 0.14.1.9000
 
 * Make the error in `install_dependency` not muted.
+* Various performance improvements.
 
 # JuliaCall 0.14.0
 
