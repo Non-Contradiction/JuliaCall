@@ -108,8 +108,7 @@ function docall(call1)
             RObject(nothing).p;
         end;
     catch e
-        ccall((:Rf_error,RCall.libR),Ptr{Void},(Ptr{Cchar},), error_msg(e, catch_stacktrace()))
-        RObject(nothing).p;
+        Rerror(e, catch_stacktrace()).p;
     end;
 end
 
