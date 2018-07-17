@@ -70,15 +70,17 @@ JuliaObject(x, typ = "Regular") = new_obj(x, typ)
 
 ## Conversion related to JuliaObject
 
+const makeJuliaObjectInR = reval("JuliaCall:::juliaobject[['new']]")
+
 function sexp(x :: JuliaObject)
-    reval("JuliaCall:::juliaobject[['new']]")(getPlainID(x), getType(x))
+    makeJuliaObjectInR(getPlainID(x), getType(x))
 end
 
 import RCall.rcopy
 
 function rcopy(::Type{JuliaObject}, x::Ptr{EnvSxp})
     try
-        get(julia_object_stack, rcopy(RObject(x)[:getID]()))
+        get(julia_object_stack, rcopy(Int32, RObject(x)[:getID]()))
     catch e
         nothing
     end
