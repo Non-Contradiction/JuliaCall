@@ -32,7 +32,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
     # stopifnot(length(func_name) == 1, is.character(func_name), is.list(arg_list),
     #           length(show_value) == 1, is.logical(show_value))
     if (!length(func_name) == 1 || !is.character(func_name)) stop("func_name must be a character scalar.")
-    if (!is.list(arg_list)) stop("arg_list must be a list of arguments.")
+    # if (!is.list(arg_list)) stop("arg_list must be a list of arguments.")
     if (!length(show_value) == 1 || !is.logical(show_value)) stop("show_value must be a logical scalar.")
     if (is.character(need_return)) {
         need_return <- match.arg(need_return, c("R", "Julia", "None"))
@@ -56,10 +56,14 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
     ## see RMarkdown.R for more details.
     output_reset()
 
-    args <- separate_arguments(arglist = arg_list)
+    # args <- separate_arguments(arglist = arg_list)
+    # jcall <- list(fname = func_name,
+    #               named_args = as.pairlist(args$named),
+    #               unamed_args = args$unamed,
+    #               need_return = need_return,
+    #               show_value = show_value)
     jcall <- list(fname = func_name,
-                  named_args = as.pairlist(args$named),
-                  unamed_args = args$unamed,
+                  args = as.pairlist(arg_list),
                   need_return = need_return,
                   show_value = show_value)
     r <- .julia$do.call_(jcall)
@@ -75,7 +79,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
 #' @rdname call
 #' @export
 julia_call <- julia$call <- function(func_name, ..., need_return = c("R", "Julia", "None"), show_value = FALSE)
-    julia$do.call(func_name, list(...), need_return, show_value)
+    julia$do.call(func_name, pairlist(...), need_return, show_value)
 
 #' Check whether a julia object with the given name exists or not.
 #'
