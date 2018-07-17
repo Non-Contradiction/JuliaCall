@@ -88,7 +88,7 @@ function docall(call1)
         if show_value && r != nothing
             display(r)
         end
-        if need_display
+        @static if need_display
             proceed(basic_display_manager)
         end
         if need_return == "R"
