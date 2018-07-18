@@ -87,7 +87,7 @@ function docall(call1)
             fname = chop(fname);
             # f = eval(Main, parse(fname));
             f = funcfind(fname);
-            r = f.(unamed_args...);
+            r = broadcast(f, unamed_args...);
         else
             # f = eval(Main, parse(fname));
             f = funcfind(fname);
