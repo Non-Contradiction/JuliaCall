@@ -38,4 +38,4 @@ function display(d::ViewerDisplay, p)
     throw(MethodError(display, [d, p]))
 end
 
-viewer_display = ViewerDisplay()
+const viewer_display = ViewerDisplay()

@@ -29,4 +29,4 @@ function display(display::RmdDisplay, x)
     throw(MethodError)
 end
 
-rmd_display = RmdDisplay()
+const rmd_display = RmdDisplay()

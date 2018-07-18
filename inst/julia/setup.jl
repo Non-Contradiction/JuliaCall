@@ -22,7 +22,6 @@ const need_display = length(Base.Multimedia.displays) < 2
 
 if need_display
     include("./display/basic.jl")
-    include("./display/Rjulia.jl")
     include("./display/IRjulia.jl")
     include("./display/RmdJulia.jl")
     include("./display/plotsViewer.jl")
