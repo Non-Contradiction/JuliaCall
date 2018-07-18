@@ -25,9 +25,10 @@ if need_display
     include("./display/IRjulia.jl")
     include("./display/RmdJulia.jl")
     include("./display/plotsViewer.jl")
+
+    include("REPLhook.jl")
+    include("incomplete_console.jl")
 end
-include("REPLhook.jl")
-include("incomplete_console.jl")
 include("convert.jl")
 include("JuliaObject.jl")
 include("asR.jl")
@@ -102,7 +103,7 @@ function docall(call1)
         if need_return == "R"
             RObject(r).p;
         elseif need_return == "Julia"
-            RObject(JuliaObject(r)).p
+            RObject(JuliaObject(r)).p;
         else
             RObject(nothing).p;
         end;
