@@ -10,9 +10,11 @@ function plot_display(display::RmdDisplay, x)
     R"JuliaCall:::finish_plot()"
 end
 
+const text_display_in_R = R"JuliaCall:::text_display"
+
 function text_display(display::RmdDisplay, x)
     s = limitstringmime(MIME("text/plain"), x)
-    R"JuliaCall:::text_display"(s)
+    text_display_in_R(s)
 end
 
 function display(display::RmdDisplay, x)

@@ -25,4 +25,4 @@ function proceed(dm :: DisplayManager)
     end
 end
 
-basic_display_manager = DisplayManager(basic_display)
+const basic_display_manager = DisplayManager(basic_display)
