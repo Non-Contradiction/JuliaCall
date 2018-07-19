@@ -115,6 +115,10 @@ signif.JuliaObject <-
 Summary.JuliaObject <-
     function(x, ..., na.rm = FALSE) julia_call(as.character(.Generic), x)
 
+#' @export
+max.JuliaObject <-
+    function(..., na.rm = FALSE) julia_call("JuliaCall.Rmax", ...)
+
 ## Array related
 
 #' @export

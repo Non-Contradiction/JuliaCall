@@ -45,3 +45,5 @@ isArray(x :: AbstractArray) = true
 isArray(x) = false
 
 dim(x) = vcat(size(x)...)
+
+Rmax(xs...) = maximum((maximum(x) for x in xs))
