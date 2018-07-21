@@ -73,7 +73,7 @@ JuliaObject(x, typ = "Regular") = new_obj(x, typ)
 const makeJuliaObjectInR = reval("JuliaCall:::juliaobject[['new']]")
 
 function sexp(x :: JuliaObject)
-    rcall(makeJuliaObjectInR, getPlainID(x), getType(x))
+    rcall(makeJuliaObjectInR, getPlainID(x), getType(x)).p
 end
 
 import RCall.rcopy
