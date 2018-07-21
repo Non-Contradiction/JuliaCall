@@ -1,6 +1,6 @@
 #' @export
 length.JuliaObject <- function(x){
-    tryCatch(julia_call("length", x),
+    tryCatch(julia$simple_call("length", x),
              warn = function(e){},
              error = function(e) 1
     )
@@ -24,7 +24,7 @@ as_indexes <- function(ii){
     if (length(i) > 1) {
         stop("Attempt to select more than one element.")
     }
-    julia_call("getindex", x, as.integer(i))
+    julia$simple_call("getindex", x, as.integer(i))
 }
 #' @export
 `[<-.JuliaObject` <- function(x, ..., value){
@@ -36,7 +36,7 @@ as_indexes <- function(ii){
 
 #' @export
 as.character.JuliaObject <- function(x, ...)
-    tryCatch(julia_call("JuliaCall.asCharacter", x),
+    tryCatch(julia$simple_call("JuliaCall.asCharacter", x),
              warning = function(w){},
              error = function(e){warning("as.character(x) failed; return(x) instead."); x}
     )
@@ -49,7 +49,7 @@ as.list.JuliaObject <- function(x, ...)
 
 #' @export
 as.double.JuliaObject <- function(x, ...)
-    tryCatch(julia_call("JuliaCall.asDouble", x),
+    tryCatch(julia$simple_call("JuliaCall.asDouble", x),
              warning = function(w){},
              error = function(e){warning("as.double(x) failed; return(x) instead."); x}
     )
@@ -59,7 +59,7 @@ as.integer.JuliaObject <- function(x, ...)
     as.integer(as.double(x))
 #' @export
 as.logical.JuliaObject <- function(x, ...)
-    tryCatch(julia_call("JuliaCall.asLogical", x),
+    tryCatch(julia$simple_call("JuliaCall.asLogical", x),
              warning = function(w){},
              error = function(e){warning("as.logical(x) failed; return(x) instead."); x}
     )
@@ -71,14 +71,14 @@ fdot <- function(x) paste0(as.character(x), ".")
 #' @export
 Ops.JuliaObject <- function(e1, e2 = NULL){
     if (is.null(e2)) {
-        return(JuliaPlain(julia_call(fdot(.Generic), e1)))
+        return(JuliaPlain(julia$simple_call(fdot(.Generic), e1)))
     }
-    JuliaPlain(julia_call(fdot(.Generic), e1, e2))
+    JuliaPlain(julia$simple_call(fdot(.Generic), e1, e2))
 }
 #' @export
-`%%.JuliaObject` <- function(e1, e2) julia_call("mod.", e1, e2)
+`%%.JuliaObject` <- function(e1, e2) julia$simple_call("mod.", e1, e2)
 #' @export
-`%/%.JuliaObject` <- function(e1, e2) julia_call("div.", e1, e2)
+`%/%.JuliaObject` <- function(e1, e2) julia$simple_call("div.", e1, e2)
 #' @export
 `&.JuliaObject` <- function(e1, e2) as.logical(e1) & as.logical(e2)
 #' @export
@@ -87,33 +87,33 @@ Ops.JuliaObject <- function(e1, e2 = NULL){
 ## Math Group
 
 #' @export
-Math.JuliaObject <- function(x, ...) julia_call(fdot(.Generic), x)
+Math.JuliaObject <- function(x, ...) julia$simple_call(fdot(.Generic), x)
 #' @export
-ceiling.JuliaObject <- function(x) julia_call("ceil.", x)
+ceiling.JuliaObject <- function(x) julia$simple_call("ceil.", x)
 #' @export
-cummax.JuliaObject <- function(x) julia_call("JuliaCall.cummax1", x)
+cummax.JuliaObject <- function(x) julia$simple_call("JuliaCall.cummax1", x)
 #' @export
-cummin.JuliaObject <- function(x) julia_call("JuliaCall.cummin1", x)
+cummin.JuliaObject <- function(x) julia$simple_call("JuliaCall.cummin1", x)
 #' @export
-cumsum.JuliaObject <- function(x) julia_call("JuliaCall.cumsum1", x)
+cumsum.JuliaObject <- function(x) julia$simple_call("JuliaCall.cumsum1", x)
 #' @export
-cumprod.JuliaObject <- function(x) julia_call("JuliaCall.cumprod1", x)
+cumprod.JuliaObject <- function(x) julia$simple_call("JuliaCall.cumprod1", x)
 
 ## Math2 Group
 
 #' @export
 round.JuliaObject <-
-    function(x, digits = 0) julia_call("round.", x, as.integer(digits))
+    function(x, digits = 0) julia$simple_call("round.", x, as.integer(digits))
 
 #' @export
 signif.JuliaObject <-
-    function(x, digits = 6) julia_call("signif.", x, as.integer(digits))
+    function(x, digits = 6) julia$simple_call("signif.", x, as.integer(digits))
 
 ## Summary Group Unfinished
 
 #' @export
 Summary.JuliaObject <-
-    function(x, ..., na.rm = FALSE) julia_call(as.character(.Generic), x)
+    function(x, ..., na.rm = FALSE) julia$simple_call(as.character(.Generic), x)
 
 #' @export
 max.JuliaObject <-
@@ -124,11 +124,11 @@ max.JuliaObject <-
 #' @export
 as.vector.JuliaObject <- function(x, mode = "any"){
     if (length(x) == 1) x
-    else tryCatch(julia_call("vec", x), warning = function(w){}, error = function(e){x})
+    else tryCatch(julia$simple_call("vec", x), warning = function(w){}, error = function(e){x})
 }
 
 #' @export
-dim.JuliaObject <- function(x) julia_call("JuliaCall.dim", x)
+dim.JuliaObject <- function(x) julia$simple_call("JuliaCall.dim", x)
 
 #' @export
 `dim<-.JuliaObject` <- function(x, value)
@@ -136,22 +136,22 @@ dim.JuliaObject <- function(x) julia_call("JuliaCall.dim", x)
 
 #' @export
 aperm.JuliaObject <- function(a, perm, ...)
-    julia_call("permutedims", a, as.integer(perm))
+    julia$simple_call("permutedims", a, as.integer(perm))
 
 #' @export
-is.array.JuliaObject <- function(x) julia_call("JuliaCall.isArray", x)
+is.array.JuliaObject <- function(x) julia$simple_call("JuliaCall.isArray", x)
 
 #' @export
-is.matrix.JuliaObject <- function(x) julia_call("JuliaCall.isMatrix", x)
+is.matrix.JuliaObject <- function(x) julia$simple_call("JuliaCall.isMatrix", x)
 
 ## Mean
 
 #' @export
-mean.JuliaObject <- function(x, ...) julia_call("mean", x)
+mean.JuliaObject <- function(x, ...) julia$simple_call("mean", x)
 
 #' @export
 determinant.JuliaObject <- function(x, logarithm = TRUE, ...){
-    r <- julia_call("logabsdet", x)
+    r <- julia$simple_call("logabsdet", x)
     names(r) <- c("modulus", "sign")
     r$sign <- r$sign + 0.0
     r
@@ -160,9 +160,9 @@ determinant.JuliaObject <- function(x, logarithm = TRUE, ...){
 #' @export
 solve.JuliaObject <- function(a, b, ...){
     if (missing(b)) {
-        return(julia_call("inv", a))
+        return(julia$simple_call("inv", a))
     }
-    julia_call("\\", a, b)
+    julia$simple_call("\\", a, b)
 }
 
 #' @export
@@ -174,5 +174,5 @@ c.JuliaObject <- function(...){
 
 #' @export
 t.JuliaObject <- function(x){
-    julia_call("transpose", x)
+    julia$simple_call("transpose", x)
 }
