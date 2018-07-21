@@ -190,10 +190,10 @@ julia_help <- julia$help <- function(fname){
 julia_assign <- julia$assign <-
     function(x, value) julia$call("JuliaCall.assign", x, value, need_return = FALSE)
 
-julia_simple_call <- julia$simple_call <- function(func, arg1, arg2){
-    if (missing(arg2)) r <- .julia$simple_call_(func, arg1)
-    else r <- .julia$simple_call_(func, arg1, arg2)
-    # r <- .julia$simple_call_(...)
+julia_simple_call <- julia$simple_call <- function(func, ...){
+    # if (missing(arg2)) r <- .julia$simple_call_(func, arg1)
+    # else r <- .julia$simple_call_(func, arg1, arg2)
+    r <- .julia$simple_call_(func, ...)
     if (inherits(r, "error")) stop(r)
     r
 }
