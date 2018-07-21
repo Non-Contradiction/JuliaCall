@@ -166,6 +166,8 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCa
     ## Suppress pyplot gui
     julia_command('ENV["MPLBACKEND"] = "Agg";')
 
+    .julia$simple_call_ <- julia_eval("JuliaCall.simple_call")
+
     invisible(julia)
 }
 

@@ -189,3 +189,9 @@ julia_help <- julia$help <- function(fname){
 #' @export
 julia_assign <- julia$assign <-
     function(x, value) julia$call("JuliaCall.assign", x, value, need_return = FALSE)
+
+julia_simple_call <- julia$simple_call <- function(...){
+    r <- .julia$simple_call_(...)
+    if (inherits(r, "error")) stop(r)
+    r
+}

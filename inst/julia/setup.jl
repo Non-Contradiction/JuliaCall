@@ -25,10 +25,10 @@ if need_display
     include("./display/IRjulia.jl")
     include("./display/RmdJulia.jl")
     include("./display/plotsViewer.jl")
+    include("REPLhook.jl")
+    include("incomplete_console.jl")
 end
 
-include("REPLhook.jl")
-include("incomplete_console.jl")
 include("convert.jl")
 include("JuliaObject.jl")
 include("asR.jl")
@@ -111,6 +111,8 @@ function docall(call1)
         Rerror(e, catch_stacktrace()).p;
     end;
 end
+
+include("interface1.jl")
 
 function exists(x)
     isdefined(Symbol(x))
