@@ -1,7 +1,12 @@
 # JuliaCall 0.14.1.9000
 
 * Make the error in `install_dependency` not muted.
-* Various performance improvements.
+* Various performance improvements in `julia_call` interface functions.
+* Performance improvement for `sexp`, `rcopy` and creating of `JuliaObject`.
+* Performance improvement in display systems.
+* Have a `julia$simple_call` interface which is a simple and more performant
+  "equivalent" of the `julia_call` interface.
+* Various small bug fixes.
 
 # JuliaCall 0.14.0
 
