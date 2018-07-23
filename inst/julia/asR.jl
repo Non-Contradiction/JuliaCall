@@ -10,3 +10,6 @@ asLogical(x :: AbstractString) = ifelse(x in ["T", "TRUE", "true", "True"], true
 asLogical(x :: AbstractArray{Bool}) = x
 asLogical{T<:Number}(x :: AbstractArray{T}) = [asLogical(xx) for xx in x]
 asLogical{T<:AbstractString}(x :: AbstractArray{T}) = [asLogical(xx) for xx in x]
+
+isNumeric(x) = isa(x, Real)
+isNumeric(x :: AbstractArray{T}) where {T} = issubtype(T, Real)

@@ -176,3 +176,6 @@ c.JuliaObject <- function(...){
 t.JuliaObject <- function(x){
     julia$simple_call("transpose", x)
 }
+
+#' @export
+is.numeric.JuliaObject <- function(x) julia$simple_call("JuliaCall.isNumeric", x)
