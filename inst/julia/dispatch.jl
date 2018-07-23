@@ -26,11 +26,15 @@ function assign!(x :: AbstractArray, value :: AbstractArray, i)
     end
 end
 
-function assign!(x :: AbstractArray, value, i...)
-    try
+function assign!(x :: AbstractArray{T}, value :: T, i...) where {T}
+    setindex!(x, value, i...)
+end
+
+function assign!(x :: AbstractArray{T}, value, i...) where {T}
+    commontype = promote_type(eltype(x), typeof(value))
+    if T == commontype
         setindex!(x, value, i...)
-    catch e
-        commontype = promote_type(eltype(x), typeof(value))
+    else
         x = AbstractArray{commontype}(x)
         setindex!(x, value, i...)
     end
