@@ -44,6 +44,15 @@ function assign!(x :: AbstractArray{T}, value, i...) where {T}
     end
 end
 
+function assign!(x, value, i)
+    if length(x) == 1 && i == 1
+        value
+    else
+        warn("Assignment for JuliaObject fails.")
+        x
+    end
+end
+
 ## Array related dispatching methods
 
 isMatrix(x :: AbstractArray) = length(size(x)) == 2
