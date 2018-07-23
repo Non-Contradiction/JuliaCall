@@ -16,11 +16,15 @@ unlist(x) = vcat(x...)
 
 rep(x, times) = repmat(vcat(x), times)
 
-function assign!(x :: AbstractArray, value :: AbstractArray, i)
-    try
+function assign!(x :: AbstractArray{T}, value :: AbstractArray{T}, i)
+    setindex!(x, value, i)
+end
+
+function assign!(x :: AbstractArray{T}, value :: AbstractArray, i)
+    commontype = promote_type(eltype(x), eltype(value))
+    if T == commontype
         setindex!(x, value, i)
-    catch e
-        commontype = promote_type(eltype(x), eltype(value))
+    else
         x = AbstractArray{commontype}(x)
         setindex!(x, value, i)
     end
