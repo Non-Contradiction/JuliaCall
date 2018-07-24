@@ -1,3 +1,8 @@
+# JuliaCall 0.14.2.9000
+
+* Match the assignment behavior for `JuliaObject` to that in native R.
+* Implementation of generics for `is.numeric` and `is.double` for `JuliaObject`.
+
 # JuliaCall 0.14.1.9000
 
 * Make the error in `install_dependency` not muted.
