@@ -22,12 +22,12 @@ const need_display = length(Base.Multimedia.displays) < 2
 
 if need_display
     include("./display/basic.jl")
-    include("./display/IRjulia.jl")
-    include("./display/RmdJulia.jl")
-    include("./display/plotsViewer.jl")
-    include("REPLhook.jl")
-    include("incomplete_console.jl")
 end
+include("./display/IRjulia.jl")
+include("./display/RmdJulia.jl")
+include("./display/plotsViewer.jl")
+include("REPLhook.jl")
+include("incomplete_console.jl")
 
 include("convert.jl")
 include("JuliaObject.jl")
