@@ -69,7 +69,7 @@ function Jc(xs...)
     if length(xs) > 1
         vcat([_Jc(x) for x in xs]...)
     else
-        _Jc(xs[1])
+        xs[1]
     end
 end
 
