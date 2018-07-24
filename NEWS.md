@@ -1,7 +1,8 @@
 # JuliaCall 0.14.2.9000
 
 * Match the assignment behavior for `JuliaObject` to that in native R.
-* Implementation of generics for `is.numeric` and `is.double` for `JuliaObject`.
+* Implementation of generics for `is.numeric` for `JuliaObject`.
+* Bug correction for `c.JuliaObject`.
 
 # JuliaCall 0.14.1.9000
 

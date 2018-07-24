@@ -64,3 +64,19 @@ isArray(x) = false
 dim(x) = vcat(size(x)...)
 
 Rmax(xs...) = maximum((maximum(x) for x in xs))
+
+function Jc(xs...)
+    if length(xs) > 1
+        vcat([_Jc(x) for x in xs]...)
+    else
+        _Jc(xs[1])
+    end
+end
+
+function _Jc(x :: AbstractArray)
+    vec(x)
+end
+
+function _Jc(x)
+    [x]
+end

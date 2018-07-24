@@ -167,9 +167,7 @@ solve.JuliaObject <- function(a, b, ...){
 
 #' @export
 c.JuliaObject <- function(...){
-    dots <- list(...)
-    if (length(dots) == 1) return(dots[[1]])
-    dots
+    julia$simple_call("JuliaCall.Jc", ...)
 }
 
 #' @export
