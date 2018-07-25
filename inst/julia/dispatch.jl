@@ -67,10 +67,14 @@ Rmax(xs...) = maximum((maximum(x) for x in xs))
 
 function Jc(xs...)
     if length(xs) > 1
-        vcat([_Jc(x) for x in xs]...)
+        vcat((_Jc(x) for x in xs)...)
     else
         xs[1]
     end
+end
+
+function Jc(x :: AbstractArray)
+    vec(x)
 end
 
 function _Jc(x :: AbstractArray)
