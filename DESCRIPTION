@@ -1,8 +1,8 @@
 Package: JuliaCall
 Type: Package
 Title: Seamless Integration Between R and 'Julia'
-Version: 0.14.2.9000
-Date: 2018-7-23
+Version: 0.14.3.9000
+Date: 2018-7-26
 Authors@R: c(
     person("Changcheng", "Li", , "cxl508@psu.edu", c("aut", "cre")),
     person("Randy", "Lai", role = "ctb"),
@@ -24,7 +24,6 @@ BugReports: https://github.com/Non-Contradiction/JuliaCall/issues
 Encoding: UTF-8
 LazyData: true
 Imports: utils,
-    R6,
     Rcpp (>= 0.12.7)
 RoxygenNote: 6.0.1
 LinkingTo: Rcpp

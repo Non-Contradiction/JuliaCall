@@ -1,35 +1,57 @@
-#' @import R6
-juliaobject <- R6::R6Class("JuliaObject",
-                           public = list(
-                               initialize = function(id = 0L, type = "Regular"){
-                                   if (private$locked) return(invisible(self))
-                                   private$id <- id
-                                   private$locked <- TRUE
-                                   if (!identical(type, "Regular")) {
-                                       extendJuliaObj(self, type)
-                                   }
-                               },
-                               getID = function(){
-                                   private$id
-                               },
-                               print = function(...){
-                                   cat(paste0("Julia Object of type ",
-                                              julia_call("JuliaCall.str_typeof", self),
-                                              ".\n",
-                                              julia_call("JuliaCall.show_string", self)))
-                                   #julia_call("show", self, need_return = FALSE)
+# #' @import R6
+# juliaobject <- R6::R6Class("JuliaObject",
+#                            public = list(
+#                                initialize = function(id = 0L, type = "Regular"){
+#                                    if (private$locked) return(invisible(self))
+#                                    private$id <- id
+#                                    private$locked <- TRUE
+#                                    if (!identical(type, "Regular")) {
+#                                        extendJuliaObj(self, type)
+#                                    }
+#                                },
+#                                getID = function(){
+#                                    private$id
+#                                },
+#                                print = function(...){
+#                                    cat(paste0("Julia Object of type ",
+#                                               julia_call("JuliaCall.str_typeof", self),
+#                                               ".\n",
+#                                               julia_call("JuliaCall.show_string", self)))
+#                                    #julia_call("show", self, need_return = FALSE)
+#
+#                                    invisible(self)
+#                                }
+#                                # finalize = function() {
+#                                #     julia_call("JuliaCall.rm_obj", private$id)
+#                                #     invisible(NULL)
+#                                # }
+#                            ),
+#                            private = list(id = 0L, locked = FALSE),
+#                            lock_objects = FALSE,
+#                            lock_class = TRUE,
+#                            cloneable = FALSE)
 
-                                   invisible(self)
-                               }
-                               # finalize = function() {
-                               #     julia_call("JuliaCall.rm_obj", private$id)
-                               #     invisible(NULL)
-                               # }
-                           ),
-                           private = list(id = 0L, locked = FALSE),
-                           lock_objects = FALSE,
-                           lock_class = TRUE,
-                           cloneable = FALSE)
+juliaobject <- new.env()
+juliaobject$new <- function(id = 0L, type = "Regular"){
+    self <- new.env()
+    self$id <- id
+    if (!identical(type, "Regular")) {
+        extendJuliaObj(self, type)
+    }
+    self$getID <- function() self$id
+    class(self) <- "JuliaObject"
+    self
+}
+
+print.JuliaObject <- function(self, ...){
+    cat(paste0("Julia Object of type ",
+               julia_call("JuliaCall.str_typeof", self),
+               ".\n",
+               julia_call("JuliaCall.show_string", self)))
+    #julia_call("show", self, need_return = FALSE)
+
+    invisible(self)
+}
 
 #' Convert an R Object to Julia Object.
 #'

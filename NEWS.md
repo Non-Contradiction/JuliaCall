@@ -1,3 +1,7 @@
+# JuliaCall 0.14.3.9000
+
+* Try to remove `R6` dependency to reduce overhead creating `JuliaObject`.
+
 # JuliaCall 0.14.2.9000
 
 * Match the assignment behavior for `JuliaObject` to that in native R.
