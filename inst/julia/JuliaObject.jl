@@ -80,7 +80,8 @@ import RCall.rcopy
 
 function rcopy(::Type{JuliaObject}, x::Ptr{EnvSxp})
     try
-        get(julia_object_stack, rcopy(Int32, RObject(x)[:getID]()))
+        # get(julia_object_stack, rcopy(Int32, RObject(x)[:getID]()))
+        get(julia_object_stack, rcopy(Int32, RObject(x)[:id]))
     catch e
         nothing
     end

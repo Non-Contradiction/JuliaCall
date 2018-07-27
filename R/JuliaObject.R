@@ -38,7 +38,7 @@ juliaobject$new <- function(id = 0L, type = "Regular"){
     if (!identical(type, "Regular")) {
         extendJuliaObj(self, type)
     }
-    self$getID <- function() self$id
+    # self$getID <- function() self$id
     class(self) <- "JuliaObject"
     self
 }
