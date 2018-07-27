@@ -43,14 +43,15 @@ juliaobject$new <- function(id = 0L, type = "Regular"){
     self
 }
 
-print.JuliaObject <- function(self, ...){
+#' @export
+print.JuliaObject <- function(x, ...){
     cat(paste0("Julia Object of type ",
-               julia_call("JuliaCall.str_typeof", self),
+               julia_call("JuliaCall.str_typeof", x),
                ".\n",
-               julia_call("JuliaCall.show_string", self)))
+               julia_call("JuliaCall.show_string", x)))
     #julia_call("show", self, need_return = FALSE)
 
-    invisible(self)
+    invisible(x)
 }
 
 #' Convert an R Object to Julia Object.
