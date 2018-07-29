@@ -61,8 +61,8 @@ print.JuliaObject <- function(x, ...){
 #'
 #' @param x the R object you want to convert to julia object.
 #'
-#' @return an S4 object of class JuliaObject
-#' which contains an id correspond to the julia object.
+#' @return an environment of class JuliaObject,
+#' which contains an id corresponding to the actual julia object.
 #'
 #' @examples
 #'
