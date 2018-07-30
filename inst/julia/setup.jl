@@ -1,10 +1,12 @@
-const julia06 = VERSION < v"0.6.5"
-if julia06
+if VERSION < v"0.6.5"
     Base.load_juliarc()
 else
     Base.load_julia_startup()
 end
+
 module JuliaCall
+
+const julia07 = VERSION > v"0.6.5"
 
 # gc_enable(false)
 
@@ -14,7 +16,7 @@ module JuliaCall
 
 using Suppressor
 
-if !is_windows() && julia06
+if !is_windows() && !julia07
     @suppress_err begin
         @eval Base JULIA_HOME = joinpath(dirname(JULIA_HOME), "bin")
         @eval Base julia_cmd() = julia_cmd(joinpath(JULIA_HOME, julia_exename()))
