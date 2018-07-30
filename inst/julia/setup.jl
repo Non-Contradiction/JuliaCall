@@ -8,6 +8,18 @@ module JuliaCall
 
 const julia07 = VERSION > v"0.6.5"
 
+if julia07
+    using Pkg
+end
+
+function installed(name)
+    @static if julia07
+        get(Pkg.installed(), name, nothing)
+    else
+        Pkg.installed(name)
+    end
+end
+
 # gc_enable(false)
 
 # Pkg.update()
@@ -130,7 +142,7 @@ function eval_string(x)
 end
 
 function installed_package(pkg_name)
-    string(Pkg.installed(pkg_name))
+    string(installed(pkg_name))
 end
 
 function help(fname)
