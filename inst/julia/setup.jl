@@ -3,23 +3,11 @@ if VERSION < v"0.6.5"
 else
     Base.load_julia_startup()
     using Pkg
-    if get(Pkg.installed(), "SpecialFunctions", nothing) == nothing
-        Pkg.add("SpecialFunctions")
-    end
-    using SpecialFunctions
 end
 
 module JuliaCall
 
 const julia07 = VERSION > v"0.6.5"
-
-function installed(name)
-    @static if julia07
-        get(Pkg.installed(), name, nothing)
-    else
-        Pkg.installed(name)
-    end
-end
 
 if julia07
     using Pkg
@@ -27,6 +15,14 @@ if julia07
     const is_windows = Sys.iswindows
     const Display = AbstractDisplay
     const readstring(s) = read(s, String)
+end
+
+function installed(name)
+    @static if julia07
+        get(Pkg.installed(), name, nothing)
+    else
+        Pkg.installed(name)
+    end
 end
 
 # gc_enable(false)

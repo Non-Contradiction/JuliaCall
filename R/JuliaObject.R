@@ -95,10 +95,12 @@ fields <- function(object){
 #' @rdname JuliaObjectFields
 #' @export
 fields.JuliaObject <- function(object){
-    tryCatch(julia_call("string.",
-                        julia_call("fieldnames", julia_call("typeof", object))),
-             warn = function(w){},
-             error = function(e) NULL)
+    as.character(
+        tryCatch(julia_call("string.",
+                            julia_call("fieldnames", julia_call("typeof", object))),
+                 warn = function(w){},
+                 error = function(e) NULL)
+    )
 }
 
 #' @rdname JuliaObjectFields
