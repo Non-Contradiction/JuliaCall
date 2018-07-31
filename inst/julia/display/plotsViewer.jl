@@ -34,6 +34,7 @@ function display(d::ViewerDisplay, p)
         return
         display(d, MIME("image/png"), p)
         return
+    catch e;
     end
     throw(MethodError(display, [d, p]))
 end

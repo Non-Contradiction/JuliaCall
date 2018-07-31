@@ -44,6 +44,7 @@ function display(d::RjuliaDisplay, p)
         try
             display(d, m, p)
             return
+        catch e;
         end
     end
     throw(MethodError)

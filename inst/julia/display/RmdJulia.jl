@@ -26,10 +26,12 @@ function display(display::RmdDisplay, x)
             plot_display(display, x)
             return
         end
+    catch e;
     end
     try
         text_display(display, x)
         return
+    catch e;
     end
     throw(MethodError)
 end

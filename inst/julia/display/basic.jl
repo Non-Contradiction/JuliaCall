@@ -2,6 +2,7 @@ const output = IOBuffer()
 
 if julia07
     using REPL
+    const Void = Nothing
 else
     const REPL = Base.REPL
 end

@@ -10,6 +10,9 @@ const julia07 = VERSION > v"0.6.5"
 
 if julia07
     using Pkg
+    const parse = Meta.parse
+    const is_windows = Sys.iswindows
+    const Display = AbstractDisplay
 end
 
 function installed(name)
@@ -138,7 +141,7 @@ function exists(x)
 end
 
 function eval_string(x)
-    eval(Main, parse(x))
+    Core.eval(Main, parse(x))
 end
 
 function installed_package(pkg_name)
@@ -150,7 +153,7 @@ function help(fname)
 end
 
 function assign(name, x)
-    eval(Main, Expr(:(=), Symbol(name), x))
+    Core.eval(Main, Expr(:(=), Symbol(name), x))
 end
 
 function str_typeof(x)
