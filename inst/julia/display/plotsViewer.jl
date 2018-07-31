@@ -1,4 +1,4 @@
-type ViewerDisplay <: Display
+struct ViewerDisplay <: Display
 end
 
 function pngwrite(x, filename)

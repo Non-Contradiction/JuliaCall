@@ -8,7 +8,7 @@ const basic_display = Base.REPL.REPLDisplay(basic_repl)
 
 Base.pushdisplay(basic_display)
 
-type DisplayManager
+mutable struct DisplayManager
     repl_display :: Base.REPL.REPLDisplay
     location :: Int64
 end

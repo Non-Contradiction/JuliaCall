@@ -98,7 +98,7 @@ sexp(x) = sexp(JuliaObject(x))
 ## Regarding to issue #12, #13 and #16,
 ## we should use JuliaObject for general AbstractArray
 @suppress_err begin
-    JuliaCall.sexp{T}(x :: AbstractArray{T}) = sexp(JuliaObject(x))
+    JuliaCall.sexp(x :: AbstractArray{T}) where {T} = sexp(JuliaObject(x))
 end
 
 ## AbstractArray{Any} should be converted to R List

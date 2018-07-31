@@ -1,6 +1,6 @@
 import Base.Multimedia.display
 
-type RmdDisplay <: Display
+struct RmdDisplay <: Display
 end
 
 function plot_display(display::RmdDisplay, x)
