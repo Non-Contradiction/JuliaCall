@@ -7,7 +7,7 @@ test_that("test of the JuliaObject", {
     expect_equal(c(julia_eval("1//2") ^ 2), 0.25)
 
     julia_command("
-    type Mytype
+    mutable struct Mytype
         num::Int
         den::Int
         ans::Float64

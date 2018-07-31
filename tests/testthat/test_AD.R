@@ -69,7 +69,7 @@ test_that("test of AD of Rosenbrock function", {
     ## We could test the result by writing rosenbrock function directly in julia
     ## and calculate the derivative by ForwardDiff
     julia_eval("function rosenjl(x) n = length(x);
-               x1 = x[2:n]; x2 = x[1:(n - 1)]; sum(100 * (x1 - x2.^2).^2 + (1 - x2).^2) end")
+               x1 = x[2:n]; x2 = x[1:(n - 1)]; sum(100 * (x1 .- x2.^2).^2 + (1 .- x2).^2) end")
     julia_command("gRjl = x -> ForwardDiff.gradient(rosenjl, x);")
     julia_command("hRjl = x -> ForwardDiff.hessian(rosenjl, x);")
 

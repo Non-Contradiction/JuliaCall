@@ -3,19 +3,15 @@ if VERSION < v"0.6.5"
 else
     Base.load_julia_startup()
     using Pkg
+    if get(Pkg.installed(), "SpecialFunctions", nothing) == nothing
+        Pkg.add("SpecialFunctions")
+    end
+    using SpecialFunctions
 end
 
 module JuliaCall
 
 const julia07 = VERSION > v"0.6.5"
-
-if julia07
-    using Pkg
-    const parse = Meta.parse
-    const is_windows = Sys.iswindows
-    const Display = AbstractDisplay
-    const readstring(s) = read(s, String)
-end
 
 function installed(name)
     @static if julia07
@@ -23,6 +19,14 @@ function installed(name)
     else
         Pkg.installed(name)
     end
+end
+
+if julia07
+    using Pkg
+    const parse = Meta.parse
+    const is_windows = Sys.iswindows
+    const Display = AbstractDisplay
+    const readstring(s) = read(s, String)
 end
 
 # gc_enable(false)
@@ -139,7 +143,7 @@ end
 include("interface1.jl")
 
 function exists(x)
-    isdefined(Symbol(x))
+    isdefined(Main, Symbol(x))
 end
 
 function eval_string(x)
