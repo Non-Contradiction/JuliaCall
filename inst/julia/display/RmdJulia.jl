@@ -3,11 +3,14 @@ import Base.Multimedia.display
 struct RmdDisplay <: Display
 end
 
+const begin_plot_in_R = R"JuliaCall:::begin_plot"
+const finish_plot_in_R = R"JuliaCall:::finish_plot"
+
 function plot_display(display::RmdDisplay, x)
-    path = rcopy(R"JuliaCall:::begin_plot()")
+    path = rcopy(begin_plot_in_R())
     mkpath(dirname(path))
     Main.Plots.savefig(x, path)
-    R"JuliaCall:::finish_plot()"
+    finish_plot_in_R()
 end
 
 const text_display_in_R = R"JuliaCall:::text_display"
