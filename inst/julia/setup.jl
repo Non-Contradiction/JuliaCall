@@ -2,6 +2,7 @@ if VERSION < v"0.6.5"
     Base.load_juliarc()
 else
     Base.load_julia_startup()
+    using Pkg
 end
 
 module JuliaCall
@@ -13,6 +14,7 @@ if julia07
     const parse = Meta.parse
     const is_windows = Sys.iswindows
     const Display = AbstractDisplay
+    const readstring(s) = read(s, String)
 end
 
 function installed(name)
@@ -130,7 +132,7 @@ function docall(call1)
             RObject(nothing).p;
         end;
     catch e
-        Rerror(e, catch_stacktrace()).p;
+        Rerror(e, stacktrace(catch_backtrace())).p;
     end;
 end
 

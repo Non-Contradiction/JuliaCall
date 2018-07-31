@@ -14,7 +14,7 @@ tanpi(x) = sinpi(x) / cospi(x)
 
 unlist(x) = vcat(x...)
 
-rep(x, times) = repmat(vcat(x), times)
+rep(x, times) = @static if julia07 repeat(vcat(x), times) else repmat(vcat(x), times) end
 
 function assign!(x :: AbstractArray{T}, value :: AbstractArray{T}, i) where {T}
     setindex!(x, value, i)

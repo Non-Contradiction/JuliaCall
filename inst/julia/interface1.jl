@@ -12,7 +12,7 @@ function simple_call(fname, args...; kwargs...)
         end
         RObject(r).p
     catch e
-        Rerror(e, catch_stacktrace()).p;
+        Rerror(e, stacktrace(catch_backtrace())).p;
     end;
 end
 
@@ -30,6 +30,6 @@ end
 #         end
 #         RObject(r).p
 #     catch e
-#         Rerror(e, catch_stacktrace()).p;
+#         Rerror(e, stacktrace(catch_backtrace())).p;
 #     end;
 # end
