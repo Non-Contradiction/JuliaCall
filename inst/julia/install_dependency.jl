@@ -3,10 +3,17 @@
 ## <https://github.com/Non-Contradiction/JuliaCall/issues/9>
 ## as well as coming up with the solution
 
+CurrentRhome = ARGS[1]
+
+## println(Rhome)
+
+ENV["R_HOME"] = CurrentRhome
+
 const julia07 = VERSION > v"0.6.5"
 
 if julia07
     using Pkg
+    pkg"add RCall#e59a546"
 end
 
 function installed(name)
@@ -23,15 +30,7 @@ end;
 
 using Suppressor
 
-CurrentRhome = ARGS[1]
-
-## println(Rhome)
-
-ENV["R_HOME"] = CurrentRhome
-
-if julia07
-    pkg"add RCall#e59a546"
-elseif installed("RCall") == nothing
+if installed("RCall") == nothing
     Pkg.add("RCall")
 end;
 
