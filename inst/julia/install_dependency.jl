@@ -13,7 +13,8 @@ const julia07 = VERSION > v"0.6.5"
 
 if julia07
     using Pkg
-    pkg"add RCall#e59a546"
+else
+    macro pkg_str(x) begin nothing end end
 end
 
 function installed(name)
@@ -30,7 +31,9 @@ end;
 
 using Suppressor
 
-if installed("RCall") == nothing
+if julia07
+    pkg"add RCall#e59a546"
+elseif installed("RCall") == nothing
     Pkg.add("RCall")
 end;
 
