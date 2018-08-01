@@ -1,6 +1,10 @@
 # JuliaCall 0.14.3.9000
 
 * Try to remove `R6` dependency to reduce overhead creating `JuliaObject`.
+* Compatibility with `Julia` v0.7,
+  currently need to use `RCall#e59a546` with `JuliaCall` on `Julia` v0.7.
+* Deprecation fixing with `Julia` v0.7.
+* Implementation of `diff.JuliaObject`.
 
 # JuliaCall 0.14.2.9000
 
