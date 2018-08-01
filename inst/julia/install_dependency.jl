@@ -29,7 +29,9 @@ CurrentRhome = ARGS[1]
 
 ENV["R_HOME"] = CurrentRhome
 
-if installed("RCall") == nothing
+if julia07
+    pkg"add RCall#e59a546"
+elseif installed("RCall") == nothing
     Pkg.add("RCall")
 end;
 
