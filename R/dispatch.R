@@ -177,3 +177,6 @@ t.JuliaObject <- function(x){
 
 #' @export
 is.numeric.JuliaObject <- function(x) julia$simple_call("JuliaCall.isNumeric", x)
+
+#' @export
+diff.JuliaObject <- function(x, ...) julia$simple_call("diff", x)
