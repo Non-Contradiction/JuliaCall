@@ -6,6 +6,10 @@ os:
 env:
   - JULIA="06"
   - JULIA="07"
+matrix:
+  allow_failures:
+    - os: linux
+    - env: JULIA="07"
 
 addons:
   apt:
