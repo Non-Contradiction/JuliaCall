@@ -1,3 +1,7 @@
+# JuliaCall 0.14.0
+
+* Eighth release on CRAN.
+
 # JuliaCall 0.14.3.9000
 
 * Try to remove `R6` dependency to reduce overhead creating `JuliaObject`.
