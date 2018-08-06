@@ -13,9 +13,9 @@ const basic_repl = REPL.BasicREPL(out_terminal)
 
 const basic_display = REPL.REPLDisplay(basic_repl)
 
-Base.pushdisplay(basic_display)
+## Base.pushdisplay(basic_display)
 
-mutable struct DisplayManager
+mutable struct DisplayManager <: Display
     repl_display :: REPL.REPLDisplay
     location :: Int64
 end
@@ -32,4 +32,14 @@ function proceed(dm :: DisplayManager)
     end
 end
 
+function display(dm :: DisplayManager, mime::MIME"text/plain", x)
+    display(dm.repl_display, mime, x)
+    proceed(dm)
+    nothing
+end
+
+display(dm :: DisplayManager, x) = display(dm, MIME("text/plain"), x)
+
 const basic_display_manager = DisplayManager(basic_display)
+
+Base.pushdisplay(basic_display_manager)

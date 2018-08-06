@@ -15,6 +15,8 @@ if julia07
     const is_windows = Sys.iswindows
     const Display = AbstractDisplay
     const readstring(s) = read(s, String)
+else
+    import Base.Multimedia.display
 end
 
 function installed(name)
@@ -121,9 +123,9 @@ function docall(call1)
         if show_value && r != nothing
             display(r)
         end
-        @static if need_display
-            proceed(basic_display_manager)
-        end
+        # @static if need_display
+        #     proceed(basic_display_manager)
+        # end
         if need_return == "R"
             RObject(r).p;
         elseif need_return == "Julia"

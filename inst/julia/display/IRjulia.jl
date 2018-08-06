@@ -1,4 +1,4 @@
-import Base.Multimedia.display
+# import Base.Multimedia.display
 
 struct RjuliaDisplay <: Display
     mime_dict:: Dict
