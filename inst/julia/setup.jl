@@ -15,8 +15,6 @@ if julia07
     const is_windows = Sys.iswindows
     const Display = AbstractDisplay
     const readstring(s) = read(s, String)
-else
-    import Base.Multimedia.display
 end
 
 function installed(name)
@@ -46,6 +44,7 @@ using RCall
 
 const need_display = length(Base.Multimedia.displays) < 2
 
+import Base.Multimedia.display
 if need_display
     include("./display/basic.jl")
 end
