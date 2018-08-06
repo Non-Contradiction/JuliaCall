@@ -46,9 +46,9 @@ juliaobject$new <- function(id = 0L, type = "Regular"){
 #' @export
 print.JuliaObject <- function(x, ...){
     cat(paste0("Julia Object of type ",
-               julia_call("JuliaCall.str_typeof", x),
+               julia$simple_call("JuliaCall.str_typeof", x),
                ".\n",
-               julia_call("JuliaCall.show_string", x)))
+               julia$simple_call("JuliaCall.show_string", x)))
     #julia_call("show", self, need_return = FALSE)
 
     invisible(x)
@@ -72,7 +72,7 @@ print.JuliaObject <- function(x, ...){
 #'
 #' @export
 JuliaObject <- function(x){
-    julia_call("JuliaCall.JuliaObject", x)
+    julia$simple_call("JuliaCall.JuliaObject", x)
 }
 
 #' JuliaObject Fields.
@@ -96,8 +96,8 @@ fields <- function(object){
 #' @export
 fields.JuliaObject <- function(object){
     as.character(
-        tryCatch(julia_call("string.",
-                            julia_call("fieldnames", julia_call("typeof", object))),
+        tryCatch(julia$simple_call("string.",
+                            julia$simple_call("fieldnames", julia$simple_call("typeof", object))),
                  warn = function(w){},
                  error = function(e) NULL)
     )
@@ -112,7 +112,7 @@ field <- function(object, name){
 #' @rdname JuliaObjectFields
 #' @export
 field.JuliaObject <- function(object, name){
-    tryCatch(julia_call("getfield", object, as.symbol(name)),
+    tryCatch(julia$simple_call("getfield", object, as.symbol(name)),
              warn = function(w){},
              error = function(e) NULL)
 }
@@ -126,7 +126,7 @@ field.JuliaObject <- function(object, name){
 #' @rdname JuliaObjectFields
 #' @export
 `field<-.JuliaObject` <- function(object, name, value){
-    julia_call("JuliaCall.setfield1!", object, as.symbol(name), value)
+    julia$simple_call("JuliaCall.setfield1!", object, as.symbol(name), value)
     object
 }
 

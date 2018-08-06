@@ -197,3 +197,7 @@ julia_simple_call <- julia$simple_call <- function(func, ...){
     if (inherits(r, "error")) stop(r)
     r
 }
+
+julia_simple_do.call <- julia$simple_do.call <- function(func, args){
+    do.call(julia_simple_call, c(list(func), args))
+}
