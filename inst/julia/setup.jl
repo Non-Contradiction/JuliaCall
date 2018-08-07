@@ -89,20 +89,24 @@ end
 
 function call_decompose(call1)
     call = RObject(Ptr{RCall.VecSxp}(call1))
-    fname = rcopy(String, call[:fname])
+    # fname = rcopy(String, call[:fname])
+    fname = rcopy(String, call[1]) :: String
     # named_args = Any[(rcopy(Symbol, k), rcopy(i)) for (k, i) in enumerate(call[:named_args])]
     # unamed_args = Any[rcopy(i) for i in call[:unamed_args]]
     named_args = Any[]
     unamed_args = Any[]
-    for (k,a) in enumerate(call[:args])
+    # for (k,a) in enumerate(call[:args])
+    for (k,a) in enumerate(call[2])
         if isa(k.p, Ptr{RCall.NilSxp})
             push!(unamed_args, rcopy(a))
         else
             push!(named_args, (rcopy(Symbol,k), rcopy(a)))
         end
     end
-    need_return = rcopy(String, call[:need_return])
-    show_value = rcopy(Bool, call[:show_value])
+    # need_return = rcopy(String, call[:need_return])
+    need_return = rcopy(String, call[3]) :: String
+    # show_value = rcopy(Bool, call[:show_value])
+    show_value = rcopy(Bool, call[4]) :: Bool
     (fname, named_args, unamed_args, need_return, show_value)
 end
 
@@ -126,11 +130,11 @@ function docall(call1)
         #     proceed(basic_display_manager)
         # end
         if need_return == "R"
-            RObject(r).p;
+            sexp(r);
         elseif need_return == "Julia"
-            RObject(JuliaObject(r)).p;
+            sexp(JuliaObject(r));
         else
-            RObject(nothing).p;
+            sexp(nothing);
         end;
     catch e
         Rerror(e, stacktrace(catch_backtrace())).p;
