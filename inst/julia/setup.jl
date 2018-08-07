@@ -93,16 +93,27 @@ function call_decompose(call1)
     fname = rcopy(String, call[1]) :: String
     # named_args = Any[(rcopy(Symbol, k), rcopy(i)) for (k, i) in enumerate(call[:named_args])]
     # unamed_args = Any[rcopy(i) for i in call[:unamed_args]]
-    named_args = Any[]
-    unamed_args = Any[]
-    # for (k,a) in enumerate(call[:args])
-    for (k,a) in enumerate(call[2])
-        if isa(k.p, Ptr{RCall.NilSxp})
-            push!(unamed_args, rcopy(a))
-        else
-            push!(named_args, (rcopy(Symbol,k), rcopy(a)))
-        end
+    args = call[2] :: RObject{RCall.VecSxp}
+    symbols = rcopy(Vector{Symbol}, getnames(args)) :: Vector{Symbol}
+    es = rcopy(Vector{Any}, args) :: Vector{Any}
+    if length(symbols) == 0
+        unamed_args = es
+        named_args = Any[]
+    else
+        unamed_args = Any[es[i] for i in 1:length(es) if symbols[i] == Symbol("")]
+        named_args = Any[(symbols[i], es[i]) for i in 1:length(es) if symbols[i] != Symbol("")]
     end
+
+    # named_args = Any[]
+    # unamed_args = Any[]
+    # # for (k,a) in enumerate(call[:args])
+    # for (k,a) in enumerate(args)
+    #     if isa(k.p, Ptr{RCall.NilSxp})
+    #         push!(unamed_args, rcopy(a))
+    #     else
+    #         push!(named_args, (rcopy(Symbol,k), rcopy(a)))
+    #     end
+    # end
     # need_return = rcopy(String, call[:need_return])
     need_return = rcopy(String, call[3]) :: String
     # show_value = rcopy(Bool, call[:show_value])

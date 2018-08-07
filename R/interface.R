@@ -63,7 +63,8 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
     #               need_return = need_return,
     #               show_value = show_value)
     jcall <- list(fname = func_name,
-                  args = as.pairlist(arg_list),
+                  ##args = as.pairlist(arg_list),
+                  args = arg_list,
                   need_return = need_return,
                   show_value = show_value)
     r <- .julia$do.call_(jcall)
@@ -79,7 +80,7 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
 #' @rdname call
 #' @export
 julia_call <- julia$call <- function(func_name, ..., need_return = c("R", "Julia", "None"), show_value = FALSE)
-    julia$do.call(func_name, pairlist(...), need_return, show_value)
+    julia$do.call(func_name, list(...), need_return, show_value)
 
 #' Check whether a julia object with the given name exists or not.
 #'
