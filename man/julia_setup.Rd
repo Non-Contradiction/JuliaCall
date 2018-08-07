@@ -4,8 +4,8 @@
 \alias{julia_setup}
 \title{Do initial setup for the JuliaCall package.}
 \usage{
-julia_setup(JULIA_HOME = NULL, verbose = TRUE, force = FALSE,
-  useRCall = TRUE)
+julia_setup(JULIA_HOME = NULL, verbose = TRUE, install = TRUE,
+  force = FALSE, useRCall = TRUE)
 }
 \arguments{
 \item{JULIA_HOME}{the file folder which contains julia binary,
@@ -17,6 +17,9 @@ the julia in path.}
 
 \item{verbose}{whether to print out detailed information
 about \code{julia_setup}.}
+
+\item{install}{whether to execute install script for dependent julia packages, whose default value is TRUE;
+but can be set to FALSE to save startup time when no installation of dependent julia packages is needed.}
 
 \item{force}{whether to force julia_setup to execute again.}
 

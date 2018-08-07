@@ -10,6 +10,8 @@
 #'     the julia in path.
 #' @param verbose whether to print out detailed information
 #'     about \code{julia_setup}.
+#' @param install whether to execute install script for dependent julia packages, whose default value is TRUE;
+#'     but can be set to FALSE to save startup time when no installation of dependent julia packages is needed.
 #' @param force whether to force julia_setup to execute again.
 #' @param useRCall whether or not you want to use RCall.jl in julia,
 #'     which is an amazing package to access R in julia.
@@ -24,7 +26,7 @@
 #' }
 #'
 #' @export
-julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, force = FALSE, useRCall = TRUE) {
+julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, install = TRUE, force = FALSE, useRCall = TRUE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
