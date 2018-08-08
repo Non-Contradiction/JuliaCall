@@ -1,4 +1,11 @@
-# JuliaCall 0.14.0
+# JuliaCall 0.15.0.9000
+
+* Some performance improvements.
+* Add `install` argument in `julia_setup()`, setting it to `FALSE` can reduce startup time
+  when no installation or checking of dependent `Julia` packages is needed.
+* Improve `julia_console()`.
+
+# JuliaCall 0.15.0
 
 * Eighth release on CRAN.
 
