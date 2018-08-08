@@ -6,6 +6,9 @@ os:
 env:
   - JULIA="06"
   - JULIA="07"
+matrix:
+  allow_failures:
+    - env: JULIA="07"
 
 addons:
   apt:
@@ -31,10 +34,5 @@ before_install:
 
   - rm -rf ~/Downloads/julia*
   - export PATH="$HOME/julia/bin:$PATH"
-  
-  - if [ $JULIA == "07" ]; then julia -e 'using Pkg; pkg"add DataFrames#56a9b72"'; fi
-  - if [ $JULIA == "07" ]; then julia -e 'using Pkg; pkg"add CategoricalArrays#8738b20"'; fi
-  - if [ $JULIA == "07" ]; then julia -e 'using Pkg; pkg"add DataStructures#d6ee8e0"'; fi
-  - if [ $JULIA == "07" ]; then julia -e 'using Pkg; pkg"add RCall#e59a546"'; fi
   
   - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export R_LD_LIBRARY_PATH="$(R RHOME)/lib:$HOME/julia/lib/julia"; fi
