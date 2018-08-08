@@ -1,5 +1,5 @@
 function completion(string)
-    Base.REPLCompletions.completions(string, length(string))[1]
+    REPLCompletions.completions(string, length(string))[1]
 end
 
 function incomplete(string)

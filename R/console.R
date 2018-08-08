@@ -37,7 +37,7 @@ julia_complete_console <- function(){
 
 julia_incomplete_console <- function(){
     message("It seems that you are not in the terminal. A simple julia console will be started.")
-    message("Press ESC or CTRL+C to exit.")
+    message("Type exit and then enter to exit.")
     on.exit(message("Exiting julia console."))
     buffer <- character()
 

@@ -3,6 +3,7 @@ if VERSION < v"0.6.5"
 else
     Base.load_julia_startup()
     using Pkg
+    const STDIN = stdin
 end
 
 module JuliaCall
@@ -11,10 +12,20 @@ const julia07 = VERSION > v"0.6.5"
 
 if julia07
     using Pkg
+    ## needed by eval_string function
     const parse = Meta.parse
+    ## needed by system checking
     const is_windows = Sys.iswindows
+    ## needed by display system
     const Display = AbstractDisplay
     const readstring(s) = read(s, String)
+    ## needed by console
+    using REPL
+    const REPLCompletions = REPL.REPLCompletions
+else
+    ## in julia06
+    ## needed by console
+    const REPLCompletions = Base.REPLCompletions
 end
 
 function installed(name)
