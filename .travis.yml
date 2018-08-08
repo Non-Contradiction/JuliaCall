@@ -29,7 +29,7 @@ before_install:
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then cp -r /Volumes/Julia*/Julia*/Contents/Resources/julia $HOME/julia; fi
   - if [ "$TRAVIS_OS_NAME" == "osx" ]; then hdiutil detach -force /Volumes/Julia*; fi
   
-  - if [ $JULIA == "07" ]; then juia -e 'using Pkg; pkg"add DataFrames#56a9b72"'; fi
+  - if [ $JULIA == "07" ]; then julia -e 'using Pkg; pkg"add DataFrames#56a9b72"'; fi
 
   - rm -rf ~/Downloads/julia*
   - export PATH="$HOME/julia/bin:$PATH"
