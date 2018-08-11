@@ -103,11 +103,11 @@ cumprod.JuliaObject <- function(x) julia$simple_call("JuliaCall.cumprod1", x)
 
 #' @export
 round.JuliaObject <-
-    function(x, digits = 0) julia$simple_call("round.", x, as.integer(digits))
+    function(x, digits = 0) julia$simple_call("JuliaCall.round1.", x, as.integer(digits))
 
 #' @export
 signif.JuliaObject <-
-    function(x, digits = 6) julia$simple_call("signif.", x, as.integer(digits))
+    function(x, digits = 6) julia$simple_call("JuliaCall.signif.", x, as.integer(digits))
 
 ## Summary Group Unfinished
 

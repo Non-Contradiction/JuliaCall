@@ -3,6 +3,7 @@ if VERSION < v"0.6.5"
 else
     Base.load_julia_startup()
     using Pkg
+    ## needed by console
     const STDIN = stdin
 end
 
@@ -22,10 +23,17 @@ if julia07
     ## needed by console
     using REPL
     const REPLCompletions = REPL.REPLCompletions
+
+    ## needed by round and signif
+    const round1(x::Number, digits) = round(x; digits=digits)
+    const signif(x::Number, digits) = round(x; sigdigits=digits)
 else
     ## in julia06
     ## needed by console
     const REPLCompletions = Base.REPLCompletions
+
+    ## needed by round
+    const round1 = round
 end
 
 function installed(name)
