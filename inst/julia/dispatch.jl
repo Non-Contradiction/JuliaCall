@@ -16,31 +16,45 @@ unlist(x) = vcat(x...)
 
 rep(x, times) = @static if julia07 repeat(vcat(x), times) else repmat(vcat(x), times) end
 
+function another_setindex!(x, value :: AbstractArray, i...)
+    x[i...] .= value
+    x
+end
+
+function another_setindex!(x, value, i...)
+    if all(isa.([i...], Number))
+        setindex!(x, value, i...)
+    else
+        x[i...] .= value
+        x
+    end
+end
+
 function assign!(x :: AbstractArray{T}, value :: AbstractArray{T}, i) where {T}
-    setindex!(x, value, i)
+    another_setindex!(x, value, i)
 end
 
 function assign!(x :: AbstractArray{T}, value :: AbstractArray, i) where {T}
     commontype = promote_type(eltype(x), eltype(value))
     if T == commontype
-        setindex!(x, value, i)
+        another_setindex!(x, value, i)
     else
         x = AbstractArray{commontype}(x)
-        setindex!(x, value, i)
+        another_setindex!(x, value, i)
     end
 end
 
 function assign!(x :: AbstractArray{T}, value :: T, i...) where {T}
-    setindex!(x, value, i...)
+    another_setindex!(x, value, i...)
 end
 
 function assign!(x :: AbstractArray{T}, value, i...) where {T}
     commontype = promote_type(eltype(x), typeof(value))
     if T == commontype
-        setindex!(x, value, i...)
+        another_setindex!(x, value, i...)
     else
         x = AbstractArray{commontype}(x)
-        setindex!(x, value, i...)
+        another_setindex!(x, value, i...)
     end
 end
 
