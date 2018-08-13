@@ -32,7 +32,8 @@ end;
 using Suppressor
 
 if julia07
-    pkg"add RCall#e59a546"
+    # pkg"add RCall#e59a546"
+    pkg"add RCall#e700cee"
 elseif installed("RCall") == nothing
     Pkg.add("RCall")
 end;
