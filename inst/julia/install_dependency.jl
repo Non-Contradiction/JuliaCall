@@ -31,11 +31,7 @@ end;
 
 using Suppressor
 
-if julia07
-    # pkg"add RCall#e59a546"
-    # pkg"add RCall#e700cee"
-    pkg"add RCall#a60aaaf"
-elseif installed("RCall") == nothing
+if installed("RCall") == nothing
     Pkg.add("RCall")
 end;
 
