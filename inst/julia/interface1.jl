@@ -10,7 +10,7 @@ function simple_call(fname, args...; kwargs...)
             f = funcfind(fname);
             r = f(args...; kwargs...);
         end
-        RObject(r).p
+        sexp(r)
     catch e
         Rerror(e, stacktrace(catch_backtrace())).p;
     end;
