@@ -27,6 +27,9 @@ if julia07
     ## needed by round and signif
     const round1(x::Number, digits) = round(x; digits=digits)
     const signif(x::Number, digits) = round(x; sigdigits=digits)
+
+    ## needed by IRjulia display
+    using Base64
 else
     ## in julia06
     ## needed by console
