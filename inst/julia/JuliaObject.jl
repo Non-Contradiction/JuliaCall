@@ -93,16 +93,31 @@ rcopytype(::Type{RClass{:JuliaObject}}, x::Ptr{EnvSxp}) = JuliaObject
 
 ## Fallback conversions
 
-sexp(x) = sexp(JuliaObject(x))
+@static if julia07
+    import RCall.sexpclass
+    sexpclass(x) = RClass{:JuliaObject}
+    sexp(::Type{RClass{:JuliaObject}}, x) = sexp(JuliaObject(x))
+else
+    sexp(x) = sexp(JuliaObject(x))
+end
 
 ## Regarding to issue #12, #13 and #16,
 ## we should use JuliaObject for general AbstractArray
-@suppress_err begin
-    JuliaCall.sexp(x :: AbstractArray{T}) where {T} = sexp(JuliaObject(x))
-end
+@static if julia07
+    @suppress_err begin
+        JuliaCall.sexpclass(x :: AbstractArray{T}) where {T} = RClass{:JuliaObject}
+    end
 
-## AbstractArray{Any} should be converted to R List
-sexp(x :: AbstractArray{Any}) = sexp(VecSxp, x)
+    ## AbstractArray{Any} should be converted to R List
+    sexpclass(x :: AbstractArray{Any}) = RClass{:list}
+else
+    @suppress_err begin
+        JuliaCall.sexp(x :: AbstractArray{T}) where {T} = sexp(JuliaObject(x))
+    end
+
+    ## AbstractArray{Any} should be converted to R List
+    sexp(x :: AbstractArray{Any}) = sexp(VecSxp, x)
+end
 
 ## Preserve BigFloat precision,
 ## as the design decision in issue #16
