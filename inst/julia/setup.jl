@@ -41,7 +41,7 @@ end
 
 function installed(name)
     @static if julia07
-        get(Pkg.installed(), name, "nothing")
+        get(Pkg.installed(), name, nothing)
     else
         Pkg.installed(name)
     end
@@ -185,7 +185,11 @@ function eval_string(x)
 end
 
 function installed_package(pkg_name)
-    string(installed(pkg_name))
+    try
+        string(installed(pkg_name))
+    catch e
+        "nothing";
+    end        
 end
 
 function help(fname)

@@ -19,7 +19,7 @@ end
 
 function installed(name)
     @static if julia07
-        get(Pkg.installed(), name, "nothing")
+        get(Pkg.installed(), name, nothing)
     else
         Pkg.installed(name)
     end
