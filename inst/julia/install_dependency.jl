@@ -35,8 +35,8 @@ if installed("RCall") == nothing
     Pkg.add("RCall")
 end;
 
+depsjl = Pkg.dir("RCall", "deps", "deps.jl")
 
-depsjl = Base.Pkg.dir("RCall", "deps", "deps.jl")
 if isfile(depsjl)
     include(depsjl)
 
