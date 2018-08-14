@@ -1,3 +1,8 @@
+# JuliaCall 0.15.1.9000
+
+* More deprecation warning fixed for `Julia` v0.7.
+* `JuliaCall` is now compatible with `RCall` v0.11.0 on `Julia` v0.7.
+
 # JuliaCall 0.15.0.9000
 
 * Some performance improvements.
