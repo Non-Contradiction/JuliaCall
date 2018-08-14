@@ -61,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JuliaCall</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.14.3.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.15.1.9000</span>
       </span>
     </div>
 
@@ -129,8 +129,8 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>julia_setup</span>(<span class='kw'>JULIA_HOME</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>useRCall</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>julia_setup</span>(<span class='kw'>JULIA_HOME</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>install</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>useRCall</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -148,6 +148,11 @@ the julia in path.</p></td>
       <th>verbose</th>
       <td><p>whether to print out detailed information
 about <code>julia_setup</code>.</p></td>
+    </tr>
+    <tr>
+      <th>install</th>
+      <td><p>whether to execute install script for dependent julia packages, whose default value is TRUE;
+but can be set to FALSE to save startup time when no installation of dependent julia packages is needed.</p></td>
     </tr>
     <tr>
       <th>force</th>
