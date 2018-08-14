@@ -69,7 +69,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, install = TRUE, force
     ## if (verbose) message("Julia initiation...")
 
     if (.Platform$OS.type == "windows") {
-        libm <- julia_line(c("-e", "if !isdefined(Main, :Libdl) using Libdl; end; print(Libdl.dlpath(Base.libm_name))"), stdout = TRUE)
+        libm <- julia_line(c("-e", "try using Libdl; catch; end; print(Libdl.dlpath(Base.libm_name))"), stdout = TRUE)
         dyn.load(libm, DLLpath = .julia$bin_dir)
 
         # following is required to load dll dependencies from JULIA_HOME
