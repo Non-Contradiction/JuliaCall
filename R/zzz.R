@@ -104,7 +104,9 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, install = TRUE, force
 
     if (verbose) message("Loading setup script for JuliaCall...")
 
-    install_dependency()
+    if (isTRUE(install)) {
+        install_dependency()
+    }
 
     if (!newer(.julia$VERSION, "0.7.0")) {
         ## message("Before 0.7.0")
