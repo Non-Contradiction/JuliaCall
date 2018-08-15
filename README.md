@@ -41,15 +41,21 @@ information.
 
 ## Installation
 
-`JuliaCall` is on CRAN now\! To use package `JuliaCall`, you first have
-to install [`Julia`](https://julialang.org/) on your computer, you can
-download a generic binary from <https://julialang.org/downloads/> and
-add it to your path, and then you can install `JuliaCall` just like any
-other R packages by
+To use package `JuliaCall`, you first have to install
+[`Julia`](https://julialang.org/) on your computer, you can download a
+generic binary from <https://julialang.org/downloads/> and add it to
+your path, and then you can install `JuliaCall` just like any other R
+packages by
 
 ``` r
 install.packages("JuliaCall")
 ```
+
+Note that currently `Julia v0.6.x` and `Julia v0.7` are supported by
+`JuliaCall`. It’s also possible to use `Julia v1.0` with `JuliaCall`,
+but users need to get the github master of
+[`RCall.jl`](https://github.com/JuliaInterop/RCall.jl) by `using Pkg;
+pkg"add RCall"` in `Julia` first.
 
 You can get the development version of `JuliaCall` by
 
@@ -65,7 +71,7 @@ library(JuliaCall)
 ## Do initial setup
 
 julia <- julia_setup()
-#> Julia version 0.6.4 at location /Applications/Julia-0.6.app/Contents/Resources/julia/bin will be used.
+#> Julia version 0.7.0 at location /Applications/Julia-0.7.app/Contents/Resources/julia/bin will be used.
 #> Loading setup script for JuliaCall...
 #> Finish loading setup script for JuliaCall.
 
@@ -107,13 +113,54 @@ julia_help("sqrt")
 #> ```
 #> 
 #> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
+#> 
+#> # Examples
+#> 
+#> ```jldoctest; filter = r"Stacktrace:(\n \[[0-9]+\].*)*"
+#> julia> sqrt(big(81))
+#> 9.0
+#> 
+#> julia> sqrt(big(-81))
+#> ERROR: DomainError with -8.1e+01:
+#> NaN result for non-NaN input.
+#> Stacktrace:
+#>  [1] sqrt(::BigFloat) at ./mpfr.jl:501
+#> [...]
+#> 
+#> julia> sqrt(big(complex(-81)))
+#> 0.0 + 9.0im
+#> ```
+#> 
+#> ```
+#> sqrt(A::AbstractMatrix)
+#> ```
+#> 
+#> If `A` has no negative real eigenvalues, compute the principal matrix square root of `A`, that is the unique matrix $X$ with eigenvalues having positive real part such that $X^2 = A$. Otherwise, a nonprincipal square root is returned.
+#> 
+#> If `A` is symmetric or Hermitian, its eigendecomposition ([`eigen`](@ref)) is used to compute the square root. Otherwise, the square root is determined by means of the Björck-Hammarling method [^BH83], which computes the complex Schur form ([`schur`](@ref)) and then the complex square root of the triangular factor.
+#> 
+#> [^BH83]: Åke Björck and Sven Hammarling, "A Schur method for the square root of a matrix", Linear Algebra and its Applications, 52-53, 1983, 127-140. [doi:10.1016/0024-3795(83)80010-X](https://doi.org/10.1016/0024-3795(83)80010-X)
+#> 
+#> # Examples
+#> 
+#> ```jldoctest
+#> julia> A = [4 0; 0 4]
+#> 2×2 Array{Int64,2}:
+#>  4  0
+#>  0  4
+#> 
+#> julia> sqrt(A)
+#> 2×2 Array{Float64,2}:
+#>  2.0  0.0
+#>  0.0  2.0
+#> ```
 
 ## Functions related to installing and using Julia packages
 
 julia_install_package("Optim")
 julia_install_package_if_needed("Optim")
 julia_installed_package("Optim")
-#> [1] "0.14.1"
+#> [1] "0.16.0"
 julia_library("Optim")
 ````
 
@@ -144,6 +191,47 @@ julia_help("sqrt")
 #> ```
 #> 
 #> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
+#> 
+#> # Examples
+#> 
+#> ```jldoctest; filter = r"Stacktrace:(\n \[[0-9]+\].*)*"
+#> julia> sqrt(big(81))
+#> 9.0
+#> 
+#> julia> sqrt(big(-81))
+#> ERROR: DomainError with -8.1e+01:
+#> NaN result for non-NaN input.
+#> Stacktrace:
+#>  [1] sqrt(::BigFloat) at ./mpfr.jl:501
+#> [...]
+#> 
+#> julia> sqrt(big(complex(-81)))
+#> 0.0 + 9.0im
+#> ```
+#> 
+#> ```
+#> sqrt(A::AbstractMatrix)
+#> ```
+#> 
+#> If `A` has no negative real eigenvalues, compute the principal matrix square root of `A`, that is the unique matrix $X$ with eigenvalues having positive real part such that $X^2 = A$. Otherwise, a nonprincipal square root is returned.
+#> 
+#> If `A` is symmetric or Hermitian, its eigendecomposition ([`eigen`](@ref)) is used to compute the square root. Otherwise, the square root is determined by means of the Björck-Hammarling method [^BH83], which computes the complex Schur form ([`schur`](@ref)) and then the complex square root of the triangular factor.
+#> 
+#> [^BH83]: Åke Björck and Sven Hammarling, "A Schur method for the square root of a matrix", Linear Algebra and its Applications, 52-53, 1983, 127-140. [doi:10.1016/0024-3795(83)80010-X](https://doi.org/10.1016/0024-3795(83)80010-X)
+#> 
+#> # Examples
+#> 
+#> ```jldoctest
+#> julia> A = [4 0; 0 4]
+#> 2×2 Array{Int64,2}:
+#>  4  0
+#>  0  4
+#> 
+#> julia> sqrt(A)
+#> 2×2 Array{Float64,2}:
+#>  2.0  0.0
+#>  0.0  2.0
+#> ```
 ````
 
   - The GitHub Pages for this repository host the documentation for the
