@@ -74,12 +74,12 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, install = TRUE, force
         if (newer("0.6.5", .julia$VERSION)) {
             libm <- julia_line(c("-e", "print(Libdl.dlpath(Base.libm_name))"), stdout = TRUE)
             dyn.load(libm, DLLpath = .julia$bin_dir)
-        }
 
-        # following is required to load dll dependencies from JULIA_HOME
-        cur_dir <- getwd()
-        setwd(.julia$bin_dir)
-        on.exit(setwd(cur_dir))
+            # following is required to load dll dependencies from JULIA_HOME
+            cur_dir <- getwd()
+            setwd(.julia$bin_dir)
+            on.exit(setwd(cur_dir))
+        }
     }
 
     juliacall_initialize(.julia$dll_file)
