@@ -69,10 +69,12 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, install = TRUE, force
     ## if (verbose) message("Julia initiation...")
 
     if (.Platform$OS.type == "windows") {
-        try(juliacall_initialize(.julia$dll_file), silent = TRUE)
+        ## libm is needed to load seperately only for Julia version 0.6.x
 
-        libm <- julia_line(c("-e", "try using Libdl; catch; end; print(Libdl.dlpath(Base.libm_name))"), stdout = TRUE)
-        dyn.load(libm, DLLpath = .julia$bin_dir)
+        if (newer("0.6.5", .julia$VERSION)) {
+            libm <- julia_line(c("-e", "print(Libdl.dlpath(Base.libm_name))"), stdout = TRUE)
+            dyn.load(libm, DLLpath = .julia$bin_dir)
+        }
 
         # following is required to load dll dependencies from JULIA_HOME
         cur_dir <- getwd()
