@@ -119,8 +119,9 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p><code>JuliaCall</code> is on CRAN now! To use package <code>JuliaCall</code>, you first have to install <a href="https://julialang.org/"><code>Julia</code></a> on your computer, you can download a generic binary from <a href="https://julialang.org/downloads/" class="uri">https://julialang.org/downloads/</a> and add it to your path, and then you can install <code>JuliaCall</code> just like any other R packages by</p>
+<p>To use package <code>JuliaCall</code>, you first have to install <a href="https://julialang.org/"><code>Julia</code></a> on your computer, you can download a generic binary from <a href="https://julialang.org/downloads/" class="uri">https://julialang.org/downloads/</a> and add it to your path, and then you can install <code>JuliaCall</code> just like any other R packages by</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"JuliaCall"</span>)</a></code></pre></div>
+<p>Note that currently <code>Julia v0.6.x</code> and <code>Julia v0.7</code> are supported by <code>JuliaCall</code>. It’s also possible to use <code>Julia v1.0</code> with <code>JuliaCall</code>, but users need to get the github master of <a href="https://github.com/JuliaInterop/RCall.jl"><code>RCall.jl</code></a> by <code>using Pkg; pkg"add RCall"</code> in <code>Julia</code> first.</p>
 <p>You can get the development version of <code>JuliaCall</code> by</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"Non-Contradiction/JuliaCall"</span>)</a></code></pre></div>
 </div>
@@ -132,7 +133,7 @@
 <a class="sourceLine" id="cb3-3" data-line-number="3">## Do initial setup</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5">julia &lt;-<span class="st"> </span><span class="kw"><a href="reference/julia_setup.html">julia_setup</a></span>()</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Julia version 0.6.4 at location /Applications/Julia-0.6.app/Contents/Resources/julia/bin will be used.</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Julia version 0.7.0 at location /Applications/Julia-0.7.app/Contents/Resources/julia/bin will be used.</span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; Loading setup script for JuliaCall...</span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; Finish loading setup script for JuliaCall.</span></a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"></a>
@@ -174,14 +175,55 @@
 <a class="sourceLine" id="cb3-45" data-line-number="45"><span class="co">#&gt; ```</span></a>
 <a class="sourceLine" id="cb3-46" data-line-number="46"><span class="co">#&gt; </span></a>
 <a class="sourceLine" id="cb3-47" data-line-number="47"><span class="co">#&gt; Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.</span></a>
-<a class="sourceLine" id="cb3-48" data-line-number="48"></a>
-<a class="sourceLine" id="cb3-49" data-line-number="49">## Functions related to installing and using Julia packages</a>
-<a class="sourceLine" id="cb3-50" data-line-number="50"></a>
-<a class="sourceLine" id="cb3-51" data-line-number="51"><span class="kw"><a href="reference/julia_package.html">julia_install_package</a></span>(<span class="st">"Optim"</span>)</a>
-<a class="sourceLine" id="cb3-52" data-line-number="52"><span class="kw"><a href="reference/julia_package.html">julia_install_package_if_needed</a></span>(<span class="st">"Optim"</span>)</a>
-<a class="sourceLine" id="cb3-53" data-line-number="53"><span class="kw"><a href="reference/julia_package.html">julia_installed_package</a></span>(<span class="st">"Optim"</span>)</a>
-<a class="sourceLine" id="cb3-54" data-line-number="54"><span class="co">#&gt; [1] "0.14.1"</span></a>
-<a class="sourceLine" id="cb3-55" data-line-number="55"><span class="kw"><a href="reference/julia_package.html">julia_library</a></span>(<span class="st">"Optim"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-48" data-line-number="48"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-49" data-line-number="49"><span class="co">#&gt; # Examples</span></a>
+<a class="sourceLine" id="cb3-50" data-line-number="50"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-51" data-line-number="51"><span class="co">#&gt; ```jldoctest; filter = r"Stacktrace:(\n \[[0-9]+\].*)*"</span></a>
+<a class="sourceLine" id="cb3-52" data-line-number="52"><span class="co">#&gt; julia&gt; sqrt(big(81))</span></a>
+<a class="sourceLine" id="cb3-53" data-line-number="53"><span class="co">#&gt; 9.0</span></a>
+<a class="sourceLine" id="cb3-54" data-line-number="54"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-55" data-line-number="55"><span class="co">#&gt; julia&gt; sqrt(big(-81))</span></a>
+<a class="sourceLine" id="cb3-56" data-line-number="56"><span class="co">#&gt; ERROR: DomainError with -8.1e+01:</span></a>
+<a class="sourceLine" id="cb3-57" data-line-number="57"><span class="co">#&gt; NaN result for non-NaN input.</span></a>
+<a class="sourceLine" id="cb3-58" data-line-number="58"><span class="co">#&gt; Stacktrace:</span></a>
+<a class="sourceLine" id="cb3-59" data-line-number="59"><span class="co">#&gt;  [1] sqrt(::BigFloat) at ./mpfr.jl:501</span></a>
+<a class="sourceLine" id="cb3-60" data-line-number="60"><span class="co">#&gt; [...]</span></a>
+<a class="sourceLine" id="cb3-61" data-line-number="61"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-62" data-line-number="62"><span class="co">#&gt; julia&gt; sqrt(big(complex(-81)))</span></a>
+<a class="sourceLine" id="cb3-63" data-line-number="63"><span class="co">#&gt; 0.0 + 9.0im</span></a>
+<a class="sourceLine" id="cb3-64" data-line-number="64"><span class="co">#&gt; ```</span></a>
+<a class="sourceLine" id="cb3-65" data-line-number="65"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-66" data-line-number="66"><span class="co">#&gt; ```</span></a>
+<a class="sourceLine" id="cb3-67" data-line-number="67"><span class="co">#&gt; sqrt(A::AbstractMatrix)</span></a>
+<a class="sourceLine" id="cb3-68" data-line-number="68"><span class="co">#&gt; ```</span></a>
+<a class="sourceLine" id="cb3-69" data-line-number="69"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-70" data-line-number="70"><span class="co">#&gt; If `A` has no negative real eigenvalues, compute the principal matrix square root of `A`, that is the unique matrix $X$ with eigenvalues having positive real part such that $X^2 = A$. Otherwise, a nonprincipal square root is returned.</span></a>
+<a class="sourceLine" id="cb3-71" data-line-number="71"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-72" data-line-number="72"><span class="co">#&gt; If `A` is symmetric or Hermitian, its eigendecomposition ([`eigen`](@ref)) is used to compute the square root. Otherwise, the square root is determined by means of the Björck-Hammarling method [^BH83], which computes the complex Schur form ([`schur`](@ref)) and then the complex square root of the triangular factor.</span></a>
+<a class="sourceLine" id="cb3-73" data-line-number="73"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-74" data-line-number="74"><span class="co">#&gt; [^BH83]: Åke Björck and Sven Hammarling, "A Schur method for the square root of a matrix", Linear Algebra and its Applications, 52-53, 1983, 127-140. [doi:10.1016/0024-3795(83)80010-X](https://doi.org/10.1016/0024-3795(83)80010-X)</span></a>
+<a class="sourceLine" id="cb3-75" data-line-number="75"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-76" data-line-number="76"><span class="co">#&gt; # Examples</span></a>
+<a class="sourceLine" id="cb3-77" data-line-number="77"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-78" data-line-number="78"><span class="co">#&gt; ```jldoctest</span></a>
+<a class="sourceLine" id="cb3-79" data-line-number="79"><span class="co">#&gt; julia&gt; A = [4 0; 0 4]</span></a>
+<a class="sourceLine" id="cb3-80" data-line-number="80"><span class="co">#&gt; 2×2 Array{Int64,2}:</span></a>
+<a class="sourceLine" id="cb3-81" data-line-number="81"><span class="co">#&gt;  4  0</span></a>
+<a class="sourceLine" id="cb3-82" data-line-number="82"><span class="co">#&gt;  0  4</span></a>
+<a class="sourceLine" id="cb3-83" data-line-number="83"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb3-84" data-line-number="84"><span class="co">#&gt; julia&gt; sqrt(A)</span></a>
+<a class="sourceLine" id="cb3-85" data-line-number="85"><span class="co">#&gt; 2×2 Array{Float64,2}:</span></a>
+<a class="sourceLine" id="cb3-86" data-line-number="86"><span class="co">#&gt;  2.0  0.0</span></a>
+<a class="sourceLine" id="cb3-87" data-line-number="87"><span class="co">#&gt;  0.0  2.0</span></a>
+<a class="sourceLine" id="cb3-88" data-line-number="88"><span class="co">#&gt; ```</span></a>
+<a class="sourceLine" id="cb3-89" data-line-number="89"></a>
+<a class="sourceLine" id="cb3-90" data-line-number="90">## Functions related to installing and using Julia packages</a>
+<a class="sourceLine" id="cb3-91" data-line-number="91"></a>
+<a class="sourceLine" id="cb3-92" data-line-number="92"><span class="kw"><a href="reference/julia_package.html">julia_install_package</a></span>(<span class="st">"Optim"</span>)</a>
+<a class="sourceLine" id="cb3-93" data-line-number="93"><span class="kw"><a href="reference/julia_package.html">julia_install_package_if_needed</a></span>(<span class="st">"Optim"</span>)</a>
+<a class="sourceLine" id="cb3-94" data-line-number="94"><span class="kw"><a href="reference/julia_package.html">julia_installed_package</a></span>(<span class="st">"Optim"</span>)</a>
+<a class="sourceLine" id="cb3-95" data-line-number="95"><span class="co">#&gt; [1] "0.16.0"</span></a>
+<a class="sourceLine" id="cb3-96" data-line-number="96"><span class="kw"><a href="reference/julia_package.html">julia_library</a></span>(<span class="st">"Optim"</span>)</a></code></pre></div>
 </div>
 <div id="trouble-shooting-and-way-to-get-help" class="section level2">
 <h2 class="hasAnchor">
@@ -209,7 +251,48 @@
 <a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; sqrt(x)</span></a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; ```</span></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.</span></a></code></pre></div>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; # Examples</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; ```jldoctest; filter = r"Stacktrace:(\n \[[0-9]+\].*)*"</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; julia&gt; sqrt(big(81))</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; 9.0</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; julia&gt; sqrt(big(-81))</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; ERROR: DomainError with -8.1e+01:</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; NaN result for non-NaN input.</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; Stacktrace:</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt;  [1] sqrt(::BigFloat) at ./mpfr.jl:501</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; [...]</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; julia&gt; sqrt(big(complex(-81)))</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; 0.0 + 9.0im</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; ```</span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt; ```</span></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; sqrt(A::AbstractMatrix)</span></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">#&gt; ```</span></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-29" data-line-number="29"><span class="co">#&gt; If `A` has no negative real eigenvalues, compute the principal matrix square root of `A`, that is the unique matrix $X$ with eigenvalues having positive real part such that $X^2 = A$. Otherwise, a nonprincipal square root is returned.</span></a>
+<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="co">#&gt; If `A` is symmetric or Hermitian, its eigendecomposition ([`eigen`](@ref)) is used to compute the square root. Otherwise, the square root is determined by means of the Björck-Hammarling method [^BH83], which computes the complex Schur form ([`schur`](@ref)) and then the complex square root of the triangular factor.</span></a>
+<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co">#&gt; [^BH83]: Åke Björck and Sven Hammarling, "A Schur method for the square root of a matrix", Linear Algebra and its Applications, 52-53, 1983, 127-140. [doi:10.1016/0024-3795(83)80010-X](https://doi.org/10.1016/0024-3795(83)80010-X)</span></a>
+<a class="sourceLine" id="cb4-34" data-line-number="34"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-35" data-line-number="35"><span class="co">#&gt; # Examples</span></a>
+<a class="sourceLine" id="cb4-36" data-line-number="36"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-37" data-line-number="37"><span class="co">#&gt; ```jldoctest</span></a>
+<a class="sourceLine" id="cb4-38" data-line-number="38"><span class="co">#&gt; julia&gt; A = [4 0; 0 4]</span></a>
+<a class="sourceLine" id="cb4-39" data-line-number="39"><span class="co">#&gt; 2×2 Array{Int64,2}:</span></a>
+<a class="sourceLine" id="cb4-40" data-line-number="40"><span class="co">#&gt;  4  0</span></a>
+<a class="sourceLine" id="cb4-41" data-line-number="41"><span class="co">#&gt;  0  4</span></a>
+<a class="sourceLine" id="cb4-42" data-line-number="42"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb4-43" data-line-number="43"><span class="co">#&gt; julia&gt; sqrt(A)</span></a>
+<a class="sourceLine" id="cb4-44" data-line-number="44"><span class="co">#&gt; 2×2 Array{Float64,2}:</span></a>
+<a class="sourceLine" id="cb4-45" data-line-number="45"><span class="co">#&gt;  2.0  0.0</span></a>
+<a class="sourceLine" id="cb4-46" data-line-number="46"><span class="co">#&gt;  0.0  2.0</span></a>
+<a class="sourceLine" id="cb4-47" data-line-number="47"><span class="co">#&gt; ```</span></a></code></pre></div>
 <ul>
 <li><p>The GitHub Pages for this repository host the documentation for the development version of <code>JuliaCall</code>: <a href="https://non-contradiction.github.io/JuliaCall/" class="uri">https://non-contradiction.github.io/JuliaCall/</a>.</p></li>
 <li><p>And you are more than welcome to contact me about <code>JuliaCall</code> at <a href="mailto:lch34677@gmail.com">lch34677@gmail.com</a> or <a href="mailto:cxl508@psu.edu">cxl508@psu.edu</a>.</p></li>
