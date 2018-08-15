@@ -44,7 +44,11 @@ if isfile(depsjl)
         Pkg.build("RCall")
     end
 else
-    using RCall
+    try
+        using RCall
+    catch e
+        Pkg.build("RCall")
+    end
 
     if RCall.Rhome != CurrentRhome
         if installed("RCall") >= v"0.10.2"
