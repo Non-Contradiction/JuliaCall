@@ -121,7 +121,7 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>To use package <code>JuliaCall</code>, you first have to install <a href="https://julialang.org/"><code>Julia</code></a> on your computer, you can download a generic binary from <a href="https://julialang.org/downloads/" class="uri">https://julialang.org/downloads/</a> and add it to your path, and then you can install <code>JuliaCall</code> just like any other R packages by</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">install.packages</span>(<span class="st">"JuliaCall"</span>)</a></code></pre></div>
-<p>Note that currently <code>Julia v0.6.x</code> and <code>Julia v0.7</code> are supported by <code>JuliaCall</code>. It’s also possible to use <code>Julia v1.0</code> with <code>JuliaCall</code>, but users need to get the github master of <a href="https://github.com/JuliaInterop/RCall.jl"><code>RCall.jl</code></a> by <code>using Pkg; pkg"add RCall"</code> in <code>Julia</code> first.</p>
+<p>Note that currently <code>Julia v0.6.x</code>, <code>Julia v0.7.0</code> and <code>Julia v1.0</code> are all supported by <code>JuliaCall</code>. But note that some <code>Julia</code> packages may not work on <code>Julia v1.0</code> and you may need to use <code>Julia v0.7.0</code> for transition purposes.</p>
 <p>You can get the development version of <code>JuliaCall</code> by</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocumentation.org/packages/devtools/topics/install_github">install_github</a></span>(<span class="st">"Non-Contradiction/JuliaCall"</span>)</a></code></pre></div>
 </div>
@@ -133,7 +133,7 @@
 <a class="sourceLine" id="cb3-3" data-line-number="3">## Do initial setup</a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5">julia &lt;-<span class="st"> </span><span class="kw"><a href="reference/julia_setup.html">julia_setup</a></span>()</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Julia version 0.7.0 at location /Applications/Julia-0.7.app/Contents/Resources/julia/bin will be used.</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Julia version 1.0.0 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.</span></a>
 <a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; Loading setup script for JuliaCall...</span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; Finish loading setup script for JuliaCall.</span></a>
 <a class="sourceLine" id="cb3-9" data-line-number="9"></a>
