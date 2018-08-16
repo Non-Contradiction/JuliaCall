@@ -6,6 +6,8 @@
 * Fix various small issues in `Julia` v1.0.
 * Fix a segfault on Windows with `Julia` v0.7 and v1.0.
 * `JuliaCall` now should be usable on `Julia` v0.7 and `Julia` v1.0 with released version of `RCall`.
+* Fix issue #65 in `julia_source` on `Julia` v0.7 and v1.0.
+* Remove `julia_check` which is deprecated a long time ago.
 
 # JuliaCall 0.15.0.9000
 
