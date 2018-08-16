@@ -1,22 +1,12 @@
 JuliaCall in R Markdown
 ================
 Changcheng Li
-2017-11-16
+2018-08-16
 
 Use JuliaCall as Julia Engine in R Markdown
 -------------------------------------------
 
-To use `JuliaCall` package for julia engine in R Markdown document. Just set the engine for julia to `JuliaCall::eng_juliacall` like this:
-
-``` r
-knitr::opts_chunk$set(echo = TRUE)
-knitr::knit_engines$set(julia = JuliaCall::eng_juliacall)
-```
-
-Below is how it looks like when using `JuliaCall` as language engine for Julia.
-
-How Does JuliaCall in R Markdown Look Like?
--------------------------------------------
+To use `JuliaCall` package for julia engine in R Markdown document, just set the language of the code chunk to be `julia`.
 
 ``` julia
 ## This is a julia language chunk.
@@ -24,50 +14,19 @@ How Does JuliaCall in R Markdown Look Like?
 ## so is JuliaCall package. 
 ## The julia display will follow immediately after the corresponding command
 ## just as the R code in R Markdown.
+
+a = sqrt(2);
 a = sqrt(2)
 ```
 
     ## 1.4142135623730951
 
-``` julia
-a = sqrt(2);
-
-## And lots of different types of display are supported in JuliaCall.
-## Like markdown and plots.
-@doc sqrt
-```
-
-    ## ```
-    ## sqrt(x)
-    ## ```
-    ## 
-    ## Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
-
 ### Support for `Plots.jl`
 
-`Plots.jl` is an easy to use and powerful julia package for plotting, <https://github.com/JuliaPlots/Plots.jl>. And `JuliaCall` supports `Plots.jl` of course!!
+`Plots.jl` is an easy to use and powerful julia package for plotting, see <https://github.com/JuliaPlots/Plots.jl> for more detail.
 
 ``` julia
 using Plots
-```
-
-#### PyPlot backend
-
-``` julia
-pyplot()
-```
-
-    ## Plots.PyPlotBackend()
-
-``` julia
-plot(Plots.fakedata(50,5),w=3)
-```
-
-<img src="JuliaCall_in_RMarkdown_files/figure-markdown_github/unnamed-chunk-3-J1.png" width="600" />
-
-#### GR backend
-
-``` julia
 gr()
 ```
 
@@ -77,7 +36,7 @@ gr()
 plot(Plots.fakedata(50,5),w=3)
 ```
 
-<img src="JuliaCall_in_RMarkdown_files/figure-markdown_github/unnamed-chunk-4-J1.png" width="600" />
+<img src="JuliaCall_in_RMarkdown_files/figure-markdown_github/unnamed-chunk-2-J1.png" width="600" />
 
 Get Access to Julia in R Chunk
 ------------------------------

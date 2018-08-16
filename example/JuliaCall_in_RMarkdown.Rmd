@@ -8,18 +8,8 @@ output:
 
 ## Use JuliaCall as Julia Engine in R Markdown
 
-To use `JuliaCall` package for julia engine in R Markdown document.
-Just set the engine for julia to `JuliaCall::eng_juliacall` like this:
-
-```{r setup}
-knitr::opts_chunk$set(echo = TRUE)
-knitr::knit_engines$set(julia = JuliaCall::eng_juliacall)
-```
-
-Below is how it looks like when using `JuliaCall`
-as language engine for Julia. 
-
-## How Does JuliaCall in R Markdown Look Like?
+To use `JuliaCall` package for julia engine in R Markdown document,
+just set the language of the code chunk to be `julia`.
 
 ```{julia, cache=TRUE}
 ## This is a julia language chunk.
@@ -27,34 +17,18 @@ as language engine for Julia.
 ## so is JuliaCall package. 
 ## The julia display will follow immediately after the corresponding command
 ## just as the R code in R Markdown.
-a = sqrt(2)
-a = sqrt(2);
 
-## And lots of different types of display are supported in JuliaCall.
-## Like markdown and plots.
-@doc sqrt
+a = sqrt(2);
+a = sqrt(2)
 ```
 
 ### Support for `Plots.jl`
 
 `Plots.jl` is an easy to use and powerful julia package for plotting,
-<https://github.com/JuliaPlots/Plots.jl>.
-And `JuliaCall` supports `Plots.jl` of course!!
+see <https://github.com/JuliaPlots/Plots.jl> for more detail.
 
 ```{julia, cache=TRUE}
 using Plots
-```
-
-#### PyPlot backend
-
-```{julia, cache=TRUE}
-pyplot()
-plot(Plots.fakedata(50,5),w=3)
-```
-
-#### GR backend
-
-```{julia, cache=TRUE}
 gr()
 plot(Plots.fakedata(50,5),w=3)
 ```
