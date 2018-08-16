@@ -153,7 +153,7 @@ julia_command <- julia$command <-
 #'
 #' @export
 julia_source <- julia$source <-
-    function(file_name) julia$call("include", file_name, need_return = FALSE)
+    function(file_name) julia$call("JuliaCall.include1", file_name, need_return = FALSE)
 
 #' Get help for a julia function.
 #'

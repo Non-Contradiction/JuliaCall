@@ -189,7 +189,7 @@ function installed_package(pkg_name)
         string(installed(pkg_name))
     catch e
         "nothing";
-    end        
+    end
 end
 
 function help(fname)
@@ -208,6 +208,15 @@ function show_string(x)
     buf = IOBuffer()
     show(IOContext(buf, :limit=>true), x)
     return String(take!(buf))
+end
+
+## Needed by julia_source
+function include1(fname)
+    @static if julia07
+        Base.include(Main, fname)
+    else
+        include(fname)
+    end
 end
 
 end
