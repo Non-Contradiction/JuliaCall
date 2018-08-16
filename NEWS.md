@@ -5,8 +5,7 @@
 * Fix the problem caused by the failure of `Pkg.build("RCall")`.
 * Fix various small issues in `Julia` v1.0.
 * Fix a segfault on Windows with `Julia` v0.7 and v1.0.
-* `JuliaCall` now should be usable on `Julia` v0.7 with `RCall` v0.11.0
-  and should be usable on `Julia` v1.0 with `RCall` newer than Github commit "4f2dd71"
+* `JuliaCall` now should be usable on `Julia` v0.7 and `Julia` v1.0 with released version of `RCall`.
 
 # JuliaCall 0.15.0.9000
 

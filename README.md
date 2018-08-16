@@ -51,11 +51,10 @@ packages by
 install.packages("JuliaCall")
 ```
 
-Note that currently `Julia v0.6.x` and `Julia v0.7` are supported by
-`JuliaCall`. It’s also possible to use `Julia v1.0` with `JuliaCall`,
-but users need to get the github master of
-[`RCall.jl`](https://github.com/JuliaInterop/RCall.jl) by `using Pkg;
-pkg"add RCall"` in `Julia` first.
+Note that currently `Julia v0.6.x`, `Julia v0.7.0` and `Julia v1.0` are
+all supported by `JuliaCall`. But note that some `Julia` packages may
+not work on `Julia v1.0` and you may need to use `Julia v0.7.0` for
+transition purposes.
 
 You can get the development version of `JuliaCall` by
 
@@ -71,7 +70,7 @@ library(JuliaCall)
 ## Do initial setup
 
 julia <- julia_setup()
-#> Julia version 0.7.0 at location /Applications/Julia-0.7.app/Contents/Resources/julia/bin will be used.
+#> Julia version 1.0.0 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.
 #> Loading setup script for JuliaCall...
 #> Finish loading setup script for JuliaCall.
 
