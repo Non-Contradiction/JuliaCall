@@ -1,6 +1,6 @@
 ## Test environments
 * local OS X 10.13.6, R 3.5.1
-* OS X 10.12.6 (on travis-ci), R 3.5.0
+* OS X 10.13.3 (on travis-ci), R 3.5.0
 * ubuntu 14.04.5 (on travis-ci), R 3.5.0
 * windows (on appveyor), R 3.5.1 and r-devel with Rtools35
 * win-builder (devel and release)
