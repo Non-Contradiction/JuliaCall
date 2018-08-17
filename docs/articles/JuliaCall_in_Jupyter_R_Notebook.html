@@ -99,12 +99,12 @@
     
 <p>For the original notebook, please go to <a href="https://nbviewer.jupyter.org/github/Non-Contradiction/JuliaCall/blob/master/example/JuliaCall_in_Jupyter_R_Notebook.ipynb" class="uri">https://nbviewer.jupyter.org/github/Non-Contradiction/JuliaCall/blob/master/example/JuliaCall_in_Jupyter_R_Notebook.ipynb</a>.</p>
 <p>Here I generate a markdown file from part of the notebook and include it in this vignette.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(JuliaCall)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/julia_setup.html">julia_setup</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(JuliaCall)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/julia_setup.html">julia_setup</a></span>()</a></code></pre></div>
 <pre><code>Julia version 1.0.0 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.
 Loading setup script for JuliaCall...
 Finish loading setup script for JuliaCall.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/julia_console.html">julia_console</a></span>()</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/julia_console.html">julia_console</a></span>()</a></code></pre></div>
 <pre><code>It seems that you are not in the terminal. A simple julia console will be started.
 Type exit and then enter to exit.
 
@@ -113,10 +113,10 @@ julia&gt; sqrt(2)</code></pre>
 <pre><code>julia&gt; exit
 
 Exiting julia console.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/julia_package.html">julia_library</a></span>(<span class="st">"Plots"</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"gr()"</span>)</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/julia_package.html">julia_library</a></span>(<span class="st">"Plots"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"gr()"</span>)</a></code></pre></div>
 <p>Plots.GRBackend()</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"Plots.plot(Plots.fakedata(50,5),w=3)"</span>)</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"Plots.plot(Plots.fakedata(50,5),w=3)"</span>)</a></code></pre></div>
 
 <?xml version="1.0" encoding="utf-8"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="600" height="400" viewbox="0 0 600 400"><defs><clippath id="clip9800"><rect x="0" y="0" width="600" height="400"></rect></clippath></defs><polygon clip-path="url(#clip9800)" points="
 0,400 600,400 600,0 0,0 

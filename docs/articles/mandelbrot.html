@@ -107,82 +107,82 @@
 <p>The R implementation for the calculation of Mandelbrot set is quite straightforward. Note that it could be proved that if absolute value of one item in the sequence is greater than 2, the sequence <span class="math inline">\(\{0, f_{c}(0), f_{c}(f_{c}(0)), \ldots, f^{(n)}_{c}(0), \ldots\}\)</span> will be divergent.</p>
 <p>In the <code>mandelbrot</code> function, we keep the iteration number that the absolute value of the item is greater than 2 until the maximum iteration times.</p>
 <p>And in the <code>mandelbrotImage</code> function, for two given sequences of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, we calculate the value of <code>mandelbrot</code> function divided by the maximum iteration times on every grid point.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mandelbrot &lt;-<span class="st"> </span><span class="cf">function</span>(c, <span class="dt">iterate_max =</span> <span class="dv">500</span>){
-    z &lt;-<span class="st"> </span>0i
-    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>iterate_max) {
-        z &lt;-<span class="st"> </span>z <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>c
-        <span class="cf">if</span> (<span class="kw">abs</span>(z) <span class="op">&gt;</span><span class="st"> </span><span class="fl">2.0</span>) {
-            <span class="kw">return</span>(i)
-        }
-    }
-    iterate_max
-}
-
-mandelbrotImage &lt;-<span class="st"> </span><span class="cf">function</span>(xs, ys, <span class="dt">iterate_max =</span> <span class="dv">500</span>){
-    <span class="kw">sapply</span>(ys, <span class="cf">function</span>(y) <span class="kw">sapply</span>(xs, <span class="cf">function</span>(x) <span class="kw">mandelbrot</span>(x <span class="op">+</span><span class="st"> </span>y <span class="op">*</span><span class="st"> </span>1i, <span class="dt">iterate_max =</span> iterate_max))) <span class="op">/</span><span class="st"> </span>iterate_max
-}</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">mandelbrot &lt;-<span class="st"> </span><span class="cf">function</span>(c, <span class="dt">iterate_max =</span> <span class="dv">500</span>){</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    z &lt;-<span class="st"> </span>0i</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3">    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>iterate_max) {</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">        z &lt;-<span class="st"> </span>z <span class="op">^</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span>c</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">        <span class="cf">if</span> (<span class="kw">abs</span>(z) <span class="op">&gt;</span><span class="st"> </span><span class="fl">2.0</span>) {</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">            <span class="kw">return</span>(i)</a>
+<a class="sourceLine" id="cb1-7" data-line-number="7">        }</a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">    }</a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">    iterate_max</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">}</a>
+<a class="sourceLine" id="cb1-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb1-12" data-line-number="12">mandelbrotImage &lt;-<span class="st"> </span><span class="cf">function</span>(xs, ys, <span class="dt">iterate_max =</span> <span class="dv">500</span>){</a>
+<a class="sourceLine" id="cb1-13" data-line-number="13">    <span class="kw">sapply</span>(ys, <span class="cf">function</span>(y) <span class="kw">sapply</span>(xs, <span class="cf">function</span>(x) <span class="kw">mandelbrot</span>(x <span class="op">+</span><span class="st"> </span>y <span class="op">*</span><span class="st"> </span>1i, <span class="dt">iterate_max =</span> iterate_max))) <span class="op">/</span><span class="st"> </span>iterate_max</a>
+<a class="sourceLine" id="cb1-14" data-line-number="14">}</a></code></pre></div>
 </div>
 <div id="julia-implementation-in-r-using-juliacall" class="section level2">
 <h2 class="hasAnchor">
 <a href="#julia-implementation-in-r-using-juliacall" class="anchor"></a>Julia Implementation in R using JuliaCall</h2>
 <p>To use Julia from JuliaCall, we first need to do some necessary setup work:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(JuliaCall)
-<span class="kw"><a href="../reference/julia_setup.html">julia_setup</a></span>()
-<span class="co">#&gt; Julia version 1.0.0 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.</span>
-<span class="co">#&gt; Loading setup script for JuliaCall...</span>
-<span class="co">#&gt; Finish loading setup script for JuliaCall.</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">library</span>(JuliaCall)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="../reference/julia_setup.html">julia_setup</a></span>()</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; Julia version 1.0.0 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.</span></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; Loading setup script for JuliaCall...</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; Finish loading setup script for JuliaCall.</span></a></code></pre></div>
 <p>And then we could just define Julia functions using <code>julia_command</code>, note that the syntax is quite similar to R and easy to understand.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"</span>
-<span class="st">function mandelbrot(c, iterate_max = 500)</span>
-<span class="st">    z = 0.0im</span>
-<span class="st">    for i in 1:iterate_max</span>
-<span class="st">        z = z ^ 2 + c</span>
-<span class="st">        if abs2(z) &gt; 4.0</span>
-<span class="st">            return(i)</span>
-<span class="st">        end</span>
-<span class="st">    end</span>
-<span class="st">    iterate_max</span>
-<span class="st">end"</span>)
-<span class="co">#&gt; mandelbrot (generic function with 2 methods)</span>
-
-<span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"</span>
-<span class="st">function mandelbrotImage(xs, ys, iterate_max = 500)</span>
-<span class="st">    z = zeros(Float64, length(xs), length(ys))</span>
-<span class="st">    for i in 1:length(xs)</span>
-<span class="st">        for j in 1:length(ys)</span>
-<span class="st">            z[i, j] = mandelbrot(xs[i] + ys[j] * im, iterate_max) / iterate_max</span>
-<span class="st">        end</span>
-<span class="st">    end</span>
-<span class="st">    z</span>
-<span class="st">end"</span>)
-<span class="co">#&gt; mandelbrotImage (generic function with 2 methods)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">function mandelbrot(c, iterate_max = 500)</span></a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="st">    z = 0.0im</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">    for i in 1:iterate_max</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">        z = z ^ 2 + c</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">        if abs2(z) &gt; 4.0</span></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="st">            return(i)</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="st">        end</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="st">    end</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="st">    iterate_max</span></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="st">end"</span>)</a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">#&gt; mandelbrot (generic function with 2 methods)</span></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"</span></a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="st">function mandelbrotImage(xs, ys, iterate_max = 500)</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="st">    z = zeros(Float64, length(xs), length(ys))</span></a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="st">    for i in 1:length(xs)</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="st">        for j in 1:length(ys)</span></a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="st">            z[i, j] = mandelbrot(xs[i] + ys[j] * im, iterate_max) / iterate_max</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="st">        end</span></a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="st">    end</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="st">    z</span></a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="st">end"</span>)</a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; mandelbrotImage (generic function with 2 methods)</span></a></code></pre></div>
 </div>
 <div id="performance-comparison-between-r-and-julia-implementation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#performance-comparison-between-r-and-julia-implementation" class="anchor"></a>Performance Comparison Between R and Julia Implementation</h2>
 <p>This is the setting we use to compare the performance between R and Julia implementations.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iterate_max &lt;-<span class="st"> </span>1000L
-centerx &lt;-<span class="st"> </span><span class="fl">0.37522</span> <span class="co">#0.3750001200618655</span>
-centery &lt;-<span class="st"> </span><span class="op">-</span><span class="fl">0.22</span> <span class="co">#-0.2166393884377127</span>
-step &lt;-<span class="st"> </span><span class="fl">0.000002</span>
-size &lt;-<span class="st"> </span><span class="dv">125</span>
-xs &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span>step <span class="op">*</span><span class="st"> </span>size, step <span class="op">*</span><span class="st"> </span>size, step) <span class="op">+</span><span class="st"> </span>centerx
-ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span>step <span class="op">*</span><span class="st"> </span>size, step <span class="op">*</span><span class="st"> </span>size, step) <span class="op">+</span><span class="st"> </span>centery</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">iterate_max &lt;-<span class="st"> </span>1000L</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">centerx &lt;-<span class="st"> </span><span class="fl">0.37522</span> <span class="co">#0.3750001200618655</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">centery &lt;-<span class="st"> </span><span class="fl">-0.22</span> <span class="co">#-0.2166393884377127</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">step &lt;-<span class="st"> </span><span class="fl">0.000002</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5">size &lt;-<span class="st"> </span><span class="dv">125</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6">xs &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span>step <span class="op">*</span><span class="st"> </span>size, step <span class="op">*</span><span class="st"> </span>size, step) <span class="op">+</span><span class="st"> </span>centerx</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span>step <span class="op">*</span><span class="st"> </span>size, step <span class="op">*</span><span class="st"> </span>size, step) <span class="op">+</span><span class="st"> </span>centery</a></code></pre></div>
 <div id="time-for-pure-r-implementation" class="section level3">
 <h3 class="hasAnchor">
 <a href="#time-for-pure-r-implementation" class="anchor"></a>Time for Pure R Implementation</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">system.time</span>(zR &lt;-<span class="st"> </span><span class="kw">mandelbrotImage</span>(xs, ys, iterate_max))
-<span class="co">#&gt;   用户   系统   流逝 </span>
-<span class="co">#&gt; 21.025  0.134 21.440</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">system.time</span>(zR &lt;-<span class="st"> </span><span class="kw">mandelbrotImage</span>(xs, ys, iterate_max))</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt;   用户   系统   流逝 </span></a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt; 20.473  0.193 21.069</span></a></code></pre></div>
 </div>
 <div id="time-for-julia-implementation-using-juliacall" class="section level3">
 <h3 class="hasAnchor">
 <a href="#time-for-julia-implementation-using-juliacall" class="anchor"></a>Time for Julia Implementation using JuliaCall</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A little warm up for Julia implementation</span>
-<span class="kw">invisible</span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, 2L))
-<span class="kw">system.time</span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, iterate_max))
-<span class="co">#&gt;  用户  系统  流逝 </span>
-<span class="co">#&gt; 0.229 0.001 0.231</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co"># A little warm up for Julia implementation</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw">invisible</span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, 2L))</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw">system.time</span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, iterate_max))</a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;  用户  系统  流逝 </span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; 0.223 0.002 0.227</span></a></code></pre></div>
 <p>We could see that JuliaCall brings <strong>a lot of times speedup</strong> of the calculation, actually, we could see more speedup with larger problem scale, like <strong>100 times speedup</strong> or even more. I won’t show the result here because I don’t want to wait minutes for this RMarkdown document to be knited.</p>
 </div>
 </div>
@@ -199,36 +199,36 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <a href="#type-statibility" class="anchor"></a>Type Statibility</h3>
 <p>If you want to write high performance Julia code, you should write type stability functions. It means the variable in the functions should be of only one type.</p>
 <p>For example, if you change the first line of <code>mandelbrot</code> functions like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"</span>
-<span class="st">function mandelbrot1(c, iterate_max = 500)</span>
-<span class="st">    z = 0 ## instead of z = 0.0im in the original example</span>
-<span class="st">    for i in 1:iterate_max</span>
-<span class="st">        z = z ^ 2 + c</span>
-<span class="st">        if abs2(z) &gt; 4.0</span>
-<span class="st">            return(i)</span>
-<span class="st">        end</span>
-<span class="st">    end</span>
-<span class="st">    iterate_max</span>
-<span class="st">end"</span>)
-<span class="co">#&gt; mandelbrot1 (generic function with 2 methods)</span>
-
-<span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"</span>
-<span class="st">function mandelbrotImage1(xs, ys, iterate_max = 500)</span>
-<span class="st">    z = zeros(Float64, length(xs), length(ys))</span>
-<span class="st">    for i in 1:length(xs)</span>
-<span class="st">        for j in 1:length(ys)</span>
-<span class="st">            z[i, j] = mandelbrot1(xs[i] + ys[j] * im, iterate_max) / iterate_max</span>
-<span class="st">        end</span>
-<span class="st">    end</span>
-<span class="st">    z</span>
-<span class="st">end"</span>)
-<span class="co">#&gt; mandelbrotImage1 (generic function with 2 methods)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"</span></a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">function mandelbrot1(c, iterate_max = 500)</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">    z = 0 ## instead of z = 0.0im in the original example</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">    for i in 1:iterate_max</span></a>
+<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="st">        z = z ^ 2 + c</span></a>
+<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="st">        if abs2(z) &gt; 4.0</span></a>
+<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="st">            return(i)</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">        end</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="st">    end</span></a>
+<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="st">    iterate_max</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="st">end"</span>)</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt; mandelbrot1 (generic function with 2 methods)</span></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13"></a>
+<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="kw"><a href="../reference/julia_command.html">julia_command</a></span>(<span class="st">"</span></a>
+<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="st">function mandelbrotImage1(xs, ys, iterate_max = 500)</span></a>
+<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="st">    z = zeros(Float64, length(xs), length(ys))</span></a>
+<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="st">    for i in 1:length(xs)</span></a>
+<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="st">        for j in 1:length(ys)</span></a>
+<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="st">            z[i, j] = mandelbrot1(xs[i] + ys[j] * im, iterate_max) / iterate_max</span></a>
+<a class="sourceLine" id="cb7-20" data-line-number="20"><span class="st">        end</span></a>
+<a class="sourceLine" id="cb7-21" data-line-number="21"><span class="st">    end</span></a>
+<a class="sourceLine" id="cb7-22" data-line-number="22"><span class="st">    z</span></a>
+<a class="sourceLine" id="cb7-23" data-line-number="23"><span class="st">end"</span>)</a>
+<a class="sourceLine" id="cb7-24" data-line-number="24"><span class="co">#&gt; mandelbrotImage1 (generic function with 2 methods)</span></a></code></pre></div>
 <p>And we do the timing again:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A little warm up for Julia implementation</span>
-<span class="kw">invisible</span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, 2L))
-<span class="kw">system.time</span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, iterate_max))
-<span class="co">#&gt;  用户  系统  流逝 </span>
-<span class="co">#&gt; 0.244 0.001 0.246</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># A little warm up for Julia implementation</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw">invisible</span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, 2L))</a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw">system.time</span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, iterate_max))</a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;  用户  系统  流逝 </span></a>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 0.243 0.001 0.247</span></a></code></pre></div>
 <p>We could see the function becomes much slower, because in the <code>mandelbrot1</code> function, <code>z</code> is an integer at the beginning, but becomes a complex number in the iteration. We could use <code>@code_warntype</code> or <code>code_warntype</code> and other tools provided by Julia to check about this problem, see <a href="https://docs.julialang.org/en/stable/manual/performance-tips/" class="uri">https://docs.julialang.org/en/stable/manual/performance-tips/</a> for more information.</p>
 </div>
 </div>
@@ -236,9 +236,9 @@ ys &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-<
 <h2 class="hasAnchor">
 <a href="#conclusion" class="anchor"></a>Conclusion</h2>
 <p>For the end of this article, let us have a look at our Mandel set!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">image</span>(xs, ys, zR, <span class="dt">col =</span> <span class="kw">topo.colors</span>(<span class="dv">12</span>))
-
-<span class="kw">image</span>(xs, ys, zJL, <span class="dt">col =</span> <span class="kw">topo.colors</span>(<span class="dv">12</span>))</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">image</span>(xs, ys, zR, <span class="dt">col =</span> <span class="kw">topo.colors</span>(<span class="dv">12</span>))</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw">image</span>(xs, ys, zJL, <span class="dt">col =</span> <span class="kw">topo.colors</span>(<span class="dv">12</span>))</a></code></pre></div>
 <p><img src="mandelbrot_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 </div>
   </div>

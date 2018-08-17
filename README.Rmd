@@ -85,13 +85,8 @@ julia_assign("rsqrt", sqrt); julia_call("rsqrt", 2)
 julia_exists("sqrt")
 julia_exists("c")
 
-## You can use `julia$help` to get help for Julia functions
-
-julia_help("sqrt")
-
 ## Functions related to installing and using Julia packages
 
-julia_install_package("Optim")
 julia_install_package_if_needed("Optim")
 julia_installed_package("Optim")
 julia_library("Optim")

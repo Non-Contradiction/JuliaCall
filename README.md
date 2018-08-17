@@ -64,7 +64,7 @@ devtools::install_github("Non-Contradiction/JuliaCall")
 
 ## Basic Usage
 
-```` r
+``` r
 library(JuliaCall)
 
 ## Do initial setup
@@ -104,64 +104,13 @@ julia_exists("sqrt")
 julia_exists("c")
 #> [1] FALSE
 
-## You can use `julia$help` to get help for Julia functions
-
-julia_help("sqrt")
-#> ```
-#> sqrt(x)
-#> ```
-#> 
-#> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
-#> 
-#> # Examples
-#> 
-#> ```jldoctest; filter = r"Stacktrace:(\n \[[0-9]+\].*)*"
-#> julia> sqrt(big(81))
-#> 9.0
-#> 
-#> julia> sqrt(big(-81))
-#> ERROR: DomainError with -8.1e+01:
-#> NaN result for non-NaN input.
-#> Stacktrace:
-#>  [1] sqrt(::BigFloat) at ./mpfr.jl:501
-#> [...]
-#> 
-#> julia> sqrt(big(complex(-81)))
-#> 0.0 + 9.0im
-#> ```
-#> 
-#> ```
-#> sqrt(A::AbstractMatrix)
-#> ```
-#> 
-#> If `A` has no negative real eigenvalues, compute the principal matrix square root of `A`, that is the unique matrix $X$ with eigenvalues having positive real part such that $X^2 = A$. Otherwise, a nonprincipal square root is returned.
-#> 
-#> If `A` is symmetric or Hermitian, its eigendecomposition ([`eigen`](@ref)) is used to compute the square root. Otherwise, the square root is determined by means of the Björck-Hammarling method [^BH83], which computes the complex Schur form ([`schur`](@ref)) and then the complex square root of the triangular factor.
-#> 
-#> [^BH83]: Åke Björck and Sven Hammarling, "A Schur method for the square root of a matrix", Linear Algebra and its Applications, 52-53, 1983, 127-140. [doi:10.1016/0024-3795(83)80010-X](https://doi.org/10.1016/0024-3795(83)80010-X)
-#> 
-#> # Examples
-#> 
-#> ```jldoctest
-#> julia> A = [4 0; 0 4]
-#> 2×2 Array{Int64,2}:
-#>  4  0
-#>  0  4
-#> 
-#> julia> sqrt(A)
-#> 2×2 Array{Float64,2}:
-#>  2.0  0.0
-#>  0.0  2.0
-#> ```
-
 ## Functions related to installing and using Julia packages
 
-julia_install_package("Optim")
 julia_install_package_if_needed("Optim")
 julia_installed_package("Optim")
 #> [1] "0.16.0"
 julia_library("Optim")
-````
+```
 
 ## Trouble Shooting and Way to Get Help
 
