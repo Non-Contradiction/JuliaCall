@@ -11,4 +11,4 @@ asLogical(x :: AbstractArray{Bool}) = x
 asLogical(x :: AbstractArray{T}) where {T} = [asLogical(xx) for xx in x]
 
 isNumeric(x) = isa(x, Real)
-isNumeric(x :: AbstractArray{T}) where {T} = issubtype(T, Real)
+isNumeric(x :: AbstractArray{T}) where {T} = T <: Real
