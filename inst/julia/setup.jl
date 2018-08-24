@@ -5,6 +5,8 @@ else
     using Pkg
     ## needed by console
     const STDIN = stdin
+    ## needed by functions like logabsdet
+    using LinearAlgebra
 end
 
 module JuliaCall

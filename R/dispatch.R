@@ -43,7 +43,7 @@ as.character.JuliaObject <- function(x, ...)
 
 #' @export
 as.list.JuliaObject <- function(x, ...)
-    tryCatch(julia_call("RCall.sexp", julia_eval("RCall.VecSxp"), x),
+    tryCatch(julia_call("convert", julia_eval("Array{Any}"), x),
              warning = function(w){},
              error = function(e){list(x)})
 
