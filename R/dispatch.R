@@ -153,7 +153,7 @@ mean.JuliaObject <- function(x, ...) julia$simple_call("mean", x)
 determinant.JuliaObject <- function(x, logarithm = TRUE, ...){
     r <- julia$simple_call("logabsdet", x)
     names(r) <- c("modulus", "sign")
-    r$sign <- r$sign + 0.0
+    # r$sign <- r$sign + 0.0
     r
 }
 

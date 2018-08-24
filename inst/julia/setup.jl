@@ -5,8 +5,10 @@ else
     using Pkg
     ## needed by console
     const STDIN = stdin
-    ## needed by functions like logabsdet
+    ## needed by functions like det
     using LinearAlgebra
+    ## needed by functions like mean
+    using Statistics
 end
 
 module JuliaCall
