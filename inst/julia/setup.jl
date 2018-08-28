@@ -37,6 +37,7 @@ if julia07
 else
     ## in julia06
     ## needed by console
+    const REPL = Base.REPL
     const REPLCompletions = Base.REPLCompletions
 
     ## needed by round
