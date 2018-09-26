@@ -156,7 +156,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, install = TRUE, force
     }
 
     if (interactive()) {
-        julia_command("eval(Base, :(is_interactive = true));")
+        julia_command("Core.eval(Base, :(is_interactive = true));")
     }
 
     if (isTRUE(getOption("jupyter.in_kernel"))) {
