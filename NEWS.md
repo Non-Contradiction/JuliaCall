@@ -1,3 +1,7 @@
+# JuliaCall 0.16.1
+
+* Tenth release on CRAN.
+
 # JuliaCall 0.16.0.9000
 
 * More deprecation warning fixed for `Julia` v0.7/1.0.
