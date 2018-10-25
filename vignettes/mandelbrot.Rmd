@@ -143,7 +143,7 @@ together, but it is not a good practice.
 And the function call is also very cheap in Julia.
 
 
-### Type Statibility
+### Type Stability
 If you want to write high performance Julia code,
 you should write type stability functions.
 It means the variable in the functions should be of only one type.
