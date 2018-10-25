@@ -8,3 +8,5 @@
 *.d
 inst/doc
 /revdep/.cache.rds
+/revdep/checks.noindex
+/revdep/library.noindex
