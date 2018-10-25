@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JuliaCall</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.15.1.9000</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.16.1</span>
       </span>
     </div>
 
@@ -88,7 +88,7 @@
       <h1>Julia in RMarkdown</h1>
                         <h4 class="author">Changcheng Li</h4>
             
-            <h4 class="date">2018-08-16</h4>
+            <h4 class="date">2018-10-25</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Non-Contradiction/JuliaCall/blob/master/vignettes/Julia_in_RMarkdown.Rmd"><code>vignettes/Julia_in_RMarkdown.Rmd</code></a></small>
       <div class="hidden name"><code>Julia_in_RMarkdown.Rmd</code></div>
@@ -127,9 +127,9 @@
 <a href="#get-access-to-julia-in-r-chunk" class="anchor"></a>Get Access to Julia in R Chunk</h2>
 <p>And you can also get access to julia variables in R code chunk quite easily using <code>JuliaCall</code>, for example:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw">library</span>(JuliaCall)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">## This is a R language chunk.</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">## In the previous julia chunk, we define variable a, </a>
-<a class="sourceLine" id="cb6-4" data-line-number="4">## we can use functions in JuliaCall to get access to it.</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">## This is a R language chunk.</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">## In the previous julia chunk, we define variable a, </span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">## we can use functions in JuliaCall to get access to it.</span></a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"><span class="kw"><a href="../reference/julia_eval.html">julia_eval</a></span>(<span class="st">"a"</span>)</a></code></pre></div>
 <pre><code>## [1] 1.414214</code></pre>
 </div>
