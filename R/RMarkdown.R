@@ -7,13 +7,24 @@ check_rmd <- function(){
 output_reset <- function(){
     julia$current_text <- NULL
     julia$current_plot <- NULL
+    julia$current_stdout <- NULL
 }
 
 ## This function is used at the end of the julia_call interface
 ## to return the current output.
 output_return <- function(){
-    if (!is.null(julia$current_plot)) return(julia$current_plot)
-    if (!is.null(julia$current_text)) return(julia$current_text)
+    options = knitr::opts_current$get()
+    wrap_ <- do.call(":::", list("knitr", quote(wrap)))
+    wrap <- function(x) wrap_(x, options = options)
+
+    out <- NULL
+    if (!is.null(julia$current_plot)) out <- julia$current_plot
+    if (!is.null(julia$current_text)) out <- julia$current_text
+    stdout <- julia$current_stdout
+
+    out <- paste(c(wrap(stdout), wrap(out)),
+                 collapse = "\n")
+    knitr::asis_output(out)
 }
 
 ## This function is used at the beginning of Julia plot_display function
@@ -49,6 +60,14 @@ text_display <- function(x, options = knitr::opts_current$get()){
     julia$current_text <- text
 }
 
+## This function is used by Julia @capture_out1
+## x will be the stdout from Julia.
+stdout_display <- function(x, options = knitr::opts_current$get()){
+    wrap_character <- do.call(":::", list("knitr", quote(wrap.character)))
+    text <- knitr::asis_output(wrap_character(x, options = options))
+    julia$current_stdout <- text
+}
+
 ## The idea of the engine is quite simple,
 ## we parse the Julia code line by line to see if it is a complete
 ## Julia command, if it is, evaluate it using julia_command function.
@@ -71,8 +90,8 @@ text_display <- function(x, options = knitr::opts_current$get()){
 eng_juliacall <- function(options) {
     code <- options$code
 
-    wrap_ <- do.call(":::", list("knitr", quote(wrap)))
-    wrap <- function(x) wrap_(x, options = options)
+    # wrap_ <- do.call(":::", list("knitr", quote(wrap)))
+    # wrap <- function(x) wrap_(x, options = options)
 
     if (!options$eval) {
         knitr::engine_output(options, paste(code, collapse = "\n"), "")
@@ -91,10 +110,12 @@ eng_juliacall <- function(options) {
         ss <- paste(c(ss, line), collapse = "\n")
 
         if (length(buffer) && (!julia_call("JuliaCall.incomplete", buffer))) {
-            out <- tryCatch(julia_command(buffer),
-                            warning = function(w) w,
-                            error = function(e) e)
-            out <- wrap(out)
+            # out <- tryCatch(julia_command(buffer),
+            #                 warning = function(w) w,
+            #                 error = function(e) e)
+            # out <- wrap(out)
+            out <- stdout_capture_command(buffer)
+
             if (options$results != 'hide' && length(out) > 0  && nchar(trimws(out)) > 0) {
                 if (length(options$echo) > 1L || options$echo) {
                     doc <- paste(c(doc,
@@ -118,4 +139,14 @@ eng_juliacall <- function(options) {
         }
     }
     doc
+}
+
+stdout_capture_command <- function(buffer){
+    buffer <- trimws(buffer, "right")
+    ending <- if (endsWith(buffer, ";")) "end;" else "end"
+    buffer <- paste(c("JuliaCall.@capture_out1 begin", buffer, ending),
+                    collapse = "\n")
+    tryCatch(julia_command(buffer),
+             warning = function(w) w,
+             error = function(e) e)
 }

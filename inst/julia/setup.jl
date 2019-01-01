@@ -5,6 +5,8 @@ else
     using Pkg
     ## needed by console
     const STDIN = stdin
+    ## needed by rmarkdown stdout capture
+    const STDOUT = stdout
     ## needed by functions like det
     using LinearAlgebra
     ## needed by functions like mean
@@ -80,6 +82,7 @@ include("./display/RmdJulia.jl")
 include("./display/plotsViewer.jl")
 include("REPLhook.jl")
 include("incomplete_console.jl")
+include("RmdStd.jl")
 
 include("convert.jl")
 include("JuliaObject.jl")
