@@ -140,7 +140,7 @@ julia_eval <- julia$eval <- function(cmd, need_return = c("R", "Julia"))
 #'
 #' @export
 julia_command <- julia$command <-
-    function(cmd, show_value = !endsWith(cmd, ";"))
+    function(cmd, show_value = !endsWith(trimws(cmd, "right"), ";"))
         julia$call("JuliaCall.eval_string", cmd,
                    need_return = FALSE,
                    show_value = show_value)

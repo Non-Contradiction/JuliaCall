@@ -25,7 +25,7 @@ Encoding: UTF-8
 LazyData: true
 Imports: utils,
     Rcpp (>= 0.12.7)
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 LinkingTo: Rcpp
 NeedsCompilation: yes
 ByteCompile: yes
