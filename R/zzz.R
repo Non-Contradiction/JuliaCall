@@ -82,6 +82,8 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, install = TRUE, force
         on.exit(setwd(cur_dir))
     }
 
+    try(dyn.load(.julia$dll_file), silent = TRUE)
+
     juliacall_initialize(.julia$dll_file)
 
     ## if (verbose) message("Finish Julia initiation.")
