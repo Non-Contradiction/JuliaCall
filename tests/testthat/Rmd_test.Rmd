@@ -23,6 +23,8 @@ knitr::knit_engines$set(julia = JuliaCall::eng_juliacall)
 a = sqrt(2)
 a = sqrt(2);
 
+@time b = sqrt(2)
+
 ## And lots of different types of display are supported in JuliaCall.
 ## Like markdown.
 @doc sqrt
@@ -36,5 +38,5 @@ using `JuliaCall`, for example:
 ## This is a R language chunk.
 ## In the previous julia chunk, we define variable a, 
 ## we can use functions in JuliaCall to get access to it.
-JuliaCall::julia_eval("a")
+JuliaCall::julia_eval("a") + JuliaCall::julia_eval("b")
 ```
