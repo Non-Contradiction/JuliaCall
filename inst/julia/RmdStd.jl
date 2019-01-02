@@ -12,7 +12,7 @@ macro capture_out1(block)
         end
 
         out = try
-            @eval($block)
+            Core.eval(Main, Meta.parse($(string(block))))
         finally
             if ccall(:jl_generating_output, Cint, ()) == 0
                 redirect_stdout(original_stdout)
