@@ -1,5 +1,5 @@
 pandoc: 2.2.3.2
-pkgdown: 1.1.0
+pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
   JuliaCall_in_Jupyter_R_Notebook: JuliaCall_in_Jupyter_R_Notebook.html
