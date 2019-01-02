@@ -1,12 +1,12 @@
 JuliaCall in R Markdown
 ================
 Changcheng Li
-2018-08-16
+2019-01-01
 
-Use JuliaCall as Julia Engine in R Markdown
--------------------------------------------
+## Use JuliaCall as Julia Engine in R Markdown
 
-To use `JuliaCall` package for julia engine in R Markdown document, just set the language of the code chunk to be `julia`.
+To use `JuliaCall` package for julia engine in R Markdown document, just
+set the language of the code chunk to be `julia`.
 
 ``` julia
 ## This is a julia language chunk.
@@ -23,7 +23,8 @@ a = sqrt(2)
 
 ### Support for `Plots.jl`
 
-`Plots.jl` is an easy to use and powerful julia package for plotting, see <https://github.com/JuliaPlots/Plots.jl> for more detail.
+`Plots.jl` is an easy to use and powerful julia package for plotting,
+see <https://github.com/JuliaPlots/Plots.jl> for more detail.
 
 ``` julia
 using Plots
@@ -36,12 +37,12 @@ gr()
 plot(Plots.fakedata(50,5),w=3)
 ```
 
-<img src="JuliaCall_in_RMarkdown_files/figure-markdown_github/unnamed-chunk-2-J1.png" width="600" />
+![](JuliaCall_in_RMarkdown_files/figure-gfm/unnamed-chunk-2-J1.png)<!-- -->
 
-Get Access to Julia in R Chunk
-------------------------------
+## Get Access to Julia in R Chunk
 
-And you can also get access to julia variables in R code chunk quite easily using `JuliaCall`, for example:
+And you can also get access to julia variables in R code chunk quite
+easily using `JuliaCall`, for example:
 
 ``` r
 library(JuliaCall)

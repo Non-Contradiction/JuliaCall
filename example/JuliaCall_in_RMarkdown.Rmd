@@ -11,7 +11,7 @@ output:
 To use `JuliaCall` package for julia engine in R Markdown document,
 just set the language of the code chunk to be `julia`.
 
-```{julia, cache=TRUE}
+```{julia}
 ## This is a julia language chunk.
 ## In julia, the command without ending semicolon will trigger the display
 ## so is JuliaCall package. 
@@ -27,7 +27,7 @@ a = sqrt(2)
 `Plots.jl` is an easy to use and powerful julia package for plotting,
 see <https://github.com/JuliaPlots/Plots.jl> for more detail.
 
-```{julia, cache=TRUE}
+```{julia}
 using Plots
 gr()
 plot(Plots.fakedata(50,5),w=3)
@@ -37,7 +37,7 @@ plot(Plots.fakedata(50,5),w=3)
 
 And you can also get access to julia variables in R code chunk quite easily
 using `JuliaCall`, for example:
-```{r, cache=TRUE}
+```{r}
 library(JuliaCall)
 ## This is a R language chunk.
 ## In the previous julia chunk, we define variable a, 
