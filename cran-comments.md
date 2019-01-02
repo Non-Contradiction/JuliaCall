@@ -1,8 +1,8 @@
 ## Test environments
-* local OS X 10.13.6, R 3.5.1
-* OS X 10.13.3 (on travis-ci), R 3.5.0
+* local osx 10.14.2, R 3.5.2
+* osx 10.13.3 (on travis-ci), R 3.5.2
 * ubuntu 14.04.5 (on travis-ci), R 3.5.1
-* windows (on appveyor), R 3.5.1 and r-devel with Rtools35
+* windows (on appveyor), R 3.5.2 and r-devel with Rtools35
 * win-builder (devel, release and oldrelease)
 
 ## R CMD check results

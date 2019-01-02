@@ -2,21 +2,21 @@
 
 |field    |value                        |
 |:--------|:----------------------------|
-|version  |R version 3.5.1 (2018-07-02) |
-|os       |macOS High Sierra 10.13.6    |
+|version  |R version 3.5.2 (2018-12-20) |
+|os       |macOS Mojave 10.14.2         |
 |system   |x86_64, darwin15.6.0         |
 |ui       |RStudio                      |
 |language |(EN)                         |
-|collate  |zh_CN.UTF-8                  |
-|ctype    |zh_CN.UTF-8                  |
+|collate  |en_US.UTF-8                  |
+|ctype    |en_US.UTF-8                  |
 |tz       |America/New_York             |
-|date     |2018-10-25                   |
+|date     |2019-01-02                   |
 
 # Dependencies
 
-|package   |old    |new    |Δ |
+|package   |old    |new    |Δ  |
 |:---------|:------|:------|:--|
-|JuliaCall |0.16.0 |0.16.1 |*  |
+|JuliaCall |0.16.1 |0.16.2 |*  |
 
 # Revdeps
 
@@ -24,7 +24,7 @@
 
 |package                        |version |error |warning |note |
 |:------------------------------|:-------|:-----|:-------|:----|
-|convexjlr                      |0.7.0   |      |        |     |
+|convexjlr                      |0.8.1   |      |        |     |
 |[diffeqr](problems.md#diffeqr) |0.1.1   |      |        |1    |
-|knitr                          |1.20    |      |        |     |
+|knitr                          |1.21    |      |        |     |
 
