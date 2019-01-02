@@ -1,3 +1,7 @@
+# JuliaCall 0.16.1.9000
+
+* Capturing stdout from Julia in RMarkdown documents.
+
 # JuliaCall 0.16.1
 
 * Tenth release on CRAN.
