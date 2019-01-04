@@ -98,7 +98,15 @@ eng_juliacall <- function(options) {
     }
 
     if (!.julia$initialized) {
-        julia_setup()
+        engine.path <- if (is.list(options[["engine.path"]]))
+            options[["engine.path"]][["julia"]]
+        else
+            options[["engine.path"]]
+
+        if (is.character(engine.path)) {
+            julia_setup(JULIA_HOME = engine.path)
+        }
+        else julia_setup()
     }
 
     doc <- character()
