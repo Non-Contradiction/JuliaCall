@@ -1,6 +1,14 @@
+# JuliaCall 0.16.2.9000
+
+* Respect `engine.path` option for `Julia` in RMarkdown document.
+
+# JuliaCall 0.16.2
+
+* Eleventh release on CRAN.
+
 # JuliaCall 0.16.1.9000
 
-* Capturing stdout from Julia in RMarkdown documents.
+* Capturing `Julia` stdout in RMarkdown documents.
 
 # JuliaCall 0.16.1
 
