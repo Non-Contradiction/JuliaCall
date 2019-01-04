@@ -13,18 +13,12 @@ output_reset <- function(){
 ## This function is used at the end of the julia_call interface
 ## to return the current output.
 output_return <- function(){
-    options = knitr::opts_current$get()
-    wrap_ <- do.call(":::", list("knitr", quote(wrap)))
-    wrap <- function(x) wrap_(x, options = options)
-
     out <- NULL
     if (!is.null(julia$current_plot)) out <- julia$current_plot
     if (!is.null(julia$current_text)) out <- julia$current_text
     stdout <- julia$current_stdout
 
-    out <- paste(c(wrap(stdout), wrap(out)),
-                 collapse = "\n")
-    knitr::asis_output(out)
+    list(stdout = stdout, out = out)
 }
 
 ## This function is used at the beginning of Julia plot_display function
@@ -55,17 +49,13 @@ finish_plot <- function(){
 ## This function is used by Julia text_display function
 ## x will be the text representation of the Julia result.
 text_display <- function(x, options = knitr::opts_current$get()){
-    wrap_character <- do.call(":::", list("knitr", quote(wrap.character)))
-    text <- knitr::asis_output(wrap_character(x, options = options))
-    julia$current_text <- text
+    julia$current_text <- x
 }
 
 ## This function is used by Julia @capture_out1
 ## x will be the stdout from Julia.
 stdout_display <- function(x, options = knitr::opts_current$get()){
-    wrap_character <- do.call(":::", list("knitr", quote(wrap.character)))
-    text <- knitr::asis_output(wrap_character(x, options = options))
-    julia$current_stdout <- text
+    julia$current_stdout <- x
 }
 
 ## The idea of the engine is quite simple,
@@ -90,9 +80,6 @@ stdout_display <- function(x, options = knitr::opts_current$get()){
 eng_juliacall <- function(options) {
     code <- options$code
 
-    # wrap_ <- do.call(":::", list("knitr", quote(wrap)))
-    # wrap <- function(x) wrap_(x, options = options)
-
     if (!options$eval) {
         knitr::engine_output(options, paste(code, collapse = "\n"), "")
     }
@@ -109,7 +96,7 @@ eng_juliacall <- function(options) {
         else julia_setup()
     }
 
-    doc <- character()
+    doc <- list()
     buffer <- character()
     ss <- character()
 
@@ -118,35 +105,32 @@ eng_juliacall <- function(options) {
         ss <- paste(c(ss, line), collapse = "\n")
 
         if (length(buffer) && (!julia_call("JuliaCall.incomplete", buffer))) {
-            # out <- tryCatch(julia_command(buffer),
-            #                 warning = function(w) w,
-            #                 error = function(e) e)
-            # out <- wrap(out)
+
             out <- stdout_capture_command(buffer)
 
-            if (options$results != 'hide' && length(out) > 0  && nchar(trimws(out)) > 0) {
+            if (options$results != 'hide' &&
+                ((length(out$stdout) > 0 && nchar(trimws(out$stdout)) > 0) ||
+                (length(out$out) > 0) && nchar(trimws(out$out)) > 0)) {
                 if (length(options$echo) > 1L || options$echo) {
-                    doc <- paste(c(doc,
-                                   knitr::knit_hooks$get('source')(ss, options)
-                                   ),
-                                 collapse = "\n")
+                    doc[[length(doc) + 1]] <- structure(list(src = ss), class = "source")
                     ss <- character()
                 }
-                doc <- paste(c(doc, out), collapse = "\n")
+                doc[[length(doc) + 1]] <- out$stdout
+                doc[[length(doc) + 1]] <- out$out
             }
             buffer <- character()
         }
     }
     if (length(ss) > 0) {
         if (length(options$echo) > 1L || options$echo) {
-            doc <- paste(c(doc,
-                           knitr::knit_hooks$get('source')(ss, options)
-                           ),
-                         collapse = "\n")
+            doc[[length(doc) + 1]] <- structure(list(src = ss), class = "source")
             ss <- character()
         }
     }
-    doc
+
+    # print(doc)
+
+    knitr::engine_output(options, out = doc)
 }
 
 stdout_capture_command <- function(buffer){
