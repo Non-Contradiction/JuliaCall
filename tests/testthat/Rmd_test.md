@@ -33,9 +33,6 @@ b = begin println(sqrt(2)); sqrt(2) end
 
     ## 1.4142135623730951
 
-``` julia
-```
-
 ## Get Access to Julia in R Chunk
 
 And you can also get access to julia variables in R code chunk quite
