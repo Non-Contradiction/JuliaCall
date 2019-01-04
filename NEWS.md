@@ -1,6 +1,7 @@
 # JuliaCall 0.16.2.9000
 
 * Respect `engine.path` option for `Julia` in RMarkdown document.
+* Refactor `Julia` `knitr` engine to avoid use of `knitr` internal functions.
 
 # JuliaCall 0.16.2
 
