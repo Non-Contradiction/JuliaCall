@@ -71,6 +71,9 @@ end
 
 using RCall
 
+## Fix https://github.com/JuliaInterop/RCall.jl/issues/289
+unsafe_store!(cglobal((:R_CStackLimit,RCall.libR),Csize_t), typemax(Csize_t))
+
 const need_display = length(Base.Multimedia.displays) < 2
 
 import Base.Multimedia.display
