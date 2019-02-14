@@ -9,6 +9,8 @@ environment:
     R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.5.2-win.exe"
   - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/1.0/julia-1.0-latest-win64.exe"
     R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.5.2-win.exe"
+  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/1.1/julia-1.1-latest-win64.exe"
+    R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.5.2-win.exe"
 
 notifications:
   - provider: Email
