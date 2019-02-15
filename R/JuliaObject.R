@@ -32,7 +32,7 @@
 #                            cloneable = FALSE)
 
 juliaobject <- new.env()
-juliaobject$new <- function(id = 0L, type = "Regular"){
+juliaobject$new <- function(id, type = "Regular"){
     self <- new.env()
     self$id <- id
     if (!identical(type, "Regular")) {
