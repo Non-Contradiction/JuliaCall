@@ -33,6 +33,7 @@ test_that("test of the JuliaObject freeing", {
     skip_on_cran()
     julia <- julia_setup()
 
+    gc()
     count0 <- julia_eval("length(keys(RCall.jtypExtPtrs))")
 
     r <- julia_eval("1//2")
