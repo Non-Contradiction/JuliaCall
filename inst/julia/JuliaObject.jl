@@ -91,7 +91,7 @@ function rcopy(::Type{JuliaObject}, x::Ptr{EnvSxp})
     try
         # get(julia_object_stack, rcopy(Int32, RObject(x)[:getID]()))
         # get(julia_object_stack, rcopy(Int32, RObject(x)[:id]))
-        RCall.jtypExtPtrs[RCall.sexp(RObject(x)[:id])].x
+        RCall.jtypExtPtrs[RCall.sexp(x[:id])].x
     catch e
         nothing
     end
