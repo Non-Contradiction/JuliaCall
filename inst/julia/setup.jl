@@ -121,12 +121,12 @@ end
 # end
 
 function call_decompose(call1)
-    call = RObject(Ptr{RCall.VecSxp}(call1))
+    call = Ptr{RCall.VecSxp}(call1)
     # fname = rcopy(String, call[:fname])
     fname = rcopy(String, call[1]) :: String
     # named_args = Any[(rcopy(Symbol, k), rcopy(i)) for (k, i) in enumerate(call[:named_args])]
     # unamed_args = Any[rcopy(i) for i in call[:unamed_args]]
-    args = call[2] :: RObject{RCall.VecSxp}
+    args = call[2] :: Ptr{RCall.VecSxp}
     symbols = rcopy(Vector{Symbol}, getnames(args)) :: Vector{Symbol}
     es = rcopy(Vector{Any}, args) :: Vector{Any}
     if length(symbols) == 0

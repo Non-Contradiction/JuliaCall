@@ -68,21 +68,23 @@ function new_obj(obj, typ = "Regular")
     JuliaObject(s, typ)
 end
 
+
+## debugging for freeing
 # function rm_obj(id)
-#     remove!(julia_object_stack, id)
+#     RCall.decref_extptr(RCall.sexp(x))
 # end
 
 JuliaObject(x :: JuliaObject, typ = "Regular") = x
 JuliaObject(x :: RObject, typ = "Regular") = new_obj(rcopy(x), typ)
-JuliaObject(x :: RCall.Sxp, typ = "Regular") = new_obj(RObject(x), typ)
+JuliaObject(x :: RCall.Sxp, typ = "Regular") = new_obj(rcopy(x), typ)
 JuliaObject(x, typ = "Regular") = new_obj(x, typ)
 
 ## Conversion related to JuliaObject
 
-const makeJuliaObjectInR = reval("JuliaCall:::juliaobject[['new']]")
+const makeJuliaObjectInR = reval("JuliaCall:::juliaobjectnew")
 
 function sexp(x :: JuliaObject)
-    rcall(makeJuliaObjectInR, getPlainID(x), getType(x)).p
+    RCall.rcall_p(makeJuliaObjectInR, getPlainID(x), getType(x))
 end
 
 import RCall.rcopy
