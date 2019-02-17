@@ -18,7 +18,18 @@ output_return <- function(){
     if (!is.null(julia$current_text)) out <- julia$current_text
     stdout <- julia$current_stdout
 
-    list(stdout = stdout, out = out)
+    structure(list(stdout = stdout, out = out), class = "JuliaOutput")
+}
+
+#' @export
+knit_print.JuliaOutput = function(x, ...) {
+    options = knitr::opts_current$get()
+    wrap_ <- do.call(":::", list("knitr", quote(wrap)))
+    wrap <- function(x) wrap_(x, options = options)
+
+    knitr::asis_output(paste(c(wrap(x$stdout), wrap(x$out)),
+                             collapse = "\n"))
+
 }
 
 ## This function is used at the beginning of Julia plot_display function
