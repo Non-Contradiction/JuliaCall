@@ -31,15 +31,23 @@
 #                            lock_class = TRUE,
 #                            cloneable = FALSE)
 
-juliaobject <- new.env()
-juliaobject$new <- function(id = 0L, type = "Regular"){
-    self <- new.env()
+rmobj <- function(e){
+    print("HI")
+}
+
+# juliaobject <- new.env()
+juliaobjectnew <- function(id, type = "Regular"){
+    self <- new.env(parent = emptyenv())
     self$id <- id
     if (!identical(type, "Regular")) {
         extendJuliaObj(self, type)
     }
     # self$getID <- function() self$id
     class(self) <- "JuliaObject"
+
+    # debugging for freeing
+    # reg.finalizer(self, rmobj)
+
     self
 }
 

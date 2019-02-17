@@ -28,3 +28,21 @@ test_that("test of the JuliaObject", {
     expect_equal(field(r, "ans"), 2 / 12)
     remove(r)
 })
+
+test_that("test of the JuliaObject freeing", {
+    skip_on_cran()
+    julia <- julia_setup()
+
+    gc()
+    count0 <- julia_eval("length(keys(RCall.jtypExtPtrs))")
+
+    r <- julia_eval("1//2")
+    count1 <- julia_eval("length(keys(RCall.jtypExtPtrs))")
+    expect_equal(count1, count0 + 1)
+
+    r <- NULL
+    gc()
+    count2 <- julia_eval("length(keys(RCall.jtypExtPtrs))")
+    expect_equal(count2, count0)
+
+})
