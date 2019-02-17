@@ -1,3 +1,8 @@
+# JuliaCall 0.16.3.9000
+
+* Improvement for `JuliaObject`, which frees the `JuliaObject` on the `Julia` side
+  after it's freed on the R side.
+
 # JuliaCall 0.16.2.9000
 
 * Respect `engine.path` option for `Julia` in RMarkdown document.
