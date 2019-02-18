@@ -2,7 +2,7 @@
 output: github_document
 ---
 
-# Improve R's Performance using JuliaCall with Mandel Set Example
+# Improve R's Performance using JuliaCall with Mandelbrot Set Example
 
 ## What is Mandelbrot Set? 
 
@@ -130,7 +130,7 @@ JuliaCall brings **a lot of times speedup** of the calculation,
 actually, we could see more speedup with larger problem scale,
 like **100 times speedup** or even more.
 I won't show the result here because I don't want to wait
-minutes for this RMarkdown document to be knited.
+minutes for this RMarkdown document to be knitted.
 
 ## Tips for Julia Performance
 
