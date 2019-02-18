@@ -5,11 +5,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Improve R’s Performance using JuliaCall with Mandel Set Example • JuliaCall</title>
+<title>Improve R’s Performance using JuliaCall with Mandelbrot Set Example • JuliaCall</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/cerulean/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Improve R’s Performance using JuliaCall with Mandel Set Example">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Improve R’s Performance using JuliaCall with Mandelbrot Set Example">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JuliaCall</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.4</span>
       </span>
     </div>
 
@@ -59,7 +59,7 @@
       <a href="../articles/Julia_in_RMarkdown.html">Julia in RMarkdown</a>
     </li>
     <li>
-      <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall with Mandel Set Example</a>
+      <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall with Mandelbrot Set Example</a>
     </li>
   </ul>
 </li>
@@ -86,7 +86,7 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Improve R’s Performance using JuliaCall with Mandel Set Example</h1>
+      <h1>Improve R’s Performance using JuliaCall with Mandelbrot Set Example</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/Non-Contradiction/JuliaCall/blob/master/vignettes/mandelbrot.Rmd"><code>vignettes/mandelbrot.Rmd</code></a></small>
@@ -174,7 +174,7 @@
 <a href="#time-for-pure-r-implementation" class="anchor"></a>Time for Pure R Implementation</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.time">system.time</a></span>(zR &lt;-<span class="st"> </span><span class="kw">mandelbrotImage</span>(xs, ys, iterate_max))</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;  21.998   0.261  23.473</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;  20.609   0.070  20.753</span></a></code></pre></div>
 </div>
 <div id="time-for-julia-implementation-using-juliacall" class="section level3">
 <h3 class="hasAnchor">
@@ -183,8 +183,8 @@
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/invisible">invisible</a></span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, 2L))</a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.time">system.time</a></span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage"</span>, xs, ys, iterate_max))</a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;   0.225   0.003   0.235</span></a></code></pre></div>
-<p>We could see that JuliaCall brings <strong>a lot of times speedup</strong> of the calculation, actually, we could see more speedup with larger problem scale, like <strong>100 times speedup</strong> or even more. I won’t show the result here because I don’t want to wait minutes for this RMarkdown document to be knited.</p>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt;   0.222   0.001   0.223</span></a></code></pre></div>
+<p>We could see that JuliaCall brings <strong>a lot of times speedup</strong> of the calculation, actually, we could see more speedup with larger problem scale, like <strong>100 times speedup</strong> or even more. I won’t show the result here because I don’t want to wait minutes for this RMarkdown document to be knitted.</p>
 </div>
 </div>
 <div id="tips-for-julia-performance" class="section level2">
@@ -229,7 +229,7 @@
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/invisible">invisible</a></span>(<span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, 2L))</a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.time">system.time</a></span>(zJL &lt;-<span class="st"> </span><span class="kw"><a href="../reference/call.html">julia_call</a></span>(<span class="st">"mandelbrotImage1"</span>, xs, ys, iterate_max))</a>
 <a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;    user  system elapsed </span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;   0.246   0.006   0.271</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt;   0.247   0.001   0.248</span></a></code></pre></div>
 <p>We could see the function becomes much slower, because in the <code>mandelbrot1</code> function, <code>z</code> is an integer at the beginning, but becomes a complex number in the iteration. We could use <code>@code_warntype</code> or <code>code_warntype</code> and other tools provided by Julia to check about this problem, see <a href="https://docs.julialang.org/en/stable/manual/performance-tips/" class="uri">https://docs.julialang.org/en/stable/manual/performance-tips/</a> for more information.</p>
 </div>
 </div>

@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JuliaCall</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.4</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
       <a href="../articles/Julia_in_RMarkdown.html">Julia in RMarkdown</a>
     </li>
     <li>
-      <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall with Mandel Set Example</a>
+      <a href="../articles/mandelbrot.html">Improve R's Performance using JuliaCall with Mandelbrot Set Example</a>
     </li>
   </ul>
 </li>
@@ -121,12 +121,37 @@
       <small>Source: <a href='https://github.com/Non-Contradiction/JuliaCall/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="juliacall-0-16-3-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-16-3-9000" class="anchor"></a>JuliaCall 0.16.3.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Improvement for <code>JuliaObject</code>, which frees the <code>JuliaObject</code> on the <code>Julia</code> side after it’s freed on the R side.</li>
+</ul>
+</div>
+    <div id="juliacall-0-16-2-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-16-2-9000" class="anchor"></a>JuliaCall 0.16.2.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Respect <code>engine.path</code> option for <code>Julia</code> in RMarkdown document.</li>
+<li>Refactor <code>Julia</code> <code>knitr</code> engine to avoid use of <code>knitr</code> internal functions.</li>
+</ul>
+</div>
+    <div id="juliacall-0-16-2" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-16-2" class="anchor"></a>JuliaCall 0.16.2<small> 2019-01-03 </small>
+</h1>
+<ul>
+<li>Eleventh release on CRAN.</li>
+</ul>
+</div>
     <div id="juliacall-0-16-1-9000" class="section level1">
 <h1 class="page-header">
 <a href="#juliacall-0-16-1-9000" class="anchor"></a>JuliaCall 0.16.1.9000<small> Unreleased </small>
 </h1>
 <ul>
-<li>Capturing stdout from Julia in RMarkdown documents.</li>
+<li>Capturing <code>Julia</code> stdout in RMarkdown documents.</li>
 </ul>
 </div>
     <div id="juliacall-0-16-1" class="section level1">
@@ -216,7 +241,7 @@
 <ul>
 <li>Make the error in <code>install_dependency</code> not muted.</li>
 <li>Various performance improvements in <code>julia_call</code> interface functions.</li>
-<li>Performance improvement for <code>sexp</code>, <code>rcopy</code> and creating of <code>JuliaObject</code>.</li>
+<li>Performance improvement for <code>sexp</code>, <code>rcopy</code> and creation of <code>JuliaObject</code>.</li>
 <li>Performance improvement in display systems.</li>
 <li>Have a <code>julia$simple_call</code> interface which is a simple and more performant “equivalent” of the <code>julia_call</code> interface.</li>
 <li>Various small bug fixes.</li>
@@ -365,7 +390,7 @@
 </h1>
 <ul>
 <li>Remove deprecated <code>julia_eval_string</code>.</li>
-<li>Improve <code>JuliaCall</code> RMarkdown engine. The display system should work for all kinds of documents that rmarkdown supports.</li>
+<li>Improve <code>JuliaCall</code> RMarkdown engine. The display system should work for all kinds of documents that RMarkdown supports.</li>
 <li>Should use older version of RCall with older version of R.</li>
 </ul>
 </div>
@@ -403,7 +428,7 @@
 </h1>
 <ul>
 <li>New Julia display system <code><a href="../reference/plotsViewer.html">plotsViewer()</a></code>, which integrates better into R.</li>
-<li>Fits several bugs in <code>JuliaCall</code>, like removing using of depreated function.</li>
+<li>Fixes several bugs in <code>JuliaCall</code>, like removing deprecated functions.</li>
 <li>Improve display systems of RMarkdown and Jupyter R Notebook.</li>
 </ul>
 </div>
@@ -491,6 +516,9 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#juliacall-0-16-3-9000">0.16.3.9000</a></li>
+        <li><a href="#juliacall-0-16-2-9000">0.16.2.9000</a></li>
+        <li><a href="#juliacall-0-16-2">0.16.2</a></li>
         <li><a href="#juliacall-0-16-1-9000">0.16.1.9000</a></li>
         <li><a href="#juliacall-0-16-1">0.16.1</a></li>
         <li><a href="#juliacall-0-16-0-9000">0.16.0.9000</a></li>
