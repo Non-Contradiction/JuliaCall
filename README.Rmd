@@ -57,7 +57,7 @@ devtools::install_github("Non-Contradiction/JuliaCall")
 ```
 
 ## Basic Usage
-```{r, cache=TRUE}
+```{r}
 library(JuliaCall)
 
 ## Do initial setup
@@ -108,7 +108,7 @@ and there are three ways for `JuliaCall` to find `Julia` not on PATH.
 
 - One way to get help for julia functions is just using `julia$help` like the following example:
 
-```{r, cache=TRUE}
+```{r}
 julia_help("sqrt")
 ```
 

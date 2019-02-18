@@ -113,7 +113,7 @@ ys <- seq(-step * size, step * size, step) + centery
 ``` r
 system.time(zR <- mandelbrotImage(xs, ys, iterate_max))
 #>    user  system elapsed 
-#>  20.593   0.157  20.988
+#>  17.520   0.174  17.970
 ```
 
 ### Time for Julia Implementation using JuliaCall
@@ -123,7 +123,7 @@ system.time(zR <- mandelbrotImage(xs, ys, iterate_max))
 invisible(julia_call("mandelbrotImage", xs, ys, 2L))
 system.time(zJL <- julia_call("mandelbrotImage", xs, ys, iterate_max))
 #>    user  system elapsed 
-#>   0.224   0.003   0.232
+#>   0.183   0.000   0.183
 ```
 
 We could see that JuliaCall brings **a lot of times speedup** of the
@@ -185,7 +185,7 @@ And we do the timing again:
 invisible(julia_call("mandelbrotImage1", xs, ys, 2L))
 system.time(zJL <- julia_call("mandelbrotImage1", xs, ys, iterate_max))
 #>    user  system elapsed 
-#>   0.244   0.002   0.250
+#>   0.200   0.001   0.201
 ```
 
 We could see the function becomes much slower, because in the

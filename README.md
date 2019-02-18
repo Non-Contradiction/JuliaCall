@@ -70,7 +70,7 @@ library(JuliaCall)
 ## Do initial setup
 
 julia <- julia_setup()
-#> Julia version 1.0.0 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.
+#> Julia version 1.0.3 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.
 #> Loading setup script for JuliaCall...
 #> Finish loading setup script for JuliaCall.
 
@@ -108,7 +108,7 @@ julia_exists("c")
 
 julia_install_package_if_needed("Optim")
 julia_installed_package("Optim")
-#> [1] "0.16.0"
+#> [1] "0.17.2"
 julia_library("Optim")
 ```
 
