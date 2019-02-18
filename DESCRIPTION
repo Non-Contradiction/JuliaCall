@@ -24,13 +24,13 @@ BugReports: https://github.com/Non-Contradiction/JuliaCall/issues
 Encoding: UTF-8
 LazyData: true
 Imports: utils,
-    Rcpp (>= 0.12.7)
+    Rcpp (>= 0.12.7),
+    knitr (>= 1.18)
 RoxygenNote: 6.1.1
 LinkingTo: Rcpp
 NeedsCompilation: yes
 ByteCompile: yes
 SystemRequirements: Julia >= 0.6.0, RCall.jl
 Suggests: testthat,
-    knitr (>= 1.18),
     rmarkdown
 VignetteBuilder: knitr

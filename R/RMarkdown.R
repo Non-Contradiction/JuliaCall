@@ -21,6 +21,7 @@ output_return <- function(){
     structure(list(stdout = stdout, out = out), class = "JuliaOutput")
 }
 
+#' @importFrom knitr knit_print
 #' @export
 knit_print.JuliaOutput = function(x, ...) {
     options = knitr::opts_current$get()
