@@ -1,7 +1,10 @@
+# JuliaCall 0.16.4
+
+* Twelfth release on CRAN.
+
 # JuliaCall 0.16.3.9000
 
-* Improvement for `JuliaObject`, which frees the `JuliaObject` on the `Julia` side
-  after it's freed on the R side.
+* Improvement for `JuliaObject`, which frees the `JuliaObject` on the `Julia` side after it's freed on the R side.
 
 # JuliaCall 0.16.2.9000
 
