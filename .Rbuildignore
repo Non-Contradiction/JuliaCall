@@ -13,3 +13,4 @@
 ^\.gitattributes$
 ^vignettes/mandelbrot\.Rmd$
 ^revdep$
+^paper$
