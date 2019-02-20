@@ -191,12 +191,11 @@ julia_help("sqrt")
 
 ## JuliaCall for R Package Developers
 
-If you are interested in developing an R package which is an interface
-for a Julia package, `JuliaCall` is an ideal choice for that\!
-
-Basically you only need to find the Julia function or Julia module you
-want to have in `R` and then just `using` the module and `call` the
-function. Several examples are:
+If you are interested in developing an `R` package which is an interface
+for a `Julia` package, `JuliaCall` is an ideal choice. You only need to
+find the `Julia` function or `Julia` module you want to have in `R`,
+`using` the module, and `julia_call` the function. There are some
+examples:
 
   - [`diffeqr`](https://github.com/JuliaDiffEq/diffeqr) is a package for
     solving differential equations in `R`. It utilizes
@@ -216,6 +215,10 @@ function. Several examples are:
     an `R` interface to the `Ipopt` nonlinear optimization solver. It
     provides a simple high-level wrapper for `Julia` package
     \[`Ipopt.jl`\] (<https://github.com/JuliaOpt/Ipopt.jl>).
+  - [`FixedEffectjlr`](https://github.com/eloualiche/FixedEffectjlr)
+    uses the `Julia` package
+    [`FixedEffectModels.jl`](https://github.com/matthieugomez/FixedEffectModels.jl)
+    to estimate large fixed effects models in `R`.
   - [Julia MixedModels from R](http://rpubs.com/dmbates/377897)
     illustrates how to use `JuliaCall` and `Julia` package
     [`MixedModels.jl`](https://github.com/dmbates/MixedModels.jl) to
@@ -229,37 +232,40 @@ function. Several examples are:
 
 If you have any issues in developing an `R` package using `JuliaCall`,
 you may report it using the link:
-<https://github.com/Non-Contradiction/JuliaCall/issues/new>. Or email me
+<https://github.com/Non-Contradiction/JuliaCall/issues/new>, or email me
 at <lch34677@gmail.com> or <cxl508@psu.edu>.
 
 ## Suggestion and Issue Reporting
 
 `JuliaCall` is under active development now. Any suggestion or issue
 reporting is welcome\! You may report it using the link:
-<https://github.com/Non-Contradiction/JuliaCall/issues/new>. Or email me
+<https://github.com/Non-Contradiction/JuliaCall/issues/new>, or email me
 at <lch34677@gmail.com> or <cxl508@psu.edu>.
 
-And if you encounter some issues which crash `R` or `RStudio`, then you
-may have met segfault errors. I am very sorry. And I am trying my best
-to remove errors like that. It will be much appreciated if you can
+If you encounter some issues which crash `R` or `RStudio`, then you may
+have met segfault errors. I am very sorry for this and will try my best
+to remove errors like that. It will be much appreciated if you can -
+download the source of `JuliaCall` from Github, - open `JuliaCall.Rproj`
+in your RStudio or open `R` from the directory where you download the
+source of `JuliaCall`, - run `devtools::check()` to see the result of `R
+CMD check` for `JuliaCall` on your machine, - and paste the result to
+the issue report.
 
-  - download the source of `JuliaCall` from Github,
-  - open `JuliaCall.Rproj` in your RStudio or open `R` from the
-    directory where you download the source of `JuliaCall`,
-  - run `devtools::check()` to see the result of `R CMD check` for
-    `JuliaCall` on your machine,
-  - and paste the result to the issue report.
-
-## Interfaces between R and Julia
+## Other interfaces between R and Julia
 
   - [`RCall.jl`](https://github.com/JuliaInterop/RCall.jl) is a `Julia`
     package which embeds `R` in `Julia`. `JuliaCall` is inspired by
     `RCall.jl` and depends on `RCall.jl` for many functionalities like
-    much of the type conversion between `R` and `Julia`.
+    type conversion between `R` and `Julia`.
   - [`XRJulia`](https://github.com/johnmchambers/XRJulia) is an `R`
-    package based on John Chambers’ `XR` package and allow for
+    package based on John Chambers’ `XR` package and allows for
     structured integration of `R` with `Julia`. It connects to `Julia`
     and uses JSON to transfer data between `Julia` and `R`.
   - [`RJulia`](https://github.com/armgong/rjulia) is an `R` package
     which embeds `Julia` in `R` as well as `JuliaCall`. It is not on
     CRAN yet and I haven’t tested it.
+
+## License
+
+`JuliaCall` is licensed under
+[MIT](https://cran.r-project.org/web/licenses/MIT).
