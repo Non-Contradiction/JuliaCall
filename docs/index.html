@@ -252,8 +252,7 @@
 <div id="juliacall-for-r-package-developers" class="section level2">
 <h2 class="hasAnchor">
 <a href="#juliacall-for-r-package-developers" class="anchor"></a>JuliaCall for R Package Developers</h2>
-<p>If you are interested in developing an R package which is an interface for a Julia package, <code>JuliaCall</code> is an ideal choice for that!</p>
-<p>Basically you only need to find the Julia function or Julia module you want to have in <code>R</code> and then just <code>using</code> the module and <code>call</code> the function. Several examples are:</p>
+<p>If you are interested in developing an <code>R</code> package which is an interface for a <code>Julia</code> package, <code>JuliaCall</code> is an ideal choice. You only need to find the <code>Julia</code> function or <code>Julia</code> module you want to have in <code>R</code>, <code>using</code> the module, and <code>julia_call</code> the function. There are some examples:</p>
 <ul>
 <li>
 <a href="https://github.com/JuliaDiffEq/diffeqr"><code>diffeqr</code></a> is a package for solving differential equations in <code>R</code>. It utilizes <a href="http://docs.juliadiffeq.org/latest/">DifferentialEquations.jl</a> for its core routines to give high performance solving of ordinary differential equations (ODEs), stochastic differential equations (SDEs), delay differential equations (DDEs), and differential-algebraic equations (DAEs) directly in <code>R</code>.</li>
@@ -262,35 +261,36 @@
 <li>
 <a href="https://github.com/Non-Contradiction/ipoptjlr"><code>ipoptjlr</code></a> provides an <code>R</code> interface to the <code>Ipopt</code> nonlinear optimization solver. It provides a simple high-level wrapper for <code>Julia</code> package [<code>Ipopt.jl</code>] (<a href="https://github.com/JuliaOpt/Ipopt.jl" class="uri">https://github.com/JuliaOpt/Ipopt.jl</a>).</li>
 <li>
+<a href="https://github.com/eloualiche/FixedEffectjlr"><code>FixedEffectjlr</code></a> uses the <code>Julia</code> package <a href="https://github.com/matthieugomez/FixedEffectModels.jl"><code>FixedEffectModels.jl</code></a> to estimate large fixed effects models in <code>R</code>.</li>
+<li>
 <a href="http://rpubs.com/dmbates/377897">Julia MixedModels from R</a> illustrates how to use <code>JuliaCall</code> and <code>Julia</code> package <a href="https://github.com/dmbates/MixedModels.jl"><code>MixedModels.jl</code></a> to build mixed models in <code>R</code>.</li>
 <li>
 <a href="https://github.com/Non-Contradiction/autodiffr"><code>autodiffr</code></a> provides automatic differentiation to native <code>R</code> functions by wrapping <code>Julia</code> packages <a href="https://github.com/JuliaDiff/ForwardDiff.jl"><code>ForwardDiff.jl</code></a> and <a href="https://github.com/JuliaDiff/ReverseDiff.jl"><code>ReverseDiff.jl</code></a> through <code>JuliaCall</code>, which is a work in progress.</li>
 </ul>
-<p>If you have any issues in developing an <code>R</code> package using <code>JuliaCall</code>, you may report it using the link: <a href="https://github.com/Non-Contradiction/JuliaCall/issues/new" class="uri">https://github.com/Non-Contradiction/JuliaCall/issues/new</a>. Or email me at <a href="mailto:lch34677@gmail.com">lch34677@gmail.com</a> or <a href="mailto:cxl508@psu.edu">cxl508@psu.edu</a>.</p>
+<p>If you have any issues in developing an <code>R</code> package using <code>JuliaCall</code>, you may report it using the link: <a href="https://github.com/Non-Contradiction/JuliaCall/issues/new" class="uri">https://github.com/Non-Contradiction/JuliaCall/issues/new</a>, or email me at <a href="mailto:lch34677@gmail.com">lch34677@gmail.com</a> or <a href="mailto:cxl508@psu.edu">cxl508@psu.edu</a>.</p>
 </div>
 <div id="suggestion-and-issue-reporting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#suggestion-and-issue-reporting" class="anchor"></a>Suggestion and Issue Reporting</h2>
-<p><code>JuliaCall</code> is under active development now. Any suggestion or issue reporting is welcome! You may report it using the link: <a href="https://github.com/Non-Contradiction/JuliaCall/issues/new" class="uri">https://github.com/Non-Contradiction/JuliaCall/issues/new</a>. Or email me at <a href="mailto:lch34677@gmail.com">lch34677@gmail.com</a> or <a href="mailto:cxl508@psu.edu">cxl508@psu.edu</a>.</p>
-<p>And if you encounter some issues which crash <code>R</code> or <code>RStudio</code>, then you may have met segfault errors. I am very sorry. And I am trying my best to remove errors like that. It will be much appreciated if you can</p>
-<ul>
-<li>download the source of <code>JuliaCall</code> from Github,</li>
-<li>open <code>JuliaCall.Rproj</code> in your RStudio or open <code>R</code> from the directory where you download the source of <code>JuliaCall</code>,</li>
-<li>run <code><a href="https://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code> to see the result of <code>R CMD check</code> for <code>JuliaCall</code> on your machine,</li>
-<li>and paste the result to the issue report.</li>
-</ul>
+<p><code>JuliaCall</code> is under active development now. Any suggestion or issue reporting is welcome! You may report it using the link: <a href="https://github.com/Non-Contradiction/JuliaCall/issues/new" class="uri">https://github.com/Non-Contradiction/JuliaCall/issues/new</a>, or email me at <a href="mailto:lch34677@gmail.com">lch34677@gmail.com</a> or <a href="mailto:cxl508@psu.edu">cxl508@psu.edu</a>.</p>
+<p>If you encounter some issues which crash <code>R</code> or <code>RStudio</code>, then you may have met segfault errors. I am very sorry for this and will try my best to remove errors like that. It will be much appreciated if you can - download the source of <code>JuliaCall</code> from Github, - open <code>JuliaCall.Rproj</code> in your RStudio or open <code>R</code> from the directory where you download the source of <code>JuliaCall</code>, - run <code><a href="https://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code> to see the result of <code>R CMD check</code> for <code>JuliaCall</code> on your machine, - and paste the result to the issue report.</p>
 </div>
-<div id="interfaces-between-r-and-julia" class="section level2">
+<div id="other-interfaces-between-r-and-julia" class="section level2">
 <h2 class="hasAnchor">
-<a href="#interfaces-between-r-and-julia" class="anchor"></a>Interfaces between R and Julia</h2>
+<a href="#other-interfaces-between-r-and-julia" class="anchor"></a>Other interfaces between R and Julia</h2>
 <ul>
 <li>
-<a href="https://github.com/JuliaInterop/RCall.jl"><code>RCall.jl</code></a> is a <code>Julia</code> package which embeds <code>R</code> in <code>Julia</code>. <code>JuliaCall</code> is inspired by <code>RCall.jl</code> and depends on <code>RCall.jl</code> for many functionalities like much of the type conversion between <code>R</code> and <code>Julia</code>.</li>
+<a href="https://github.com/JuliaInterop/RCall.jl"><code>RCall.jl</code></a> is a <code>Julia</code> package which embeds <code>R</code> in <code>Julia</code>. <code>JuliaCall</code> is inspired by <code>RCall.jl</code> and depends on <code>RCall.jl</code> for many functionalities like type conversion between <code>R</code> and <code>Julia</code>.</li>
 <li>
-<a href="https://github.com/johnmchambers/XRJulia"><code>XRJulia</code></a> is an <code>R</code> package based on John Chambers’ <code>XR</code> package and allow for structured integration of <code>R</code> with <code>Julia</code>. It connects to <code>Julia</code> and uses JSON to transfer data between <code>Julia</code> and <code>R</code>.</li>
+<a href="https://github.com/johnmchambers/XRJulia"><code>XRJulia</code></a> is an <code>R</code> package based on John Chambers’ <code>XR</code> package and allows for structured integration of <code>R</code> with <code>Julia</code>. It connects to <code>Julia</code> and uses JSON to transfer data between <code>Julia</code> and <code>R</code>.</li>
 <li>
 <a href="https://github.com/armgong/rjulia"><code>RJulia</code></a> is an <code>R</code> package which embeds <code>Julia</code> in <code>R</code> as well as <code>JuliaCall</code>. It is not on CRAN yet and I haven’t tested it.</li>
 </ul>
+</div>
+<div id="license" class="section level2">
+<h2 class="hasAnchor">
+<a href="#license" class="anchor"></a>License</h2>
+<p><code>JuliaCall</code> is licensed under <a href="https://cran.r-project.org/web/licenses/MIT">MIT</a>.</p>
 </div>
 </div>
   </div>
