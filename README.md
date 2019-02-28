@@ -247,14 +247,17 @@ reporting is welcome\! You may report it using the link:
 <https://github.com/Non-Contradiction/JuliaCall/issues/new>, or email me
 at <lch34677@gmail.com> or <cxl508@psu.edu>.
 
-If you encounter some issues which crash `R` or `RStudio`, then you may
-have met segfault errors. I am very sorry for this and will try my best
-to remove errors like that. It is much appreciated if you can - download
-the source of `JuliaCall` from Github, - open `JuliaCall.Rproj` in your
-RStudio or open `R` from the directory where you download the source of
-`JuliaCall`, - run `devtools::check()` to see the result of `R CMD
-check` for `JuliaCall` on your machine, - and paste the result to the
-issue report.
+### Checking `JuliaCall` Package
+
+To check and test the `JuliaCall` package, you need to have the source
+package. You can
+
+  - download the source of `JuliaCall` from Github,
+  - open `JuliaCall.Rproj` in your RStudio or open `R` from the
+    downloaded directory,
+  - run `devtools::test()` to see the result of the test suite.
+  - run `devtools::check()` or click the `Check` button in the RStudio
+    Build panel in the upper right to see the result of `R CMD check`.
 
 ## Other Interfaces Between R and Julia
 
