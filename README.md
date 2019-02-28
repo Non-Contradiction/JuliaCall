@@ -18,14 +18,14 @@ Status](https://ci.appveyor.com/api/projects/status/github/Non-Contradiction/Jul
     Julia](#juliacall-for-seamless-integration-of-r-and-julia)
       - [Installation](#installation)
       - [Basic Usage](#basic-usage)
-      - [Trouble Shooting and Way to Get
-        Help](#trouble-shooting-and-way-to-get-help)
+      - [Troubleshooting and Way to Get
+        Help](#troubleshooting-and-way-to-get-help)
       - [JuliaCall for R Package
         Developers](#juliacall-for-r-package-developers)
       - [Suggestion and Issue
         Reporting](#suggestion-and-issue-reporting)
-      - [Interfaces between R and
-        Julia](#interfaces-between-r-and-julia)
+      - [Other Interfaces Between R and
+        Julia](#other-interfaces-between-r-and-julia)
 
 Package `JuliaCall` is an R interface to `Julia`, which is a high-level,
 high-performance dynamic programming language for numerical computing,
@@ -42,7 +42,7 @@ information.
 ## Installation
 
 To use package `JuliaCall`, you first have to install
-[`Julia`](https://julialang.org/) on your computer, you can download a
+[`Julia`](https://julialang.org/) on your computer. You can download a
 generic binary from <https://julialang.org/downloads/> and add it to
 your path, and then you can install `JuliaCall` just like any other R
 packages by
@@ -51,10 +51,8 @@ packages by
 install.packages("JuliaCall")
 ```
 
-Note that currently `Julia v0.6.x`, `Julia v0.7.0` and `Julia v1.0` are
-all supported by `JuliaCall`. But note that some `Julia` packages may
-not work on `Julia v1.0` and you may need to use `Julia v0.7.0` for
-transition purposes.
+Currently `Julia v0.6.x`, `Julia v1.0.x`, and `Julia v1.1` are all
+supported by `JuliaCall`.
 
 You can get the development version of `JuliaCall` by
 
@@ -74,11 +72,11 @@ julia <- julia_setup()
 #> Loading setup script for JuliaCall...
 #> Finish loading setup script for JuliaCall.
 
-## If you want to use a julia at a specific location, you could do the following:
-## julia_setup(JULIA_HOME = "the folder that contains julia binary"), 
+## If you want to use Julia at a specific location, you could do the following:
+## julia_setup(JULIA_HOME = "the folder that contains Julia binary"), 
 ## or you can set JULIA_HOME in command line environment or use `options(...)`
 
-## Different ways for using Julia to calculate sqrt(2)
+## Different ways of using Julia to calculate sqrt(2)
 
 # julia$command("a = sqrt(2);"); julia$eval("a")
 julia_command("a = sqrt(2);"); julia_eval("a")
@@ -112,12 +110,12 @@ julia_installed_package("Optim")
 julia_library("Optim")
 ```
 
-## Trouble Shooting and Way to Get Help
+## Troubleshooting and Way to Get Help
 
 ### Julia is not found
 
-Make sure the `Julia` installation is correct. `JuliaCall` is able to
-find `Julia` on PATH, and there are three ways for `JuliaCall` to find
+Make sure the `Julia` installation is correct. `JuliaCall` can find
+`Julia` on PATH, and there are three ways for `JuliaCall` to find
 `Julia` not on PATH.
 
   - Use `julia_setup(JULIA_HOME = "the folder that contains julia
@@ -125,10 +123,17 @@ find `Julia` on PATH, and there are three ways for `JuliaCall` to find
   - Use `options(JULIA_HOME = "the folder that contains julia binary")`
   - Set `JULIA_HOME` in command line environment.
 
+### libstdc++.so.6: version \`GLIBCXX\_3.4.xx’ not found
+
+Such problems are usually on Linux machines. The cause for the problem
+is that R cannot find the libstdc++ version needed by `Julia`. To deal
+with the problem, users can export “TheFolderContainsJulia/lib/julia” to
+R\_LD\_LIBRARY\_PATH.
+
 ### How to Get Help
 
-  - One way to get help for julia functions is just using `julia$help`
-    like the following example:
+  - One way to get help for Julia functions is just using `julia$help`
+    as the following example:
 
 <!-- end list -->
 
@@ -186,7 +191,7 @@ julia_help("sqrt")
     development version of `JuliaCall`:
     <https://non-contradiction.github.io/JuliaCall/>.
 
-  - And you are more than welcome to contact me about `JuliaCall` at
+  - Also, you are more than welcome to contact me about `JuliaCall` at
     <lch34677@gmail.com> or <cxl508@psu.edu>.
 
 ## JuliaCall for R Package Developers
@@ -244,14 +249,14 @@ at <lch34677@gmail.com> or <cxl508@psu.edu>.
 
 If you encounter some issues which crash `R` or `RStudio`, then you may
 have met segfault errors. I am very sorry for this and will try my best
-to remove errors like that. It will be much appreciated if you can -
-download the source of `JuliaCall` from Github, - open `JuliaCall.Rproj`
-in your RStudio or open `R` from the directory where you download the
-source of `JuliaCall`, - run `devtools::check()` to see the result of `R
-CMD check` for `JuliaCall` on your machine, - and paste the result to
-the issue report.
+to remove errors like that. It is much appreciated if you can - download
+the source of `JuliaCall` from Github, - open `JuliaCall.Rproj` in your
+RStudio or open `R` from the directory where you download the source of
+`JuliaCall`, - run `devtools::check()` to see the result of `R CMD
+check` for `JuliaCall` on your machine, - and paste the result to the
+issue report.
 
-## Other interfaces between R and Julia
+## Other Interfaces Between R and Julia
 
   - [`RCall.jl`](https://github.com/JuliaInterop/RCall.jl) is a `Julia`
     package which embeds `R` in `Julia`. `JuliaCall` is inspired by
@@ -263,7 +268,7 @@ the issue report.
     and uses JSON to transfer data between `Julia` and `R`.
   - [`RJulia`](https://github.com/armgong/rjulia) is an `R` package
     which embeds `Julia` in `R` as well as `JuliaCall`. It is not on
-    CRAN yet and I haven’t tested it.
+    CRAN yet, and I haven’t tested it.
 
 ## License
 
