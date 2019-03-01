@@ -5,7 +5,7 @@
 \title{Do initial setup for the JuliaCall package.}
 \usage{
 julia_setup(JULIA_HOME = NULL, verbose = TRUE, install = TRUE,
-  force = FALSE, useRCall = TRUE)
+  force = FALSE, useRCall = TRUE, rebuild = FALSE)
 }
 \arguments{
 \item{JULIA_HOME}{the file folder which contains julia binary,
@@ -18,13 +18,16 @@ the julia in path.}
 \item{verbose}{whether to print out detailed information
 about \code{julia_setup}.}
 
-\item{install}{whether to execute install script for dependent julia packages, whose default value is TRUE;
+\item{install}{whether to execute installation script for dependent julia packages, whose default value is TRUE;
 but can be set to FALSE to save startup time when no installation of dependent julia packages is needed.}
 
 \item{force}{whether to force julia_setup to execute again.}
 
 \item{useRCall}{whether or not you want to use RCall.jl in julia,
 which is an amazing package to access R in julia.}
+
+\item{rebuild}{whether to rebuild RCall.jl, whose default value is FALSE to save startup time.
+If a new version of R is used, then this parameter needs to be set to TRUE.}
 }
 \value{
 The julia interface, which is an environment with the necessary methods
@@ -32,6 +35,9 @@ The julia interface, which is an environment with the necessary methods
 }
 \description{
 \code{julia_setup} does the initial setup for the JuliaCall package.
+    It setups automatic type conversion, Julia display systems, etc,
+    and is necessary for every new R session to use the package.
+    If not carried out manually, it will be invoked automatically before other julia_xxx functions.
 }
 \examples{
 

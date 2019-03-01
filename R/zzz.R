@@ -1,6 +1,9 @@
 #' Do initial setup for the JuliaCall package.
 #'
 #' \code{julia_setup} does the initial setup for the JuliaCall package.
+#'     It setups automatic type conversion, Julia display systems, etc,
+#'     and is necessary for every new R session to use the package.
+#'     If not carried out manually, it will be invoked automatically before other julia_xxx functions.
 #'
 #' @param JULIA_HOME the file folder which contains julia binary,
 #'     if not set, JuliaCall will look at the global option JULIA_HOME,
@@ -10,11 +13,13 @@
 #'     the julia in path.
 #' @param verbose whether to print out detailed information
 #'     about \code{julia_setup}.
-#' @param install whether to execute install script for dependent julia packages, whose default value is TRUE;
+#' @param install whether to execute installation script for dependent julia packages, whose default value is TRUE;
 #'     but can be set to FALSE to save startup time when no installation of dependent julia packages is needed.
 #' @param force whether to force julia_setup to execute again.
 #' @param useRCall whether or not you want to use RCall.jl in julia,
 #'     which is an amazing package to access R in julia.
+#' @param rebuild whether to rebuild RCall.jl, whose default value is FALSE to save startup time.
+#'     If a new version of R is used, then this parameter needs to be set to TRUE.
 #'
 #' @return The julia interface, which is an environment with the necessary methods
 #'   like command, source and things like that to communicate with julia.
@@ -26,7 +31,8 @@
 #' }
 #'
 #' @export
-julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, install = TRUE, force = FALSE, useRCall = TRUE) {
+julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
+                        install = TRUE, force = FALSE, useRCall = TRUE, rebuild = FALSE) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
@@ -115,6 +121,10 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE, install = TRUE, force
 
     if (isTRUE(install)) {
         install_dependency()
+    }
+
+    if (isTRUE(rebuild)) {
+        rebuild()
     }
 
     if (!newer(.julia$VERSION, "0.7.0")) {
