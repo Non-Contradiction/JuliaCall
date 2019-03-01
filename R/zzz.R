@@ -191,3 +191,11 @@ install_dependency <- function(){
                stdout = TRUE,
                stderr = TRUE)
 }
+
+rebuild <- function(){
+    ## `RCall` needs to be precompiled with the current R.
+    julia_line(c(system.file("julia/rebuildRCall.jl", package = "JuliaCall"),
+                 R.home()),
+               stdout = TRUE,
+               stderr = TRUE)
+}
