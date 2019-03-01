@@ -14,3 +14,4 @@
 ^vignettes/mandelbrot\.Rmd$
 ^revdep$
 ^paper$
+^LICENSE\.md$
