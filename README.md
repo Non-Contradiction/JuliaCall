@@ -65,7 +65,9 @@ devtools::install_github("Non-Contradiction/JuliaCall")
 ``` r
 library(JuliaCall)
 
-## Do initial setup
+## Do initial setup for automatic type conversion, Julia display systems, etc. 
+## It is necessary for every new R session to use the package.
+## If not carried out manually, it will be invoked automatically before other julia_xxx functions.
 
 julia <- julia_setup()
 #> Julia version 1.0.3 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.
