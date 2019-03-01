@@ -34,27 +34,3 @@ using Suppressor
 if installed("RCall") == nothing
     Pkg.add("RCall")
 end;
-
-depsjl = Pkg.dir("RCall", "deps", "deps.jl")
-
-if isfile(depsjl)
-    include(depsjl)
-
-    if Rhome != CurrentRhome
-        Pkg.build("RCall")
-    end
-else
-    try
-        using RCall
-    catch e
-        Pkg.build("RCall")
-    end
-
-    if RCall.Rhome != CurrentRhome
-        if installed("RCall") >= v"0.10.2"
-            Pkg.build("RCall")
-        else
-            Base.compilecache("RCall")
-        end
-    end
-end
