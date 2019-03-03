@@ -22,8 +22,8 @@ Status](https://ci.appveyor.com/api/projects/status/github/Non-Contradiction/Jul
         Help](#troubleshooting-and-way-to-get-help)
       - [JuliaCall for R Package
         Developers](#juliacall-for-r-package-developers)
-      - [Suggestion and Issue
-        Reporting](#suggestion-and-issue-reporting)
+      - [Suggestion, Issue Reporting, and
+        Contributing](#suggestion-issue-reporting-and-contributing)
       - [Other Interfaces Between R and
         Julia](#other-interfaces-between-r-and-julia)
 
@@ -242,12 +242,16 @@ you may report it using the link:
 <https://github.com/Non-Contradiction/JuliaCall/issues/new>, or email me
 at <lch34677@gmail.com> or <cxl508@psu.edu>.
 
-## Suggestion and Issue Reporting
+## Suggestion, Issue Reporting, and Contributing
 
 `JuliaCall` is under active development now. Any suggestion or issue
 reporting is welcome\! You may report it using the link:
 <https://github.com/Non-Contradiction/JuliaCall/issues/new>, or email me
-at <lch34677@gmail.com> or <cxl508@psu.edu>.
+at <lch34677@gmail.com> or <cxl508@psu.edu>. You are welcome to use the
+[issue template](.github/issue-template.md) and the [pull request
+template](.github/pull-request-template.md). The [contributing
+guide](.github/CONTRIBUTING.md) gives some guidance to make
+contributions.
 
 ### Checking `JuliaCall` Package
 
@@ -279,3 +283,9 @@ package. You can
 
 `JuliaCall` is licensed under
 [MIT](https://cran.r-project.org/web/licenses/MIT).
+
+## Code of Conduct
+
+Please note that the `JuliaCall` project is released with a [Contributor
+Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
+you agree to abide by its terms.

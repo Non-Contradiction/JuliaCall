@@ -1,3 +1,5 @@
+^\.github$
+^CODE_OF_CONDUCT\.md$
 ^CRAN-RELEASE$
 ^.*\.Rproj$
 ^\.Rproj\.user$
@@ -15,3 +17,4 @@
 ^revdep$
 ^paper$
 ^LICENSE\.md$
+^contributing\.md$
