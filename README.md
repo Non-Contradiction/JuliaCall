@@ -248,8 +248,8 @@ at <lch34677@gmail.com> or <cxl508@psu.edu>.
 reporting is welcome\! You may report it using the link:
 <https://github.com/Non-Contradiction/JuliaCall/issues/new>, or email me
 at <lch34677@gmail.com> or <cxl508@psu.edu>. You are welcome to use the
-[issue template](.github/issue-template.md) and the [pull request
-template](.github/pull-request-template.md). The [contributing
+[issue template](.github/issue_template.md) and the [pull request
+template](.github/pull_request_template.md). The [contributing
 guide](.github/CONTRIBUTING.md) gives some guidance to make
 contributions.
 
