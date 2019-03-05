@@ -1,18 +1,24 @@
 language: r
 cache: packages
+r_check_args: '--use-valgrind'
 os:
   - linux
   - osx
 env:
   - JULIA="06"
+    VALGRIND_OPTS='--leak-check=full --track-origins=yes'
   # - JULIA="07"
   - JULIA="10"
+    VALGRIND_OPTS='--leak-check=full --track-origins=yes'
   - JULIA="11"
+    VALGRIND_OPTS='--leak-check=full --track-origins=yes'
 
 addons:
   apt:
     sources: [ 'ubuntu-toolchain-r-test']
-    packages: ['libstdc++6']
+    packages: 
+      - 'libstdc++6'
+      - valgrind
 
 notifications:
   email: false
