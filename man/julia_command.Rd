@@ -2,22 +2,24 @@
 % Please edit documentation in R/interface.R
 \name{julia_command}
 \alias{julia_command}
-\title{Evaluate string commands in julia.}
+\title{Evaluate string commands in julia and (may) invoke the julia display system.}
 \usage{
 julia_command(cmd, show_value = !endsWith(trimws(cmd, "right"), ";"))
 }
 \arguments{
 \item{cmd}{the command string you want to evaluate in julia.}
 
-\item{show_value}{whether to display julia return value or not,
+\item{show_value}{whether to display julia returning value or not,
 the default value is `FALSE` if the `cmd` ends with semicolon
 and `TRUE` otherwise.}
 }
 \description{
 \code{julia_command} evaluates string commands in julia
-without returning the result.
-If you need the result, maybe you could
-try \code{julia_eval}.
+without returning the result back to R.
+However, it may evoke julia display system,
+see the documentation of the argument `show_value` for more details.
+If you need to get the evaluation result in R, you can use
+\code{julia_eval}.
 }
 \examples{
 

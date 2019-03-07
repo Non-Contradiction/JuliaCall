@@ -2,15 +2,18 @@
 #'
 #' \code{julia_do.call} is the \code{do.call} for julia.
 #' And \code{julia_call} calls julia functions.
+#' For usage of these functions, see documentation of arguments and examples.
 #'
 #' @param func_name the name of julia function you want to call.
+#'   If you add "." after `func_name`,
+#'   the julia function call will be broadcasted.
 #' @param arg_list the list of the arguments you want to pass to the julia function.
 #' @param ... the arguments you want to pass to the julia function.
 #' @param need_return whether you want julia to return value as an R object,
 #'   a wrapper for julia object or no return.
 #'   The value of need_return could be TRUE (equal to option "R") or FALSE (equal to option "None"),
 #'   or one of the options "R", "Julia" and "None".
-#' @param show_value whether to display julia return value or not.
+#' @param show_value whether to invoke the julia display system or not.
 #'
 #' @details Note that named arguments will be discarded if the call uses dot notation,
 #'   for example, "sqrt.".
@@ -20,6 +23,7 @@
 #' \donttest{ ## julia_setup is quite time consuming
 #'   julia_do.call("sqrt", list(2))
 #'   julia_call("sqrt", 2)
+#'   julia_call("sqrt.", 1:10)
 #' }
 #'
 #' @name call
@@ -97,12 +101,17 @@ julia_call <- julia$call <- function(func_name, ..., need_return = c("R", "Julia
 #' @export
 julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", name)
 
-#' Evaluate string commands in julia and get the result.
+#' Evaluate string commands in julia and get the result back in R.
 #'
 #' \code{julia_eval} evaluates string commands in julia and
-#' returns the result (automatically converted to an R object or a JuliaObject wrapper).
-#' If you don't need the result, maybe you could
-#' try \code{julia_command}.
+#' returns the result to R.
+#' The returning julia object will be automatically converted
+#' to an R object or a JuliaObject wrapper,
+#' see the documentation of the argument `need_return` for more details.
+#' `julia_eval` will not invoke julia display system.
+#' If you don't need the returning result in R or
+#' you want to invoke the julia display system, you can
+#' use \code{julia_command}.
 #'
 #' @param cmd the command string you want to evaluate in julia.
 #' @param need_return whether you want julia to return value as an R object or
@@ -120,15 +129,17 @@ julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", na
 julia_eval <- julia$eval <- function(cmd, need_return = c("R", "Julia"))
         julia$call("JuliaCall.eval_string", cmd, need_return = match.arg(need_return))
 
-#' Evaluate string commands in julia.
+#' Evaluate string commands in julia and (may) invoke the julia display system.
 #'
 #' \code{julia_command} evaluates string commands in julia
-#' without returning the result.
-#' If you need the result, maybe you could
-#' try \code{julia_eval}.
+#' without returning the result back to R.
+#' However, it may evoke julia display system,
+#' see the documentation of the argument `show_value` for more details.
+#' If you need to get the evaluation result in R, you can use
+#' \code{julia_eval}.
 #'
 #' @param cmd the command string you want to evaluate in julia.
-#' @param show_value whether to display julia return value or not,
+#' @param show_value whether to display julia returning value or not,
 #'   the default value is `FALSE` if the `cmd` ends with semicolon
 #'   and `TRUE` otherwise.
 #'

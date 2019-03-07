@@ -2,7 +2,7 @@
 % Please edit documentation in R/interface.R
 \name{julia_eval}
 \alias{julia_eval}
-\title{Evaluate string commands in julia and get the result.}
+\title{Evaluate string commands in julia and get the result back in R.}
 \usage{
 julia_eval(cmd, need_return = c("R", "Julia"))
 }
@@ -17,9 +17,14 @@ the R object automatically converted from julia object.
 }
 \description{
 \code{julia_eval} evaluates string commands in julia and
-returns the result (automatically converted to an R object or a JuliaObject wrapper).
-If you don't need the result, maybe you could
-try \code{julia_command}.
+returns the result to R.
+The returning julia object will be automatically converted
+to an R object or a JuliaObject wrapper,
+see the documentation of the argument `need_return` for more details.
+`julia_eval` will not invoke julia display system.
+If you don't need the returning result in R or
+you want to invoke the julia display system, you can
+use \code{julia_command}.
 }
 \examples{
 
