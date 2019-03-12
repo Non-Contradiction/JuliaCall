@@ -32,20 +32,20 @@ It also provides `Julia` package management functions such as installation and l
 and utility functions to get the documentation of `Julia` functions.
 `JuliaCall` can also be used in R Markdown document as the engine of `Julia` language, see Section 2.77 in [@xie2018r].
 
-There are `R` packages which wraps `Julia` packages based on `JuliaCall` to provide new functionalities
+There are `R` packages which wrap `Julia` packages based on `JuliaCall` to provide new functionalities
 or performance improvements to some existing packages in `R`.
 [`autodiffr`](https://github.com/Non-Contradiction/autodiffr) [@autodiffr] provides automatic differentiation to `R` functions by wrapping
 [`ForwardDiff.jl`](https://github.com/JuliaDiff/ForwardDiff.jl) and
 [`ReverseDiff.jl`](https://github.com/JuliaDiff/ReverseDiff.jl).
-[`convexjlr`](https://github.com/Non-Contradiction/convexjlr) [@convexjlr] is an `R` package for Disciplined Convex Programming (DCP) by providing a high level wrapper for [`Convex.jl`](https://github.com/JuliaOpt/Convex.jl).
-[`diffeqr`](https://github.com/JuliaDiffEq/diffeqr) [@diffeqr] solves differential equations in `R` which utilizes [`DifferentialEquations.jl`](http://docs.juliadiffeq.org/latest/).
+[`convexjlr`](https://github.com/Non-Contradiction/convexjlr) [@convexjlr] is an `R` package for Disciplined Convex Programming (DCP) providing a high level wrapper for [`Convex.jl`](https://github.com/JuliaOpt/Convex.jl).
+[`diffeqr`](https://github.com/JuliaDiffEq/diffeqr) [@diffeqr] solves differential equations in `R` using [`DifferentialEquations.jl`](http://docs.juliadiffeq.org/latest/).
 [`FixedEffectjlr`](https://github.com/eloualiche/FixedEffectjlr) [@fixedeffectjlr] estimates large fixed effects models in `R` by providing an interface to [`FixedEffectModels.jl`](https://github.com/matthieugomez/FixedEffectModels.jl).
 
 Besides `JuliaCall`, there are also some other interfaces between `R` and `Julia`:
 `R` packages [`XRJulia`](https://github.com/johnmchambers/XRJulia),
-[`rjulia`](https://github.com/armgong/rjulia),
-and `Julia` package [`RCall.jl`](https://github.com/JuliaInterop/RCall.jl).
-Package `XRJulia` follows the extending `R` interface implemented by the `XR` package, which connects to `Julia` from `R` [@chambers2017extending].
+[`RJulia`](https://github.com/armgong/rjulia),
+and the `Julia` package [`RCall.jl`](https://github.com/JuliaInterop/RCall.jl).
+The package `XRJulia` follows the extending `R` interface implemented by the `XR` package, which connects to `Julia` from `R` [@chambers2017extending].
 It uses JavaScript Object Notation (JSON) format to transmit data, while `JuliaCall` copies objects in memory between `R` and `Julia`.
 It has performance disadvantages compared to `JuliaCall`.
 Table 1 depicts the times needed to transmit a $500\times 500$ matrix full of ones from `R` v3.5.2 to `Julia` v1.0.3 using `JuliaCall` v0.16.4 and `XRJulia` Github master b6224fa at the time of writing (there is no released version of `XRJulia` to support `Julia` v1.0 yet).
@@ -53,7 +53,7 @@ The times are measured by `R` package `microbenchmark` with 1000 evaluation time
 The script with the benchmark code and setup instructions can be found in the `paper` directory in [`JuliaCall` Github repository](https://github.com/Non-Contradiction/JuliaCall).
 In the header of the table, "lq" means lower quantile and "uq" means upper quantile.
 From Table 1, it can be seen that `JuliaCall` has a significant speed advantage of transmitting data between `R` and `Julia`.
-Package `RJulia` [@rjulia] also embeds `Julia` in `R`, but its functionality is quite limited,
+The package `RJulia` [@rjulia] also embeds `Julia` in `R`, but its functionality is quite limited,
 has not been updated for more than one year,
 and does not support `Julia` v1.0 and v1.1 at the time of writing.
 `RCall.jl` is a `Julia` package which embeds `R` in `Julia`.
