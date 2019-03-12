@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Evaluate string commands in julia. — julia_command • JuliaCall</title>
+<title>Evaluate string commands in julia and (may) invoke the julia display system. — julia_command • JuliaCall</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,14 @@
 
 
 
-<meta property="og:title" content="Evaluate string commands in julia. — julia_command" />
+<meta property="og:title" content="Evaluate string commands in julia and (may) invoke the julia display system. — julia_command" />
 
 <meta property="og:description" content="julia_command evaluates string commands in julia
-without returning the result.
-If you need the result, maybe you could
-try julia_eval." />
+without returning the result back to R.
+However, it may evoke julia display system,
+see the documentation of the argument `show_value` for more details.
+If you need to get the evaluation result in R, you can use
+julia_eval." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,7 +125,7 @@ try julia_eval." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Evaluate string commands in julia.</h1>
+    <h1>Evaluate string commands in julia and (may) invoke the julia display system.</h1>
     <small class="dont-index">Source: <a href='https://github.com/Non-Contradiction/JuliaCall/blob/master/R/interface.R'><code>R/interface.R</code></a></small>
     <div class="hidden name"><code>julia_command.Rd</code></div>
     </div>
@@ -131,9 +133,11 @@ try julia_eval." />
     <div class="ref-description">
     
     <p><code>julia_command</code> evaluates string commands in julia
-without returning the result.
-If you need the result, maybe you could
-try <code>julia_eval</code>.</p>
+without returning the result back to R.
+However, it may evoke julia display system,
+see the documentation of the argument `show_value` for more details.
+If you need to get the evaluation result in R, you can use
+<code>julia_eval</code>.</p>
     
     </div>
 
@@ -148,7 +152,7 @@ try <code>julia_eval</code>.</p>
     </tr>
     <tr>
       <th>show_value</th>
-      <td><p>whether to display julia return value or not,
+      <td><p>whether to display julia returning value or not,
 the default value is `FALSE` if the `cmd` ends with semicolon
 and `TRUE` otherwise.</p></td>
     </tr>

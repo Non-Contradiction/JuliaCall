@@ -108,10 +108,10 @@
 <ul>
 <li><a href="#installation">Installation</a></li>
 <li><a href="#basic-usage">Basic Usage</a></li>
-<li><a href="#trouble-shooting-and-way-to-get-help">Trouble Shooting and Way to Get Help</a></li>
+<li><a href="#troubleshooting-and-ways-to-get-help">Troubleshooting and Ways to Get Help</a></li>
 <li><a href="#juliacall-for-r-package-developers">JuliaCall for R Package Developers</a></li>
-<li><a href="#suggestion-and-issue-reporting">Suggestion and Issue Reporting</a></li>
-<li><a href="#interfaces-between-r-and-julia">Interfaces between R and Julia</a></li>
+<li><a href="#suggestion-issue-reporting-and-contributing">Suggestion, Issue Reporting, and Contributing</a></li>
+<li><a href="#other-interfaces-between-r-and-julia">Other Interfaces Between R and Julia</a></li>
 </ul>
 </li>
 </ul>
@@ -120,68 +120,66 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>To use package <code>JuliaCall</code>, you first have to install <a href="https://julialang.org/"><code>Julia</code></a> on your computer, you can download a generic binary from <a href="https://julialang.org/downloads/" class="uri">https://julialang.org/downloads/</a> and add it to your path, and then you can install <code>JuliaCall</code> just like any other R packages by</p>
+<p>To use package <code>JuliaCall</code>, you first have to install <a href="https://julialang.org/"><code>Julia</code></a> on your computer. You can download a generic binary from <a href="https://julialang.org/downloads/" class="uri">https://julialang.org/downloads/</a> and add it to your path, and then you can install <code>JuliaCall</code> just like any other R packages by</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"JuliaCall"</span>)</a></code></pre></div>
-<p>Note that currently <code>Julia v0.6.x</code>, <code>Julia v0.7.0</code> and <code>Julia v1.0</code> are all supported by <code>JuliaCall</code>. But note that some <code>Julia</code> packages may not work on <code>Julia v1.0</code> and you may need to use <code>Julia v0.7.0</code> for transition purposes.</p>
+<p>Currently <code>Julia v0.6.x</code>, <code>Julia v1.0.x</code>, and <code>Julia v1.1</code> are all supported by <code>JuliaCall</code>.</p>
 <p>You can get the development version of <code>JuliaCall</code> by</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/reexports">install_github</a></span>(<span class="st">"Non-Contradiction/JuliaCall"</span>)</a></code></pre></div>
 </div>
 <div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic Usage</h2>
+<p>Before using <code>JuliaCall</code>, you need to do initial setup by function <code><a href="reference/julia_setup.html">julia_setup()</a></code> for automatic type conversion, Julia display systems, etc. It is necessary for every new R session to use the package. If not carried out manually, it will be invoked automatically before other <code>julia_xxx</code> functions. Solutions to some common error in <code><a href="reference/julia_setup.html">julia_setup()</a></code> are documented in the <a href="#troubleshooting-and-way-to-get-help">troubleshooting section</a>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(JuliaCall)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">## Do initial setup</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5">julia &lt;-<span class="st"> </span><span class="kw"><a href="reference/julia_setup.html">julia_setup</a></span>()</a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#&gt; Julia version 1.0.3 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">#&gt; Loading setup script for JuliaCall...</span></a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">#&gt; Finish loading setup script for JuliaCall.</span></a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">## If you want to use a julia at a specific location, you could do the following:</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">## julia_setup(JULIA_HOME = "the folder that contains julia binary"), </span></a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"><span class="co">## or you can set JULIA_HOME in command line environment or use `options(...)`</span></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="co">## Different ways for using Julia to calculate sqrt(2)</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"></a>
-<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="co"># julia$command("a = sqrt(2);"); julia$eval("a")</span></a>
-<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="kw"><a href="reference/julia_command.html">julia_command</a></span>(<span class="st">"a = sqrt(2);"</span>); <span class="kw"><a href="reference/julia_eval.html">julia_eval</a></span>(<span class="st">"a"</span>)</a>
-<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="co">#&gt; [1] 1.414214</span></a>
-<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="kw"><a href="reference/julia_eval.html">julia_eval</a></span>(<span class="st">"sqrt(2)"</span>)</a>
-<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="co">#&gt; [1] 1.414214</span></a>
-<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="kw"><a href="reference/call.html">julia_call</a></span>(<span class="st">"sqrt"</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="co">#&gt; [1] 1.414214</span></a>
-<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="kw"><a href="reference/julia_eval.html">julia_eval</a></span>(<span class="st">"sqrt"</span>)(<span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="co">#&gt; [1] 1.414214</span></a>
-<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="kw"><a href="reference/julia_assign.html">julia_assign</a></span>(<span class="st">"x"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">2</span>)); <span class="kw"><a href="reference/julia_eval.html">julia_eval</a></span>(<span class="st">"x"</span>)</a>
-<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="co">#&gt; [1] 1.414214</span></a>
-<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="kw"><a href="reference/julia_assign.html">julia_assign</a></span>(<span class="st">"rsqrt"</span>, sqrt); <span class="kw"><a href="reference/call.html">julia_call</a></span>(<span class="st">"rsqrt"</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-28" data-line-number="28"><span class="co">#&gt; [1] 1.414214</span></a>
-<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="dv">2</span> <span class="op">%&gt;J%</span><span class="st"> </span>sqrt</a>
-<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">#&gt; [1] 1.414214</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">julia &lt;-<span class="st"> </span><span class="kw"><a href="reference/julia_setup.html">julia_setup</a></span>()</a>
+<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; Julia version 1.0.3 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt; Loading setup script for JuliaCall...</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; Finish loading setup script for JuliaCall.</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="co">## If you want to use `Julia` at a specific location, you could do the following:</span></a>
+<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="co">## julia_setup(JULIA_HOME = "the folder that contains Julia binary").</span></a>
+<a class="sourceLine" id="cb3-9" data-line-number="9"><span class="co">## You can also set JULIA_HOME in command line environment or use `options(...)`.</span></a>
+<a class="sourceLine" id="cb3-10" data-line-number="10"></a>
+<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="co">## Different ways of using Julia to calculate sqrt(2)</span></a>
+<a class="sourceLine" id="cb3-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co"># julia$command("a = sqrt(2);"); julia$eval("a")</span></a>
+<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="kw"><a href="reference/julia_command.html">julia_command</a></span>(<span class="st">"a = sqrt(2);"</span>); <span class="kw"><a href="reference/julia_eval.html">julia_eval</a></span>(<span class="st">"a"</span>)</a>
+<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="co">#&gt; [1] 1.414214</span></a>
+<a class="sourceLine" id="cb3-16" data-line-number="16"><span class="kw"><a href="reference/julia_eval.html">julia_eval</a></span>(<span class="st">"sqrt(2)"</span>)</a>
+<a class="sourceLine" id="cb3-17" data-line-number="17"><span class="co">#&gt; [1] 1.414214</span></a>
+<a class="sourceLine" id="cb3-18" data-line-number="18"><span class="kw"><a href="reference/call.html">julia_call</a></span>(<span class="st">"sqrt"</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb3-19" data-line-number="19"><span class="co">#&gt; [1] 1.414214</span></a>
+<a class="sourceLine" id="cb3-20" data-line-number="20"><span class="kw"><a href="reference/julia_eval.html">julia_eval</a></span>(<span class="st">"sqrt"</span>)(<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb3-21" data-line-number="21"><span class="co">#&gt; [1] 1.414214</span></a>
+<a class="sourceLine" id="cb3-22" data-line-number="22"><span class="kw"><a href="reference/julia_assign.html">julia_assign</a></span>(<span class="st">"x"</span>, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/MathFun">sqrt</a></span>(<span class="dv">2</span>)); <span class="kw"><a href="reference/julia_eval.html">julia_eval</a></span>(<span class="st">"x"</span>)</a>
+<a class="sourceLine" id="cb3-23" data-line-number="23"><span class="co">#&gt; [1] 1.414214</span></a>
+<a class="sourceLine" id="cb3-24" data-line-number="24"><span class="kw"><a href="reference/julia_assign.html">julia_assign</a></span>(<span class="st">"rsqrt"</span>, sqrt); <span class="kw"><a href="reference/call.html">julia_call</a></span>(<span class="st">"rsqrt"</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb3-25" data-line-number="25"><span class="co">#&gt; [1] 1.414214</span></a>
+<a class="sourceLine" id="cb3-26" data-line-number="26"><span class="dv">2</span> <span class="op">%&gt;J%</span><span class="st"> </span>sqrt</a>
+<a class="sourceLine" id="cb3-27" data-line-number="27"><span class="co">#&gt; [1] 1.414214</span></a>
+<a class="sourceLine" id="cb3-28" data-line-number="28"></a>
+<a class="sourceLine" id="cb3-29" data-line-number="29"><span class="co">## You can use `julia$exists` as `exists` in R to test</span></a>
+<a class="sourceLine" id="cb3-30" data-line-number="30"><span class="co">## whether a function or name exists in Julia or not</span></a>
 <a class="sourceLine" id="cb3-31" data-line-number="31"></a>
-<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="co">## You can use `julia$exists` as `exists` in R to test</span></a>
-<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">## whether a function or name exists in Julia or not</span></a>
-<a class="sourceLine" id="cb3-34" data-line-number="34"></a>
-<a class="sourceLine" id="cb3-35" data-line-number="35"><span class="kw"><a href="reference/julia_exists.html">julia_exists</a></span>(<span class="st">"sqrt"</span>)</a>
-<a class="sourceLine" id="cb3-36" data-line-number="36"><span class="co">#&gt; [1] TRUE</span></a>
-<a class="sourceLine" id="cb3-37" data-line-number="37"><span class="kw"><a href="reference/julia_exists.html">julia_exists</a></span>(<span class="st">"c"</span>)</a>
-<a class="sourceLine" id="cb3-38" data-line-number="38"><span class="co">#&gt; [1] FALSE</span></a>
-<a class="sourceLine" id="cb3-39" data-line-number="39"></a>
-<a class="sourceLine" id="cb3-40" data-line-number="40"><span class="co">## Functions related to installing and using Julia packages</span></a>
-<a class="sourceLine" id="cb3-41" data-line-number="41"></a>
-<a class="sourceLine" id="cb3-42" data-line-number="42"><span class="kw"><a href="reference/julia_package.html">julia_install_package_if_needed</a></span>(<span class="st">"Optim"</span>)</a>
-<a class="sourceLine" id="cb3-43" data-line-number="43"><span class="kw"><a href="reference/julia_package.html">julia_installed_package</a></span>(<span class="st">"Optim"</span>)</a>
-<a class="sourceLine" id="cb3-44" data-line-number="44"><span class="co">#&gt; [1] "0.17.2"</span></a>
-<a class="sourceLine" id="cb3-45" data-line-number="45"><span class="kw"><a href="reference/julia_package.html">julia_library</a></span>(<span class="st">"Optim"</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb3-32" data-line-number="32"><span class="kw"><a href="reference/julia_exists.html">julia_exists</a></span>(<span class="st">"sqrt"</span>)</a>
+<a class="sourceLine" id="cb3-33" data-line-number="33"><span class="co">#&gt; [1] TRUE</span></a>
+<a class="sourceLine" id="cb3-34" data-line-number="34"><span class="kw"><a href="reference/julia_exists.html">julia_exists</a></span>(<span class="st">"c"</span>)</a>
+<a class="sourceLine" id="cb3-35" data-line-number="35"><span class="co">#&gt; [1] FALSE</span></a>
+<a class="sourceLine" id="cb3-36" data-line-number="36"></a>
+<a class="sourceLine" id="cb3-37" data-line-number="37"><span class="co">## Functions related to installing and using Julia packages</span></a>
+<a class="sourceLine" id="cb3-38" data-line-number="38"></a>
+<a class="sourceLine" id="cb3-39" data-line-number="39"><span class="kw"><a href="reference/julia_package.html">julia_install_package_if_needed</a></span>(<span class="st">"Optim"</span>)</a>
+<a class="sourceLine" id="cb3-40" data-line-number="40"><span class="kw"><a href="reference/julia_package.html">julia_installed_package</a></span>(<span class="st">"Optim"</span>)</a>
+<a class="sourceLine" id="cb3-41" data-line-number="41"><span class="co">#&gt; [1] "0.17.2"</span></a>
+<a class="sourceLine" id="cb3-42" data-line-number="42"><span class="kw"><a href="reference/julia_package.html">julia_library</a></span>(<span class="st">"Optim"</span>)</a></code></pre></div>
 </div>
-<div id="trouble-shooting-and-way-to-get-help" class="section level2">
+<div id="troubleshooting-and-ways-to-get-help" class="section level2">
 <h2 class="hasAnchor">
-<a href="#trouble-shooting-and-way-to-get-help" class="anchor"></a>Trouble Shooting and Way to Get Help</h2>
+<a href="#troubleshooting-and-ways-to-get-help" class="anchor"></a>Troubleshooting and Ways to Get Help</h2>
 <div id="julia-is-not-found" class="section level3">
 <h3 class="hasAnchor">
 <a href="#julia-is-not-found" class="anchor"></a>Julia is not found</h3>
-<p>Make sure the <code>Julia</code> installation is correct. <code>JuliaCall</code> is able to find <code>Julia</code> on PATH, and there are three ways for <code>JuliaCall</code> to find <code>Julia</code> not on PATH.</p>
+<p>Make sure the <code>Julia</code> installation is correct. <code>JuliaCall</code> can find <code>Julia</code> on PATH, and there are three ways for <code>JuliaCall</code> to find <code>Julia</code> not on PATH.</p>
 <ul>
 <li>Use <code><a href="reference/julia_setup.html">julia_setup(JULIA_HOME = "the folder that contains julia binary")</a></code>
 </li>
@@ -190,11 +188,16 @@
 <li>Set <code>JULIA_HOME</code> in command line environment.</li>
 </ul>
 </div>
+<div id="libstdc-so-6-version-glibcxx_3-4-xx-not-found" class="section level3">
+<h3 class="hasAnchor">
+<a href="#libstdc-so-6-version-glibcxx_3-4-xx-not-found" class="anchor"></a>libstdc++.so.6: version `GLIBCXX_3.4.xx’ not found</h3>
+<p>Such problems are usually on Linux machines. The cause for the problem is that R cannot find the libstdc++ version needed by <code>Julia</code>. To deal with the problem, users can export “TheFolderContainsJulia/lib/julia” to R_LD_LIBRARY_PATH.</p>
+</div>
 <div id="how-to-get-help" class="section level3">
 <h3 class="hasAnchor">
 <a href="#how-to-get-help" class="anchor"></a>How to Get Help</h3>
 <ul>
-<li>One way to get help for julia functions is just using <code>julia$help</code> like the following example:</li>
+<li>One way to get help for Julia functions is just using <code>julia$help</code> as the following example:</li>
 </ul>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="reference/julia_help.html">julia_help</a></span>(<span class="st">"sqrt"</span>)</a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; ```</span></a>
@@ -245,7 +248,7 @@
 <a class="sourceLine" id="cb4-47" data-line-number="47"><span class="co">#&gt; ```</span></a></code></pre></div>
 <ul>
 <li><p>The GitHub Pages for this repository host the documentation for the development version of <code>JuliaCall</code>: <a href="https://non-contradiction.github.io/JuliaCall/" class="uri">https://non-contradiction.github.io/JuliaCall/</a>.</p></li>
-<li><p>And you are more than welcome to contact me about <code>JuliaCall</code> at <a href="mailto:lch34677@gmail.com">lch34677@gmail.com</a> or <a href="mailto:cxl508@psu.edu">cxl508@psu.edu</a>.</p></li>
+<li><p>Also, you are more than welcome to contact me about <code>JuliaCall</code> at <a href="mailto:lch34677@gmail.com">lch34677@gmail.com</a> or <a href="mailto:cxl508@psu.edu">cxl508@psu.edu</a>.</p></li>
 </ul>
 </div>
 </div>
@@ -269,28 +272,43 @@
 </ul>
 <p>If you have any issues in developing an <code>R</code> package using <code>JuliaCall</code>, you may report it using the link: <a href="https://github.com/Non-Contradiction/JuliaCall/issues/new" class="uri">https://github.com/Non-Contradiction/JuliaCall/issues/new</a>, or email me at <a href="mailto:lch34677@gmail.com">lch34677@gmail.com</a> or <a href="mailto:cxl508@psu.edu">cxl508@psu.edu</a>.</p>
 </div>
-<div id="suggestion-and-issue-reporting" class="section level2">
+<div id="suggestion-issue-reporting-and-contributing" class="section level2">
 <h2 class="hasAnchor">
-<a href="#suggestion-and-issue-reporting" class="anchor"></a>Suggestion and Issue Reporting</h2>
-<p><code>JuliaCall</code> is under active development now. Any suggestion or issue reporting is welcome! You may report it using the link: <a href="https://github.com/Non-Contradiction/JuliaCall/issues/new" class="uri">https://github.com/Non-Contradiction/JuliaCall/issues/new</a>, or email me at <a href="mailto:lch34677@gmail.com">lch34677@gmail.com</a> or <a href="mailto:cxl508@psu.edu">cxl508@psu.edu</a>.</p>
-<p>If you encounter some issues which crash <code>R</code> or <code>RStudio</code>, then you may have met segfault errors. I am very sorry for this and will try my best to remove errors like that. It will be much appreciated if you can - download the source of <code>JuliaCall</code> from Github, - open <code>JuliaCall.Rproj</code> in your RStudio or open <code>R</code> from the directory where you download the source of <code>JuliaCall</code>, - run <code><a href="https://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code> to see the result of <code>R CMD check</code> for <code>JuliaCall</code> on your machine, - and paste the result to the issue report.</p>
+<a href="#suggestion-issue-reporting-and-contributing" class="anchor"></a>Suggestion, Issue Reporting, and Contributing</h2>
+<p><code>JuliaCall</code> is under active development now. Any suggestion or issue reporting is welcome! You may report it using the link: <a href="https://github.com/Non-Contradiction/JuliaCall/issues/new" class="uri">https://github.com/Non-Contradiction/JuliaCall/issues/new</a>, or email me at <a href="mailto:lch34677@gmail.com">lch34677@gmail.com</a> or <a href="mailto:cxl508@psu.edu">cxl508@psu.edu</a>. You are welcome to use the <a href="issue_template.html">issue template</a> and the <a href="pull_request_template.html">pull request template</a>. The <a href="CONTRIBUTING.html">contributing guide</a> provides some guidance for making contributions.</p>
+<div id="checking-juliacall-package" class="section level3">
+<h3 class="hasAnchor">
+<a href="#checking-juliacall-package" class="anchor"></a>Checking <code>JuliaCall</code> Package</h3>
+<p>To check and test the <code>JuliaCall</code> package, you need to have the source package. You can</p>
+<ul>
+<li>download the source of <code>JuliaCall</code> from Github,</li>
+<li>open <code>JuliaCall.Rproj</code> in your RStudio or open <code>R</code> from the downloaded directory,</li>
+<li>run <code><a href="https://www.rdocumentation.org/packages/devtools/topics/test">devtools::test()</a></code> to see the result of the test suite.</li>
+<li>run <code><a href="https://www.rdocumentation.org/packages/devtools/topics/check">devtools::check()</a></code> or click the <code>Check</code> button in the RStudio Build panel in the upper right to see the result of <code>R CMD check</code>.</li>
+</ul>
+</div>
 </div>
 <div id="other-interfaces-between-r-and-julia" class="section level2">
 <h2 class="hasAnchor">
-<a href="#other-interfaces-between-r-and-julia" class="anchor"></a>Other interfaces between R and Julia</h2>
+<a href="#other-interfaces-between-r-and-julia" class="anchor"></a>Other Interfaces Between R and Julia</h2>
 <ul>
 <li>
 <a href="https://github.com/JuliaInterop/RCall.jl"><code>RCall.jl</code></a> is a <code>Julia</code> package which embeds <code>R</code> in <code>Julia</code>. <code>JuliaCall</code> is inspired by <code>RCall.jl</code> and depends on <code>RCall.jl</code> for many functionalities like type conversion between <code>R</code> and <code>Julia</code>.</li>
 <li>
 <a href="https://github.com/johnmchambers/XRJulia"><code>XRJulia</code></a> is an <code>R</code> package based on John Chambers’ <code>XR</code> package and allows for structured integration of <code>R</code> with <code>Julia</code>. It connects to <code>Julia</code> and uses JSON to transfer data between <code>Julia</code> and <code>R</code>.</li>
 <li>
-<a href="https://github.com/armgong/rjulia"><code>RJulia</code></a> is an <code>R</code> package which embeds <code>Julia</code> in <code>R</code> as well as <code>JuliaCall</code>. It is not on CRAN yet and I haven’t tested it.</li>
+<a href="https://github.com/armgong/rjulia"><code>RJulia</code></a> is an <code>R</code> package which embeds <code>Julia</code> in <code>R</code> as well as <code>JuliaCall</code>. It is not on CRAN yet, and I haven’t tested it.</li>
 </ul>
 </div>
 <div id="license" class="section level2">
 <h2 class="hasAnchor">
 <a href="#license" class="anchor"></a>License</h2>
 <p><code>JuliaCall</code> is licensed under <a href="https://cran.r-project.org/web/licenses/MIT">MIT</a>.</p>
+</div>
+<div id="code-of-conduct" class="section level2">
+<h2 class="hasAnchor">
+<a href="#code-of-conduct" class="anchor"></a>Code of Conduct</h2>
+<p>Please note that the <code>JuliaCall</code> project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>
   </div>
@@ -310,9 +328,8 @@
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
-</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 <div class="developers">

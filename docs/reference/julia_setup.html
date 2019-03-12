@@ -32,7 +32,10 @@
 
 <meta property="og:title" content="Do initial setup for the JuliaCall package. — julia_setup" />
 
-<meta property="og:description" content="julia_setup does the initial setup for the JuliaCall package." />
+<meta property="og:description" content="julia_setup does the initial setup for the JuliaCall package.
+    It setups automatic type conversion, Julia display systems, etc,
+    and is necessary for every new R session to use the package.
+    If not carried out manually, it will be invoked automatically before other julia_xxx functions." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -127,12 +130,15 @@
 
     <div class="ref-description">
     
-    <p><code>julia_setup</code> does the initial setup for the JuliaCall package.</p>
+    <p><code>julia_setup</code> does the initial setup for the JuliaCall package.
+    It setups automatic type conversion, Julia display systems, etc,
+    and is necessary for every new R session to use the package.
+    If not carried out manually, it will be invoked automatically before other julia_xxx functions.</p>
     
     </div>
 
     <pre class="usage"><span class='fu'>julia_setup</span>(<span class='kw'>JULIA_HOME</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>verbose</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>install</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>useRCall</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+  <span class='kw'>force</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>useRCall</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>rebuild</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -153,7 +159,7 @@ about <code>julia_setup</code>.</p></td>
     </tr>
     <tr>
       <th>install</th>
-      <td><p>whether to execute install script for dependent julia packages, whose default value is TRUE;
+      <td><p>whether to execute installation script for dependent julia packages, whose default value is TRUE;
 but can be set to FALSE to save startup time when no installation of dependent julia packages is needed.</p></td>
     </tr>
     <tr>
@@ -164,6 +170,11 @@ but can be set to FALSE to save startup time when no installation of dependent j
       <th>useRCall</th>
       <td><p>whether or not you want to use RCall.jl in julia,
 which is an amazing package to access R in julia.</p></td>
+    </tr>
+    <tr>
+      <th>rebuild</th>
+      <td><p>whether to rebuild RCall.jl, whose default value is FALSE to save startup time.
+If a new version of R is used, then this parameter needs to be set to TRUE.</p></td>
     </tr>
     </table>
     

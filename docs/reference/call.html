@@ -33,7 +33,8 @@
 <meta property="og:title" content="Call julia functions. — call" />
 
 <meta property="og:description" content="julia_do.call is the do.call for julia.
-And julia_call calls julia functions." />
+And julia_call calls julia functions.
+For usage of these functions, see documentation of arguments and examples." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -129,7 +130,8 @@ And julia_call calls julia functions." />
     <div class="ref-description">
     
     <p><code>julia_do.call</code> is the <code>do.call</code> for julia.
-And <code>julia_call</code> calls julia functions.</p>
+And <code>julia_call</code> calls julia functions.
+For usage of these functions, see documentation of arguments and examples.</p>
     
     </div>
 
@@ -144,7 +146,9 @@ And <code>julia_call</code> calls julia functions.</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>func_name</th>
-      <td><p>the name of julia function you want to call.</p></td>
+      <td><p>the name of julia function you want to call.
+If you add "." after `func_name`,
+the julia function call will be broadcasted.</p></td>
     </tr>
     <tr>
       <th>arg_list</th>
@@ -159,7 +163,7 @@ or one of the options "R", "Julia" and "None".</p></td>
     </tr>
     <tr>
       <th>show_value</th>
-      <td><p>whether to display julia return value or not.</p></td>
+      <td><p>whether to invoke the julia display system or not.</p></td>
     </tr>
     <tr>
       <th>...</th>
@@ -176,7 +180,8 @@ or one of the options "R", "Julia" and "None".</p></td>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'>
 </div><div class='input'> <span class='co'>## julia_setup is quite time consuming</span>
-  <span class='fu'>julia_do.call</span>(<span class='st'>"sqrt"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fl'>2</span>))</div><div class='output co'>#&gt; [1] 1.414214</div><div class='input'>  <span class='fu'>julia_call</span>(<span class='st'>"sqrt"</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 1.414214</div><div class='input'>
+  <span class='fu'>julia_do.call</span>(<span class='st'>"sqrt"</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/list'>list</a></span>(<span class='fl'>2</span>))</div><div class='output co'>#&gt; [1] 1.414214</div><div class='input'>  <span class='fu'>julia_call</span>(<span class='st'>"sqrt"</span>, <span class='fl'>2</span>)</div><div class='output co'>#&gt; [1] 1.414214</div><div class='input'>  <span class='fu'>julia_call</span>(<span class='st'>"sqrt."</span>, <span class='fl'>1</span>:<span class='fl'>10</span>)</div><div class='output co'>#&gt;  [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751 2.828427
+#&gt;  [9] 3.000000 3.162278</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

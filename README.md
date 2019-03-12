@@ -18,8 +18,8 @@ Status](https://ci.appveyor.com/api/projects/status/github/Non-Contradiction/Jul
     Julia](#juliacall-for-seamless-integration-of-r-and-julia)
       - [Installation](#installation)
       - [Basic Usage](#basic-usage)
-      - [Troubleshooting and Way to Get
-        Help](#troubleshooting-and-way-to-get-help)
+      - [Troubleshooting and Ways to Get
+        Help](#troubleshooting-and-ways-to-get-help)
       - [JuliaCall for R Package
         Developers](#juliacall-for-r-package-developers)
       - [Suggestion, Issue Reporting, and
@@ -115,7 +115,7 @@ julia_installed_package("Optim")
 julia_library("Optim")
 ```
 
-## Troubleshooting and Way to Get Help
+## Troubleshooting and Ways to Get Help
 
 ### Julia is not found
 
@@ -253,7 +253,7 @@ reporting is welcome\! You may report it using the link:
 at <lch34677@gmail.com> or <cxl508@psu.edu>. You are welcome to use the
 [issue template](.github/issue_template.md) and the [pull request
 template](.github/pull_request_template.md). The [contributing
-guide](.github/CONTRIBUTING.md) gives some guidance to make
+guide](.github/CONTRIBUTING.md) provides some guidance for making
 contributions.
 
 ### Checking `JuliaCall` Package

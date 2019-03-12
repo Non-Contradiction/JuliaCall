@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Evaluate string commands in julia and get the result. — julia_eval • JuliaCall</title>
+<title>Evaluate string commands in julia and get the result back in R. — julia_eval • JuliaCall</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,12 +30,17 @@
 
 
 
-<meta property="og:title" content="Evaluate string commands in julia and get the result. — julia_eval" />
+<meta property="og:title" content="Evaluate string commands in julia and get the result back in R. — julia_eval" />
 
 <meta property="og:description" content="julia_eval evaluates string commands in julia and
-returns the result (automatically converted to an R object or a JuliaObject wrapper).
-If you don't need the result, maybe you could
-try julia_command." />
+returns the result to R.
+The returning julia object will be automatically converted
+to an R object or a JuliaObject wrapper,
+see the documentation of the argument `need_return` for more details.
+`julia_eval` will not invoke julia display system.
+If you don't need the returning result in R or
+you want to invoke the julia display system, you can
+use julia_command." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -123,7 +128,7 @@ try julia_command." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Evaluate string commands in julia and get the result.</h1>
+    <h1>Evaluate string commands in julia and get the result back in R.</h1>
     <small class="dont-index">Source: <a href='https://github.com/Non-Contradiction/JuliaCall/blob/master/R/interface.R'><code>R/interface.R</code></a></small>
     <div class="hidden name"><code>julia_eval.Rd</code></div>
     </div>
@@ -131,9 +136,14 @@ try julia_command." />
     <div class="ref-description">
     
     <p><code>julia_eval</code> evaluates string commands in julia and
-returns the result (automatically converted to an R object or a JuliaObject wrapper).
-If you don't need the result, maybe you could
-try <code>julia_command</code>.</p>
+returns the result to R.
+The returning julia object will be automatically converted
+to an R object or a JuliaObject wrapper,
+see the documentation of the argument `need_return` for more details.
+`julia_eval` will not invoke julia display system.
+If you don't need the returning result in R or
+you want to invoke the julia display system, you can
+use <code>julia_command</code>.</p>
     
     </div>
 
