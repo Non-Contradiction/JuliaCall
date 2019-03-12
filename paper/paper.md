@@ -50,6 +50,7 @@ It uses JavaScript Object Notation (JSON) format to transmit data, while `JuliaC
 It has performance disadvantages compared to `JuliaCall`.
 Table 1 depicts the times needed to transmit a $500\times 500$ matrix full of ones from `R` v3.5.2 to `Julia` v1.0.3 using `JuliaCall` v0.16.4 and `XRJulia` Github master b6224fa at the time of writing (there is no released version of `XRJulia` to support `Julia` v1.0 yet).
 The times are measured by `R` package `microbenchmark` with 1000 evaluation times.
+The script with the benchmark code and setup instructions can be found in the `paper` directory in [`JuliaCall` Github repository](https://github.com/Non-Contradiction/JuliaCall).
 In the header of the table, "lq" means lower quantile and "uq" means upper quantile.
 From Table 1, it can be seen that `JuliaCall` has a significant speed advantage of transmitting data between `R` and `Julia`.
 Package `RJulia` [@rjulia] also embeds `Julia` in `R`, but its functionality is quite limited,
