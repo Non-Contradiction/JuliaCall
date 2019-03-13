@@ -1,3 +1,12 @@
+# JuliaCall 0.16.5
+
+# JuliaCall 0.16.4.9000
+
+* Various improvements in documentation.
+* Add a `rebuild` argument in the function `julia_setup`.
+  The argument controls whether to rebuild `RCall.jl`, whose default value is `FALSE` to save startup time.
+  If a new version of R is used, then this parameter needs to be set to `TRUE`.
+
 # JuliaCall 0.16.4
 
 * Twelfth release on CRAN.
@@ -34,7 +43,7 @@
 # JuliaCall 0.15.1.9000
 
 * More deprecation warning fixed for `Julia` v0.7.
-* `JuliaCall` is now compatible with `RCall` v0.11.0 on `Julia` v0.7.
+* `JuliaCall` is now compatible with `RCall.jl` v0.11.0 on `Julia` v0.7.
 * Fix the problem caused by the failure of `Pkg.build("RCall")`.
 * Fix various small issues in `Julia` v1.0.
 * Fix a segfault on Windows with `Julia` v0.7 and v1.0.
