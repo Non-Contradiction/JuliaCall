@@ -17,3 +17,4 @@
 ^revdep$
 ^paper$
 ^LICENSE\.md$
+^\.zenodo\.json$
