@@ -1,0 +1,27 @@
+{
+    "description": "Changes since v0.16.4\n<ul>\n<li>Various improvements in documentation.</li>\n<li>Add a <code>rebuild</code> argument in the function <code>julia_setup</code>.\nThe argument controls whether to rebuild <code>RCall.jl</code>, whose default value is <code>FALSE</code> to save startup time.\nIf a new version of R is used, then this parameter needs to be set to <code>TRUE</code>.</li>\n</ul>", 
+    "license": "other-open", 
+    "title": "JuliaCall: an R package for seamless integration between R and Julia", 
+    "version": "v0.16.5", 
+    "upload_type": "software", 
+    "publication_date": "2019-03-13", 
+    "creators": [
+        {
+            "affiliation": "Department of Statistics, Pennsylvania State University at University Park", 
+            "name": "Changcheng Li"
+        }
+    ], 
+    "access_right": "open", 
+    "related_identifiers": [
+        {
+            "scheme": "url", 
+            "identifier": "https://github.com/Non-Contradiction/JuliaCall/tree/v0.16.5", 
+            "relation": "isSupplementTo"
+        }, 
+        {
+            "scheme": "doi", 
+            "identifier": "10.5281/zenodo.2591768", 
+            "relation": "isVersionOf"
+        }
+    ]
+}
