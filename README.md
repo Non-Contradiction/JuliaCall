@@ -295,3 +295,20 @@ package. You can
 Please note that the `JuliaCall` project is released with a [Contributor
 Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
 you agree to abide by its terms.
+
+## Citing
+
+If you use `JuliaCall` in research that resulted in publications, then
+please cite the `JuliaCall` paper using the following BibTeX entry:
+
+    @Article{,
+        author = {Changcheng Li},
+        title = {{JuliaCall}: an {R} package for seamless integration between {R} and {Julia}},
+        journal = {The Journal of Open Source Software},
+        publisher = {The Open Journal},
+        year = {2019},
+        volume = {4},
+        number = {35},
+        pages = {1284},
+        doi = {10.21105/joss.01284},
+      }
