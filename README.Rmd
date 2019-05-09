@@ -114,6 +114,14 @@ Such problems are usually on Linux machines.
 The cause for the problem is that R cannot find the libstdc++ version needed by `Julia`.
 To deal with the problem, users can export "TheFolderContainsJulia/lib/julia" to R_LD_LIBRARY_PATH.
 
+### RCall not properly installed
+
+The issue is usually caused by updates in R, and it can be typically solved by setting `rebuild` argument to `TRUE` in `julia_setup()` as follows.
+
+```{r eval=FALSE}
+JuliaCall::julia_setup(rebuild = TRUE)
+```
+
 ### How to Get Help
 
 - One way to get help for Julia functions is just using `julia$help` as the following example:
@@ -179,7 +187,7 @@ Please note that the `JuliaCall` project is released with a [Contributor Code of
 
 If you use `JuliaCall` in research that resulted in publications, then please cite the `JuliaCall` paper using the following BibTeX entry:
 ```
-@Article{,
+@Article{JuliaCall,
     author = {Changcheng Li},
     title = {{JuliaCall}: an {R} package for seamless integration between {R} and {Julia}},
     journal = {The Journal of Open Source Software},

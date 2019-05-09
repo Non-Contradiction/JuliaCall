@@ -112,7 +112,7 @@ julia_exists("c")
 
 julia_install_package_if_needed("Optim")
 julia_installed_package("Optim")
-#> [1] "0.17.2"
+#> [1] "0.18.1"
 julia_library("Optim")
 ```
 
@@ -135,6 +135,16 @@ Such problems are usually on Linux machines. The cause for the problem
 is that R cannot find the libstdc++ version needed by `Julia`. To deal
 with the problem, users can export “TheFolderContainsJulia/lib/julia” to
 R\_LD\_LIBRARY\_PATH.
+
+### RCall not properly installed
+
+The issue is usually caused by updates in R, and it can be typically
+solved by setting `rebuild` argument to `TRUE` in `julia_setup()` as
+follows.
+
+``` r
+JuliaCall::julia_setup(rebuild = TRUE)
+```
 
 ### How to Get Help
 
@@ -301,7 +311,7 @@ you agree to abide by its terms.
 If you use `JuliaCall` in research that resulted in publications, then
 please cite the `JuliaCall` paper using the following BibTeX entry:
 
-    @Article{,
+    @Article{JuliaCall,
         author = {Changcheng Li},
         title = {{JuliaCall}: an {R} package for seamless integration between {R} and {Julia}},
         journal = {The Journal of Open Source Software},
