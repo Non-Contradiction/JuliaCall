@@ -17,7 +17,6 @@ julia_install_package <- julia$install_package <- function(pkg_name){
     else {
         julia$call("Pkg.add", pkg_name)
     }
-    print("Finished.")
 }
 
 #' @rdname julia_package
