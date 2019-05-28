@@ -10,13 +10,21 @@ NULL
 
 #' @rdname julia_package
 #' @export
-julia_install_package <- julia$install_package <-
-    function(pkg_name) julia$command(paste0('pkg"add ', pkg_name, '"'))
+julia_install_package <- julia$install_package <- function(pkg_name){
+    if (newer(.julia$VERSION, "0.6.5")) {
+        julia$command("Pkg.update()")
+    }
+    julia$command(paste0('pkg"add ', pkg_name, '"'))
+}
 
 #' @rdname julia_package
 #' @export
-julia_installed_package <- julia$installed_package <-
-    function(pkg_name) julia$call("JuliaCall.installed_package", pkg_name)
+julia_installed_package <- julia$installed_package <- function(pkg_name){
+    if (newer(.julia$VERSION, "0.6.5")) {
+        julia$command("Pkg.update()")
+    }
+    julia$call("JuliaCall.installed_package", pkg_name)
+}
 
 #' @rdname julia_package
 #' @export
