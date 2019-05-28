@@ -28,13 +28,13 @@ julia_locate <- function(JULIA_HOME = NULL){
                 julia_bin <- "julia"
             }
         }
-        tryCatch(system2(julia_bin, "-E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE)[1],
+        tryCatch(system2(julia_bin, "--startup-file=no -E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE)[1],
                  warning = function(war) {},
                  error = function(err) NULL)
     }
     else {
         tryCatch(system2(file.path(JULIA_HOME, "julia"),
-                         "-E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE)[1],
+                         "--startup-file=no -E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE)[1],
                  warning = function(war) {},
                  error = function(err) NULL)
     }
@@ -46,6 +46,7 @@ julia_locate <- function(JULIA_HOME = NULL){
 ## We need to call julia from the command line to precompile packages.
 ## It is currently used in julia_setup in zzz.R and julia_library in package.R
 julia_line <- function(command, ...){
+    command <- c("--startup-file=no", command)
     system2(file.path(.julia$bin_dir, "julia"), shQuote(command), ...)
 }
 
