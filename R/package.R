@@ -11,7 +11,7 @@ NULL
 #' @rdname julia_package
 #' @export
 julia_install_package <- julia$install_package <-
-    function(pkg_name) julia$call("Pkg.add", pkg_name, need_return = FALSE)
+    function(pkg_name) julia$command(paste0('pkg"add ', pkg_name, '"'))
 
 #' @rdname julia_package
 #' @export

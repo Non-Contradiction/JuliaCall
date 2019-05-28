@@ -44,6 +44,10 @@ else
 
     ## needed by round
     const round1 = round
+
+    macro pkg_str(name)
+        return :( Pkg.add($name) )
+    end
 end
 
 function installed(name)
