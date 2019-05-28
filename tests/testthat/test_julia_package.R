@@ -10,7 +10,7 @@ test_that("test of functionality related to julia_package", {
     expect_null(julia_library("RCall"))
 
     ## test installation of packages from URL
-    if (utils::compareVersion(julia$VERSION, "0.6.5")) {
+    if (utils::compareVersion(julia$VERSION, "0.6.5") > 0) {
         expect_null(julia_install_package("https://github.com/JuliaIO/Suppressor.jl"))
     }
 })
