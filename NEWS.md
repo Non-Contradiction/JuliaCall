@@ -1,4 +1,10 @@
+# JuliaCall 0.16.5.9000
+
+* `julia_install_package` accepts URLs to install packages, fix #106.
+
 # JuliaCall 0.16.5
+
+* Thirteenth release on CRAN.
 
 # JuliaCall 0.16.4.9000
 
