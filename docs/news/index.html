@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">JuliaCall</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.16.6</span>
       </span>
     </div>
 
@@ -121,6 +121,33 @@
       <small>Source: <a href='https://github.com/Non-Contradiction/JuliaCall/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="juliacall-0-16-5-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-16-5-9000" class="anchor"></a>JuliaCall 0.16.5.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code>julia_install_package</code> accepts URLs to install packages, fix <a href='https://github.com/Non-Contradiction/JuliaCall/issues/106'>#106</a>.</li>
+<li>Do not let print in startup files to mess up with <code>julia_setup</code>, fix <a href='https://github.com/Non-Contradiction/JuliaCall/issues/105'>#105</a>.</li>
+</ul>
+</div>
+    <div id="juliacall-0-16-5" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-16-5" class="anchor"></a>JuliaCall 0.16.5<small> 2019-03-22 </small>
+</h1>
+<ul>
+<li>Thirteenth release on CRAN.</li>
+</ul>
+</div>
+    <div id="juliacall-0-16-4-9000" class="section level1">
+<h1 class="page-header">
+<a href="#juliacall-0-16-4-9000" class="anchor"></a>JuliaCall 0.16.4.9000<small> Unreleased </small>
+</h1>
+<ul>
+<li>Various improvements in documentation.</li>
+<li>Add a <code>rebuild</code> argument in the function <code>julia_setup</code>. The argument controls whether to rebuild <code>RCall.jl</code>, whose default value is <code>FALSE</code> to save startup time. If a new version of R is used, then this parameter needs to be set to <code>TRUE</code>.</li>
+</ul>
+</div>
     <div id="juliacall-0-16-4" class="section level1">
 <h1 class="page-header">
 <a href="#juliacall-0-16-4" class="anchor"></a>JuliaCall 0.16.4<small> 2019-02-18 </small>
@@ -193,7 +220,7 @@
 <ul>
 <li>More deprecation warning fixed for <code>Julia</code> v0.7.</li>
 <li>
-<code>JuliaCall</code> is now compatible with <code>RCall</code> v0.11.0 on <code>Julia</code> v0.7.</li>
+<code>JuliaCall</code> is now compatible with <code>RCall.jl</code> v0.11.0 on <code>Julia</code> v0.7.</li>
 <li>Fix the problem caused by the failure of <code>Pkg.build("RCall")</code>.</li>
 <li>Fix various small issues in <code>Julia</code> v1.0.</li>
 <li>Fix a segfault on Windows with <code>Julia</code> v0.7 and v1.0.</li>
@@ -524,6 +551,9 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#juliacall-0-16-5-9000">0.16.5.9000</a></li>
+        <li><a href="#juliacall-0-16-5">0.16.5</a></li>
+        <li><a href="#juliacall-0-16-4-9000">0.16.4.9000</a></li>
         <li><a href="#juliacall-0-16-4">0.16.4</a></li>
         <li><a href="#juliacall-0-16-3-9000">0.16.3.9000</a></li>
         <li><a href="#juliacall-0-16-2-9000">0.16.2.9000</a></li>

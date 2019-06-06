@@ -262,10 +262,13 @@ at <lch34677@gmail.com> or <cxl508@psu.edu>.
 reporting is welcome\! You may report it using the link:
 <https://github.com/Non-Contradiction/JuliaCall/issues/new>, or email me
 at <lch34677@gmail.com> or <cxl508@psu.edu>. You are welcome to use the
-[issue template](.github/issue_template.md) and the [pull request
-template](.github/pull_request_template.md). The [contributing
-guide](.github/CONTRIBUTING.md) provides some guidance for making
-contributions.
+[issue
+template](https://github.com/Non-Contradiction/JuliaCall/blob/master/.github/ISSUE_TEMPLATE/bug_report.md)
+and the [pull request
+template](https://github.com/Non-Contradiction/JuliaCall/blob/master/.github/pull_request_template.md).
+The [contributing
+guide](https://github.com/Non-Contradiction/JuliaCall/blob/master/.github/CONTRIBUTING.md)
+provides some guidance for making contributions.
 
 ### Checking `JuliaCall` Package
 
@@ -303,8 +306,9 @@ package. You can
 ## Code of Conduct
 
 Please note that the `JuliaCall` project is released with a [Contributor
-Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project,
-you agree to abide by its terms.
+Code of
+Conduct](https://github.com/Non-Contradiction/JuliaCall/blob/master/CODE_OF_CONDUCT.md).
+By contributing to this project, you agree to abide by its terms.
 
 ## Citing
 

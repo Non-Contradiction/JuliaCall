@@ -1,6 +1,7 @@
 # JuliaCall 0.16.5.9000
 
 * `julia_install_package` accepts URLs to install packages, fix #106.
+* Do not let print in startup files to mess up with `julia_setup`, fix #105.
 
 # JuliaCall 0.16.5
 
