@@ -93,7 +93,7 @@ eng_juliacall <- function(options) {
     code <- options$code
 
     if (!options$eval) {
-        knitr::engine_output(options, paste(code, collapse = "\n"), "")
+        return(knitr::engine_output(options, paste(code, collapse = "\n"), ""))
     }
 
     if (!.julia$initialized) {
