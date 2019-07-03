@@ -1,3 +1,11 @@
+# JuliaCall 0.16.6.9000
+
+* Fix bug about eval option in RMarkdown document, fix #109.
+
+# JuliaCall 0.16.6
+
+* Fourteenth release on CRAN.
+
 # JuliaCall 0.16.5.9000
 
 * `julia_install_package` accepts URLs to install packages, fix #106.
