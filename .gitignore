@@ -6,6 +6,7 @@
 *.so
 *.a
 *.d
+*.dll
 inst/doc
 /revdep/.cache.rds
 /revdep/checks.noindex
