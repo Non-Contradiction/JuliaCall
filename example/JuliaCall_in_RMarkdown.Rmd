@@ -26,7 +26,12 @@ a = sqrt(2)
 
 `Plots.jl` is an easy to use and powerful julia package for plotting,
 see <https://github.com/JuliaPlots/Plots.jl> for more detail.
+Before the first time using `Plots.jl`, you first need to install the package like:
+```{julia eval = FALSE}
+import Pkg; Pkg.add("Plots")
+```
 
+After installation of the package, you can use it like this:
 ```{julia}
 using Plots
 gr()
@@ -35,7 +40,7 @@ plot(Plots.fakedata(50,5),w=3)
 
 ## Get Access to Julia in R Chunk
 
-And you can also get access to julia variables in R code chunk quite easily
+You can also get access to julia variables in R code chunk quite easily
 using `JuliaCall`, for example:
 ```{r}
 library(JuliaCall)
