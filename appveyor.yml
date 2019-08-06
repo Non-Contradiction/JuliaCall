@@ -48,11 +48,11 @@ install:
   - ps: (new-object net.webclient).DownloadFile(
       "http://mirrors.ctan.org/systems/win32/miktex/setup/windows-x86/portable-miktex.exe",
       "C:\projects\miktex-portable.exe")
-  - C:\projects\miktex-portable.exe -oC:\miktex >NUL
-  - set "PATH=%PATH%;c:\miktex\texmfs\install\miktex\bin"
+  - C:\projects\miktex-portable.exe --unattended --auto-install=yes
+  # - set "PATH=%PATH%;c:\miktex\texmfs\install\miktex\bin"
   # autoinstall latex packages (0=no, 1=autoinstall, 2=ask)
   # this adds this to the registry!
-  - initexmf --set-config-value "[MPM]AutoInstall=1"
+  # - initexmf --set-config-value "[MPM]AutoInstall=1"
 
   - set PATH=C:\projects\R\bin\x64;%PATH%
 
