@@ -3,7 +3,7 @@
 ## <https://github.com/Non-Contradiction/JuliaCall/issues/9>
 ## as well as coming up with the solution
 
-CurrentRhome = ARGS[1]
+CurrentRhome = normpath(ARGS[1])
 
 ## println(Rhome)
 
@@ -41,7 +41,7 @@ catch e
     Pkg.build("RCall")
 end
 
-if RCall.Rhome != CurrentRhome
+if normpath(RCall.Rhome) != CurrentRhome
     if installed("RCall") >= v"0.10.2"
         Pkg.build("RCall")
     else

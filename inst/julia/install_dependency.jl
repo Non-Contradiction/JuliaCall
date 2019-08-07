@@ -3,7 +3,7 @@
 ## <https://github.com/Non-Contradiction/JuliaCall/issues/9>
 ## as well as coming up with the solution
 
-CurrentRhome = ARGS[1]
+CurrentRhome = normpath(ARGS[1])
 
 ## println(Rhome)
 
