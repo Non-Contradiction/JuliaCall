@@ -1,21 +1,31 @@
 #' Using julia packages.
 #'
 #' @param pkg_name the julia package name.
+#' @param pkg_name_or_url the julia package name or url.
 #' @param ... you can provide none or one or multiple julia package names here.
 #' @return julia_installed_package will return the version number of the julia package,
 #'     "nothing" if the package is not installed.
+#' @examples
+#' \donttest{ ## julia_setup is quite time consuming
+#'   julia_install_package("DataFrames")
+#'   julia_install_package("https://github.com/JuliaData/DataFrames.jl")
+#'   julia_installed_package("DataFrames")
+#'   julia_install_package_if_needed("DataFrames")
+#'   julia_update_package("DataFrame")
+#'   julia_library("DataFrames")
+#' }
 #'
 #' @name julia_package
 NULL
 
 #' @rdname julia_package
 #' @export
-julia_install_package <- julia$install_package <- function(pkg_name){
+julia_install_package <- julia$install_package <- function(pkg_name_or_url){
     if (newer(.julia$VERSION, "0.6.5")) {
-        julia$command(paste0('pkg"add ', pkg_name, '"'))
+        julia$command(paste0('pkg"add ', pkg_name_or_url, '"'))
     }
     else {
-        julia$call("Pkg.add", pkg_name)
+        julia$call("Pkg.add", pkg_name_or_url)
     }
 }
 

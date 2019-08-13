@@ -9,7 +9,7 @@
 \alias{julia_library}
 \title{Using julia packages.}
 \usage{
-julia_install_package(pkg_name)
+julia_install_package(pkg_name_or_url)
 
 julia_installed_package(pkg_name)
 
@@ -20,6 +20,8 @@ julia_update_package(...)
 julia_library(pkg_name)
 }
 \arguments{
+\item{pkg_name_or_url}{the julia package name or url.}
+
 \item{pkg_name}{the julia package name.}
 
 \item{...}{you can provide none or one or multiple julia package names here.}
@@ -30,4 +32,15 @@ julia_installed_package will return the version number of the julia package,
 }
 \description{
 Using julia packages.
+}
+\examples{
+\donttest{ ## julia_setup is quite time consuming
+  julia_install_package("DataFrames")
+  julia_install_package("https://github.com/JuliaData/DataFrames.jl")
+  julia_installed_package("DataFrames")
+  julia_install_package_if_needed("DataFrames")
+  julia_update_package("DataFrame")
+  julia_library("DataFrames")
+}
+
 }
