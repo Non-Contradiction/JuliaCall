@@ -45,16 +45,21 @@ install:
 
   # Download miktex portable
 
-  - ps: (new-object net.webclient).DownloadFile(
-      "http://mirrors.ctan.org/systems/win32/miktex/setup/windows-x86/portable-miktex.exe",
-      "C:\projects\miktex-portable.exe")
-  - C:\projects\miktex-portable.exe --unattended --auto-install=yes --portable=c:\miktex
-  - set "PATH=%PATH%;c:\miktex\texmfs\install\miktex\bin\x64"
+  # - ps: (new-object net.webclient).DownloadFile(
+  #     "http://mirrors.ctan.org/systems/win32/miktex/setup/windows-x86/portable-miktex.exe",
+  #     "C:\projects\miktex-portable.exe")
+  # - C:\projects\miktex-portable.exe --unattended --auto-install=yes --portable=c:\miktex
+  # - set "PATH=%PATH%;c:\miktex\texmfs\install\miktex\bin\x64"
   # autoinstall latex packages (0=no, 1=autoinstall, 2=ask)
   # this adds this to the registry!
   # - initexmf --set-config-value "[MPM]AutoInstall=1"
 
   - set PATH=C:\projects\R\bin\x64;%PATH%
+  
+  # Use tinytex for latex
+  
+  - Rscript -e "install.packages('tinytex', repos='http://cran.rstudio.com/'); tinytex::install_tinytex(force=TRUE); tinytex:::install_yihui_pkgs()"
+  - set PATH=%APPDATA%\\TinyTeX\\bin\\win32;%PATH%
 
   # Download and install Rtools
 
