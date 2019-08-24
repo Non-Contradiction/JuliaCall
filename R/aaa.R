@@ -24,6 +24,21 @@ julia_locate <- function(JULIA_HOME = NULL){
         if (julia_bin == "") {
             if (.Platform$OS.type == "unix") {
                 julia_bin <- system2("bash", "-l -c 'which julia'", stdout = TRUE)[1]
+            } else if (.Platform$OS.type == "windows" ) {
+                # look for julia in the most common installation path
+                appdata_local_path <- file.path(sprintf("C:/Users/%s", Sys.info()[["login"]]), "AppData/Local")
+
+                # get a list of folder names
+                ld <- list.dirs(appdata_local_path, recursive = FALSE, full.names = FALSE)
+
+                # which of these folers start with "Julia"
+                x = ld[sort(which(substr(ld,1,5) == "Julia"))]
+                # TODO if interactive() let the user choose a version of Julia
+                # keep the lastest version of Julia as that is likeley to be the default
+                x = x[length(x)]
+
+                # filter the ld for folders that starts with Julia
+                julia_bin <- file.path(appdata_local_path, x, "bin/julia.exe")
             } else {
                 julia_bin <- "julia"
             }
@@ -54,4 +69,4 @@ newer <- function(x, y){
     x <- substring(x, 1, 5)
     y <- substring(y, 1, 5)
     utils::compareVersion(x, y) >= 0
-    }
+}
