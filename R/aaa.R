@@ -25,14 +25,23 @@ julia_locate <- function(JULIA_HOME = NULL){
             if (.Platform$OS.type == "unix") {
                 julia_bin <- system2("bash", "-l -c 'which julia'", stdout = TRUE)[1]
             } else if (.Platform$OS.type == "windows" ) {
+                windows_login_id <- Sys.info()[["login"]]
+                if(windows_login_id == "unknown") {
+                    stop("The Windows login is 'unknown'. Can not find julia executable")
+                }
+
                 # look for julia in the most common installation path
-                appdata_local_path <- file.path(sprintf("C:/Users/%s", Sys.info()[["login"]]), "AppData/Local")
+                appdata_local_path <- file.path("C:/Users/", windows_login_id, "AppData/Local")
 
                 # get a list of folder names
                 ld <- list.dirs(appdata_local_path, recursive = FALSE, full.names = FALSE)
 
                 # which of these folers start with "Julia"
                 x = ld[sort(which(substr(ld,1,5) == "Julia"))]
+
+                if(length(x) == 0) {
+                    stop(sprintf("Can not find the Julia installation in the default installation path '%s'", appdata_local_path))
+                }
                 # TODO if interactive() let the user choose a version of Julia
                 # keep the lastest version of Julia as that is likeley to be the default
                 x = x[length(x)]
