@@ -25,13 +25,19 @@ julia_locate <- function(JULIA_HOME = NULL){
             if (.Platform$OS.type == "unix") {
                 julia_bin <- system2("bash", "-l -c 'which julia'", stdout = TRUE)[1]
             } else if (.Platform$OS.type == "windows" ) {
-                windows_login_id <- Sys.info()[["login"]]
-                if(windows_login_id == "unknown") {
-                    stop("The Windows login is 'unknown'. Can not find julia executable")
+                # look for julia in the most common installation path
+                appdata_local_path <- Sys.getenv("LOCALAPPDATA")
+
+
+                # if the path is not defined, then try to construct it manually
+                if(appdata_local_path == "") {
+                    windows_login_id <- Sys.info()[["login"]]
+                    if(windows_login_id == "unknown") {
+                        stop("The Windows login is 'unknown'. Can not find julia executable")
+                    }
+                    appdata_local_path <- file.path("C:/Users/", windows_login_id, "AppData/Local")
                 }
 
-                # look for julia in the most common installation path
-                appdata_local_path <- file.path("C:/Users/", windows_login_id, "AppData/Local")
 
                 # get a list of folder names
                 ld <- list.dirs(appdata_local_path, recursive = FALSE, full.names = FALSE)
