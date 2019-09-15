@@ -1,11 +1,11 @@
-using Arrow
+using .Arrow
 import RCall.sexp
 import RCall.rcopy
 import RCall: RClass, rcopytype
 
 ## Julia Tuple will be convert to S3 class JuliaTuple based on R list
 
-function sexp(x ::Primitive{Float64})
+function sexp(x ::Primitive)
     sexp(x[:])
 end
 

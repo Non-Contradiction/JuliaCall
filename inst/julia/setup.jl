@@ -230,4 +230,12 @@ function include1(fname)
     end
 end
 
+using RCall.Requires
+
+function __init__()
+    @require Arrow="69666777-d1a9-59fb-9406-91d4454c9d45" include("arrow.jl")
 end
+
+end
+
+using Main.JuliaCall
