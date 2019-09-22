@@ -12,7 +12,7 @@
 #' @export
 autowrap <- function(type, fields = NULL, methods = c()){
     addExt(type, fields, methods)
-    cmd <- paste0('@eval JuliaCall @suppress_err begin sexp(x :: Main.',
+    cmd <- paste0('@eval JuliaCall begin sexp(x :: Main.',
                   type,
                   ') = sexp(JuliaObject(x, "',
                   type,
