@@ -1,4 +1,4 @@
-function_wrap <- function(env, pkgname, fname){
+function_wrap <- function(fname, pkgname = "Main", env = parent.frame()){
   func_name <- paste0(pkgname, ".", fname)
   force(func_name)
   f <- function(...,
