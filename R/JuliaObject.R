@@ -44,6 +44,7 @@ juliaobjectnew <- function(id, type = "Regular"){
     }
     # self$getID <- function() self$id
     class(self) <- "JuliaObject"
+    self$. <- function(...) julia_call("JuliaCall.apply", self, ...)
 
     # debugging for freeing
     # reg.finalizer(self, rmobj)
