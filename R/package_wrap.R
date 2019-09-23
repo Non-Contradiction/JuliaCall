@@ -22,6 +22,10 @@ julia_pkg_import <- function(pkg_name, func_list){
   env$setup <- function(...){
     JuliaCall::julia_setup(...)
     JuliaCall::julia_library(pkg_name)
+    for (hook in env$hooks) {
+      if (is.function(hook)) {hook()}
+      else {warning("Some hook is not a function.")}
+    }
     env$initialized <- TRUE
   }
   for (fname in func_list) {
@@ -30,4 +34,9 @@ julia_pkg_import <- function(pkg_name, func_list){
                    env = env)
   }
   env
+}
+
+hook_setup <- function(env, func){
+  if (is.function(func)) {env$hooks <- c(env$hooks, func)}
+  else {warning("Some hook is not a function.")}
 }
