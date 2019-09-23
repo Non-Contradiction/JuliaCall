@@ -1,6 +1,6 @@
 context("JuliaObject test")
 
-test_that("test of the JuliaObject", {
+test_that("test of JuliaObject", {
     skip_on_cran()
     julia <- julia_setup()
 
@@ -29,7 +29,7 @@ test_that("test of the JuliaObject", {
     remove(r)
 })
 
-test_that("test of the JuliaObject freeing", {
+test_that("test of JuliaObject freeing", {
     skip_on_cran()
     julia <- julia_setup()
 
@@ -45,4 +45,19 @@ test_that("test of the JuliaObject freeing", {
     count2 <- julia_eval("length(keys(RCall.jtypExtPtrs))")
     expect_equal(count2, count0)
 
+})
+
+test_that("test of callable JuliaObject", {
+    skip_on_cran()
+    julia <- julia_setup()
+
+    julia_command("struct Callable end")
+    julia_command("(::Callable)(x...) = x")
+    r <- julia_eval("Callable()")
+    r1 <- r$.(1,2,3)
+    expect_equal(length(r1), 3)
+    expect_equal(r1[[1]], 1)
+    expect_equal(r1[[2]], 2)
+    expect_equal(r1[[3]], 3)
+    expect_true(inherits(r1, "JuliaTuple"))
 })
