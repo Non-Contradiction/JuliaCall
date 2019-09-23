@@ -1,11 +1,11 @@
 julia_function <- function(func_name, pkg_name = "Main",
-                           env = emptyenv()){
+                           env = new.env(emptyenv())){
   fname <- paste0(pkg_name, ".", func_name)
   force(fname)
   f <- function(...,
                 need_return = c("R", "Julia", "None"),
                 show_value = FALSE){
-    if (!isTRUE(env$initialized)) {
+    if (!isTRUE(env$initialized) && is.function(env$setup)) {
       env$setup()
     }
     JuliaCall::julia_do.call(func_name = fname, list(...),
@@ -14,6 +14,7 @@ julia_function <- function(func_name, pkg_name = "Main",
   }
   force(f)
   env[[func_name]] <- f
+  f
 }
 
 julia_pkg_import <- function(pkg_name, func_list){
