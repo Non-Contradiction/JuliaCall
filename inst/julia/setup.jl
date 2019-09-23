@@ -230,4 +230,8 @@ function include1(fname)
     end
 end
 
+function apply(f, args...)
+    f(args...)
+end
+
 end
