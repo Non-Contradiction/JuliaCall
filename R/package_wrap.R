@@ -8,9 +8,9 @@ julia_function <- function(func_name, pkg_name = "Main",
     if (!isTRUE(env$initialized) && is.function(env$setup)) {
       env$setup()
     }
-    JuliaCall::julia_do.call(func_name = fname, list(...),
-                             need_return = match.arg(need_return),
-                             show_value = show_value)
+    julia_do.call(func_name = fname, list(...),
+                  need_return = match.arg(need_return),
+                  show_value = show_value)
   }
   force(f)
   env[[func_name]] <- f
@@ -20,8 +20,8 @@ julia_function <- function(func_name, pkg_name = "Main",
 julia_pkg_import <- function(pkg_name, func_list,
                              env = new.env(parent = emptyenv())){
   env$setup <- function(...){
-    JuliaCall::julia_setup(...)
-    JuliaCall::julia_library(pkg_name)
+    julia_setup(...)
+    julia_library(pkg_name)
     for (hook in env$hooks) {
       if (is.function(hook)) {hook()}
       else {warning("Some hook is not a function.")}
