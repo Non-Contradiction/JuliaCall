@@ -36,7 +36,7 @@ julia_pkg_import <- function(pkg_name, func_list){
   env
 }
 
-hook_setup <- function(env, func){
+julia_pkg_hook <- function(env, func){
   if (is.function(func)) {env$hooks <- c(env$hooks, func)}
   else {warning("Some hook is not a function.")}
 }
