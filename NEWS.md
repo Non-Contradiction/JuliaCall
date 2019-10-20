@@ -1,6 +1,13 @@
+# JuliaCall 0.16.7.9000
+
+* Bug fixes and add CI tests for function `autowrap`.
+* New features for automatic package wrapping: `julia_function`, `julia_pkg_import`, and `julia_pkg_hook`.
+* `$.()` for `Julia` callable object syntax.
+
 # JuliaCall 0.16.6.9000
 
 * Fix bug about eval option in RMarkdown document, fix #109.
+* Add a way to find Julia.exe on Windows when JULIA_HOME is not set. Thanks to @xiaodaigh.
 
 # JuliaCall 0.16.6
 
