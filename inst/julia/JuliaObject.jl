@@ -1,15 +1,4 @@
 import RCall.sexp
-import Base.get
-
-# struct JuliaObjectID
-#     i :: Int32
-# end
-#
-# function nextid(id :: JuliaObjectID)
-#     JuliaObjectID(id.i + 1)
-# end
-#
-# JuliaObjectID() = JuliaObjectID(0)
 
 struct JuliaObject
     id :: Ptr{RCall.ExtPtrSxp}
@@ -17,7 +6,7 @@ struct JuliaObject
     JuliaObject(id :: Ptr{RCall.ExtPtrSxp}, typ = "Regular") = new(id, typ)
 end
 
-function getPlainID(x :: JuliaObject)
+function getID(x :: JuliaObject)
     x.id
 end
 
@@ -25,39 +14,7 @@ function getType(x :: JuliaObject)
     x.typ
 end
 
-# mutable struct JuliaObjectContainer
-#     object_dict :: Dict{JuliaObjectID, Any}
-#     ind :: JuliaObjectID
-# end
-#
-# JuliaObjectContainer() = JuliaObjectContainer(Dict(), JuliaObjectID())
-#
-# function add!(container :: JuliaObjectContainer, x, typ = "Regular")
-#     container.ind = nextid(container.ind)
-#     container.object_dict[container.ind] = x
-#     JuliaObject(container.ind, typ)
-# end
-
-# function remove!(container :: JuliaObjectContainer, id)
-#     delete!(container.object_dict, id)
-# end
-
-# function get(container :: JuliaObjectContainer, id :: JuliaObjectID)
-#     container.object_dict[id]
-# end
-#
-# function get(container :: JuliaObjectContainer, id)
-#     container.object_dict[JuliaObjectID(id)]
-# end
-
-## As long as the interface stays the same, the following code should be fine.
-## The global JuliaObjectContainer julia_object_stack
-
-# const julia_object_stack = JuliaObjectContainer()
-
 function new_obj(obj, typ = "Regular")
-    # add!(julia_object_stack, obj, typ)
-
     # wrap in a `Ref`
     refj = Ref(obj)
     jptr = pointer_from_objref(refj)
@@ -84,7 +41,7 @@ JuliaObject(x, typ = "Regular") = new_obj(x, typ)
 const makeJuliaObjectInR = reval("JuliaCall:::juliaobjectnew")
 
 function sexp(x :: JuliaObject)
-    RCall.rcall_p(makeJuliaObjectInR, getPlainID(x), getType(x))
+    RCall.rcall_p(makeJuliaObjectInR, getID(x), getType(x))
 end
 
 import RCall.rcopy
