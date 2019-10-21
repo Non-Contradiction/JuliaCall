@@ -154,3 +154,12 @@ stdout_capture_command <- function(buffer){
              warning = function(w) w,
              error = function(e) stop(e))
 }
+
+julia_notebook_setup <- function(...){
+    julia_setup(...)
+    .julia$rmd <- TRUE
+    julia_command("Base.pushdisplay(JuliaCall.rmd_display);")
+    njulia <- function(...)
+        paste0(eng_juliacall(...), collapse = "\n")
+    knitr::knit_engines$set("julia" = njulia)
+}
