@@ -1,0 +1,212 @@
+pkgname <- "convexjlr"
+source(file.path(R.home("share"), "R", "examples-header.R"))
+options(warn = 1)
+options(pager = "console")
+library('convexjlr')
+
+base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+cleanEx()
+nameEx("Expr")
+### * Expr
+
+flush(stderr()); flush(stdout())
+
+### Name: Expr
+### Title: Create expressions to be used for optimization problem creation
+### Aliases: Expr
+
+### ** Examples
+
+## Not run: 
+##D     convex_setup()
+##D     x <- Variable(2)
+##D     x1 <- Expr(x + 1)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("J")
+### * J
+
+flush(stderr()); flush(stdout())
+
+### Name: J
+### Title: Make a variable to be of Julia's awareness
+### Aliases: J
+
+### ** Examples
+
+## Not run: 
+##D     convex_setup()
+##D     b <- J(c(1:2))
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("addConstraint")
+### * addConstraint
+
+flush(stderr()); flush(stdout())
+
+### Name: addConstraint
+### Title: Add constraints to optimization problem
+### Aliases: addConstraint
+
+### ** Examples
+
+## Not run: 
+##D     convex_setup()
+##D     x <- Variable(4)
+##D     b <- J(c(1:4))
+##D     p <- minimize(sum((x - b) ^ 2))
+##D     p <- addConstraint(p, x >= 0, x <= 3)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("convex_setup")
+### * convex_setup
+
+flush(stderr()); flush(stdout())
+
+### Name: convex_setup
+### Title: Doing the setup for the package convexjlr
+### Aliases: convex_setup
+
+### ** Examples
+
+## Not run: 
+##D convex_setup()
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("cvx_optim")
+### * cvx_optim
+
+flush(stderr()); flush(stdout())
+
+### Name: cvx_optim
+### Title: Solve optimization problem
+### Aliases: cvx_optim
+
+### ** Examples
+
+## Not run: 
+##D     convex_setup()
+##D     x <- Variable()
+##D     b <- 1
+##D     p <- minimize(sum((x - b) ^ 2))
+##D     cvx_optim(p)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("problem_creating")
+### * problem_creating
+
+flush(stderr()); flush(stdout())
+
+### Name: problem_creating
+### Title: Create optimization problem
+### Aliases: problem_creating minimize maximize satisfy
+
+### ** Examples
+
+## Not run: 
+##D     convex_setup()
+##D     x <- Variable(4)
+##D     b <- J(c(1:4))
+##D     p <- minimize(sum((x - b) ^ 2), x >= 0, x <= 3)
+##D     p <- maximize(-sum((x - b) ^ 2), x >= 0, x <= 3)
+##D     p <- satisfy(sum((x - b) ^ 2) <= 1, x >= 0, x <= 3)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("property")
+### * property
+
+flush(stderr()); flush(stdout())
+
+### Name: property
+### Title: Get properties of optimization problem
+### Aliases: property status optval
+
+### ** Examples
+
+## Not run: 
+##D     convex_setup()
+##D     x <- Variable(2)
+##D     b <- J(c(1:2))
+##D     p <- minimize(sum((x - b) ^ 2))
+##D     cvx_optim(p)
+##D     status(p)
+##D     optval(p)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("value")
+### * value
+
+flush(stderr()); flush(stdout())
+
+### Name: value
+### Title: Get values of expressions at optimizer
+### Aliases: value evaluate
+
+### ** Examples
+
+## Not run: 
+##D     convex_setup()
+##D     x <- Variable(4)
+##D     b <- J(c(1:4))
+##D     p <- minimize(sum((x - b) ^ 2))
+##D     cvx_optim(p)
+##D     value(x[1] + x[2], x[3] + x[4])
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("variable_creating")
+### * variable_creating
+
+flush(stderr()); flush(stdout())
+
+### Name: variable_creating
+### Title: Create variable for optimization problem
+### Aliases: variable_creating Variable Semidefinite
+
+### ** Examples
+
+## Not run: 
+##D     convex_setup()
+##D     x <- Variable(4)
+##D     X <- Variable(c(4, 4), sign = "Positive")
+##D     S <- Semidefinite(4)
+## End(Not run)
+
+
+
+### * <FOOTER>
+###
+cleanEx()
+options(digits = 7L)
+base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+grDevices::dev.off()
+###
+### Local variables: ***
+### mode: outline-minor ***
+### outline-regexp: "\\(> \\)?### [*]+" ***
+### End: ***
+quit('no')

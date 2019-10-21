@@ -1,0 +1,1572 @@
+
+R version 3.6.1 (2019-07-05) -- "Action of the Toes"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "iai"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> options(pager = "console")
+> library('iai')
+
+Attaching package: 'iai'
+
+The following object is masked from 'package:stats':
+
+    predict
+
+The following objects are masked from 'package:base':
+
+    apply, transform
+
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("apply")
+> ### * apply
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: apply
+> ### Title: Return the leaf index in a tree model into which each point in
+> ###   the features falls
+> ### Aliases: apply
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::apply(lnr, X)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("apply_nodes")
+> ### * apply_nodes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: apply_nodes
+> ### Title: Return the indices of the points in the features that fall into
+> ###   each node of a trained tree model
+> ### Aliases: apply_nodes
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::apply_nodes(lnr, X)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("as.mixeddata")
+> ### * as.mixeddata
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: as.mixeddata
+> ### Title: Convert a vector of values to IAI mixed data format
+> ### Aliases: as.mixeddata
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("clone")
+> ### * clone
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: clone
+> ### Title: Return an unfitted copy of a learner with the same parameters
+> ### Aliases: clone
+> 
+> ### ** Examples
+> 
+> ## Not run: new_lnr <- iai::clone(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("decision_path")
+> ### * decision_path
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: decision_path
+> ### Title: Return a matrix where entry '(i, j)' is true if the 'i'th point
+> ###   in the features passes through the 'j'th node in a trained tree
+> ###   model.
+> ### Aliases: decision_path
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::decision_path(lnr, X)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("delete_rich_output_param")
+> ### * delete_rich_output_param
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: delete_rich_output_param
+> ### Title: Delete a global rich output parameter
+> ### Aliases: delete_rich_output_param
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::delete_rich_output_param("simple_layout")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fit")
+> ### * fit
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fit
+> ### Title: Fits a model to the training data
+> ### Aliases: fit
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fit_cv")
+> ### * fit_cv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fit_cv
+> ### Title: Fits a grid search to the training data with cross-validation
+> ### Aliases: fit_cv
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fit_transform")
+> ### * fit_transform
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fit_transform
+> ### Title: Fit an imputation model using the given features and impute the
+> ###   missing values in these features
+> ### Aliases: fit_transform
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("fit_transform_cv")
+> ### * fit_transform_cv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: fit_transform_cv
+> ### Title: Train a grid using cross-validation with features and impute all
+> ###   missing values in these features
+> ### Aliases: fit_transform_cv
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_best_params")
+> ### * get_best_params
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_best_params
+> ### Title: Return the best parameter combination from a grid
+> ### Aliases: get_best_params
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_best_params(grid)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_classification_label")
+> ### * get_classification_label
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_classification_label
+> ### Title: Return the predicted label at a node of a tree
+> ### Aliases: get_classification_label
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_classification_label(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_classification_proba")
+> ### * get_classification_proba
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_classification_proba
+> ### Title: Return the predicted probabilities of class membership at a node
+> ###   of a tree
+> ### Aliases: get_classification_proba
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_classification_proba(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_depth")
+> ### * get_depth
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_depth
+> ### Title: Get the depth of a node of a tree
+> ### Aliases: get_depth
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_depth(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_grid_results")
+> ### * get_grid_results
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_grid_results
+> ### Title: Return a summary of the results from the grid search
+> ### Aliases: get_grid_results
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_grid_results(grid)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_learner")
+> ### * get_learner
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_learner
+> ### Title: Return the fitted learner using the best parameter combination
+> ###   from a grid
+> ### Aliases: get_learner
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::get_learner(grid)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_lower_child")
+> ### * get_lower_child
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_lower_child
+> ### Title: Get the index of the lower child at a split node of a tree
+> ### Aliases: get_lower_child
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_lower_child(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_num_nodes")
+> ### * get_num_nodes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_num_nodes
+> ### Title: Return the number of nodes in a trained learner
+> ### Aliases: get_num_nodes
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_num_nodes(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_num_samples")
+> ### * get_num_samples
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_num_samples
+> ### Title: Get the number of training points contained in a node of a tree
+> ### Aliases: get_num_samples
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_num_samples(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_params")
+> ### * get_params
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_params
+> ### Title: Return the value of all parameters on a learner
+> ### Aliases: get_params
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_params(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_parent")
+> ### * get_parent
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_parent
+> ### Title: Get the index of the parent node at a node of a tree
+> ### Aliases: get_parent
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_parent(lnr, 2)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_prediction_constant")
+> ### * get_prediction_constant
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_prediction_constant
+> ### Title: Return the constant term in the prediction in the trained
+> ###   learner
+> ### Aliases: get_prediction_constant
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_prediction_constant(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_prediction_weights")
+> ### * get_prediction_weights
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_prediction_weights
+> ### Title: Return the weights for numeric and categoric features used for
+> ###   prediction in the trained learner
+> ### Aliases: get_prediction_weights
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_prediction_weights(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_prescription_treatment_rank")
+> ### * get_prescription_treatment_rank
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_prescription_treatment_rank
+> ### Title: Return the treatments ordered from most effective to least
+> ###   effective at a node of a tree
+> ### Aliases: get_prescription_treatment_rank
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_prescription_treatment_rank(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_regression_constant")
+> ### * get_regression_constant
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_regression_constant
+> ### Title: Return the constant term in the regression prediction at a node
+> ###   of a tree
+> ### Aliases: get_regression_constant
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D iai::get_regression_constant(lnr, 1)
+> ##D iai::get_regression_constant(lnr, 1, "A")
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_regression_weights")
+> ### * get_regression_weights
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_regression_weights
+> ### Title: Return the weights for each feature in the regression prediction
+> ###   at a node of a tree
+> ### Aliases: get_regression_weights
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D iai::get_regression_weights(lnr, 1)
+> ##D iai::get_regression_weights(lnr, 1, "A")
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_rich_output_params")
+> ### * get_rich_output_params
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_rich_output_params
+> ### Title: Return the current global rich output parameter settings
+> ### Aliases: get_rich_output_params
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_rich_output_params()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_split_categories")
+> ### * get_split_categories
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_split_categories
+> ### Title: Return the categoric/ordinal information used in the split at a
+> ###   node of a tree
+> ### Aliases: get_split_categories
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_split_categories(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_split_feature")
+> ### * get_split_feature
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_split_feature
+> ### Title: Return the feature used in the split at a node of a tree
+> ### Aliases: get_split_feature
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_split_feature(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_split_threshold")
+> ### * get_split_threshold
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_split_threshold
+> ### Title: Return the threshold used in the split at a node of a tree
+> ### Aliases: get_split_threshold
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_split_threshold(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_split_weights")
+> ### * get_split_weights
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_split_weights
+> ### Title: Return the weights for numeric and categoric features used in
+> ###   the hyperplane split at a node of a tree
+> ### Aliases: get_split_weights
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_split_weights(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_survival_curve")
+> ### * get_survival_curve
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_survival_curve
+> ### Title: Return the survival curve at a node of a tree
+> ### Aliases: get_survival_curve
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_survival_curve(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_survival_curve_data")
+> ### * get_survival_curve_data
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_survival_curve_data
+> ### Title: Extract the underlying data from a survival curve (as returned
+> ###   by 'predict' or 'get_survival_curve')
+> ### Aliases: get_survival_curve_data
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_survival_curve_data(curve)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("get_upper_child")
+> ### * get_upper_child
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: get_upper_child
+> ### Title: Get the index of the upper child at a split node of a tree
+> ### Aliases: get_upper_child
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::get_upper_child(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("grid_search")
+> ### * grid_search
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: grid_search
+> ### Title: Controls grid search over parameter combinations
+> ### Aliases: grid_search
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("iai_setup")
+> ### * iai_setup
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: iai_setup
+> ### Title: Initialize Julia and the IAI package.
+> ### Aliases: iai_setup
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::iai_setup()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("imputation_learner")
+> ### * imputation_learner
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: imputation_learner
+> ### Title: Generic learner for imputing missing values
+> ### Aliases: imputation_learner
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::imputation_learner(method = "opt_tree")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("impute")
+> ### * impute
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: impute
+> ### Title: Impute missing values using either a specified method or through
+> ###   validation
+> ### Aliases: impute
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("impute_cv")
+> ### * impute_cv
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: impute_cv
+> ### Title: Impute missing values using cross validation
+> ### Aliases: impute_cv
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("is_categoric_split")
+> ### * is_categoric_split
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: is_categoric_split
+> ### Title: Check if a node of a tree applies a categoric split
+> ### Aliases: is_categoric_split
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::is_categoric_split(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("is_hyperplane_split")
+> ### * is_hyperplane_split
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: is_hyperplane_split
+> ### Title: Check if a node of a tree applies a hyperplane split
+> ### Aliases: is_hyperplane_split
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::is_hyperplane_split(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("is_leaf")
+> ### * is_leaf
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: is_leaf
+> ### Title: Check if a node of a tree is a leaf
+> ### Aliases: is_leaf
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::is_leaf(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("is_mixed_ordinal_split")
+> ### * is_mixed_ordinal_split
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: is_mixed_ordinal_split
+> ### Title: Check if a node of a tree applies a mixed ordinal/categoric
+> ###   split
+> ### Aliases: is_mixed_ordinal_split
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::is_mixed_ordinal_split(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("is_mixed_parallel_split")
+> ### * is_mixed_parallel_split
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: is_mixed_parallel_split
+> ### Title: Check if a node of a tree applies a mixed parallel/categoric
+> ###   split
+> ### Aliases: is_mixed_parallel_split
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::is_mixed_parallel_split(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("is_ordinal_split")
+> ### * is_ordinal_split
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: is_ordinal_split
+> ### Title: Check if a node of a tree applies a ordinal split
+> ### Aliases: is_ordinal_split
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::is_ordinal_split(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("is_parallel_split")
+> ### * is_parallel_split
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: is_parallel_split
+> ### Title: Check if a node of a tree applies a parallel split
+> ### Aliases: is_parallel_split
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::is_parallel_split(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("mean_imputation_learner")
+> ### * mean_imputation_learner
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: mean_imputation_learner
+> ### Title: Learner for conducting mean imputation
+> ### Aliases: mean_imputation_learner
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::mean_imputation_learner()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("missing_goes_lower")
+> ### * missing_goes_lower
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: missing_goes_lower
+> ### Title: Check if points with missing values go to the lower child at a
+> ###   split node of of a tree
+> ### Aliases: missing_goes_lower
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::missing_goes_lower(lnr, 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("multi_questionnaire")
+> ### * multi_questionnaire
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: multi_questionnaire
+> ### Title: Construct an interactive questionnaire using multiple tree
+> ###   learners as specified by questions
+> ### Aliases: multi_questionnaire
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D iai::multi_questionnaire(list("Questionnaire for" = list(
+> ##D    "first learner" = lnr1,
+> ##D    "second learner" = lnr2
+> ##D )))
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("multi_tree_plot")
+> ### * multi_tree_plot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: multi_tree_plot
+> ### Title: Construct an interactive tree visualization of multiple tree
+> ###   learners as specified by questions
+> ### Aliases: multi_tree_plot
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D iai::multi_tree_plot(list("Visualizing" = list(
+> ##D    "first learner" = lnr1,
+> ##D    "second learner" = lnr2
+> ##D )))
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("opt_knn_imputation_learner")
+> ### * opt_knn_imputation_learner
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: opt_knn_imputation_learner
+> ### Title: Learner for conducting optimal k-NN imputation
+> ### Aliases: opt_knn_imputation_learner
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::opt_knn_imputation_learner()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("opt_svm_imputation_learner")
+> ### * opt_svm_imputation_learner
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: opt_svm_imputation_learner
+> ### Title: Learner for conducting optimal SVM imputation
+> ### Aliases: opt_svm_imputation_learner
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::opt_svm_imputation_learner()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("opt_tree_imputation_learner")
+> ### * opt_tree_imputation_learner
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: opt_tree_imputation_learner
+> ### Title: Learner for conducting optimal tree-based imputation
+> ### Aliases: opt_tree_imputation_learner
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::opt_tree_imputation_learner()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("optimal_feature_selection_classifier")
+> ### * optimal_feature_selection_classifier
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: optimal_feature_selection_classifier
+> ### Title: Learner for conducting Optimal Feature Selection on
+> ###   classification problems
+> ### Aliases: optimal_feature_selection_classifier
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::optimal_feature_selection_classifier()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("optimal_feature_selection_regressor")
+> ### * optimal_feature_selection_regressor
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: optimal_feature_selection_regressor
+> ### Title: Learner for conducting Optimal Feature Selection on regression
+> ###   problems
+> ### Aliases: optimal_feature_selection_regressor
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::optimal_feature_selection_regressor()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("optimal_tree_classifier")
+> ### * optimal_tree_classifier
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: optimal_tree_classifier
+> ### Title: Learner for training Optimal Classification Trees
+> ### Aliases: optimal_tree_classifier
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::optimal_tree_classifier()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("optimal_tree_prescription_maximizer")
+> ### * optimal_tree_prescription_maximizer
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: optimal_tree_prescription_maximizer
+> ### Title: Learner for training Optimal Prescriptive Trees where the
+> ###   prescriptions should aim to maximize outcomes
+> ### Aliases: optimal_tree_prescription_maximizer
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::optimal_tree_prescription_maximizer()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("optimal_tree_prescription_minimizer")
+> ### * optimal_tree_prescription_minimizer
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: optimal_tree_prescription_minimizer
+> ### Title: Learner for training Optimal Prescriptive Trees where the
+> ###   prescriptions should aim to minimize outcomes
+> ### Aliases: optimal_tree_prescription_minimizer
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::optimal_tree_prescription_minimizer()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("optimal_tree_regressor")
+> ### * optimal_tree_regressor
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: optimal_tree_regressor
+> ### Title: Learner for training Optimal Regression Trees
+> ### Aliases: optimal_tree_regressor
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::optimal_tree_regressor()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("optimal_tree_survivor")
+> ### * optimal_tree_survivor
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: optimal_tree_survivor
+> ### Title: Learner for training Optimal Survival Trees
+> ### Aliases: optimal_tree_survivor
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::optimal_tree_survivor()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("predict")
+> ### * predict
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: predict
+> ### Title: Return the predictions made by the model for each point in the
+> ###   features
+> ### Aliases: predict
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::predict(lnr, X)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("predict_outcomes")
+> ### * predict_outcomes
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: predict_outcomes
+> ### Title: Return the the predicted outcome for each treatment made by a
+> ###   model for each point in the features
+> ### Aliases: predict_outcomes
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::predict_outcomes(lnr, X)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("predict_proba")
+> ### * predict_proba
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: predict_proba
+> ### Title: Return the probabilities of class membership predicted by a
+> ###   model for each point in the features
+> ### Aliases: predict_proba
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::predict_proba(lnr, X)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("print_path")
+> ### * print_path
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: print_path
+> ### Title: Print the decision path through the learner for each sample in
+> ###   the features
+> ### Aliases: print_path
+> 
+> ### ** Examples
+> 
+> ## Not run: 
+> ##D iai::print_path(lnr, X)
+> ##D iai::print_path(lnr, X, 1)
+> ## End(Not run)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("questionnaire")
+> ### * questionnaire
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: questionnaire
+> ### Title: Specify an interactive questionnaire of a tree learner
+> ### Aliases: questionnaire
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::questionnaire(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("rand_imputation_learner")
+> ### * rand_imputation_learner
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: rand_imputation_learner
+> ### Title: Learner for conducting random imputation
+> ### Aliases: rand_imputation_learner
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::rand_imputation_learner()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("read_json")
+> ### * read_json
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: read_json
+> ### Title: Read in a learner or grid saved in JSON format
+> ### Aliases: read_json
+> 
+> ### ** Examples
+> 
+> ## Not run: obj <- iai::read_json("out.json")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("reset_display_label")
+> ### * reset_display_label
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: reset_display_label
+> ### Title: Reset the predicted probability displayed to be that of the
+> ###   predicted label when visualizing a learner
+> ### Aliases: reset_display_label
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::reset_display_label(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("roc_curve")
+> ### * roc_curve
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: roc_curve
+> ### Title: Construct an ROC curve using a trained model on the given data
+> ### Aliases: roc_curve
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::roc_curve(lnr, X, y)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("score")
+> ### * score
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: score
+> ### Title: Calculate the score for a model on the given data
+> ### Aliases: score
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::score(lnr, X, y)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("set_display_label")
+> ### * set_display_label
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_display_label
+> ### Title: Show the probability of a specified label when visualizing a
+> ###   learner
+> ### Aliases: set_display_label
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::set_display_label(lnr, "A")
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("set_julia_seed")
+> ### * set_julia_seed
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_julia_seed
+> ### Title: Set the random seed in Julia
+> ### Aliases: set_julia_seed
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::set_julia_seed(1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("set_params")
+> ### * set_params
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_params
+> ### Title: Set all supplied parameters on a learner
+> ### Aliases: set_params
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::set_params(lnr, random_seed = 1)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("set_rich_output_param")
+> ### * set_rich_output_param
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_rich_output_param
+> ### Title: Sets a global rich output parameter
+> ### Aliases: set_rich_output_param
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::set_rich_output_param("simple_layout", TRUE)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("set_threshold")
+> ### * set_threshold
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: set_threshold
+> ### Title: For a binary classification problem, update the the predicted
+> ###   labels in the leaves of the learner to predict a label only if the
+> ###   predicted probability is at least the specified threshold.
+> ### Aliases: set_threshold
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::set_threshold(lnr, "A", 0.4)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("show_in_browser")
+> ### * show_in_browser
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: show_in_browser
+> ### Title: Show interactive visualization of an object (such as a learner
+> ###   or curve) in the default browser
+> ### Aliases: show_in_browser
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::show_in_browser(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("show_questionnaire")
+> ### * show_questionnaire
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: show_questionnaire
+> ### Title: Show an interactive questionnaire based on a learner in default
+> ###   browser
+> ### Aliases: show_questionnaire
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::show_questionnaire(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("single_knn_imputation_learner")
+> ### * single_knn_imputation_learner
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: single_knn_imputation_learner
+> ### Title: Learner for conducting heuristic k-NN imputation
+> ### Aliases: single_knn_imputation_learner
+> 
+> ### ** Examples
+> 
+> ## Not run: lnr <- iai::single_knn_imputation_learner()
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("split_data")
+> ### * split_data
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: split_data
+> ### Title: Split the data into training and test datasets
+> ### Aliases: split_data
+> 
+> ### ** Examples
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("transform")
+> ### * transform
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: transform
+> ### Title: Impute missing values in a dataframe using a fitted imputation
+> ###   model
+> ### Aliases: transform
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::transform(lnr, X)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("tree_plot")
+> ### * tree_plot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: tree_plot
+> ### Title: Specify an interactive tree visualization of a tree learner
+> ### Aliases: tree_plot
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::tree_plot(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("variable_importance")
+> ### * variable_importance
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: variable_importance
+> ### Title: Generate a ranking of the variables in the learner according to
+> ###   their importance when training the trees
+> ### Aliases: variable_importance
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::variable_importance(lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("write_dot")
+> ### * write_dot
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: write_dot
+> ### Title: Output a learner in .dot format
+> ### Aliases: write_dot
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::write_dot(file.path(tempdir(), "tree.dot"), lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("write_html")
+> ### * write_html
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: write_html
+> ### Title: Output a learner as an interactive browser visualization in HTML
+> ###   format
+> ### Aliases: write_html
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::write_html(file.path(tempdir(), "tree.html"), lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("write_json")
+> ### * write_json
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: write_json
+> ### Title: Output a learner or grid in JSON format
+> ### Aliases: write_json
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::write_json(file.path(tempdir(), "out.json"), obj)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("write_png")
+> ### * write_png
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: write_png
+> ### Title: Output a learner as a PNG image
+> ### Aliases: write_png
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::write_png(file.path(tempdir(), "tree.png"), lnr)
+> 
+> 
+> 
+> 
+> cleanEx()
+> nameEx("write_questionnaire")
+> ### * write_questionnaire
+> 
+> flush(stderr()); flush(stdout())
+> 
+> ### Name: write_questionnaire
+> ### Title: Output a learner as an interactive questionnaire in HTML format
+> ### Aliases: write_questionnaire
+> 
+> ### ** Examples
+> 
+> ## Not run: iai::write_questionnaire(file.path(tempdir(), "questionnaire.html"), lnr)
+> 
+> 
+> 
+> 
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.25 0.05 0.52 NA NA 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

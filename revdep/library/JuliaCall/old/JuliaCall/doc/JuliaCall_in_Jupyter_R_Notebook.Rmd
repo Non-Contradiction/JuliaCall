@@ -1,0 +1,24 @@
+---
+title: "JuliaCall in Jupyter R Notebook"
+author: "Changcheng Li"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{JuliaCall in Jupyter R Notebook}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+For the original notebook, please go to
+<https://nbviewer.jupyter.org/github/Non-Contradiction/JuliaCall/blob/master/example/JuliaCall_in_Jupyter_R_Notebook.ipynb>.
+
+Here I generate a markdown file from part of the notebook and include
+it in this vignette.
+
+```{r, results='asis', echo=FALSE}
+cat(paste(readLines("JuliaCall_in_Jupyter_R_Notebook1.md"), collapse = "\n"))
+```

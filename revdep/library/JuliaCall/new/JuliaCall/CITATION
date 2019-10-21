@@ -1,0 +1,15 @@
+bibentry(bibtype = "Article",
+         textVersion = NULL,
+         header = "To cite package ‘JuliaCall’ in publications use:",
+         footer = NULL,
+         key = "JuliaCall", other = list(), mheader = NULL, mfooter = NULL,
+         author = "Changcheng Li",
+         title = "{JuliaCall}: an {R} package for seamless integration between {R} and {Julia}",
+         journal = "The Journal of Open Source Software",
+         publisher = "The Open Journal",
+         year = 2019,
+         volume = 4,
+         number = 35,
+         pages = 1284,
+         doi = "10.21105/joss.01284"
+         )

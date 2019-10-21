@@ -1,0 +1,38 @@
+
+R version 3.6.1 (2019-07-05) -- "Action of the Toes"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(testthat)
+> library(iai)
+
+Attaching package: 'iai'
+
+The following object is masked from 'package:stats':
+
+    predict
+
+The following objects are masked from 'package:base':
+
+    apply, transform
+
+> 
+> test_check("iai")
+== testthat results  ========================================================
+[ OK: 0 | SKIPPED: 23 | WARNINGS: 0 | FAILED: 0 ]
+> 
+> proc.time()
+   user  system elapsed 
+   0.70    0.21    1.01 

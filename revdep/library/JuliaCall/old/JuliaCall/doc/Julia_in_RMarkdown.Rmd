@@ -1,0 +1,14 @@
+---
+title: "Julia in RMarkdown"
+author: "Changcheng Li"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Julia in RMarkdown}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, results='asis', echo=FALSE}
+cat(paste(readLines("JuliaCall_in_RMarkdown.md")[-(1:4)], collapse = "\n"))
+```

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Wrap julia functions and packages the easy way.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for julia_pkg_wrap {JuliaCall}"><tr><td>julia_pkg_wrap {JuliaCall}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Wrap julia functions and packages the easy way.</h2>
+
+<h3>Description</h3>
+
+<p>Wrap julia functions and packages the easy way.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+julia_function(func_name, pkg_name = "Main", env = new.env(emptyenv()))
+
+julia_pkg_import(pkg_name, func_list, env = new.env(parent = emptyenv()))
+
+julia_pkg_hook(env, hook)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>func_name</code></td>
+<td>
+<p>the julia function name to be wrapped.</p>
+</td></tr>
+<tr valign="top"><td><code>pkg_name</code></td>
+<td>
+<p>the julia package name to be wrapped.</p>
+</td></tr>
+<tr valign="top"><td><code>env</code></td>
+<td>
+<p>the environment where the functions and packages
+are wrapped.</p>
+</td></tr>
+<tr valign="top"><td><code>func_list</code></td>
+<td>
+<p>the list of julia function names to
+be wrapped.</p>
+</td></tr>
+<tr valign="top"><td><code>hook</code></td>
+<td>
+<p>the function to be executed
+before the execution of wrapped functions.</p>
+</td></tr>
+</table>
+
+
+<h3>Examples</h3>
+
+<pre>
+ ## julia_setup is quite time consuming
+  julia_install_package_if_needed("Optim")
+  opt &lt;- julia_pkg_import("Optim",
+                           func_list = c("optimize", "BFGS"))
+rosenbrock &lt;- function(x) (1.0 - x[1])^2 + 100.0 * (x[2] - x[1]^2)^2
+result &lt;- opt$optimize(rosenbrock, rep(0,2), opt$BFGS())
+result
+
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>JuliaCall</em> version 0.17.0 <a href="00Index.html">Index</a>]</div>
+</body></html>
