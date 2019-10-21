@@ -73,10 +73,11 @@ julia_do.call <- julia$do.call <- function(func_name, arg_list, need_return = c(
                   show_value = show_value)
     r <- .julia$do.call_(jcall)
 
+    if (inherits(r, "error")) stop(r)
+
     rmd <- identical(need_return, "None") && show_value && .julia$rmd
     if (rmd) return(output_return())
 
-    if (inherits(r, "error")) stop(r)
     if (!identical(need_return, "None")) return(r)
     invisible(r)
 }

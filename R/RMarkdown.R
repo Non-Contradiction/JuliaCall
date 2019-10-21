@@ -152,5 +152,5 @@ stdout_capture_command <- function(buffer){
                     collapse = "\n")
     tryCatch(julia_command(buffer),
              warning = function(w) w,
-             error = function(e) e)
+             error = function(e) stop(e))
 }
