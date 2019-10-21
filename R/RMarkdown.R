@@ -155,6 +155,14 @@ stdout_capture_command <- function(buffer){
              error = function(e) stop(e))
 }
 
+#' Do setup for julia chunks in RMarkdown notebooks.
+#'
+#' \code{julia_notebook_setup} does the initial setup for julia chunks in RMarkdown notebooks.
+#'   The function must be called to deal with the
+#'   "don't know how to handle julia engine output" problem in notebooks.
+#' @param ... The same arguments accepted by `julia_setup`.
+#'
+#' @export
 julia_notebook_setup <- function(...){
     julia_setup(...)
     .julia$rmd <- TRUE
