@@ -1,0 +1,19 @@
+---
+title: "Test"
+author: "Changcheng Li"
+date: "2017/9/23"
+output: github_document
+---
+
+## Use JuliaCall as Julia Engine in R Markdown
+
+To use `JuliaCall` package for julia engine in R Markdown document.
+Just set the engine for julia to `JuliaCall::eng_juliacall` like this:
+
+```{r setup}
+knitr::knit_engines$set(julia = JuliaCall::eng_juliacall)
+```
+
+```{julia}
+abc
+```
