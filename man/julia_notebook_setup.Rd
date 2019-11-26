@@ -2,7 +2,7 @@
 % Please edit documentation in R/RMarkdown.R
 \name{julia_notebook_setup}
 \alias{julia_notebook_setup}
-\title{Do setup for julia chunks in RMarkdown notebooks.}
+\title{(Deprecated) Do setup for julia chunks in RMarkdown notebooks.}
 \usage{
 julia_notebook_setup(...)
 }
@@ -10,7 +10,6 @@ julia_notebook_setup(...)
 \item{...}{The same arguments accepted by `julia_setup`.}
 }
 \description{
-\code{julia_notebook_setup} does the initial setup for julia chunks in RMarkdown notebooks.
-  The function must be called to deal with the
-  "don't know how to handle julia engine output" problem in notebooks.
+\code{julia_notebook_setup} is deprecated,
+  use \code{julia_markdown_setup(notebook=TRUE)} instead.
 }

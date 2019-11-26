@@ -4,8 +4,14 @@
 \alias{julia_setup}
 \title{Do initial setup for the JuliaCall package.}
 \usage{
-julia_setup(JULIA_HOME = NULL, verbose = TRUE, install = TRUE,
-  force = FALSE, useRCall = TRUE, rebuild = FALSE)
+julia_setup(
+  JULIA_HOME = NULL,
+  verbose = TRUE,
+  install = TRUE,
+  force = FALSE,
+  useRCall = TRUE,
+  rebuild = FALSE
+)
 }
 \arguments{
 \item{JULIA_HOME}{the file folder which contains julia binary,

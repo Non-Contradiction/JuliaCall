@@ -3,7 +3,6 @@
 \docType{package}
 \name{JuliaCall}
 \alias{JuliaCall}
-\alias{JuliaCall-package}
 \title{JuliaCall: Seamless Integration Between R and Julia.}
 \description{
 JuliaCall provides you with functions to call Julia functions and

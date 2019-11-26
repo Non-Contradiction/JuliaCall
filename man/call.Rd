@@ -6,11 +6,19 @@
 \alias{julia_call}
 \title{Call julia functions.}
 \usage{
-julia_do.call(func_name, arg_list, need_return = c("R", "Julia", "None"),
-  show_value = FALSE)
+julia_do.call(
+  func_name,
+  arg_list,
+  need_return = c("R", "Julia", "None"),
+  show_value = FALSE
+)
 
-julia_call(func_name, ..., need_return = c("R", "Julia", "None"),
-  show_value = FALSE)
+julia_call(
+  func_name,
+  ...,
+  need_return = c("R", "Julia", "None"),
+  show_value = FALSE
+)
 }
 \arguments{
 \item{func_name}{the name of julia function you want to call.
