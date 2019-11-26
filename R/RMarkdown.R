@@ -142,7 +142,10 @@ eng_juliacall <- function(options) {
 
     # print(doc)
 
-    knitr::engine_output(options, out = doc)
+    r <- knitr::engine_output(options, out = doc)
+
+    if (!isTRUE(.julia$notebook)) return(r)
+    paste0(r, collapse = "\n")
 }
 
 stdout_capture_command <- function(buffer){
@@ -166,8 +169,6 @@ stdout_capture_command <- function(buffer){
 julia_notebook_setup <- function(...){
     julia_setup(...)
     .julia$rmd <- TRUE
+    .julia$notebook <- TRUE
     julia_command("Base.pushdisplay(JuliaCall.rmd_display);")
-    njulia <- function(...)
-        paste0(eng_juliacall(...), collapse = "\n")
-    knitr::knit_engines$set("julia" = njulia)
 }

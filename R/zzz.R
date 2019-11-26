@@ -151,6 +151,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
     ## Check whether we need to set up RmdDisplay
     ## Pay attention to rstudio notebook
     .julia$rmd <- check_rmd() || notebook
+    .julia$notebook <- notebook
 
     ## useRCall will be used later in julia_console,
     ## because in the hook RCall.rgui_start() will be executed,
@@ -196,15 +197,6 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
     julia_command('ENV["MPLBACKEND"] = "Agg";')
 
     .julia$simple_call_ <- julia_eval("JuliaCall.simple_call")
-
-    ## for rstudio notebook
-    if (notebook) {
-        # .julia$rmd <- TRUE
-        # julia_command("Base.pushdisplay(JuliaCall.rmd_display);")
-        njulia <- function(...)
-            paste0(eng_juliacall(...), collapse = "\n")
-        knitr::knit_engines$set("julia" = njulia)
-    }
 
     invisible(julia)
 }
