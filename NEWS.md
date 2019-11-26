@@ -1,6 +1,8 @@
 # JuliaCall 0.17.0.9000
 
 * Fix bug for not throwing error in RMarkdown document. Fix #122.
+* Support julia chunk in RMarkdown notebook. Fix #98.
+* Add `julia_markdown_setup` for setup of JuliaCall in RMarkdown document and notebook explicitly. Related to #98 and #132.
 
 # JuliaCall 0.17.0
 
