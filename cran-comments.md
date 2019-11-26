@@ -1,5 +1,5 @@
 ## Test environments
-* local Windows 10, R 3.6.1
+* local Windows 10, R 3.6.1 with Rtools35
 * macOS 10.13.3 (on travis-ci), R 3.6.1
 * Ubuntu 16.04.6 (on travis-ci), R 3.6.1
 * Windows (on appveyor), R 3.6.1 and r-devel with Rtools35
