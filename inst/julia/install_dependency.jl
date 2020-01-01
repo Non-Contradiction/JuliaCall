@@ -32,3 +32,8 @@ using Suppressor
 if installed("RCall") == nothing
     Pkg.add("RCall")
 end;
+
+if julia07 && installed("Requires") == nothing
+    Pkg.add("Requires")
+    using Requires
+end;
