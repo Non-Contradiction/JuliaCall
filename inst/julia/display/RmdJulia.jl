@@ -54,6 +54,13 @@ end
 
 function display(display::RmdDisplay, x)
     try
+        if isa(x, Main.Plots.Plot)
+            plot_display(display, x)
+            return
+        end
+    catch e;
+    end
+    try
         text_display(display, x)
         return
     catch e;
