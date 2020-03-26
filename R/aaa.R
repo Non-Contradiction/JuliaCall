@@ -79,7 +79,8 @@ julia_locate <- function(JULIA_HOME = NULL){
 ## It is currently used in julia_setup in zzz.R and julia_library in package.R
 julia_line <- function(command, ...){
     command <- c("--startup-file=no", command)
-    system2(file.path(.julia$bin_dir, "julia"), shQuote(command), ...)
+    r <- system2(file.path(.julia$bin_dir, "julia"), shQuote(command), ...)
+    r[length(r)]
 }
 
 newer <- function(x, y){
