@@ -120,7 +120,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
                       },
                   onexit = TRUE)
 
-    ##.julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
+    .julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
 
     if (verbose) message("Loading setup script for JuliaCall...")
 

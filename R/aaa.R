@@ -59,12 +59,15 @@ julia_locate <- function(JULIA_HOME = NULL){
             }
         }
         tryCatch({r <- system2(julia_bin, "--startup-file=no -E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE);
+                  r <- system2(julia_bin, "--startup-file=no -E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE);
                   r[length(r)-1]},
                  warning = function(war) {},
                  error = function(err) NULL)
     }
     else {
         tryCatch({r <- system2(file.path(JULIA_HOME, "julia"),
+                               "--startup-file=no -E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE);
+                  r <- system2(file.path(JULIA_HOME, "julia"),
                          "--startup-file=no -E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE);
                   r[length(r)-1]},
                  warning = function(war) {},
@@ -79,8 +82,8 @@ julia_locate <- function(JULIA_HOME = NULL){
 ## It is currently used in julia_setup in zzz.R and julia_library in package.R
 julia_line <- function(command, ...){
     command <- c("--startup-file=no", command)
-    r <- system2(file.path(.julia$bin_dir, "julia"), shQuote(command), ...)
-    r[length(r)]
+    system2(file.path(.julia$bin_dir, "julia"), shQuote(command), ...)
+    # r[length(r)]
 }
 
 newer <- function(x, y){
