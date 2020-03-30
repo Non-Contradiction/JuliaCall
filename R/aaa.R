@@ -58,7 +58,7 @@ julia_locate <- function(JULIA_HOME = NULL){
                 julia_bin <- "julia"
             }
         }
-        tryCatch({r <- system2(julia_bin, "--startup-file=no -E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE);
+        tryCatch({r <- system2(julia_bin, "--startup-file=no -E \"1;\"", stdout = TRUE);
                   r <- system2(julia_bin, "--startup-file=no -E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE);
                   r[length(r)-1]},
                  warning = function(war) {},
@@ -66,7 +66,7 @@ julia_locate <- function(JULIA_HOME = NULL){
     }
     else {
         tryCatch({r <- system2(file.path(JULIA_HOME, "julia"),
-                               "--startup-file=no -E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE);
+                               "--startup-file=no -E \"1;\"", stdout = TRUE);
                   r <- system2(file.path(JULIA_HOME, "julia"),
                          "--startup-file=no -E \"try println(JULIA_HOME) catch e println(Sys.BINDIR) end;\"", stdout = TRUE);
                   r[length(r)-1]},
