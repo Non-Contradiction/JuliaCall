@@ -26,7 +26,7 @@ LazyData: true
 Imports: utils,
     Rcpp (>= 0.12.7),
     knitr (>= 1.28)
-RoxygenNote: 7.0.0
+RoxygenNote: 7.1.0
 LinkingTo: Rcpp
 NeedsCompilation: yes
 ByteCompile: yes

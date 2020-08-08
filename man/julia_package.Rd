@@ -39,7 +39,7 @@ Using julia packages.
   julia_install_package("https://github.com/JuliaData/DataFrames.jl")
   julia_installed_package("DataFrames")
   julia_install_package_if_needed("DataFrames")
-  julia_update_package("DataFrame")
+  julia_update_package("DataFrames")
   julia_library("DataFrames")
 }
 
