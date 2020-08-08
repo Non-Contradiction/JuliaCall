@@ -45,6 +45,7 @@ begin_plot <- function(){
     else {
         number <- options$Jfig.cur
     }
+    if (is.null(options$dev)) options$dev <- "png"
     path <- knitr::fig_chunk(label = options$label,
                              ext = options$dev, number = paste0("J", number))
     .julia$pending_plot <- knitr::include_graphics(path, error = FALSE)
