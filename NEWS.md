@@ -1,3 +1,11 @@
+# 0.17.1.9000
+
+* Fix bug for Julia plot in RMarkdown document caused by change of knitr #1717.
+
+# JuliaCall 0.17.1
+
+* Sixteenth release on CRAN.
+
 # JuliaCall 0.17.0.9000
 
 * Fix bug for not throwing error in RMarkdown document. Fix #122.
