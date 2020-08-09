@@ -62,7 +62,12 @@ finish_plot <- function(){
 ## This function is used by Julia text_display function
 ## x will be the text representation of the Julia result.
 text_display <- function(x, options = knitr::opts_current$get()){
-    julia$current_text <- x
+    if (nchar(x) > 0) {
+        julia$current_text <- paste0(x, "\n")
+    }
+    else {
+        julia$current_text <- x
+    }
 }
 
 ## This function is used by Julia @capture_out1
@@ -122,8 +127,8 @@ eng_juliacall <- function(options) {
             out <- stdout_capture_command(buffer)
 
             if (options$results != 'hide' &&
-                ((length(out$stdout) > 0 && nchar(trimws(out$stdout)) > 0) ||
-                (length(out$out) > 0) && nchar(trimws(out$out)) > 0)) {
+                ((length(out$stdout) > 0 && nchar(out$stdout) > 0) ||
+                (length(out$out) > 0) && nchar(out$out) > 0)) {
                 if (length(options$echo) > 1L || options$echo) {
                     doc[[length(doc) + 1]] <- structure(list(src = ss), class = "source")
                     ss <- character()
