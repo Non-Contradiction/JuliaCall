@@ -146,7 +146,8 @@ eng_juliacall <- function(options) {
     r <- knitr::engine_output(options, out = doc)
 
     if (!isTRUE(.julia$notebook)) return(r)
-    paste0(r, collapse = "\n")
+    # paste0(r, collapse = "\n")
+    doc
 }
 
 stdout_capture_command <- function(buffer){
