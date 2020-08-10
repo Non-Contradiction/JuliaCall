@@ -41,7 +41,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
     }
 
     ## for rstudio notebook
-    notebook <- isTRUE(options()[['rstudio.notebook.executing']])
+    notebook <- check_notebook()
     ## not verbose in notebook
     verbose <- verbose && (!notebook)
 

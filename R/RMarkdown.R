@@ -2,6 +2,10 @@ check_rmd <- function(){
     isTRUE(getOption("knitr.in.progress"))
 }
 
+check_notebook <- function(){
+    isTRUE(options()[['rstudio.notebook.executing']])
+}
+
 ## This function is used at the beginning of the julia_call interface
 ## to eraze the previous outputs
 output_reset <- function(){
@@ -113,6 +117,8 @@ eng_juliacall <- function(options) {
         }
         else julia_setup()
     }
+
+    julia_markdown_setup(notebook = check_notebook())
 
     doc <- list()
     buffer <- character()
