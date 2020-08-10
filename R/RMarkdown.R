@@ -174,7 +174,7 @@ stdout_capture_command <- function(buffer){
 #' @param notebook whether it is in RStudio notebook environment or not.
 #'
 #' @export
-julia_markdown_setup <- function(..., notebook = FALSE){
+julia_markdown_setup <- function(..., notebook = TRUE){
     julia_setup(...)
     .julia$rmd <- TRUE
     .julia$notebook <- notebook

@@ -4,7 +4,7 @@
 \alias{julia_markdown_setup}
 \title{Do setup for JuliaCall in RMarkdown documents and notebooks.}
 \usage{
-julia_markdown_setup(..., notebook = FALSE)
+julia_markdown_setup(..., notebook = TRUE)
 }
 \arguments{
 \item{...}{The same arguments accepted by `julia_setup`.}
