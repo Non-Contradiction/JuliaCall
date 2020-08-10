@@ -18,8 +18,8 @@ end
 plotwrite(::MIME"image/png", x, filename) = pngwrite(x, filename)
 plotwrite(::MIME"image/svg+xml", x, filename) = svgwrite(x, filename)
 
-tempplot(::MIME"image/png") = String(RCall.reval("tempfile(fileext = '.png')"))
-tempplot(::MIME"image/svg+xml") = String(RCall.reval("tempfile(fileext = '.html')"))
+tempplot(::MIME"image/png") = String(RCall.rcopy(RCall.reval("tempfile(fileext = '.png')")))
+tempplot(::MIME"image/svg+xml") = String(RCall.rcopy(RCall.reval("tempfile(fileext = '.html')")))
 
 function display(d::ViewerDisplay, m::MIME, p)
     fname = tempplot(m)
@@ -31,7 +31,10 @@ end
 function display(d::ViewerDisplay, p)
     try
         display(d, MIME("image/svg+xml"), p)
-        return
+        return 
+    catch e;
+    end;
+    try
         display(d, MIME("image/png"), p)
         return
     catch e;
