@@ -1,7 +1,6 @@
 library(testthat)
 library(JuliaCall)
 if (Sys.getenv("CI") != "") {
-    install.packages("rappdirs")
-    JuliaCall::install_julia()
+    JuliaCall::install_julia(tempdir())
 }
 test_check("JuliaCall")
