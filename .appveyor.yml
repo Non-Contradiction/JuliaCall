@@ -1,6 +1,6 @@
 environment:
   NOT_CRAN: "true"
-  R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.6.1-win.exe"
+  R_URL: "https://cran.rstudio.com/bin/windows/base/R-4.0.2-win.exe"
 
 notifications:
   - provider: Email
