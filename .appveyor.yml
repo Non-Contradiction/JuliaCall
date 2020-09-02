@@ -1,20 +1,6 @@
 environment:
   NOT_CRAN: "true"
-  matrix:
-  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.6/julia-0.6-latest-win64.exe"
-    R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.6.1-win.exe"
-  # - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/0.7/julia-0.7.0-win64.exe"
-  #   R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.5.3-win.exe"
-  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/1.0/julia-1.0-latest-win64.exe"
-    R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.6.1-win.exe"
-  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/1.0/julia-1.0-latest-win64.exe"
-    R_URL: "https://cran.rstudio.com/bin/windows/base/R-devel-win.exe"
-  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/1.1/julia-1.1-latest-win64.exe"
-    R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.6.1-win.exe"
-  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/1.2/julia-1.2-latest-win64.exe"
-    R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.6.1-win.exe"
-  - JULIA_URL: "https://julialang-s3.julialang.org/bin/winnt/x64/1.3/julia-1.3-latest-win64.exe"
-    R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.6.1-win.exe"
+  R_URL: "https://cran.rstudio.com/bin/windows/base/R-3.6.1-win.exe"
 
 notifications:
   - provider: Email
@@ -24,15 +10,6 @@ notifications:
 
 install:
   - ps: "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.SecurityProtocolType]::Tls12"
-
-# Download most recent Julia Windows binary
-  - ps: (new-object net.webclient).DownloadFile(
-        $env:JULIA_URL,
-        "C:\projects\julia-binary.exe")
-# Run installer silently, output to C:\projects\julia
-  - C:\projects\julia-binary.exe /S /D=C:\projects\julia
-
-  - set PATH=C:\projects\julia\bin;%PATH%
 
 # Download and install R binary
 #  - ps: |
@@ -55,9 +32,9 @@ install:
   # - initexmf --set-config-value "[MPM]AutoInstall=1"
 
   - set PATH=C:\projects\R\bin\x64;%PATH%
-  
+
   # Use tinytex for latex
-  
+
   - Rscript -e "install.packages('tinytex', repos='http://cran.rstudio.com/'); tinytex::install_tinytex(force=TRUE); tinytex:::install_yihui_pkgs()"
   - set PATH=%APPDATA%\\TinyTeX\\bin\\win32;%PATH%
 
@@ -85,8 +62,6 @@ build_script:
 - Rscript -e "install.packages(\"testthat\", repos=\"http://cran.rstudio.com/\")"
 - Rscript -e "install.packages(\"knitr\", repos=\"http://cran.rstudio.com/\")"
 - Rscript -e "install.packages(\"rmarkdown\", repos=\"http://cran.rstudio.com/\")"
-
-# - julia -e "if VERSION >= v\"1.0.0\" using Pkg; end; @static if VERSION >= v\"1.0.0\" pkg\"add RCall#master\" end;"
 
 test_script:
 - R CMD build .
