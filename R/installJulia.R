@@ -56,6 +56,7 @@ julia_save_install_dir <- function(dir){
     cat(file.path(dir, "bin"), file = file.path(prefs, "JuliaCall"))
 }
 
+#' @export
 install_julia <- function(prefix = julia_default_install_dir()){
     if (is.null(prefix)) {
         stop("rappdirs is not installed and prefix was not provided")
