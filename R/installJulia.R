@@ -42,7 +42,15 @@ julia_tgz_url <- function(version, build){
 }
 
 julia_save_install_dir <- function(dir){
-    depot <- Sys.getenv("JULIA_DEPOT_PATH", unset = path.expand("~/.julia"))
+    depot <- Sys.getenv("JULIA_DEPOT_PATH")
+    if (depot == "") {
+        key <- if (Sys.info()["sysname"] == "Windows") {
+            "USERPROFILE"
+        } else {
+            "HOME"
+        }
+        depot <- file.path(Sys.getenv(key), ".julia")
+    }
     prefs <- file.path(depot, "prefs")
     dir.create(prefs, recursive = TRUE, showWarnings = FALSE)
     cat(file.path(dir, "bin"), file = file.path(prefs, "JuliaCall"))
