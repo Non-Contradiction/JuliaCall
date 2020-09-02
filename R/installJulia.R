@@ -1,6 +1,8 @@
+julia_version <- "v1.5.0"
+
 julia_default_install_dir <- function(){
     dir <- if (require("rappdirs")) {
-        file.path(user_data_dir("JuliaCall"), "julia")
+        file.path(user_data_dir("JuliaCall"), "julia", julia_version)
     } else {
         NULL
     }
@@ -8,7 +10,6 @@ julia_default_install_dir <- function(){
 }
 
 julia_tgz_url <- function(){
-    version <- "v1.5.0"
     arch <- if (.Machine$sizeof.pointer == 8) {
         "x86_64"
     } else {
@@ -26,7 +27,7 @@ julia_tgz_url <- function(){
     }
     url <- sprintf(
         "https://github.com/JuliaBinaryWrappers/Julia_jll.jl/releases/download/Julia-%s%%2B0/Julia.%s.%s-%s-libgfortran4-cxx11.tar.gz",
-        version, version, arch, os
+        julia_version, julia_version, arch, os
     )
     return(url)
 }
