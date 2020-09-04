@@ -5,7 +5,7 @@ os:
   - osx
 addons:
   apt:
-    sources: [ 'ubuntu-toolchain-r-test']
+    sources: ['ubuntu-toolchain-r-test']
     packages: ['libstdc++6']
 notifications:
   email: false

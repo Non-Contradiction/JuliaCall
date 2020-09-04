@@ -56,6 +56,12 @@ julia_save_install_dir <- function(dir){
     cat(file.path(dir, "bin"), file = file.path(prefs, "JuliaCall"))
 }
 
+#' Install Julia.
+#'
+#' @param prefix the directory where Julia will be installed.
+#'     If not set, a default location will be determined by \code{rappdirs}
+#'     if it is installed, otherwise an error will be raised.
+#'
 #' @export
 install_julia <- function(prefix = julia_default_install_dir()){
     if (is.null(prefix)) {
