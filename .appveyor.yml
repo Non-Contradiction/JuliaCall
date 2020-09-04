@@ -62,6 +62,7 @@ build_script:
 - Rscript -e "install.packages(\"testthat\", repos=\"http://cran.rstudio.com/\")"
 - Rscript -e "install.packages(\"knitr\", repos=\"http://cran.rstudio.com/\")"
 - Rscript -e "install.packages(\"rmarkdown\", repos=\"http://cran.rstudio.com/\")"
+- Rscript -e "install.packages(\"Rcpp\", repos=\"http://cran.rstudio.com/\")"
 
 test_script:
 - R CMD build .
