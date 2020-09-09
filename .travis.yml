@@ -10,6 +10,7 @@ addons:
     sources: ['ubuntu-toolchain-r-test']
     packages: ['libstdc++6']
 before_script:
-  - Rscript -e 'library(JuliaCall); JuliaCall::install_julia(Sys.getenv("JULIA_HOME"))'
+  - Rscript -e 'install.packages("devtools")'
+  - Rscript -e 'library(devtools); devtools::load_all("."); library(JuliaCall); JuliaCall::install_julia(Sys.getenv("JULIA_HOME"))'
 notifications:
   email: false
