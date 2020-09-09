@@ -3,9 +3,13 @@ cache: packages
 os:
   - linux
   - osx
+env:
+  - JULIA_HOME=/tmp/julia
 addons:
   apt:
     sources: ['ubuntu-toolchain-r-test']
     packages: ['libstdc++6']
+before_script:
+  - Rscript -e 'library(JuliaCall); JuliaCall::install_julia(Sys.getenv("JULIA_HOME"))'
 notifications:
   email: false
