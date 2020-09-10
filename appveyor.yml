@@ -42,7 +42,7 @@ install:
   # Download and install Rtools
 
   - ps: (new-object net.webclient).DownloadFile(
-      "https://cran.rstudio.com/bin/windows/Rtools/Rtools35.exe",
+      "https://cran.r-project.org/bin/windows/Rtools/rtools40-x86_64.exe",
       "C:\projects\rtools.exe")
   # - C:\projects\rtools.exe /S /D=C:\Rtools
   - C:\projects\rtools.exe /VERYSILENT /DIR=C:\Rtools
