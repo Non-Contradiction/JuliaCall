@@ -52,9 +52,9 @@ build_script:
   - rm -rf vignettes
   - ps: |
       Rscript -e "d <- read.dcf('DESCRIPTION'); d[, colnames(d) == 'VignetteBuilder'] <- NA; write.dcf(d, 'DESCRIPTION')"
-      Rscript -e 'sessionInfo()'
-      Rscript -e 'install.packages("testthat", "knitr", "rmarkdown", "Rcpp", "devtools", repos="http://cran.rstudio.com/")'
-      Rscript -e 'library(devtools); devtools::load_all("."); library(JuliaCall); JuliaCall::install_julia("C:\\projects\\julia")'
+      Rscript -e "sessionInfo()"
+      Rscript -e "install.packages(c('testthat', 'knitr', 'rmarkdown', 'Rcpp', 'devtools'), repos='http://cran.rstudio.com/')"
+      Rscript -e "library(devtools); devtools::load_all('.'); library(JuliaCall); JuliaCall::install_julia('C:\\projects\\julia')"
 
 test_script:
   - R CMD build .
