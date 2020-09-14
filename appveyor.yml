@@ -46,7 +46,7 @@ install:
       "C:\projects\rtools.exe")
   # - C:\projects\rtools.exe /S /D=C:\Rtools
   - C:\projects\rtools.exe /VERYSILENT /DIR=C:\Rtools
-  - set PATH=C:\Rtools\usr\bin;%PATH%
+  - set PATH=C:\Rtools\usr\bin;C:\Rtools\mingw64\bin;%PATH%
 
 build_script:
   - rm -rf vignettes
