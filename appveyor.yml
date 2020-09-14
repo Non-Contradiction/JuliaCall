@@ -2,7 +2,7 @@ environment:
   NOT_CRAN: "true"
   R_URL: "https://cran.rstudio.com/bin/windows/base/R-4.0.2-win.exe"
   _R_CHECK_FORCE_SUGGESTS_: "false"
-  JULIA_HOME: "/tmp/julia/v1.5.0/bin"
+  JULIA_HOME: "C:\\julia\\v1.5.0\\bin"
 
 notifications:
   - provider: Email
@@ -47,8 +47,7 @@ install:
       "C:\projects\rtools.exe")
   # - C:\projects\rtools.exe /S /D=C:\Rtools
   - C:\projects\rtools.exe /VERYSILENT /DIR=C:\Rtools
-
-  - Rscript -e "writeLines('PATH=`"${RTOOLS40_HOME}\\usr\\bin;${PATH}`"', con = '~/.Renviron')"
+  - set PATH=C:\Rtools\usr\bin;%PATH%
 
 build_script:
 # Need to convert from shallow to complete for Pkg.clone to work
@@ -68,7 +67,7 @@ build_script:
 
 # Install Julia
 - Rscript -e 'install.packages("devtools")'
-- Rscript -e 'library(devtools); devtools::load_all("."); library(JuliaCall); JuliaCall::install_julia("/tmp/julia")'
+- Rscript -e 'library(devtools); devtools::load_all("."); library(JuliaCall); JuliaCall::install_julia("C:\\julia")'
 
 test_script:
 - R CMD build .
