@@ -2,7 +2,7 @@ environment:
   NOT_CRAN: "true"
   R_URL: "https://cran.rstudio.com/bin/windows/base/R-4.0.2-win.exe"
   _R_CHECK_FORCE_SUGGESTS_: "false"
-  JULIA_HOME: "C:\\julia\\v1.5.0\\bin"
+  JULIA_HOME: "C:\\projects\\julia\\v1.5.0\\bin"
 
 notifications:
   - provider: Email
@@ -21,6 +21,7 @@ install:
         $env:R_URL,
         "C:\projects\R-binary.exe")
   - C:\projects\R-binary.exe /VERYSILENT /DIR=C:\projects\R
+  - set PATH=C:\projects\R\bin;%PATH%
 
   # Download miktex portable
 
@@ -32,8 +33,6 @@ install:
   # autoinstall latex packages (0=no, 1=autoinstall, 2=ask)
   # this adds this to the registry!
   # - initexmf --set-config-value "[MPM]AutoInstall=1"
-
-  - set PATH=C:\projects\R\bin\x64;%PATH%
 
   # Use tinytex for latex
 
@@ -50,11 +49,6 @@ install:
   - set PATH=C:\Rtools\usr\bin;%PATH%
 
 build_script:
-# Need to convert from shallow to complete for Pkg.clone to work
-#  - IF EXIST .git\shallow (git fetch --unshallow)
-#  - C:\projects\julia\bin\julia -e "versioninfo();
-#      Pkg.clone(pwd(), \"RCall\"); Pkg.build(\"RCall\")"
-
 # Not build vignettes
 - rm -rf vignettes
 - Rscript -e "d <- read.dcf('DESCRIPTION'); d[, colnames(d) == 'VignetteBuilder'] <- NA; write.dcf(d, 'DESCRIPTION')"
@@ -67,7 +61,7 @@ build_script:
 
 # Install Julia
 - Rscript -e 'install.packages("devtools")'
-- Rscript -e 'library(devtools); devtools::load_all("."); library(JuliaCall); JuliaCall::install_julia("C:\\julia")'
+- Rscript -e 'library(devtools); devtools::load_all("."); library(JuliaCall); JuliaCall::install_julia("C:\\projects\\julia")'
 
 test_script:
 - R CMD build .
