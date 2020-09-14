@@ -44,9 +44,8 @@ install:
   - ps: (new-object net.webclient).DownloadFile(
       "https://cran.r-project.org/bin/windows/Rtools/rtools40-x86_64.exe",
       "C:\projects\rtools.exe")
-  # - C:\projects\rtools.exe /S /D=C:\Rtools
-  - C:\projects\rtools.exe /VERYSILENT /DIR=C:\Rtools
-  - set PATH=C:\Rtools\usr\bin;C:\Rtools\mingw64\bin;%PATH%
+  - C:\projects\rtools.exe /VERYSILENT /DIR=C:\Rtools40
+  - set PATH=C:\Rtools40\usr\bin;C:\Rtools40\mingw64\bin;%PATH%
 
 build_script:
   - rm -rf vignettes
