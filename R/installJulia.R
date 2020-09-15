@@ -77,4 +77,6 @@ install_julia <- function(prefix = julia_default_install_dir()){
     dest <- file.path(prefix, version)
     untar(file, exdir=dest)
     julia_save_install_dir(dest)
+    print(sprintf("Installed Julia to %s", dest))
+    return(TRUE)
 }
