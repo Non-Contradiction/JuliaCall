@@ -6,18 +6,31 @@ using namespace Rcpp;
 
 
 // [[Rcpp::export]]
-bool juliacall_initialize(const std::string& libpath) {
+bool juliacall_initialize(const std::string& libpath,
+                          const std::string& julia_bindir,
+                          const std::string& image_relative_path) {
     if (jl_main_module != NULL) {
         return true;
     }
+
+    bool is_custom_image = image_relative_path == "default" ? false : true;
+
     if (!load_libjulia(libpath)) {
         stop(libpath + " - " + get_last_dl_error_message());
     }
     if (!load_libjulia_symbols()) {
         stop(get_last_loaded_symbol() + " - " + get_last_dl_error_message());
     }
+    if(!load_libjulia_init_symbol(is_custom_image)){
+        stop(get_last_loaded_symbol() + " - " + get_last_dl_error_message());
+    }
 
-    jl_init();
+    if(is_custom_image){
+        jl_init_with_image(julia_bindir.c_str(), image_relative_path.c_str());
+    } else {
+        jl_init();
+    }
+
 
     if (!load_libjulia_modules()) {
         stop(get_last_dl_error_message());

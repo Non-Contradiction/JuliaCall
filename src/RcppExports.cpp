@@ -6,13 +6,15 @@
 using namespace Rcpp;
 
 // juliacall_initialize
-bool juliacall_initialize(const std::string& libpath);
-RcppExport SEXP _JuliaCall_juliacall_initialize(SEXP libpathSEXP) {
+bool juliacall_initialize(const std::string& libpath, const std::string& julia_bindir, const std::string& image_relative_path);
+RcppExport SEXP _JuliaCall_juliacall_initialize(SEXP libpathSEXP, SEXP julia_bindirSEXP, SEXP image_relative_pathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::string& >::type libpath(libpathSEXP);
-    rcpp_result_gen = Rcpp::wrap(juliacall_initialize(libpath));
+    Rcpp::traits::input_parameter< const std::string& >::type julia_bindir(julia_bindirSEXP);
+    Rcpp::traits::input_parameter< const std::string& >::type image_relative_path(image_relative_pathSEXP);
+    rcpp_result_gen = Rcpp::wrap(juliacall_initialize(libpath, julia_bindir, image_relative_path));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -50,7 +52,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_JuliaCall_juliacall_initialize", (DL_FUNC) &_JuliaCall_juliacall_initialize, 1},
+    {"_JuliaCall_juliacall_initialize", (DL_FUNC) &_JuliaCall_juliacall_initialize, 3},
     {"_JuliaCall_juliacall_cmd", (DL_FUNC) &_JuliaCall_juliacall_cmd, 1},
     {"_JuliaCall_juliacall_docall", (DL_FUNC) &_JuliaCall_juliacall_docall, 1},
     {"_JuliaCall_juliacall_atexit_hook", (DL_FUNC) &_JuliaCall_juliacall_atexit_hook, 1},

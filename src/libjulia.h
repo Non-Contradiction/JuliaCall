@@ -88,7 +88,7 @@ STATIC_INLINE jl_function_t *jl_get_function(jl_module_t *m, const char *name)
 JL_EXTERN int (*jl_is_initialized)(void);
 JL_EXTERN void (*jl_init)(void);
 JL_EXTERN void (*jl_atexit_hook)(int status);
-
+JL_EXTERN void (*jl_init_with_image)(const char *julia_bindir, const char *image_relative_path);
 // front end interface
 JL_EXTERN jl_value_t* (*jl_eval_string)(const char *str);
 
@@ -130,6 +130,7 @@ JL_EXTERN void* libjulia_t;
 bool load_libjulia(const std::string& libpath);
 bool unloa_libjulia();
 bool load_libjulia_symbols();
+bool load_libjulia_init_symbol(bool custom_image);
 bool load_libjulia_modules();
 
 } // namespace libjulia

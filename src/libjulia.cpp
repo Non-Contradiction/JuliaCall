@@ -116,9 +116,8 @@ bool load_libjulia_symbols() {
     LOAD_JULIA_SYMBOL(jl_get_global);
 
     LOAD_JULIA_SYMBOL(jl_is_initialized);
-    // load jl_init
-    if (!(load_symbol(libjulia_t, "jl_init", (void**) &jl_init) || load_symbol(libjulia_t, "jl_init__threading", (void**) &jl_init)))
-        return false;
+
+
     LOAD_JULIA_SYMBOL(jl_atexit_hook);
     LOAD_JULIA_SYMBOL(jl_eval_string);
 
@@ -136,6 +135,20 @@ bool load_libjulia_symbols() {
     LOAD_JULIA_SYMBOL(jl_stdout_obj);
     LOAD_JULIA_SYMBOL(jl_stderr_obj);
 
+    return true;
+}
+
+// load jl_init or jl_init with_image
+bool load_libjulia_init_symbol(bool custom_image){
+
+    if(!custom_image){
+        if (!(load_symbol(libjulia_t, "jl_init", (void**) &jl_init) || load_symbol(libjulia_t, "jl_init__threading", (void**) &jl_init)))
+            return false;
+    } else {
+        if (!(load_symbol(libjulia_t, "jl_init_with_image", (void**) &jl_init_with_image) ||
+            load_symbol(libjulia_t, "jl_init_with_image__threading", (void**) &jl_init_with_image)))
+            return false;
+    }
     return true;
 }
 
