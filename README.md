@@ -35,8 +35,7 @@ see <https://julialang.org/> for more information. Below is an image for
 JuliaCall brings **more than 100 times speedup** of the calculation\!
 See
 <https://github.com/Non-Contradiction/JuliaCall/tree/master/example/mandelbrot>
-for more
-information.
+for more information.
 
 ![](https://non-contradiction.github.io/JuliaCall/articles/mandelbrot.png)
 
@@ -74,7 +73,7 @@ section](#troubleshooting-and-way-to-get-help).
 ``` r
 library(JuliaCall)
 julia <- julia_setup()
-#> Julia version 1.0.3 at location /Applications/Julia-1.0.app/Contents/Resources/julia/bin will be used.
+#> Julia version 1.5.2 at location /usr/bin will be used.
 #> Loading setup script for JuliaCall...
 #> Finish loading setup script for JuliaCall.
 
@@ -112,7 +111,7 @@ julia_exists("c")
 
 julia_install_package_if_needed("Optim")
 julia_installed_package("Optim")
-#> [1] "0.18.1"
+#> [1] "1.2.0"
 julia_library("Optim")
 ```
 
@@ -168,7 +167,7 @@ julia_help("sqrt")
 #> 9.0
 #> 
 #> julia> sqrt(big(-81))
-#> ERROR: DomainError with -8.1e+01:
+#> ERROR: DomainError with -81.0:
 #> NaN result for non-NaN input.
 #> Stacktrace:
 #>  [1] sqrt(::BigFloat) at ./mpfr.jl:501
@@ -184,7 +183,9 @@ julia_help("sqrt")
 #> 
 #> If `A` has no negative real eigenvalues, compute the principal matrix square root of `A`, that is the unique matrix $X$ with eigenvalues having positive real part such that $X^2 = A$. Otherwise, a nonprincipal square root is returned.
 #> 
-#> If `A` is symmetric or Hermitian, its eigendecomposition ([`eigen`](@ref)) is used to compute the square root. Otherwise, the square root is determined by means of the Björck-Hammarling method [^BH83], which computes the complex Schur form ([`schur`](@ref)) and then the complex square root of the triangular factor.
+#> If `A` is real-symmetric or Hermitian, its eigendecomposition ([`eigen`](@ref)) is used to compute the square root.   For such matrices, eigenvalues λ that appear to be slightly negative due to roundoff errors are treated as if they were zero More precisely, matrices with all eigenvalues `≥ -rtol*(max |λ|)` are treated as semidefinite (yielding a Hermitian square root), with negative eigenvalues taken to be zero. `rtol` is a keyword argument to `sqrt` (in the Hermitian/real-symmetric case only) that defaults to machine precision scaled by `size(A,1)`.
+#> 
+#> Otherwise, the square root is determined by means of the Björck-Hammarling method [^BH83], which computes the complex Schur form ([`schur`](@ref)) and then the complex square root of the triangular factor.
 #> 
 #> [^BH83]: Åke Björck and Sven Hammarling, "A Schur method for the square root of a matrix", Linear Algebra and its Applications, 52-53, 1983, 127-140. [doi:10.1016/0024-3795(83)80010-X](https://doi.org/10.1016/0024-3795(83)80010-X)
 #> 
