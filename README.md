@@ -145,6 +145,15 @@ follows.
 JuliaCall::julia_setup(rebuild = TRUE)
 ```
 
+### `ERROR: could not load library "/usr/lib/x86_64-linux-gnu/../bin/../lib/x86_64-linux-gnu/julia/sys.so"`
+
+This error happens when Julia is built/installed with
+`MULTIARCH_INSTALL=1`, as it is on e.g. Debian. It is caused by [the
+bindir-locating code in jl\_init not being
+multiarch-aware](https://github.com/JuliaLang/julia/issues/32614#issuecomment-656787386).
+To work around it, try setting `JULIA_BINDIR=/usr/bin` in
+[`.Renviron`](https://rstats.wtf/r-startup.html#renviron).
+
 ### How to Get Help
 
   - One way to get help for Julia functions is just using `julia$help`

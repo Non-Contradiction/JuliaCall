@@ -119,6 +119,8 @@ bool load_libjulia_symbols() {
     // load jl_init
     if (!(load_symbol(libjulia_t, "jl_init", (void**) &jl_init) || load_symbol(libjulia_t, "jl_init__threading", (void**) &jl_init)))
         return false;
+    if (!(load_symbol(libjulia_t, "jl_init_with_image", (void**) &jl_init_with_image) || load_symbol(libjulia_t, "jl_init_with_image__threading", (void**) &jl_init_with_image)))
+        return false;
     LOAD_JULIA_SYMBOL(jl_atexit_hook);
     LOAD_JULIA_SYMBOL(jl_eval_string);
 
