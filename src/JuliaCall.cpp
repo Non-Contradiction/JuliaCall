@@ -7,22 +7,40 @@ using namespace Rcpp;
 
 
 // [[Rcpp::export]]
-bool juliacall_initialize(const std::string& libpath) {
+bool juliacall_initialize(const std::string& libpath,
+                          const std::string& julia_bindir,
+                          const std::string& image_relative_path) {
     if (jl_main_module != NULL) {
         return true;
     }
+
+    bool is_custom_image = image_relative_path == "default" ? false : true;
+    bool is_custom_bindir;
+    const char *julia_bindir_extra = getenv("JULIA_BINDIR");
+    if (julia_bindir_extra)
+        is_custom_bindir = true;
+    else
+        is_custom_bindir = false;
+
     if (!load_libjulia(libpath)) {
         stop(libpath + " - " + get_last_dl_error_message());
     }
     if (!load_libjulia_symbols()) {
         stop(get_last_loaded_symbol() + " - " + get_last_dl_error_message());
     }
+    if(!load_libjulia_init_symbol(is_custom_image || is_custom_bindir)){
+        stop(get_last_loaded_symbol() + " - " + get_last_dl_error_message());
+    }
 
-    const char *julia_bindir = getenv("JULIA_BINDIR");
-    if (julia_bindir)
-        jl_init_with_image(julia_bindir, NULL);
-    else
-        jl_init();
+    if(is_custom_image){
+        jl_init_with_image(julia_bindir.c_str(), image_relative_path.c_str());
+    } else {
+        if (is_custom_bindir){
+            jl_init_with_image(julia_bindir_extra, NULL);
+        } else {
+            jl_init();
+        }
+    }
 
     if (!load_libjulia_modules()) {
         stop(get_last_dl_error_message());
