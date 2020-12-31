@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <Rcpp.h>
 #include "libjulia.h"
 
@@ -17,7 +18,11 @@ bool juliacall_initialize(const std::string& libpath) {
         stop(get_last_loaded_symbol() + " - " + get_last_dl_error_message());
     }
 
-    jl_init();
+    const char *julia_bindir = getenv("JULIA_BINDIR");
+    if (julia_bindir)
+        jl_init_with_image(julia_bindir, NULL);
+    else
+        jl_init();
 
     if (!load_libjulia_modules()) {
         stop(get_last_dl_error_message());
