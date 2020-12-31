@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <Rcpp.h>
 #include "libjulia.h"
 
@@ -28,7 +29,12 @@ bool juliacall_initialize(const std::string& libpath,
     if(is_custom_image){
         jl_init_with_image(julia_bindir.c_str(), image_relative_path.c_str());
     } else {
-        jl_init();
+        const char *julia_bindir = getenv("JULIA_BINDIR");
+        if (julia_bindir){
+            jl_init_with_image(julia_bindir, NULL);
+        } else {
+            jl_init();
+        }
     }
 
 
