@@ -1,6 +1,8 @@
 # 0.17.1.9000
 
 * Fix bug for Julia plot in RMarkdown document caused by change of knitr #1717.
+* Workaround for #99: `ERROR: could not load library` on Debian/Ubuntu and
+  other systems which build Julia with `MULTIARCH_INSTALL=1` (#143 by @liskin).
 
 # JuliaCall 0.17.1
 

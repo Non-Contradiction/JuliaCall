@@ -14,6 +14,13 @@ julia_locate <- function(JULIA_HOME = NULL){
             Sys.getenv("JULIA_HOME")
         }
     }
+    if (is.null(JULIA_HOME)) {
+        depot <- Sys.getenv("JULIA_DEPOT_PATH", unset = julia_default_depot())
+        prefs_file <- file.path(depot, "prefs", "JuliaCall")
+        if (file.exists(prefs_file)) {
+            JULIA_HOME <- readChar(prefs_file, 256)
+        }
+    }
 
     if (is.null(JULIA_HOME)) {
         ## In macOS, the environment variables, e.g., PATH of a GUI is set by launchctl not the SHELL.

@@ -42,7 +42,6 @@ bool juliacall_initialize(const std::string& libpath,
         }
     }
 
-
     if (!load_libjulia_modules()) {
         stop(get_last_dl_error_message());
     }

@@ -117,7 +117,6 @@ bool load_libjulia_symbols() {
 
     LOAD_JULIA_SYMBOL(jl_is_initialized);
 
-
     LOAD_JULIA_SYMBOL(jl_atexit_hook);
     LOAD_JULIA_SYMBOL(jl_eval_string);
 

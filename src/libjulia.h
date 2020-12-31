@@ -87,6 +87,8 @@ STATIC_INLINE jl_function_t *jl_get_function(jl_module_t *m, const char *name)
 // initialization functions
 JL_EXTERN int (*jl_is_initialized)(void);
 JL_EXTERN void (*jl_init)(void);
+JL_EXTERN void (*jl_init_with_image)(const char *julia_bindir,
+                                     const char *image_relative_path);
 JL_EXTERN void (*jl_atexit_hook)(int status);
 JL_EXTERN void (*jl_init_with_image)(const char *julia_bindir, const char *image_relative_path);
 // front end interface
