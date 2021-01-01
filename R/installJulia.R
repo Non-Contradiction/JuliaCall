@@ -1,6 +1,6 @@
 julia_default_install_dir <- function(){
-    dir <- if (require("rappdirs")) {
-        file.path(user_data_dir("JuliaCall"), "julia")
+    dir <- if (requireNamespace("rappdirs", quietly = TRUE)) {
+        file.path(rappdirs::user_data_dir("JuliaCall"), "julia")
     } else {
         NULL
     }
@@ -10,7 +10,7 @@ julia_default_install_dir <- function(){
 julia_latest_version <- function(){
     url <- "https://raw.githubusercontent.com/JuliaBinaryWrappers/Julia_jll.jl/master/Project.toml"
     file <- tempfile()
-    download.file(url, file)
+    utils::download.file(url, file)
     toml <- readChar(file, 1024)
     match <- regexec("version = \"(.*)\\+(.*?)\"", toml)
     captures <- regmatches(toml, match)
@@ -73,9 +73,9 @@ install_julia <- function(prefix = julia_default_install_dir()){
     build <- version_build[2]
     url <- julia_tgz_url(version, build)
     file <- tempfile()
-    download.file(url, file)
+    utils::download.file(url, file)
     dest <- file.path(prefix, version)
-    untar(file, exdir=dest)
+    utils::untar(file, exdir=dest)
     julia_save_install_dir(dest)
     print(sprintf("Installed Julia to %s", dest))
     return(TRUE)
