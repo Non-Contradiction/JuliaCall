@@ -20,6 +20,8 @@ which contains an id corresponding to the actual julia object.
 \examples{
 
 \donttest{ ## julia_setup is quite time consuming
+  ## doing initialization and automatic installation of Julia if necessary
+  julia_setup(installJulia = TRUE)
   a <- JuliaObject(1)
 }
 

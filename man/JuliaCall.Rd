@@ -12,9 +12,9 @@ to use Julia packages as easy as possible.
 
 \donttest{ ## The examples are quite time consuming
 
-  ## Do initiation for JuliaCall
+  ## Do initiation for JuliaCall and automatic installation if necessary
 
-  julia <- julia_setup()
+  julia <- julia_setup(installJulia = TRUE)
 
   ## Different ways for calculating `sqrt(2)`
 

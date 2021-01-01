@@ -48,6 +48,8 @@ Note that named arguments will be discarded if the call uses dot notation,
 \examples{
 
 \donttest{ ## julia_setup is quite time consuming
+  ## doing initialization and automatic installation of Julia if necessary
+  julia_setup(installJulia = TRUE)
   julia_do.call("sqrt", list(2))
   julia_call("sqrt", 2)
   julia_call("sqrt.", 1:10)

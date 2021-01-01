@@ -35,6 +35,8 @@ Using julia packages.
 }
 \examples{
 \donttest{ ## julia_setup is quite time consuming
+  ## doing initialization and automatic installation of Julia if necessary
+  julia_setup(installJulia = TRUE)
   julia_install_package("DataFrames")
   julia_installed_package("DataFrames")
   julia_install_package_if_needed("DataFrames")
