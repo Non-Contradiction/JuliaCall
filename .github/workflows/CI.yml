@@ -60,15 +60,6 @@ jobs:
           remotes::install_cran("rcmdcheck")
         shell: Rscript {0}
 
-      - name: Install Julia
-        run: |
-          install.packages("devtools")
-          library(devtools)
-          devtools::load_all(".")
-          library(JuliaCall)
-          JuliaCall::install_julia("/tmp/julia")
-        shell: Rscript {0}
-
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
