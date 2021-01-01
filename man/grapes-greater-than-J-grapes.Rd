@@ -16,6 +16,8 @@ The experimental language piper for julia language.
 }
 \examples{
 \donttest{ ## julia_setup is quite time consuming
+  ## doing initialization and automatic installation of Julia if necessary
+  julia_setup(installJulia = TRUE)
   2 \%>J\% sqrt
   3 \%>J\% log(2)
 }
