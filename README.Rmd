@@ -44,15 +44,30 @@ knitr::opts_chunk$set(
 
 ## Installation
 
-To use package `JuliaCall`, you first have to install [`Julia`](https://julialang.org/) on your computer. You can download a generic binary from 
-<https://julialang.org/downloads/> and add it to your path, and then you can install `JuliaCall` just like any other R packages by
+You can install `JuliaCall` just like any other R packages by
+
 ```{r eval=FALSE}
 install.packages("JuliaCall")
 ```
 
-Currently `Julia v0.6.x`, `Julia v1.0.x`, and `Julia v1.1` are all supported by `JuliaCall`.
+To use `JuliaCall` you must have a working installation of Julia.
+This can be easily done via:
+
+```{julia eval=FALSE}
+library(JuliaCall)
+install_julia()
+```
+
+which will automatically install and setup a version of Julia specifically
+for use with JuliaCall.
+
+You can also setup Julia manually by downloading a generic binary from 
+<https://julialang.org/downloads/> and add it to your path Currently 
+`Julia v0.6.x` and the `Julia v1.x` releeses are all supported by 
+`JuliaCall`.
 
 You can get the development version of `JuliaCall` by
+
 ```{r eval=FALSE}
 devtools::install_github("Non-Contradiction/JuliaCall")
 ```
