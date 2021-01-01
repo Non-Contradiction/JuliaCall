@@ -58,11 +58,19 @@ install_julia()
 ```
 
 which will automatically install and setup a version of Julia specifically
-for use with JuliaCall.
+for use with JuliaCall. Or you can do
+
+```{r eval=FALSE}
+library(JuliaCall)
+julia_setup(installJulia = TRUE)
+```
+
+which will invoke `install_julia` automatically if Julia is not found 
+and also do initialization of `JuliaCall`.
 
 You can also setup Julia manually by downloading a generic binary from 
 <https://julialang.org/downloads/> and add it to your path. Currently 
-`Julia v0.6.x` and the `Julia v1.x` releeses are all supported by 
+`Julia v0.6.x` and the `Julia v1.x` releases are all supported by 
 `JuliaCall`.
 
 You can get the development version of `JuliaCall` by

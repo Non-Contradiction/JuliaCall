@@ -1,8 +1,16 @@
+# JuliaCall 0.17.2
+
+* Seventeenth release on CRAN.
+
 # 0.17.1.9000
 
 * Fix bug for Julia plot in RMarkdown document caused by change of knitr #1717.
-* Workaround for #99: `ERROR: could not load library` on Debian/Ubuntu and
-  other systems which build Julia with `MULTIARCH_INSTALL=1` (#143 by @liskin).
+* Workaround for #99: `ERROR: could not load library` on Debian/Ubuntu and other systems which build Julia with `MULTIARCH_INSTALL=1` (#143 by @liskin).
+* Add `install_julia` function for automatic installation of julia. (#135 by @christopher-dG).
+* Add option "relative_sysimage_path" in function `julia_setup()` for custom sysimage loading (#140 by @dgrominski).
+* Add option "installJulia" in function `julia_setup()` for automatic installation of Julia when Julia is not found. 
+* Fix problem of dll searching on Windows (#150).
+
 
 # JuliaCall 0.17.1
 
