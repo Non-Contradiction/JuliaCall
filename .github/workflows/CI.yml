@@ -70,11 +70,6 @@ jobs:
           JuliaCall::install_julia("/tmp/julia")
         shell: Rscript {0}
 
-      - name: Set Julia on PATH on Windows
-        if: runner.os == 'Windows'
-        run: |
-          echo "/tmp/julia/v1.5.0/bin" >> $GITHUB_PATH
-
       - name: Check
         env:
           _R_CHECK_CRAN_INCOMING_REMOTE_: false
