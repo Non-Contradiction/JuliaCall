@@ -3,10 +3,8 @@
 
 # JuliaCall for Seamless Integration of R and Julia
 
-[![Travis-CI Build
-Status](https://travis-ci.org/Non-Contradiction/JuliaCall.svg?branch=master)](https://travis-ci.org/Non-Contradiction/JuliaCall)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/Non-Contradiction/JuliaCall?branch=master&svg=true)](https://ci.appveyor.com/project/Non-Contradiction/JuliaCall)
+[![R build
+status](https://github.com/Non-Contradiction/JuliaCall/workflows/R-CMD-check/badge.svg)](https://github.com/Non-Contradiction/JuliaCall/actions)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/JuliaCall)](https://cran.r-project.org/package=JuliaCall)
 [![](https://cranlogs.r-pkg.org/badges/JuliaCall)](https://cran.r-project.org/package=JuliaCall)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/JuliaCall)](https://cran.r-project.org/package=JuliaCall)
@@ -47,20 +45,20 @@ You can install `JuliaCall` just like any other R packages by
 install.packages("JuliaCall")
 ```
 
-To use `JuliaCall` you must have a working installation of Julia.
-This can be easily done via:
+To use `JuliaCall` you must have a working installation of Julia. This
+can be easily done via:
 
-```julia
+``` r
 library(JuliaCall)
 install_julia()
 ```
 
-which will automatically install and setup a version of Julia specifically
-for use with JuliaCall.
+which will automatically install and setup a version of Julia
+specifically for use with JuliaCall.
 
-You can also setup Julia manually by downloading a generic binary from 
-<https://julialang.org/downloads/> and add it to your path Currently 
-`Julia v0.6.x` and the `Julia v1.x` releeses are all supported by 
+You can also setup Julia manually by downloading a generic binary from
+<https://julialang.org/downloads/> and add it to your path. Currently
+`Julia v0.6.x` and the `Julia v1.x` releeses are all supported by
 `JuliaCall`.
 
 You can get the development version of `JuliaCall` by
@@ -82,7 +80,7 @@ section](#troubleshooting-and-way-to-get-help).
 ``` r
 library(JuliaCall)
 julia <- julia_setup()
-#> Julia version 1.5.2 at location /usr/bin will be used.
+#> Julia version 1.5.0 at location C:\Users\lch34\AppData\Local\JULIAC~1\JULIAC~1\julia\V15~1.0\bin will be used.
 #> Loading setup script for JuliaCall...
 #> Finish loading setup script for JuliaCall.
 
@@ -120,7 +118,7 @@ julia_exists("c")
 
 julia_install_package_if_needed("Optim")
 julia_installed_package("Optim")
-#> [1] "1.2.0"
+#> [1] "0.22.0"
 julia_library("Optim")
 ```
 
@@ -176,7 +174,7 @@ julia_help("sqrt")
 #> sqrt(x)
 #> ```
 #> 
-#> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `√` is equivalent to `sqrt`.
+#> Return $\sqrt{x}$. Throws [`DomainError`](@ref) for negative [`Real`](@ref) arguments. Use complex negative arguments instead. The prefix operator `v` is equivalent to `sqrt`.
 #> 
 #> # Examples
 #> 
@@ -201,7 +199,7 @@ julia_help("sqrt")
 #> 
 #> If `A` has no negative real eigenvalues, compute the principal matrix square root of `A`, that is the unique matrix $X$ with eigenvalues having positive real part such that $X^2 = A$. Otherwise, a nonprincipal square root is returned.
 #> 
-#> If `A` is real-symmetric or Hermitian, its eigendecomposition ([`eigen`](@ref)) is used to compute the square root.   For such matrices, eigenvalues λ that appear to be slightly negative due to roundoff errors are treated as if they were zero More precisely, matrices with all eigenvalues `≥ -rtol*(max |λ|)` are treated as semidefinite (yielding a Hermitian square root), with negative eigenvalues taken to be zero. `rtol` is a keyword argument to `sqrt` (in the Hermitian/real-symmetric case only) that defaults to machine precision scaled by `size(A,1)`.
+#> If `A` is real-symmetric or Hermitian, its eigendecomposition ([`eigen`](@ref)) is used to compute the square root.   For such matrices, eigenvalues <U+03BB> that appear to be slightly negative due to roundoff errors are treated as if they were zero More precisely, matrices with all eigenvalues `= -rtol*(max |<U+03BB>|)` are treated as semidefinite (yielding a Hermitian square root), with negative eigenvalues taken to be zero. `rtol` is a keyword argument to `sqrt` (in the Hermitian/real-symmetric case only) that defaults to machine precision scaled by `size(A,1)`.
 #> 
 #> Otherwise, the square root is determined by means of the Björck-Hammarling method [^BH83], which computes the complex Schur form ([`schur`](@ref)) and then the complex square root of the triangular factor.
 #> 
