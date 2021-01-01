@@ -209,6 +209,8 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
     julia_command('ENV["MPLBACKEND"] = "Agg";')
 
     .julia$simple_call_ <- julia_eval("JuliaCall.simple_call")
+  
+    Sys.setenv(PATH = paste0(Sys.getenv("PATH"), ";", .julia$bin_dir))
 
     invisible(julia)
 }
