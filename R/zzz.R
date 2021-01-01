@@ -54,7 +54,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
     JULIA_HOME <- julia_locate(JULIA_HOME)
 
     if (is.null(JULIA_HOME)) {
-        if (isTRUE(installJullia)) {
+        if (isTRUE(installJulia)) {
             install_julia()
             JULIA_HOME <- julia_locate(JULIA_HOME)
             if (is.null(JULIA_HOME))
