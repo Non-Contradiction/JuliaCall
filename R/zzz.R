@@ -31,12 +31,12 @@
 #' @examples
 #'
 #' \donttest{ ## julia_setup is quite time consuming
-#'   julia <- julia_setup()
+#'   julia <- julia_setup(installJulia = TRUE)
 #' }
 #'
 #' @export
 julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
-                        installJullia = FALSE,
+                        installJulia = FALSE,
                         install = TRUE, force = FALSE, useRCall = TRUE,
                         rebuild = FALSE, relative_sysimage_path = "default") {
     ## libR <- paste0(R.home(), '/lib')

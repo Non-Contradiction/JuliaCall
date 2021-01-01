@@ -7,7 +7,7 @@
 julia_setup(
   JULIA_HOME = NULL,
   verbose = TRUE,
-  installJullia = FALSE,
+  installJulia = FALSE,
   install = TRUE,
   force = FALSE,
   useRCall = TRUE,
@@ -26,6 +26,9 @@ the julia in path.}
 \item{verbose}{whether to print out detailed information
 about \code{julia_setup}.}
 
+\item{installJulia}{whether to install julia automatically when julia is not found,
+whose default value is FALSE.}
+
 \item{install}{whether to execute installation script for dependent julia packages, whose default value is TRUE;
 but can be set to FALSE to save startup time when no installation of dependent julia packages is needed.}
 
@@ -39,9 +42,6 @@ If a new version of R is used, then this parameter needs to be set to TRUE.}
 
 \item{relative_sysimage_path}{path to the precompiled custom sys image. Path have to be relative to JULIA_HOME directory
 e.g. for default image it usually is "../lib/julia/sys.ji".}
-
-\item{installJulia}{whether to install julia automatically when julia is not found,
-whose default value is FALSE.}
 }
 \value{
 The julia interface, which is an environment with the necessary methods
@@ -56,7 +56,7 @@ The julia interface, which is an environment with the necessary methods
 \examples{
 
 \donttest{ ## julia_setup is quite time consuming
-  julia <- julia_setup()
+  julia <- julia_setup(installJulia = TRUE)
 }
 
 }

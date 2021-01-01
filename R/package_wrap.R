@@ -10,6 +10,8 @@
 #'     before the execution of wrapped functions.
 #' @examples
 #' \donttest{ ## julia_setup is quite time consuming
+#'   ## do initialization and automatic installation of Julia if necessary
+#'   julia_setup(installJulia = TRUE)
 #'   julia_install_package_if_needed("Optim")
 #'   opt <- julia_pkg_import("Optim",
 #'                            func_list = c("optimize", "BFGS"))
