@@ -7,6 +7,7 @@
 julia_setup(
   JULIA_HOME = NULL,
   verbose = TRUE,
+  installJullia = FALSE,
   install = TRUE,
   force = FALSE,
   useRCall = TRUE,
@@ -35,7 +36,12 @@ which is an amazing package to access R in julia.}
 
 \item{rebuild}{whether to rebuild RCall.jl, whose default value is FALSE to save startup time.
 If a new version of R is used, then this parameter needs to be set to TRUE.}
-\item{relative_sysimage_path}{path to the precompiled custom sys image. Path have to be relative to JULIA_HOME directory. E.g. for default image it usually is "../lib/julia/sys.ji".}
+
+\item{relative_sysimage_path}{path to the precompiled custom sys image. Path have to be relative to JULIA_HOME directory
+e.g. for default image it usually is "../lib/julia/sys.ji".}
+
+\item{installJulia}{whether to install julia automatically when julia is not found,
+whose default value is FALSE.}
 }
 \value{
 The julia interface, which is an environment with the necessary methods

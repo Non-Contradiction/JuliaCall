@@ -13,6 +13,8 @@
 #'     the julia in path.
 #' @param verbose whether to print out detailed information
 #'     about \code{julia_setup}.
+#' @param installJulia whether to install julia automatically when julia is not found,
+#'     whose default value is FALSE.
 #' @param install whether to execute installation script for dependent julia packages, whose default value is TRUE;
 #'     but can be set to FALSE to save startup time when no installation of dependent julia packages is needed.
 #' @param force whether to force julia_setup to execute again.
@@ -34,6 +36,7 @@
 #'
 #' @export
 julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
+                        installJullia = FALSE,
                         install = TRUE, force = FALSE, useRCall = TRUE,
                         rebuild = FALSE, relative_sysimage_path = "default") {
     ## libR <- paste0(R.home(), '/lib')
@@ -51,7 +54,15 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
     JULIA_HOME <- julia_locate(JULIA_HOME)
 
     if (is.null(JULIA_HOME)) {
-        stop("Julia is not found.")
+        if (isTRUE(installJullia)) {
+            install_julia()
+            JULIA_HOME <- julia_locate(JULIA_HOME)
+            if (is.null(JULIA_HOME))
+                stop("Julia is not found and automatic installation failed.")
+        }
+        else {
+            stop("Julia is not found.")
+        }
     }
 
     img_abs_path <-normalizePath(paste(JULIA_HOME,relative_sysimage_path, sep = "/"), mustWork = F)
@@ -209,7 +220,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
     julia_command('ENV["MPLBACKEND"] = "Agg";')
 
     .julia$simple_call_ <- julia_eval("JuliaCall.simple_call")
-  
+
     if (.Platform$OS.type == "windows") {
         ## needed for R to find julia dlls
         Sys.setenv(PATH = paste0(Sys.getenv("PATH"), ";", .julia$bin_dir))
