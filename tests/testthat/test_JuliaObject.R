@@ -2,7 +2,7 @@ context("JuliaObject test")
 
 test_that("test of JuliaObject", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     expect_equal(c(julia_eval("1//2") ^ 2), 0.25)
 
@@ -31,7 +31,7 @@ test_that("test of JuliaObject", {
 
 test_that("test of JuliaObject freeing", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     gc()
     count0 <- julia_eval("length(keys(RCall.jtypExtPtrs))")
@@ -49,7 +49,7 @@ test_that("test of JuliaObject freeing", {
 
 test_that("test of callable JuliaObject", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     julia_command("struct Callable end")
     julia_command("(::Callable)(x...) = x")

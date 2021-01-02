@@ -2,7 +2,7 @@ context("Basic test")
 
 test_that("test of the basic functionality", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     expect_equal(julia_eval("sqrt(2)"), sqrt(2))
     expect_equal(julia_call("sqrt", 2), sqrt(2))

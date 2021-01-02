@@ -5,7 +5,7 @@ context("Automatic Differentiation Test")
 
 test_that("test of AD on basic functions", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     julia_install_package_if_needed("ForwardDiff")
     julia_library("ForwardDiff")
@@ -18,7 +18,7 @@ test_that("test of AD on basic functions", {
 
 test_that("test of AD of lambertW function", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     julia_install_package_if_needed("ForwardDiff")
     julia_library("ForwardDiff")
@@ -43,7 +43,7 @@ test_that("test of AD of lambertW function", {
 
 test_that("test of AD of Rosenbrock function", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     julia_install_package_if_needed("ForwardDiff")
     julia_library("ForwardDiff")

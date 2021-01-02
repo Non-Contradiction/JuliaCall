@@ -2,7 +2,7 @@ context("JuliaTuple test")
 
 test_that("test of JuliaTuple", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     julia_command("r1 = (1, 2);")
     r2 <- julia_eval("r1")

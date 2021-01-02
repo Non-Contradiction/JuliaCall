@@ -2,7 +2,7 @@ context("Pkg wrap Test")
 
 test_that("test of pkg wrap", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     julia_install_package_if_needed("Optim")
     opt <- julia_pkg_import("Optim",

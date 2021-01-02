@@ -2,7 +2,7 @@ context("julia_package test")
 
 test_that("test of functionality related to julia_package", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     expect_null(julia_install_package("RCall"))
     expect_null(julia_install_package_if_needed("RCall"))

@@ -2,7 +2,7 @@ context("Argument test")
 
 test_that("test of passing arguments", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     julia_command("function test(a, b; c= 1, d = 2) a+b+c+d end")
     expect_equal(julia_call("test", 1, 2), 6)
