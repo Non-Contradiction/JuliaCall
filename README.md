@@ -243,31 +243,31 @@ find the `Julia` function or `Julia` module you want to have in `R`,
 `using` the module, and `julia_call` the function. There are some
 examples:
 
-  - [`diffeqr`](https://github.com/JuliaDiffEq/diffeqr) is a package for
+  - [`diffeqr`](https://github.com/SciML/diffeqr) is a package for
     solving differential equations in `R`. It utilizes
-    [DifferentialEquations.jl](http://docs.juliadiffeq.org/latest/) for
-    its core routines to give high performance solving of ordinary
+    [DifferentialEquations.jl](https://diffeq.sciml.ai/latest/) for its
+    core routines to give high performance solving of ordinary
     differential equations (ODEs), stochastic differential equations
     (SDEs), delay differential equations (DDEs), and
     differential-algebraic equations (DAEs) directly in `R`.
   - [`convexjlr`](https://github.com/Non-Contradiction/convexjlr) is an
     `R` package for Disciplined Convex Programming (DCP) by providing a
     high level wrapper for `Julia` package
-    [`Convex.jl`](https://github.com/JuliaOpt/Convex.jl). `convexjlr`
+    [`Convex.jl`](https://github.com/jump-dev/Convex.jl). `convexjlr`
     can solve linear programs, second order cone programs, semidefinite
     programs, exponential cone programs, mixed-integer linear programs,
     and some other DCP-compliant convex programs through `Convex.jl`.
   - [`ipoptjlr`](https://github.com/Non-Contradiction/ipoptjlr) provides
     an `R` interface to the `Ipopt` nonlinear optimization solver. It
     provides a simple high-level wrapper for `Julia` package
-    \[`Ipopt.jl`\] (<https://github.com/JuliaOpt/Ipopt.jl>).
-  - [`FixedEffectjlr`](https://github.com/eloualiche/FixedEffectjlr)
+    \[`Ipopt.jl`\] (<https://github.com/jump-dev/Ipopt.jl>).
+  - [`FixedEffectjlr`](https://github.com/FixedEffects/FixedEffectjlr)
     uses the `Julia` package
     [`FixedEffectModels.jl`](https://github.com/matthieugomez/FixedEffectModels.jl)
     to estimate large fixed effects models in `R`.
   - [Julia MixedModels from R](http://rpubs.com/dmbates/377897)
     illustrates how to use `JuliaCall` and `Julia` package
-    [`MixedModels.jl`](https://github.com/dmbates/MixedModels.jl) to
+    [`MixedModels.jl`](https://github.com/JuliaStats/MixedModels.jl) to
     build mixed models in `R`.
   - [`autodiffr`](https://github.com/Non-Contradiction/autodiffr)
     provides automatic differentiation to native `R` functions by
