@@ -29,7 +29,7 @@ testJuliaObjectGeneric <- function(generic, narg,
 
 test_that("test of basic generics", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     testJuliaObjectGeneric(length, 1)
     testJuliaObjectGeneric(as.double, 1)
@@ -48,7 +48,7 @@ test_that("test of basic generics", {
 
 test_that("test of Compare group", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     testJuliaObjectGeneric(`==`, 2)
     testJuliaObjectGeneric(`>`, 2)
@@ -60,7 +60,7 @@ test_that("test of Compare group", {
 
 test_that("test of Arith group", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     testJuliaObjectGeneric(`+`, 2)
     testJuliaObjectGeneric(`-`, 2)
@@ -77,7 +77,7 @@ test_that("test of Arith group", {
 
 test_that("test of Logic group", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     testJuliaObjectGeneric(`&`, 2)
     testJuliaObjectGeneric(`|`, 2)
@@ -85,7 +85,7 @@ test_that("test of Logic group", {
 
 test_that("test of Math and Math2 group", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     testJuliaObjectGeneric(abs, 1)
     testJuliaObjectGeneric(sign, 1)

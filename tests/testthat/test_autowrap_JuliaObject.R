@@ -2,7 +2,7 @@ context("autowrap test")
 
 test_that("test of autowrap", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     julia_command("
     struct MyType2{T} <: AbstractArray{T,1}

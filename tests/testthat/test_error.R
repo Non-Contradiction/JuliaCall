@@ -2,7 +2,7 @@ context("Error handling test")
 
 test_that("test of the error handling functionality", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     expect_error(julia_eval("abc"))
     expect_error(julia_command("abc"))

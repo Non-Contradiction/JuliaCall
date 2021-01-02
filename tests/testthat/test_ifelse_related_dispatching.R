@@ -2,7 +2,7 @@ context("ifelse-related dispatching test")
 
 test_that("test of rep", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     expect_equal(rep(1, 3), c(rep(JuliaObject(1), 3)))
     expect_equal(rep(1:2, 3), c(rep(JuliaObject(1:2), 3)))
@@ -16,7 +16,7 @@ test_that("test of rep", {
 
 test_that("test of logical index", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     x1 <- JuliaObject(1:3)
     expect_equal(x1[2], x1[c(FALSE, TRUE, FALSE)])
@@ -32,7 +32,7 @@ test_that("test of logical index", {
 
 test_that("test of assign", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     x <- julia_eval("[1//1;2//1;3//1]")
 
@@ -55,7 +55,7 @@ test_that("test of assign", {
 
 test_that("test of ifelse", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     x <- julia_eval("[1//1;2//1;3//1]")
     y <- julia_eval("[0//1;2//1;3//1]")

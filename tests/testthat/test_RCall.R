@@ -2,7 +2,7 @@ context("RCall test")
 
 test_that("test of using RCall through JuliaCall", {
     skip_on_cran()
-    julia <- julia_setup()
+    julia <- julia_setup(installJulia = TRUE)
 
     expect_equal(julia_eval('R"1"'), 1)
     expect_equal(julia_eval('reval("1")'), 1)
