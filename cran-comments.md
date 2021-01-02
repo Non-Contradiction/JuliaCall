@@ -1,9 +1,13 @@
 ## Test environments
 * local Windows 10, R 3.6.3 with Rtools35
-* Windows-latest (on GitHub action), R 4.0.3
-* macOS-latest (on GitHub action), R 4.0.3
-* Ubuntu 20.04 (on GitHub action), R 4.0.3 and r-devel
+* Windows-latest (on GitHub action), R-release
+* macOS-latest (on GitHub action), R-release
+* Ubuntu 20.04 (on GitHub action), R-release and R-devel
 * win-builder (devel, release, and oldrelease)
+* Windows Server 2008 R2 SP1 (on R-hub), R-devel, 32/64 bit
+* Ubuntu 16.04 (on R-hub), R-release, GCC
+* Debian Linux (on R-hub), R-devel, GCC ASAN/UBSAN
+* Fedora Linux (on R-hub), R-devel, clang, gfortran
 
 ## R CMD check results
 
