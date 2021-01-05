@@ -10,13 +10,21 @@ CurrentRhome = normpath(ARGS[1])
 ENV["R_HOME"] = CurrentRhome
 
 const julia07 = VERSION > v"0.6.5"
+const julia14 = VERSION > v"1.3.2"
 
 if julia07
     using Pkg
 end
 
 function installed(name)
-    @static if julia07
+    @static if julia14
+        for p in values(Pkg.dependencies())
+            if p.name == name && p.is_direct_dep
+                return p.version
+            end
+        end
+        nothing
+    elseif julia07
         get(Pkg.installed(), name, nothing)
     else
         Pkg.installed(name)
