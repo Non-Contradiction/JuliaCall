@@ -22,8 +22,8 @@
 #'     which is an amazing package to access R in julia.
 #' @param rebuild whether to rebuild RCall.jl, whose default value is FALSE to save startup time.
 #'     If a new version of R is used, then this parameter needs to be set to TRUE.
-#' @param relative_sysimage_path path to the precompiled custom sys image. Path have to be relative to JULIA_HOME directory
-#'     e.g. for default image it usually is "../lib/julia/sys.ji".
+#' @param sysimage_path path to the precompiled custom sys image.
+#'     Path can be either an absolute path or relative to the current directory.
 #'
 #' @return The julia interface, which is an environment with the necessary methods
 #'   like command, source and things like that to communicate with julia.
@@ -38,7 +38,7 @@
 julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
                         installJulia = FALSE,
                         install = TRUE, force = FALSE, useRCall = TRUE,
-                        rebuild = FALSE, relative_sysimage_path = "default") {
+                        rebuild = FALSE, sysimage_path = NULL) {
     ## libR <- paste0(R.home(), '/lib')
     ## system(paste0('export LD_LIBRARY_PATH=', libR, ':$LD_LIBRARY_PATH'))
 
@@ -65,12 +65,17 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
         }
     }
 
-    img_abs_path <-normalizePath(paste(JULIA_HOME,relative_sysimage_path, sep = "/"), mustWork = F)
+    if (is.null(sysimage_path)) {
+        img_abs_path <- ""
+    } else {
+        img_abs_path <- normalizePath(sysimage_path, mustWork = F)
 
-    if(!file.exists(img_abs_path) && relative_sysimage_path != "default")
-       stop("sysimage at path: ", img_abs_path, " is not found.",
-            "you have to specify the path relative to JULA_HOME directory",
-            "which is currently: ", JULIA_HOME)
+        if(!file.exists(img_abs_path))
+           stop("sysimage at path: ", img_abs_path, " is not found. ",
+                "You have to specify the path relative to the current ",
+                "directory or as an absolute path.")
+    }
+
 
     .julia$bin_dir <- JULIA_HOME
 
@@ -121,7 +126,7 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
 
     juliacall_initialize(.julia$dll_file,
                          .julia$bin_dir,
-                         relative_sysimage_path)
+                         img_abs_path)
 
     ## if (verbose) message("Finish Julia initiation.")
 
