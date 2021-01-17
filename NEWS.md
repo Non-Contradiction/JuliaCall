@@ -1,8 +1,12 @@
+# JuliaCall 0.17.2.9000
+
+* Change the way to specific sysimage path in agree with pyjulia and julia -J/--sysimage.. command line. The new `sysimage_path` argument to the function `julia_setup` allows either an absolute path to the image, or a path relative to the current directory. (#155 by @JackDunnNZ).
+
 # JuliaCall 0.17.2
 
 * Seventeenth release on CRAN.
 
-# 0.17.1.9000
+# JuliaCall 0.17.1.9000
 
 * Fix bug for Julia plot in RMarkdown document caused by change of knitr #1717.
 * Workaround for #99: `ERROR: could not load library` on Debian/Ubuntu and other systems which build Julia with `MULTIARCH_INSTALL=1` (#143 by @liskin).
