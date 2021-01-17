@@ -6,15 +6,15 @@
 using namespace Rcpp;
 
 // juliacall_initialize
-bool juliacall_initialize(const std::string& libpath, const std::string& julia_bindir, const std::string& image_relative_path);
-RcppExport SEXP _JuliaCall_juliacall_initialize(SEXP libpathSEXP, SEXP julia_bindirSEXP, SEXP image_relative_pathSEXP) {
+bool juliacall_initialize(const std::string& libpath, const std::string& julia_bindir, const std::string& image_path);
+RcppExport SEXP _JuliaCall_juliacall_initialize(SEXP libpathSEXP, SEXP julia_bindirSEXP, SEXP image_pathSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< const std::string& >::type libpath(libpathSEXP);
     Rcpp::traits::input_parameter< const std::string& >::type julia_bindir(julia_bindirSEXP);
-    Rcpp::traits::input_parameter< const std::string& >::type image_relative_path(image_relative_pathSEXP);
-    rcpp_result_gen = Rcpp::wrap(juliacall_initialize(libpath, julia_bindir, image_relative_path));
+    Rcpp::traits::input_parameter< const std::string& >::type image_path(image_pathSEXP);
+    rcpp_result_gen = Rcpp::wrap(juliacall_initialize(libpath, julia_bindir, image_path));
     return rcpp_result_gen;
 END_RCPP
 }

@@ -9,12 +9,12 @@ using namespace Rcpp;
 // [[Rcpp::export]]
 bool juliacall_initialize(const std::string& libpath,
                           const std::string& julia_bindir,
-                          const std::string& image_relative_path) {
+                          const std::string& image_path) {
     if (jl_main_module != NULL) {
         return true;
     }
 
-    bool is_custom_image = image_relative_path == "default" ? false : true;
+    bool is_custom_image = image_path == "" ? false : true;
     bool is_custom_bindir;
     const char *julia_bindir_extra = getenv("JULIA_BINDIR");
     if (julia_bindir_extra)
@@ -33,7 +33,7 @@ bool juliacall_initialize(const std::string& libpath,
     }
 
     if(is_custom_image){
-        jl_init_with_image(julia_bindir.c_str(), image_relative_path.c_str());
+        jl_init_with_image(julia_bindir.c_str(), image_path.c_str());
     } else {
         if (is_custom_bindir){
             jl_init_with_image(julia_bindir_extra, NULL);
