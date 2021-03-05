@@ -17,3 +17,12 @@ test_that("test of the basic functionality", {
     expect_equal(julia_call("sqrt.", c(1:10)), sqrt(c(1:10)))
     expect_equal(julia_call("log.", c(1:10)), log(c(1:10)))
 })
+
+test_that("test of white space stripping for string command", {
+    skip_on_cran()
+    julia <- julia_setup(installJulia = TRUE)
+
+    expect_equal({julia_command("b = sqrt(2)
+                                "); julia_eval("b
+                                               ")}, sqrt(2))
+})

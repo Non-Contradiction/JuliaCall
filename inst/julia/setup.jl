@@ -200,7 +200,7 @@ function exists(x)
 end
 
 function eval_string(x)
-    Core.eval(Main, parse(x))
+    Core.eval(Main, parse(strip(x)))
 end
 
 function installed_package(pkg_name)
