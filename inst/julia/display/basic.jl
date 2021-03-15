@@ -22,7 +22,10 @@ end
 
 DisplayManager(repl_display :: REPL.REPLDisplay) = DisplayManager(repl_display, 0)
 
-function Rprint(s) ccall((:Rprintf,RCall.libR),Void,(Ptr{Cchar},), s) end
+function Rprint(s) 
+    RCall.rcall(:cat, s)
+    ## ccall((:Rprintf,RCall.libR),Void,(Ptr{Cchar},), s) 
+end
 
 function proceed(dm :: DisplayManager)
     if dm.location < dm.repl_display.repl.terminal.out_stream.ptr-1
