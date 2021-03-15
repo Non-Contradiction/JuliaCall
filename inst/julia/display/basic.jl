@@ -33,7 +33,7 @@ function proceed(dm :: DisplayManager)
 end
 
 function display(dm :: DisplayManager, mime::MIME"text/plain", x)
-    display(dm.repl_display, mime, x)
+    Base.invokelatest(display, dm.repl_display, mime, x)
     proceed(dm)
     nothing
 end

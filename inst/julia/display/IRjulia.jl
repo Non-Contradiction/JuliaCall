@@ -18,7 +18,7 @@ function limitstringmime(mime::MIME, x)
         if israwtext(mime, x)
             return String(x)
         else
-            show(IOContext(buf, :limit=>true), mime, x)
+            Base.invokelatest(show, IOContext(buf, :limit=>true), mime, x)
         end
     else
         b64 = Base64EncodePipe(buf)
