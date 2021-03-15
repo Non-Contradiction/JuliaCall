@@ -1,3 +1,8 @@
+# JuliaCall 0.17.3.9000
+
+* White space stripping for string command in `julia_command` and `julia_eval`. Fix #161.
+* Fix #163 and other problems related to the display system.
+
 # JuliaCall 0.17.2.9000
 
 * Change the way to specific sysimage path in agree with pyjulia and julia -J/--sysimage.. command line. The new `sysimage_path` argument to the function `julia_setup` allows either an absolute path to the image, or a path relative to the current directory. (#155 by @JackDunnNZ).
