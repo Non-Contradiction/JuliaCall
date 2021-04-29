@@ -14,3 +14,4 @@ inst/doc
 /revdep/library.noindex
 /revdep/data.sqlite
 /revdep/*.html
+.DS_Store
