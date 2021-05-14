@@ -6,7 +6,7 @@
 #' @param func_call the impartial julia function call.
 #'
 #' @examples
-#' \donttest{ ## julia_setup is quite time consuming
+#' if (interactive()) { ## julia_setup is quite time consuming
 #'   ## doing initialization and automatic installation of Julia if necessary
 #'   julia_setup(installJulia = TRUE)
 #'   2 %>J% sqrt

@@ -20,7 +20,7 @@
 #'
 #' @examples
 #'
-#' \donttest{ ## julia_setup is quite time consuming
+#' if (interactive()) { ## julia_setup is quite time consuming
 #'   ## doing initialization and automatic installation of Julia if necessary
 #'   julia_setup(installJulia = TRUE)
 #'   julia_do.call("sqrt", list(2))
@@ -97,7 +97,7 @@ julia_call <- julia$call <- function(func_name, ..., need_return = c("R", "Julia
 #'
 #' @examples
 #'
-#' \donttest{ ## julia_setup is quite time consuming
+#' if (interactive()) { ## julia_setup is quite time consuming
 #'   ## doing initialization and automatic installation of Julia if necessary
 #'   julia_setup(installJulia = TRUE)
 #'   julia_exists("sqrt")
@@ -126,7 +126,7 @@ julia_exists <- julia$exists <- function(name) julia$call("JuliaCall.exists", na
 #'
 #' @examples
 #'
-#' \donttest{ ## julia_setup is quite time consuming
+#' if (interactive()) { ## julia_setup is quite time consuming
 #'   ## doing initialization and automatic installation of Julia if necessary
 #'   julia_setup(installJulia = TRUE)
 #'   julia_eval("sqrt(2)")
@@ -152,7 +152,7 @@ julia_eval <- julia$eval <- function(cmd, need_return = c("R", "Julia"))
 #'
 #' @examples
 #'
-#' \donttest{ ## julia_setup is quite time consuming
+#' if (interactive()) { ## julia_setup is quite time consuming
 #'   ## doing initialization and automatic installation of Julia if necessary
 #'   julia_setup(installJulia = TRUE)
 #'   julia_command("a = sqrt(2);")
@@ -183,7 +183,7 @@ julia_source <- julia$source <-
 #'
 #' @examples
 #'
-#' \donttest{ ## julia_setup is quite time consuming
+#' if (interactive()) { ## julia_setup is quite time consuming
 #'   ## doing initialization and automatic installation of Julia if necessary
 #'   julia_setup(installJulia = TRUE)
 #'   julia_help("sqrt")
@@ -204,7 +204,7 @@ julia_help <- julia$help <- function(fname){
 #'
 #' @examples
 #'
-#' \donttest{ ## julia_setup is quite time consuming
+#' if (interactive()) { ## julia_setup is quite time consuming
 #'   ## doing initialization and automatic installation of Julia if necessary
 #'   julia_setup(installJulia = TRUE)
 #'   julia_assign("x", 2)

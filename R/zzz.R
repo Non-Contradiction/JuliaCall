@@ -30,7 +30,7 @@
 #'
 #' @examples
 #'
-#' \donttest{ ## julia_setup is quite time consuming
+#' if (interactive()) { ## julia_setup is quite time consuming
 #'   julia <- julia_setup(installJulia = TRUE)
 #' }
 #'

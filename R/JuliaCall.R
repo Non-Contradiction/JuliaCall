@@ -5,7 +5,7 @@
 #'
 #' @examples
 #'
-#' \donttest{ ## The examples are quite time consuming
+#' if (interactive()) { ## The examples are quite time consuming
 #'
 #'   ## Do initiation for JuliaCall and automatic installation if necessary
 #'

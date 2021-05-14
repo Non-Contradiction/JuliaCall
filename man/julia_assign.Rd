@@ -17,7 +17,7 @@ corresponding julia value automatically.}
 }
 \examples{
 
-\donttest{ ## julia_setup is quite time consuming
+if (interactive()) { ## julia_setup is quite time consuming
   ## doing initialization and automatic installation of Julia if necessary
   julia_setup(installJulia = TRUE)
   julia_assign("x", 2)

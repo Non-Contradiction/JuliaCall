@@ -6,7 +6,7 @@
 #' @return julia_installed_package will return the version number of the julia package,
 #'     "nothing" if the package is not installed.
 #' @examples
-#' \donttest{ ## julia_setup is quite time consuming
+#' if (interactive()) { ## julia_setup is quite time consuming
 #'   ## doing initialization and automatic installation of Julia if necessary
 #'   julia_setup(installJulia = TRUE)
 #'   julia_install_package("DataFrames")
