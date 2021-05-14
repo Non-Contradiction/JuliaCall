@@ -148,7 +148,8 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
                       },
                   onexit = TRUE)
 
-    .julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
+    Rhomeset <- paste0('ENV["R_HOME"] = "', R.home(), '";')
+    ## .julia$cmd(paste0('ENV["R_HOME"] = "', R.home(), '"'))
 
     if (verbose) message("Loading setup script for JuliaCall...")
 
@@ -162,11 +163,11 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
 
     if (!newer(.julia$VERSION, "0.7.0")) {
         ## message("Before 0.7.0")
-        .julia$cmd(paste0('include("', system.file("julia/setup.jl", package = "JuliaCall"), '")'))
+        .julia$cmd(paste0(Rhomeset, 'include("', system.file("julia/setup.jl", package = "JuliaCall"), '")'))
     }
     else {
         ## message("After 0.7.0")
-        .julia$cmd(paste0('Base.include(Main,"',
+        .julia$cmd(paste0(Rhomeset, 'Base.include(Main,"',
                           system.file("julia/setup.jl", package = "JuliaCall"), '")'))
     }
 
