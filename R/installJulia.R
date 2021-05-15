@@ -1,6 +1,7 @@
 julia_default_install_dir <- function(){
     if (exists("R_user_dir", asNamespace("tools"))) {
-        return(file.path(tools::R_user_dir("JuliaCall"), "julia"))
+        R_user_dir <- get("R_user_dir", envir = asNamespace("tools"))
+        return(file.path(R_user_dir("JuliaCall"), "julia"))
     }
     dir <- if (requireNamespace("rappdirs", quietly = TRUE)) {
         file.path(rappdirs::user_data_dir("JuliaCall"), "julia")
