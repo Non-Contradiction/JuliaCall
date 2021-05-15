@@ -3,7 +3,7 @@
 #' @description Open julia console.
 #'
 #' @examples
-#' if (identical(Sys.getenv("AUTO_JULIA_INSTALL"), "true")) { ## julia_setup is quite time consuming
+#' if (identical(interactive(), TRUE)) { ## julia_setup is quite time consuming
 #'   julia_console()
 #' }
 #'
