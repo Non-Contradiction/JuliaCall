@@ -23,7 +23,7 @@ If you need to get the evaluation result in R, you can use
 }
 \examples{
 
-if (interactive()) { ## julia_setup is quite time consuming
+if (identical(Sys.getenv("AUTO_JULIA_INSTALL"), "true")) { ## julia_setup is quite time consuming
   ## doing initialization and automatic installation of Julia if necessary
   julia_setup(installJulia = TRUE)
   julia_command("a = sqrt(2);")

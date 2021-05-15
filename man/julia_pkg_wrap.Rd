@@ -31,7 +31,7 @@ before the execution of wrapped functions.}
 Wrap julia functions and packages the easy way.
 }
 \examples{
-if (interactive()) { ## julia_setup is quite time consuming
+if (identical(Sys.getenv("AUTO_JULIA_INSTALL"), "true")) { ## julia_setup is quite time consuming
   ## do initialization and automatic installation of Julia if necessary
   julia_setup(installJulia = TRUE)
   julia_install_package_if_needed("Optim")

@@ -10,7 +10,7 @@ to use Julia packages as easy as possible.
 }
 \examples{
 
-if (interactive()) { ## The examples are quite time consuming
+if (identical(Sys.getenv("AUTO_JULIA_INSTALL"), "true")) { ## The examples are quite time consuming
 
   ## Do initiation for JuliaCall and automatic installation if necessary
 

@@ -47,7 +47,7 @@ Note that named arguments will be discarded if the call uses dot notation,
 }
 \examples{
 
-if (interactive()) { ## julia_setup is quite time consuming
+if (identical(Sys.getenv("AUTO_JULIA_INSTALL"), "true")) { ## julia_setup is quite time consuming
   ## doing initialization and automatic installation of Julia if necessary
   julia_setup(installJulia = TRUE)
   julia_do.call("sqrt", list(2))
