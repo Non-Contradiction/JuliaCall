@@ -30,7 +30,7 @@
 #'
 #' @examples
 #'
-#' if (interactive()) { ## julia_setup is quite time consuming
+#' if (identical(Sys.getenv("AUTO_JULIA_INSTALL"), "true")) { ## julia_setup is quite time consuming
 #'   julia <- julia_setup(installJulia = TRUE)
 #' }
 #'

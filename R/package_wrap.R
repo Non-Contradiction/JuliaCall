@@ -9,7 +9,7 @@
 #' @param hook the function to be executed
 #'     before the execution of wrapped functions.
 #' @examples
-#' if (interactive()) { ## julia_setup is quite time consuming
+#' if (identical(Sys.getenv("AUTO_JULIA_INSTALL"), "true")) { ## julia_setup is quite time consuming
 #'   ## do initialization and automatic installation of Julia if necessary
 #'   julia_setup(installJulia = TRUE)
 #'   julia_install_package_if_needed("Optim")
