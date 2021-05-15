@@ -2,6 +2,7 @@
 
 * White space stripping for string command in `julia_command` and `julia_eval`. Fix #161.
 * Fix #163 and other problems related to the display system.
+* Use `R_user_dir` to get default julia installation position on R 4.0.
 
 # JuliaCall 0.17.2.9000
 
