@@ -238,8 +238,12 @@ function include1(fname)
     end
 end
 
-function apply(f, args...)
-    f(args...)
+# function apply(f, args...)
+#     f(args...)
+# end
+
+function apply(f, unamed_args...; named_args...)
+    f(unamed_args...; named_args...)
 end
 
 end
