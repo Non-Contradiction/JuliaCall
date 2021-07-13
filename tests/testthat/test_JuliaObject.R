@@ -61,3 +61,15 @@ test_that("test of callable JuliaObject", {
     expect_equal(r1[[3]], 3)
     expect_true(inherits(r1, "JuliaTuple"))
 })
+
+## Callable keyword arguments #165
+test_that("test of callable JuliaObject with keyword arguments", {
+    skip_on_cran()
+    julia <- julia_setup(installJulia = TRUE)
+
+    julia_command("struct CallableKW end")
+    julia_command("(::CallableKW)(x...; a=3.0, b=2) = a+b")
+    r <- julia_eval("CallableKW()")
+    r1 <- r$.(1, 2, 3, a=3.2)
+    expect_equal(r1, 5.2)
+})
