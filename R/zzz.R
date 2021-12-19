@@ -119,6 +119,13 @@ julia_setup <- function(JULIA_HOME = NULL, verbose = TRUE,
         on.exit(setwd(cur_dir))
     }
 
+    # workaround for Julia 1.6+ (see https://github.com/JuliaPy/pyjulia/issues/437#issuecomment-912223632)
+    if (identical(get_os(), "osx")) {
+        cur_dir <- getwd()
+        setwd(dirname(.julia$dll_file))
+        on.exit(setwd(cur_dir))
+    }
+
     ## seems okay to try to load libjulia earlier, except on osx
     if (!identical(get_os(), "osx")) {
         try(dyn.load(.julia$dll_file))
