@@ -28,13 +28,9 @@ output_return <- function(){
 #' @importFrom knitr knit_print
 #' @export
 knit_print.JuliaOutput = function(x, ...) {
-    options = knitr::opts_current$get()
-    wrap_ <- do.call(":::", list("knitr", quote(wrap)))
-    wrap <- function(x) wrap_(x, options = options)
-
+    wrap <- function(x) knitr::sew(x, options = knitr::opts_current$get())
     knitr::asis_output(paste(c(wrap(x$stdout), wrap(x$out)),
                              collapse = "\n"))
-
 }
 
 ## This function is used at the beginning of Julia plot_display function
