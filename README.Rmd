@@ -84,7 +84,7 @@ devtools::install_github("Non-Contradiction/JuliaCall")
 Before using `JuliaCall`, you need to do initial setup by function `julia_setup()` for automatic type conversion, Julia display systems, etc. 
 It is necessary for every new R session to use the package.
 If not carried out manually, it will be invoked automatically before other `julia_xxx` functions.
-Solutions to some common error in `julia_setup()` are documented in the [troubleshooting section](#troubleshooting-and-way-to-get-help).
+Solutions to some common error in `julia_setup()` are documented in the [troubleshooting section](#troubleshooting-and-ways-to-get-help).
 
 ```{r}
 library(JuliaCall)
