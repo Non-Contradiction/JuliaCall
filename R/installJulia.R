@@ -12,37 +12,43 @@ julia_default_install_dir <- function(){
 }
 
 julia_latest_version <- function(){
-    url <- "https://raw.githubusercontent.com/JuliaBinaryWrappers/Julia_jll.jl/master/Project.toml"
+    url <- "https://julialang-s3.julialang.org/bin/versions.json"
     file <- tempfile()
     utils::download.file(url, file)
-    toml <- readChar(file, 1024)
-    match <- regexec("version = \"(.*)\\+(.*?)\"", toml)
-    captures <- regmatches(toml, match)
-    captures[[1]][2] <- paste("v", captures[[1]][2], sep = "")
-    return(captures[[1]][2:3])
+    versions <- rjson::fromJSON(file=file)
+
+    max(names(Filter(function(v) v$stable, versions)))
 }
 
-julia_tgz_url <- function(version, build){
+
+julia_url <- function(version){
     arch <- if (.Machine$sizeof.pointer == 8) {
-        "x86_64"
+        "x64"
     } else {
-        "i686"
+        "x86"
     }
+    short_version <- substr(version, 1, 3)
     sysname <- Sys.info()["sysname"]
-    os <- if (sysname == "Linux") {
-        "linux-gnu"
+    if (sysname == "Linux") {
+        os <- "linux"
+        slug <- "linux-x86_64"
+        ext <- "tar.gz"
     } else if (sysname == "Darwin") {
-        "apple-darwin14"
+        os <- "mac"
+        slug <- "mac64"
+        ext <- "dmg"
     } else if (sysname == "Windows") {
-        "w64-mingw32"
+        os <- "winnt"
+        slug <- "win64"
+        ext <- "zip"
     } else {
         stop("Unknown or unsupported OS")
     }
-    url <- sprintf(
-        "https://github.com/JuliaBinaryWrappers/Julia_jll.jl/releases/download/Julia-%s+%s/Julia.%s.%s-%s-libgfortran4-cxx11.tar.gz",
-        version, build, version, arch, os
+
+    sprintf(
+        "https://julialang-s3.julialang.org/bin/%s/%s/%s/julia-%s-%s.%s",
+        os, arch, short_version, version, slug, ext
     )
-    return(url)
 }
 
 julia_default_depot <- function(){
@@ -63,24 +69,94 @@ julia_save_install_dir <- function(dir){
 
 #' Install Julia.
 #'
+#' @param version The version of Julia to install (e.g. \code{"1.6.3"}).
+#'                Defaults to \code{"latest"}, which will install the most
+#'                recent stable release.
 #' @param prefix the directory where Julia will be installed.
 #'     If not set, a default location will be determined by \code{rappdirs}
 #'     if it is installed, otherwise an error will be raised.
 #'
 #' @export
-install_julia <- function(prefix = julia_default_install_dir()){
+install_julia <- function(version = "latest",
+                          prefix = julia_default_install_dir()){
     if (is.null(prefix)) {
         stop("rappdirs is not installed and prefix was not provided")
     }
-    version_build <- julia_latest_version()
-    version <- version_build[1]
-    build <- version_build[2]
-    url <- julia_tgz_url(version, build)
+
+    if (version == "latest") {
+        version <- julia_latest_version()
+    }
+    url <- julia_url(version)
+
     file <- tempfile()
-    utils::download.file(url, file)
+    tryCatch({
+        utils::download.file(url, file)
+    }, error = function(err) {
+        stop(paste("There was an error downloading Julia. This could be due ",
+                   "to network issues, and might be resolved by re-running ",
+                   "`install_julia`.",
+                   sep = ""))
+    })
+
     dest <- file.path(prefix, version)
-    utils::untar(file, exdir=dest)
+    if (dir.exists(dest)) {
+      unlink(dest, recursive = TRUE)
+    }
+
+    sysname <- Sys.info()["sysname"]
+    if (sysname == "Linux") {
+      utils::untar(file, exdir=dest)
+      subfolder <- paste("julia-", version, sep="")
+    } else if (sysname == "Darwin") {
+      subfolder <- install_julia_dmg(file, dest)
+    } else if (sysname == "Windows") {
+      utils::unzip(file, exdir = dest)
+      subfolder <- paste("julia-", version, sep="")
+    }
+    dest <- file.path(dest, subfolder)
+
     julia_save_install_dir(dest)
+
     print(sprintf("Installed Julia to %s", dest))
-    return(TRUE)
+
+    invisible(TRUE)
+}
+
+
+# Install Julia from DMG on macOS
+install_julia_dmg <- function(dmg_path, install_dir) {
+    mount_root <- normalizePath(".")
+    mount_name <- tools::file_path_sans_ext(basename(dmg_path))
+    mount_point <- file.path(mount_root, mount_name)
+
+    umount(mount_point)
+
+    cmd <- paste(
+        'hdiutil attach "', dmg_path, '" -mountpoint "', mount_point,
+        '" -mount required -quiet',
+    sep = "")
+
+    tryCatch({
+        exitcode <- system(cmd)
+        stopifnot(exitcode == 0)
+
+        appname <- list.files(mount_point, pattern = "julia*", ignore.case = T)
+        src_path <- file.path(mount_point, appname)
+        if (!dir.exists(install_dir)) {
+            dir.create(install_dir, recursive = T)
+        }
+        file.copy(src_path, install_dir, recursive = T)
+    },
+    finally = {
+        umount(mount_point)
+    })
+
+    file.path(appname, "Contents", "Resources", "julia")
+}
+umount <- function(mount_point) {
+    if (dir.exists(mount_point)) {
+        system(paste('umount "', mount_point, '"', sep = ""))
+    } else {
+        0
+    }
 }
