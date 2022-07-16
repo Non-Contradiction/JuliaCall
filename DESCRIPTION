@@ -24,7 +24,8 @@ BugReports: https://github.com/Non-Contradiction/JuliaCall/issues
 Encoding: UTF-8
 Imports: utils,
     Rcpp (>= 0.12.7),
-    knitr (>= 1.28)
+    knitr (>= 1.28),
+    rjson
 RoxygenNote: 7.1.2
 LinkingTo: Rcpp
 NeedsCompilation: yes
