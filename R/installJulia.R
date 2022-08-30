@@ -22,7 +22,10 @@ julia_latest_version <- function(){
 
 
 julia_url <- function(version){
-    arch <- if (.Machine$sizeof.pointer == 8) {
+    sysmachine <- Sys.info()["machine"]
+    arch <- if (sysmachine == "arm64") {
+        "aarch64"
+    } else if (.Machine$sizeof.pointer == 8) {
         "x64"
     } else {
         "x86"
@@ -35,7 +38,7 @@ julia_url <- function(version){
         ext <- "tar.gz"
     } else if (sysname == "Darwin") {
         os <- "mac"
-        slug <- "mac64"
+        slug <- ifelse(sysmachine == "arm64", "macaarch64", "mac64")
         ext <- "dmg"
     } else if (sysname == "Windows") {
         os <- "winnt"
