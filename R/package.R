@@ -23,7 +23,14 @@ NULL
 #' @export
 julia_install_package <- julia$install_package <- function(pkg_name_or_url){
     if (newer(.julia$VERSION, "0.6.5")) {
-        julia$command(paste0('pkg"add ', pkg_name_or_url, '"'))
+        isurl <- grepl("/", pkg_name_or_url, fixed = TRUE)
+        if (isurl) {
+            julia$call("Pkg.add", julia$call("PackageSpec", url=pkg_name_or_url))
+            ## julia$command(paste0('Pkg.add(PackageSpec(url="', pkg_name_or_url, '"))'))
+        }
+        else {
+            julia$call("Pkg.add", pkg_name_or_url)
+        }
     }
     else {
         julia$call("Pkg.add", pkg_name_or_url)
