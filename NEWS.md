@@ -1,3 +1,20 @@
+# JuliaCall 0.17.5
+
+* Nineteenth release on CRAN.
+
+# JuliaCall 0.17.4.9000
+
+* Support keyword arguments for Callables. Fix #165.
+* Add workaround for Julia 1.6+ on mac. Thank @JackDunnNZ.
+* Use use knitr::sew() instead of deprecated knitr::wrap(). Thank Kevin Cazelles.
+* Update install_julia to use official releases rather than Julia_jll. Thank @JackDunnNZ.
+* Add support for macaarch64 to install_julia. Thank @JackDunnNZ.
+* Fix warnings caused by pkg macro usage.
+
+# JuliaCall 0.17.4
+
+* Eighteenth release on CRAN.
+
 # JuliaCall 0.17.3.9000
 
 * White space stripping for string command in `julia_command` and `julia_eval`. Fix #161.
