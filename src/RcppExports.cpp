@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // juliacall_initialize
 bool juliacall_initialize(const std::string& libpath, const std::string& julia_bindir, const std::string& image_path);
 RcppExport SEXP _JuliaCall_juliacall_initialize(SEXP libpathSEXP, SEXP julia_bindirSEXP, SEXP image_pathSEXP) {

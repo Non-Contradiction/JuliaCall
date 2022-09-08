@@ -33,5 +33,6 @@ ByteCompile: yes
 SystemRequirements: Julia >= 0.6.0, RCall.jl
 Suggests: testthat,
     rmarkdown,
-    rappdirs
+    rappdirs,
+    sass
 VignetteBuilder: knitr
