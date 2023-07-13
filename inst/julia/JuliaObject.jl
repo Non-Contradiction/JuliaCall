@@ -74,14 +74,14 @@ end
 ## we should use JuliaObject for general AbstractArray
 @static if julia07
     @suppress_err begin
-        JuliaCall.sexpclass(x :: AbstractArray{T}) where {T} = RClass{:JuliaObject}
+        @eval JuliaCall.sexpclass(x :: AbstractArray{T}) where {T} = RClass{:JuliaObject}
     end
 
     ## AbstractArray{Any} should be converted to R List
     sexpclass(x :: AbstractArray{Any}) = RClass{:list}
 else
     @suppress_err begin
-        JuliaCall.sexp(x :: AbstractArray{T}) where {T} = sexp(JuliaObject(x))
+        @eval JuliaCall.sexp(x :: AbstractArray{T}) where {T} = sexp(JuliaObject(x))
     end
 
     ## AbstractArray{Any} should be converted to R List
