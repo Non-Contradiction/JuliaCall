@@ -93,7 +93,10 @@ install_julia <- function(version = "latest",
 
     file <- tempfile()
     tryCatch({
+        old_timeout = getOption("timeout")
+        options(timeout = 300)
         utils::download.file(url, file)
+        options(timeout = old_timeout)
     }, error = function(err) {
         stop(paste("There was an error downloading Julia. This could be due ",
                    "to network issues, and might be resolved by re-running ",
